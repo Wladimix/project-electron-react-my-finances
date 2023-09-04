@@ -1,0 +1,12 @@
+{
+	"name": "my_finances",
+	"version": "1.0.0",
+	"description": "Budget management application.",
+	"main": "main.js",
+	"author": "Vladimir Maximov",
+	"license": "ISC",
+	"scripts": {},
+	"dependencies": {
+		"electron": "^26.1.0"
+	}
+}
