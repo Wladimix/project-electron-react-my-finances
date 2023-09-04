@@ -1,7 +1,13 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import React from "react";
 
-export function App() {
+import MonthlyBudget from "./Components/Pages/MonthlyBudget/MonthlyBudget";
+
+export default function App() {
     return <>
-        <h1>Hello from React!!!</h1>
+        <div className='app-container'>
+            <MonthlyBudget />
+        </div>
     </>;
 }

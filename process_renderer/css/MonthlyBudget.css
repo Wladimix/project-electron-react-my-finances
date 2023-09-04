@@ -1,0 +1,55 @@
+.app-container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.column {
+    padding: 0px;
+}
+
+.title-with-value {
+    margin: 5px;
+    padding: 0px;
+    height: 15vh;
+    display: flex;
+    font-size: 2vw;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.total-amount .title-with-value .value {
+    font-size: calc(2.5vw);
+}
+
+.income-and-expense .title-with-value {
+    margin: 0px;
+    height: 7.5vh;
+    font-size: 1.8vw;
+}
+
+.income-and-expense .monthly-income {
+    margin-top: 5px;
+}
+
+.cards-with-tables {
+    margin: 5px;
+    height: 80vh;
+}
+
+.card-with-expenses-table .card-title {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 3vw;
+}
+
+.card-with-distribution-finances-table .card-title {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 1.5vw;
+}
+
+.card-with-types-expenses-table .card-title {
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 1.5vw;
+}
