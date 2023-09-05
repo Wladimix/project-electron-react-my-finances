@@ -3,7 +3,7 @@ function createTable(knex) {
         table.increments('id');
         table.string('name');
     }).then(function () {
-        console.log('Таблица budget_units создана');
+        console.log('Таблица "budget_units" создана');
     }).catch(function (error) {
         console.error(error);
     });

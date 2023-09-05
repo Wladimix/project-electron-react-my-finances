@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const Launchingpplication = require('./process_main/Controllers/LaunchingApplication');
+const LaunchingAplication = require('./process_main/Controllers/LaunchingApplication');
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -20,7 +20,7 @@ require('electron-reload')(__dirname, {
 });
 
 app.whenReady().then(() => {
-    Launchingpplication.createTables();
+    LaunchingAplication.createTables();
     createWindow();
 });
 

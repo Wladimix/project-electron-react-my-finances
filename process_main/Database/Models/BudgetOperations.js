@@ -6,7 +6,7 @@ function createTable(knex) {
         table.integer('budget_units_id');
         table.integer('budget_categories_id');
     }).then(function () {
-        console.log('Таблица budget_operations создана');
+        console.log('Таблица "budget_operations" создана');
     }).catch(function (error) {
         console.error(error);
     });

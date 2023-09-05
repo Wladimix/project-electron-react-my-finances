@@ -1,7 +1,9 @@
+const Constants = require('../Constants');
+
 module.exports = require('knex')({
     client: 'sqlite3',
     connection: {
-        filename: '/home/vladimir/my_finances_db.sqlite3'
+        filename: Constants.DATABASE_PATH
     },
     useNullAsDefault: true
 });

@@ -9,7 +9,7 @@ import MonthName from "./Titles/MonthName";
 import TotalAmount from './Titles/TotalAmount';
 import IncomeAndExpense from './Titles/IncomeAndExpense';
 import MonthlySavings from './Titles/MonthlySavings';
-import CardWithTable from '../../OtherComponents/CardWithTable';
+import CardWithTable from '../../AuxiliaryComponents/CardWithTable';
 import ExpensesTable from './Tables/ExpensesTable';
 import DistributionFinancesTable from './Tables/DistributionFinancesTable';
 import TypesExpensesTable from './Tables/TypesExpensesTable';

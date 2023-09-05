@@ -5,7 +5,7 @@ function createTable(knex) {
         table.integer('summ');
         table.string('type');
     }).then(function () {
-        console.log('Таблица budget_categories создана');
+        console.log('Таблица "budget_categories" создана');
     }).catch(function (error) {
         console.error(error);
     });
