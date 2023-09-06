@@ -13,7 +13,7 @@ export default function RowWithAdditionOperation() {
 
     return <>
         <tr>
-            <td><Button variant='success' onClick={ ButtonActions.addAndUpdateOperation }>Добавить</Button></td>
+            <td><Button variant='success' onClick={ () => ButtonActions.addAndUpdateOperation(nameOperationValue) }>Добавить</Button></td>
             <td><Form.Control type='text' value={ nameOperationValue } onChange={ InputsActions.changeOfNameOperationValue }/></td>
             <td><Form.Control type='text'/></td>
             <td><Form.Control type='text'/></td>

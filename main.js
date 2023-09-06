@@ -28,7 +28,7 @@ app.whenReady().then(() => {
     ipcMain.handle('get-expenses-types', () => { return BudgetCategories.getExpensesTypes(knex) });
     ipcMain.handle('add-expense-type', () => { BudgetCategories.addExpenseType(knex) });
 
-    ipcMain.handle('add-operation-and-unit', () => { WorkingWithDatabase.addOperationAndUnit(knex) });
+    ipcMain.handle('add-operation-and-unit', (event, newUnitName) => { WorkingWithDatabase.addOperationAndUnit(knex, newUnitName) });
 
     createWindow();
 });

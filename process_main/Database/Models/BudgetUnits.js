@@ -11,9 +11,9 @@ function createTable(knex) {
     });
 }
 
-function addUnit(knex) {
+function addUnit(knex, newUnitName) {
     knex(Constants.BUDGET_UNITS_TABLE_NAME).insert({
-        name: 'new Name'
+        name: newUnitName
     }).then(() => {
         console.log(`Запись в таблицу "${Constants.BUDGET_UNITS_TABLE_NAME}" добавлена`);
     }).catch((error) => {

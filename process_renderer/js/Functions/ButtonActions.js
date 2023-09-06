@@ -5,8 +5,8 @@ function addAndUpdateExpenseType() {
     });
 }
 
-function addAndUpdateOperation() {
-    window.databaseManagement.addOperation();
+function addAndUpdateOperation(nameOperationValue) {
+    window.databaseManagement.addOperation(nameOperationValue);
 }
 
 export default {
