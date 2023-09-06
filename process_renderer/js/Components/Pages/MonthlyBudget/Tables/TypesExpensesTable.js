@@ -17,7 +17,7 @@ export default function TypesExpensesTable() {
                     <td>1</td>
                     <td>2</td>
                 </tr>
-                <RowWithAdditionType onClick={ButtonActions.addAndUpdateExpenseType} />
+                <RowWithAdditionType onClick={ButtonActions.addAndUpdateExpenseType}/>
             </tbody>
         </Table>
     </>;

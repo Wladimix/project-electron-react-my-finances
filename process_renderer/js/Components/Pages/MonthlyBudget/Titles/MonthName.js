@@ -4,6 +4,6 @@ import TitleWithValue from '../../../AuxiliaryComponents/TitleWithValue';
 
 export default function MonthName() {
     return <>
-        <TitleWithValue title='Сентябрь' value='2023' variant='info' />
+        <TitleWithValue title='Сентябрь' value='2023' variant='info'/>
     </>;
 }

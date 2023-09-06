@@ -1,7 +1,7 @@
 import InputsValuesStorage from '../Storage/InputsValuesStorage';
 
-function changeOfNameOperationValue(event) {
-    InputsValuesStorage.setNameOperationValue(event.target.value);
+function changeOfNameOperationValue(newValue) {
+    InputsValuesStorage.setNameOperationValue(newValue);
 }
 
 export default {
