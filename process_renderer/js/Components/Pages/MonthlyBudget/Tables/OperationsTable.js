@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Table from 'react-bootstrap/Table';
+
 import RowWithAdditionOperation from './Rows/RowWithAdditionOperation';
 
 export default function OperationsTable() {

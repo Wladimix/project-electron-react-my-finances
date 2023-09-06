@@ -11,6 +11,17 @@ function createTable(knex) {
     });
 }
 
+function addUnit(knex) {
+    knex(Constants.BUDGET_UNITS_TABLE_NAME).insert({
+        name: 'new Name'
+    }).then(() => {
+        console.log(`Запись в таблицу "${Constants.BUDGET_UNITS_TABLE_NAME}" добавлена`);
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
 module.exports = {
-    createTable
+    createTable,
+    addUnit
 }

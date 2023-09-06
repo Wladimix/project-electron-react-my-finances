@@ -1,8 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const knex = require('./process_main/Database/ConnectionDB');
-const LaunchingAplication = require('./process_main/Controllers/LaunchingApplication');
+const LaunchingAplication = require('./process_main/Functions/LaunchingApplication');
 const BudgetCategories = require('./process_main/Database/Models/BudgetCategories');
+const WorkingWithDatabase = require('./process_main/Functions/WorkingWithDatabase');
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -26,6 +27,8 @@ app.whenReady().then(() => {
 
     ipcMain.handle('get-expenses-types', () => { return BudgetCategories.getExpensesTypes(knex) });
     ipcMain.handle('add-expense-type', () => { BudgetCategories.addExpenseType(knex) });
+
+    ipcMain.handle('add-operation-and-unit', () => { WorkingWithDatabase.addOperationAndUnit(knex) });
 
     createWindow();
 });

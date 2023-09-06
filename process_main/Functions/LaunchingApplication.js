@@ -2,7 +2,7 @@ const knex = require('../Database/ConnectionDB');
 const BudgetUnits = require('../Database/Models/BudgetUnits');
 const BudgetCategories = require('../Database/Models/BudgetCategories');
 const BudgetOperations = require('../Database/Models/BudgetOperations');
-const WorkingWithFiles = require('../Controllers/WorkingWithFiles');
+const WorkingWithFiles = require('../Functions/WorkingWithFiles');
 
 function createTables() {
     if (!WorkingWithFiles.checkForFileAvailability()) {
