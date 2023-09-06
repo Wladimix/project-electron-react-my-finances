@@ -25,7 +25,7 @@ app.whenReady().then(() => {
     LaunchingAplication.createTables();
 
     ipcMain.handle('get-expenses-types', () => { return BudgetCategories.getExpensesTypes(knex) });
-    ipcMain.handle('add-expense-type', () => BudgetCategories.addExpenseType(knex));
+    ipcMain.handle('add-expense-type', () => { BudgetCategories.addExpenseType(knex) });
 
     createWindow();
 });
