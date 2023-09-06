@@ -57,3 +57,7 @@
 .card-body {
     overflow-y: auto;
 }
+
+.react-select__value-container {
+    width: 15vw;
+}

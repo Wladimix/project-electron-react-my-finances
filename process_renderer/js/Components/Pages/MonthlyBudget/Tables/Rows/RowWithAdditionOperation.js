@@ -30,8 +30,10 @@ export default function RowWithAdditionOperation() {
                 </Button>
             </td>
             <td>
-                <CreatableSelect 
-                    isClearable
+                <CreatableSelect
+                    classNamePrefix='react-select'
+                    placeholder='Ед. бюджета'
+                    formatCreateLabel={inputValue => `Добавить "${inputValue}"`}
                     options={ options }
                     onChange={ (newValue) => InputsActions.changeOfNameOperationValue(newValue.label) }
                 />

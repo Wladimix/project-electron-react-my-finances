@@ -21,7 +21,19 @@ function addUnit(knex, newUnitName) {
     });
 }
 
+function checkAvailabilityOfUnitAndReturnId(knex, unitName) {
+    return knex(Constants.BUDGET_UNITS_TABLE_NAME).where({
+        name: unitName
+    }).first().then((result) => {
+        console.log(`Поиск поля "${unitName}" в таблице "${Constants.BUDGET_UNITS_TABLE_NAME}" завершён`);
+        return result;
+    }).catch((error) => {
+        console.error(error);
+    });
+}
+
 module.exports = {
     createTable,
-    addUnit
+    addUnit,
+    checkAvailabilityOfUnitAndReturnId
 }
