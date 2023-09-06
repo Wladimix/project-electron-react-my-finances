@@ -19,6 +19,8 @@ function createWindow() {
     win.loadFile('index.html');
 }
 
+// код для разработки
+// закомментировать перед упаковкой
 require('electron-reload')(__dirname, {
     electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
 });
