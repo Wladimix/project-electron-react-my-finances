@@ -16,7 +16,7 @@ function createTable(knex) {
 function getExpensesTypes(knex) {
     return knex.select().from(Constants.BUDGET_CATEGORIES_TABLE_NAME)
         .then((res) => {
-            console.log('Данные загружены');
+            console.log(`Данные из таблицы "${Constants.BUDGET_CATEGORIES_TABLE_NAME}" загружены`);
             return res;
         }).catch((error) => {
             console.error(error);

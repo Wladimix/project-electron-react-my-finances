@@ -11,6 +11,16 @@ function createTable(knex) {
     });
 }
 
+function getUnits(knex) {
+    return knex.select().from(Constants.BUDGET_UNITS_TABLE_NAME)
+        .then((res) => {
+            console.log(`Данные из таблицы "${Constants.BUDGET_UNITS_TABLE_NAME}" загружены`);
+            return res;
+        }).catch((error) => {
+            console.error(error);
+        });
+}
+
 function addUnit(knex, newUnitName) {
     knex(Constants.BUDGET_UNITS_TABLE_NAME).insert({
         name: newUnitName
@@ -34,6 +44,7 @@ function checkAvailabilityOfUnitAndReturnId(knex, unitName) {
 
 module.exports = {
     createTable,
+    getUnits,
     addUnit,
     checkAvailabilityOfUnitAndReturnId
 }

@@ -1,3 +1,5 @@
+import LoadingData from "./LoadingData";
+
 function addAndUpdateExpenseType() {
     window.databaseManagement.addExpenseType();
     window.databaseManagement.getExpensesTypes().then((res) => {
@@ -6,7 +8,9 @@ function addAndUpdateExpenseType() {
 }
 
 function addAndUpdateOperation(nameOperationValue) {
-    window.databaseManagement.addOperation(nameOperationValue);
+    window.databaseManagement.addOperation(nameOperationValue).then(() => {
+        LoadingData.updateBudgetUnits();
+    });
 }
 
 export default {
