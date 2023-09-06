@@ -8,7 +8,8 @@ function addAndUpdateExpenseType() {
 }
 
 function addAndUpdateOperation(nameOperationValue) {
-    window.databaseManagement.addOperation(nameOperationValue).then(() => {
+    window.databaseManagement.addOperation(nameOperationValue).then((result) => {
+        console.log(result);
         LoadingData.updateBudgetUnits();
     });
 }

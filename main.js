@@ -33,7 +33,7 @@ app.whenReady().then(() => {
 
     ipcMain.handle('get-budget-units', () => { return BudgetUnits.getUnits(knex) });
 
-    ipcMain.handle('add-operation-and-unit', (event, newUnitName) => { WorkingWithDatabase.addOperationAndUnit(knex, newUnitName) });
+    ipcMain.handle('add-operation-and-unit', (event, newUnitName) => { return WorkingWithDatabase.addOperationAndUnit(knex, newUnitName) });
 
     createWindow();
 });
