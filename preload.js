@@ -1,5 +1,6 @@
-const { contextBridge } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('tests', {
-    test: () => console.log('test')
+contextBridge.exposeInMainWorld('databaseManagement', {
+    getExpensesTypes: () => ipcRenderer.invoke('get-expenses-types'),
+    addExpenseType: () => ipcRenderer.invoke('add-expense-type')
 });
