@@ -1,16 +1,16 @@
 import '../../../../css/MonthlyBudget.css';
 
-import React from "react";
+import React from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import MonthName from "./Titles/MonthName";
+import MonthName from './Titles/MonthName';
 import TotalAmount from './Titles/TotalAmount';
 import IncomeAndExpense from './Titles/IncomeAndExpense';
 import MonthlySavings from './Titles/MonthlySavings';
 import CardWithTable from '../../AuxiliaryComponents/CardWithTable';
-import ExpensesTable from './Tables/ExpensesTable';
+import OperationsTable from './Tables/OperationsTable';
 import DistributionFinancesTable from './Tables/DistributionFinancesTable';
 import TypesExpensesTable from './Tables/TypesExpensesTable';
 
@@ -32,7 +32,7 @@ export default function MonthlyBudget() {
         </Row>
         <Row>
             <Col xs={6} className='column card-with-expenses-table'>
-                <CardWithTable title='Траты' table={<ExpensesTable/>} />
+                <CardWithTable title='Траты' table={<OperationsTable />} />
             </Col>
             <Col className='column card-with-distribution-finances-table'>
                 <CardWithTable title='Распределение финансов' table={<DistributionFinancesTable />} />

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import TitleWithValue from "../../../AuxiliaryComponents/TitleWithValue";
+import TitleWithValue from '../../../AuxiliaryComponents/TitleWithValue';
 
 export default function TotalAmount() {
     return <>
