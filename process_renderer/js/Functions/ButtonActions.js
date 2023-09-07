@@ -1,20 +1,28 @@
-import LoadingData from "./LoadingData";
+import LoadingData from './LoadingData';
+import InputsValuesStorage from '../Storage/InputsValuesStorage';
 
-function addAndUpdateExpenseType() {
-    window.databaseManagement.addExpenseType();
-    window.databaseManagement.getExpensesTypes().then((res) => {
-        console.log(res);
+function addAndUpdateDistributionFinancesType(distributionFinancesTypeName) {
+    window.databaseManagement.addDistributionFinancesType(distributionFinancesTypeName).then(() => {
+        LoadingData.updateDistributionFinancesTypes();
     });
 }
 
-function addAndUpdateOperation(nameOperationValue) {
-    window.databaseManagement.addOperation(nameOperationValue).then((result) => {
-        console.log(result);
+function addAndUpdateExpenseType(expenceTypeName) {
+    window.databaseManagement.addExpenseType(expenceTypeName).then(() => {
+        LoadingData.updateExpensesTypes();
+    });
+}
+
+function addAndUpdateOperation(nameOperationValue, sumOperationValue, firstOperationCategoryId, secondOperationCategoryId) {
+    window.databaseManagement.addOperation(nameOperationValue, sumOperationValue, firstOperationCategoryId, secondOperationCategoryId).then(() => {
+        InputsValuesStorage.setNameOperationValue('');
+        InputsValuesStorage.setSumOperationValue('');
         LoadingData.updateBudgetUnits();
     });
 }
 
 export default {
+    addAndUpdateDistributionFinancesType,
     addAndUpdateExpenseType,
     addAndUpdateOperation
 }

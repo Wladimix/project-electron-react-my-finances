@@ -31,14 +31,16 @@ export default function MonthlyBudget() {
             </Col>
         </Row>
         <Row>
-            <Col xs={6} className='column card-with-expenses-table'>
-                <CardWithTable title='Финансовые операции' table={<OperationsTable />}/>
+            <Col className='column card-with-expenses-table'>
+                <CardWithTable title='Финансовые операции' table={<OperationsTable />} />
             </Col>
+        </Row>
+        <Row>
             <Col className='column card-with-distribution-finances-table'>
-                <CardWithTable title='Распределение финансов' table={<DistributionFinancesTable />}/>
+                <CardWithTable title='Распределение финансов' table={<DistributionFinancesTable />} />
             </Col>
             <Col className='column card-with-types-expenses-table'>
-                <CardWithTable title='Категории расходов' table={<TypesExpensesTable />}/>
+                <CardWithTable title='Категории расходов' table={<TypesExpensesTable />} />
             </Col>
         </Row>
     </>;

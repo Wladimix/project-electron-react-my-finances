@@ -33,7 +33,7 @@
 
 .cards-with-tables {
     margin: 5px;
-    height: 80vh;
+
 }
 
 .card-with-expenses-table .card-title {
@@ -54,10 +54,10 @@
     font-size: 1.5vw;
 }
 
-.card-body {
-    overflow-y: auto;
+.creatable-react-select__value-container {
+    /* width: 15vw; */
 }
 
-.react-select__value-container {
-    width: 15vw;
+.grouped-react-select__value-container {
+    /* width: 10vw; */
 }

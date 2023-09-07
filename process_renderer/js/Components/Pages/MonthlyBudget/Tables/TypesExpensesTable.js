@@ -2,8 +2,7 @@ import React from 'react';
 
 import Table from 'react-bootstrap/Table';
 
-import ButtonActions from '../../../../Functions/ButtonActions'
-import RowWithAdditionType from './Rows/RowWithAdditionType';
+import RowWithAdditionExpenceType from './Rows/RowWithAdditionExpenceType';
 
 export default function TypesExpensesTable() {
     return <>
@@ -17,7 +16,7 @@ export default function TypesExpensesTable() {
                     <td>1</td>
                     <td>2</td>
                 </tr>
-                <RowWithAdditionType onClick={ButtonActions.addAndUpdateExpenseType}/>
+                <RowWithAdditionExpenceType/>
             </tbody>
         </Table>
     </>;

@@ -4,9 +4,13 @@ function createTable(knex) {
     knex.schema.createTable(Constants.BUDGET_UNITS_TABLE_NAME, function (table) {
         table.increments('id');
         table.string('name');
-    }).then(function () {
+    }).then(() => {
+        return knex(Constants.BUDGET_UNITS_TABLE_NAME).insert({
+            name: ''
+        });
+    }).then(() => {
         console.log(`Таблица "${Constants.BUDGET_UNITS_TABLE_NAME}" создана`);
-    }).catch(function (error) {
+    }).catch((error) => {
         console.error(error);
     });
 }
@@ -22,10 +26,11 @@ function getUnits(knex) {
 }
 
 function addUnit(knex, newUnitName) {
-    knex(Constants.BUDGET_UNITS_TABLE_NAME).insert({
+    return knex(Constants.BUDGET_UNITS_TABLE_NAME).insert({
         name: newUnitName
-    }).then(() => {
+    }).then((result) => {
         console.log(`Запись в таблицу "${Constants.BUDGET_UNITS_TABLE_NAME}" добавлена`);
+        return result;
     }).catch((error) => {
         console.error(error);
     });
