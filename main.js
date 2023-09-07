@@ -4,6 +4,7 @@ const knex = require('./process_main/Database/ConnectionDB');
 const LaunchingAplication = require('./process_main/Functions/LaunchingApplication');
 const BudgetCategories = require('./process_main/Database/Models/BudgetCategories');
 const BudgetUnits = require('./process_main/Database/Models/BudgetUnits');
+const BudgetOperations = require('./process_main/Database/Models/BudgetOperations');
 const WorkingWithDatabase = require('./process_main/Functions/WorkingWithDatabase');
 
 function createWindow() {
@@ -36,6 +37,7 @@ app.whenReady().then(() => {
 
     ipcMain.handle('get-budget-units', () => { return BudgetUnits.getUnits(knex) });
 
+    ipcMain.handle('get-operations', () => { return BudgetOperations.getOperations(knex)});
     ipcMain.handle('add-operation-and-unit', (event, newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId) => { return WorkingWithDatabase.addOperationAndUnit(knex, newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId) });
 
     createWindow();

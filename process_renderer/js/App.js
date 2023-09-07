@@ -10,6 +10,7 @@ export default function App() {
         LoadingData.updateDistributionFinancesTypes();
         LoadingData.updateExpensesTypes();
         LoadingData.updateBudgetUnits();
+        LoadingData.updateOperations();
     }, []);
 
     return <>

@@ -18,8 +18,15 @@ function updateBudgetUnits() {
     });
 }
 
+function updateOperations() {
+    window.databaseManagement.getOperations(). then((result) => {
+        console.log(result);
+    })
+}
+
 export default {
     updateDistributionFinancesTypes,
     updateExpensesTypes,
-    updateBudgetUnits
+    updateBudgetUnits,
+    updateOperations
 }
