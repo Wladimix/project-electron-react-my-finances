@@ -17,18 +17,22 @@ function createTable(knex) {
 
 function getOperations(knex) {
     return knex(Constants.BUDGET_OPERATIONS_TABLE_NAME)
+        // .whereBetween('operation_date', ['2021-01-01', '2023-01-03'])
         .join(Constants.BUDGET_UNITS_TABLE_NAME, `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.budget_units_id`, '=', `${Constants.BUDGET_UNITS_TABLE_NAME}.id`)
-        .join(Constants.BUDGET_CATEGORIES_TABLE_NAME, `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.first_category_id`, '=', `${Constants.BUDGET_CATEGORIES_TABLE_NAME}.id`)
+        .join(Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME, `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.first_category_id`, '=', `${Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME}.id`)
+        .join(Constants.EXPENSES_CATEGORIES_TABLE_NAME, `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.second_category_id`, '=', `${Constants.EXPENSES_CATEGORIES_TABLE_NAME}.id`)
         .select(
-            /* `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.date as operation_date`,
+            `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.date as operation_date`,
             `${Constants.BUDGET_UNITS_TABLE_NAME}.name as operation_name`,
             `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.amount as operation_amount`,
-            `${Constants.BUDGET_CATEGORIES_TABLE_NAME}.name as first_category_name`, */
+            `${Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME}.name as first_category_name`,
+            `${Constants.EXPENSES_CATEGORIES_TABLE_NAME}.name as second_category_name`
         );
 }
 
 function addOperation(knex, newUnitId, newOperationSum, firstOperationCategoryId, secondOperationCategoryId) {
     return knex(Constants.BUDGET_OPERATIONS_TABLE_NAME).insert({
+        date: `2022-01-01`,
         amount: newOperationSum,
         budget_units_id: newUnitId,
         first_category_id: firstOperationCategoryId,

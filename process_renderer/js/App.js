@@ -8,7 +8,7 @@ import LoadingData from './Functions/LoadingData';
 export default function App() {
     useEffect(() => {
         LoadingData.updateDistributionFinancesTypes();
-        LoadingData.updateExpensesTypes();
+        LoadingData.updateExpensesCategories();
         LoadingData.updateBudgetUnits();
         LoadingData.updateOperations();
     }, []);

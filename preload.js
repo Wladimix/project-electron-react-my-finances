@@ -4,8 +4,8 @@ contextBridge.exposeInMainWorld('databaseManagement', {
     getDistributionFinancesTypes: () => ipcRenderer.invoke('get-distribution-finances-types'),
     addDistributionFinancesType: (distributionFinancesTypeName) => ipcRenderer.invoke('add-distribution-finances-type', distributionFinancesTypeName),
 
-    getExpensesTypes: () => ipcRenderer.invoke('get-expenses-types'),
-    addExpenseType: (expenceTypeName) => ipcRenderer.invoke('add-expense-type', expenceTypeName),
+    getExpensesCategories: () => ipcRenderer.invoke('get-expenses-categories'),
+    addExpenseCategory: (expenceCategoryName) => ipcRenderer.invoke('add-expense-categories', expenceCategoryName),
 
     getBudgetUnits: () => ipcRenderer.invoke('get-budget-units'),
 

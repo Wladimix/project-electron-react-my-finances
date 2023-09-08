@@ -6,8 +6,8 @@ function updateDistributionFinancesTypes() {
     });
 }
 
-function updateExpensesTypes() {
-    window.databaseManagement.getExpensesTypes().then((result) => {
+function updateExpensesCategories() {
+    window.databaseManagement.getExpensesCategories().then((result) => {
         UploadedDataStorage.setExpensesTypes(result);
     });
 }
@@ -26,7 +26,7 @@ function updateOperations() {
 
 export default {
     updateDistributionFinancesTypes,
-    updateExpensesTypes,
+    updateExpensesCategories,
     updateBudgetUnits,
     updateOperations
 }

@@ -8,18 +8,18 @@ import InputsValuesStorage from '../../../../../Storage/InputsValuesStorage';
 import InputsActions from '../../../../../Functions/InputsActions';
 import ButtonActions from '../../../../../Functions/ButtonActions';
 
-export default function RowWithAdditionExpenceType() {
-    const expenseTypeValue = useStore(InputsValuesStorage.$expenseTypeValue);
+export default function RowWithAdditionExpenseCategory() {
+    const expenseCategoryValue = useStore(InputsValuesStorage.$expenseCategoryValue);
 
     return <>
         <tr>
-            <td><Button variant='success' onClick={ () => ButtonActions.addAndUpdateExpenseType(expenseTypeValue) }>Добавить</Button></td>
+            <td><Button variant='success' onClick={() => ButtonActions.addAndUpdateExpenseCategory(expenseCategoryValue) }>Добавить</Button></td>
             <td>
                 <Form.Control
                     type='text'
                     placeholder='Категория'
-                    value={ expenseTypeValue }
-                    onChange={ (event) => InputsActions.changeOfExpenseTypeValue(event) }
+                    value={ expenseCategoryValue }
+                    onChange={ (event) => InputsActions.changeOfExpenseCategoryValue(event) }
                 />
             </td>
         </tr>

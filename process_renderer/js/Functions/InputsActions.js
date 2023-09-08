@@ -4,8 +4,8 @@ function changeOfDistributionFinancesTypeValue(event) {
     InputsValuesStorage.setDistributionFinancesTypeValue(event.target.value);
 }
 
-function changeOfExpenseTypeValue(event) {
-    InputsValuesStorage.setExpenseTypeValue(event.target.value);
+function changeOfExpenseCategoryValue(event) {
+    InputsValuesStorage.setExpenseCategoryValue(event.target.value);
 }
 
 function changeOfNameOperationValue(newValue) {
@@ -26,7 +26,7 @@ function changeOfSecondOperationCategoryValue(newValue) {
 
 export default {
     changeOfDistributionFinancesTypeValue,
-    changeOfExpenseTypeValue,
+    changeOfExpenseCategoryValue,
     changeOfNameOperationValue,
     changeOfSumOperationValue,
     changeOfFirstOperationCategoryValue,

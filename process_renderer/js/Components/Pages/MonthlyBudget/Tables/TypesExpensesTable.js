@@ -2,7 +2,7 @@ import React from 'react';
 
 import Table from 'react-bootstrap/Table';
 
-import RowWithAdditionExpenceType from './Rows/RowWithAdditionExpenceType';
+import RowWithAdditionExpenseCategory from './Rows/RowWithAdditionExpenseCategory';
 
 export default function TypesExpensesTable() {
     return <>
@@ -16,7 +16,7 @@ export default function TypesExpensesTable() {
                     <td>1</td>
                     <td>2</td>
                 </tr>
-                <RowWithAdditionExpenceType/>
+                <RowWithAdditionExpenseCategory />
             </tbody>
         </Table>
     </>;

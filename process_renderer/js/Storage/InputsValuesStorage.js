@@ -3,8 +3,8 @@ import { createStore, createEvent } from 'effector';
 const setDistributionFinancesTypeValue = createEvent();
 const $distributionFinancesTypeValue = createStore('').on(setDistributionFinancesTypeValue, (state, done) => done);
 
-const setExpenseTypeValue = createEvent();
-const $expenseTypeValue = createStore('').on(setExpenseTypeValue, (state, done) => done);
+const setExpenseCategoryValue = createEvent();
+const $expenseCategoryValue = createStore('').on(setExpenseCategoryValue, (state, done) => done);
 
 const setNameOperationValue = createEvent();
 const $nameOperationValue = createStore('').on(setNameOperationValue, (state, done) => done);
@@ -22,8 +22,8 @@ export default {
     setDistributionFinancesTypeValue,
     $distributionFinancesTypeValue,
 
-    setExpenseTypeValue,
-    $expenseTypeValue,
+    setExpenseCategoryValue,
+    $expenseCategoryValue,
 
     setNameOperationValue,
     $nameOperationValue,

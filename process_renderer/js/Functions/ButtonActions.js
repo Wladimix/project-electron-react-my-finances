@@ -7,9 +7,9 @@ function addAndUpdateDistributionFinancesType(distributionFinancesTypeName) {
     });
 }
 
-function addAndUpdateExpenseType(expenceTypeName) {
-    window.databaseManagement.addExpenseType(expenceTypeName).then(() => {
-        LoadingData.updateExpensesTypes();
+function addAndUpdateExpenseCategory(expenseCategoryName) {
+    window.databaseManagement.addExpenseCategory(expenseCategoryName).then(() => {
+        LoadingData.updateExpensesCategories();
     });
 }
 
@@ -23,6 +23,6 @@ function addAndUpdateOperation(nameOperationValue, sumOperationValue, firstOpera
 
 export default {
     addAndUpdateDistributionFinancesType,
-    addAndUpdateExpenseType,
+    addAndUpdateExpenseCategory,
     addAndUpdateOperation
 }
