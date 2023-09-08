@@ -1,29 +1,40 @@
+import { DISTRIBUTION_OF_FINANCES, EXPENSES_CATEGORIES } from "../Constants";
+
 function makeDataToDisplayBudgetCategories(loadedDistributionFinancesTypes, loadedExpensesTypes) {
-    let dataToDisplayBudgetCategory = [
+    return [
         {
             label: 'Распределение финансов',
             options: makeDataWithDistributionFinancesTypes(loadedDistributionFinancesTypes)
         },
         {
             label: 'Категории расходов',
-            options: makeDataWithExpensesTypes(loadedExpensesTypes)
+            options: makeDataWithExpensesCategories(loadedExpensesTypes)
         }
     ];
-    return dataToDisplayBudgetCategory;
 }
 
 function makeDataWithDistributionFinancesTypes(loadedDistributionFinancesTypes) {
-    let dataToDisplayDistributionFinancesTypes = loadedDistributionFinancesTypes.map((elem) => {
-        return { value: elem.id, label: elem.name, type: elem.type };
+    return loadedDistributionFinancesTypes.map((elem) => {
+        return { value: changeIdForSelect(elem.id, DISTRIBUTION_OF_FINANCES), label: elem.name, type: elem.type };
     });
-    return dataToDisplayDistributionFinancesTypes;
 }
 
-function makeDataWithExpensesTypes(loadedExpensesTypes) {
-    let dataToDisplayExpensesTypes = loadedExpensesTypes.map((elem) => {
-        return { value: elem.id, label: elem.name, type: elem.type };
+function makeDataWithExpensesCategories(loadedExpensesTypes) {
+    return loadedExpensesTypes.map((elem) => {
+        return { value: changeIdForSelect(elem.id, EXPENSES_CATEGORIES), label: elem.name, type: elem.type };
     });
-    return dataToDisplayExpensesTypes;
+}
+
+function changeIdForSelect(id, type) {
+    if (type === DISTRIBUTION_OF_FINANCES) {
+        return id + '-' + DISTRIBUTION_OF_FINANCES;
+    } if (type === EXPENSES_CATEGORIES) {
+        return id + '-' + EXPENSES_CATEGORIES;
+    }
+}
+
+function changeIdForSendToMainProcess(id) {
+    return Number(id[0]);
 }
 
 function makeDataToDisplayBudgetUnits(loadedUnits) {
@@ -40,6 +51,8 @@ function assignEmptyString(storageValue) {
 
 export default {
     makeDataToDisplayBudgetCategories,
+    makeDataWithDistributionFinancesTypes,
+    changeIdForSendToMainProcess,
     makeDataToDisplayBudgetUnits,
     assignEmptyString
 }

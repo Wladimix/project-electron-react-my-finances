@@ -27,7 +27,10 @@ function getOperations(knex) {
             `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.amount as operation_amount`,
             `${Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME}.name as first_category_name`,
             `${Constants.EXPENSES_CATEGORIES_TABLE_NAME}.name as second_category_name`
-        );
+        ).then((result) => {
+            console.log(`Данные из таблицы "${Constants.BUDGET_OPERATIONS_TABLE_NAME}" загружены`);
+            return result;
+        });
 }
 
 function addOperation(knex, newUnitId, newOperationSum, firstOperationCategoryId, secondOperationCategoryId) {

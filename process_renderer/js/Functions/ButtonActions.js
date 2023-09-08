@@ -18,6 +18,7 @@ function addAndUpdateOperation(nameOperationValue, sumOperationValue, firstOpera
         InputsValuesStorage.setNameOperationValue('');
         InputsValuesStorage.setSumOperationValue('');
         LoadingData.updateBudgetUnits();
+        LoadingData.updateOperations();
     });
 }
 

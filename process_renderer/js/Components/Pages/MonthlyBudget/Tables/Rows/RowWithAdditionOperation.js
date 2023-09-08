@@ -14,7 +14,7 @@ import DataProcessing from '../../../../../Functions/DataProcessing';
 
 export default function RowWithAdditionOperation() {
     const distributionFinancesTypes = useStore(UploadedDataStorage.$distributionFinancesTypes);
-    const expensesTypes = useStore(UploadedDataStorage.$expensesTypes);
+    const expensesCategories = useStore(UploadedDataStorage.$expensesCategories);
 
     const nameOperationValue = useStore(InputsValuesStorage.$nameOperationValue);
     const sumOperationValue = useStore(InputsValuesStorage.$sumOperationValue);
@@ -28,7 +28,14 @@ export default function RowWithAdditionOperation() {
             <td>
                 <Button
                     variant='success'
-                    onClick={() => ButtonActions.addAndUpdateOperation(nameOperationValue, sumOperationValue, firstOperationCategoryValue.value, secondOperationCategoryValue.value) }
+                    onClick={
+                        () => ButtonActions.addAndUpdateOperation(
+                            nameOperationValue,
+                            sumOperationValue,
+                            DataProcessing.changeIdForSendToMainProcess(firstOperationCategoryValue.value),
+                            DataProcessing.changeIdForSendToMainProcess(secondOperationCategoryValue.value)
+                        )
+                    }
                 >
                     Добавить
                 </Button>
@@ -53,18 +60,18 @@ export default function RowWithAdditionOperation() {
             </td>
             <td>
                 <Select
-                    classNamePrefix='grouped-react-select'
-                    options={ DataProcessing.makeDataToDisplayBudgetCategories(distributionFinancesTypes, expensesTypes) }
-                    placeholder='Категория'
+                    classNamePrefix="single-react-select"
+                    options={ DataProcessing.makeDataWithDistributionFinancesTypes(distributionFinancesTypes) }
+                    placeholder='Распределение финансов'
                     onChange={ newValue => InputsActions.changeOfFirstOperationCategoryValue(newValue) }
                 />
             </td>
             <td>
                 <Select
                     classNamePrefix='grouped-react-select'
-                    options={DataProcessing.makeDataToDisplayBudgetCategories(distributionFinancesTypes, expensesTypes)}
+                    options={ DataProcessing.makeDataToDisplayBudgetCategories(distributionFinancesTypes, expensesCategories) }
                     placeholder='Категория'
-                    onChange={newValue => InputsActions.changeOfSecondOperationCategoryValue(newValue)}
+                    onChange={ newValue => InputsActions.changeOfSecondOperationCategoryValue(newValue) }
                 />
             </td>
         </tr>
