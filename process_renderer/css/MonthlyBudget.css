@@ -54,10 +54,42 @@
     font-size: 1.5vw;
 }
 
-.creatable-react-select__value-container {
-    /* width: 15vw; */
+.cell-with-finance-operation-data {
+    position: relative;
+    overflow: visible;
 }
 
-.grouped-react-select__option {
-    /* width: 10vw; */
+.cell-with-finance-operation-data.hidden {
+    overflow: hidden;
+}
+
+.cell-property {
+    font-size: 25px;
+    position: absolute;
+    transition-duration: 1s;
+    transition-property: transform;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+
+.cell-property.editing-mode {
+    transform: translateY(-55px);
+}
+
+.cell-property.hidden {
+    opacity: 0;
+}
+
+.cell-input {
+    top: 55px;
+    position: absolute;
+    transition-duration: 1s;
+    transition-property: transform;
+}
+
+.cell-input.editing-mode {
+    z-index: 1;
+    transform: translateY(-55px);
 }

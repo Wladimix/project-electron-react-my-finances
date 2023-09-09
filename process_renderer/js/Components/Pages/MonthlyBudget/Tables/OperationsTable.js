@@ -2,26 +2,14 @@ import React from 'react';
 
 import Table from 'react-bootstrap/Table';
 
+import RowsWithOperation from './Rows/RowsWithOperation';
 import RowWithAdditionOperation from './Rows/RowWithAdditionOperation';
 
 export default function OperationsTable() {
     return <>
         <Table striped bordered hover>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                </tr>
+            <tbody style={{position: 'relative'}}>
+                <RowsWithOperation/>
                 <RowWithAdditionOperation/>
             </tbody>
         </Table>

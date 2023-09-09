@@ -22,13 +22,12 @@ function updateExpensesCategories() {
 function updateBudgetUnits() {
     window.databaseManagement.getBudgetUnits().then((result) => {
         UploadedDataStorage.setBudgetUnits(result);
-        console.log(result);
     });
 }
 
 function updateOperations() {
     window.databaseManagement.getOperations().then((result) => {
-        console.log(result);
+        UploadedDataStorage.setFinancialOperations(result);
     })
 }
 

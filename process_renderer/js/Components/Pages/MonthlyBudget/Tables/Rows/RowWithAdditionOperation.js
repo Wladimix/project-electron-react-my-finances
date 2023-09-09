@@ -26,19 +26,7 @@ export default function RowWithAdditionOperation() {
     return <>
         <tr>
             <td>
-                <Button
-                    variant='success'
-                    onClick={
-                        () => ButtonActions.addAndUpdateOperation(
-                            nameOperationValue,
-                            sumOperationValue,
-                            DataProcessing.changeIdForSendToMainProcess(firstOperationCategoryValue.value),
-                            DataProcessing.changeIdForSendToMainProcess(secondOperationCategoryValue.value)
-                        )
-                    }
-                >
-                    Добавить
-                </Button>
+                Дата
             </td>
             <td>
                 <CreatableSelect
@@ -73,6 +61,21 @@ export default function RowWithAdditionOperation() {
                     placeholder='Категория'
                     onChange={ newValue => InputsActions.changeOfSecondOperationCategoryValue(newValue) }
                 />
+            </td>
+            <td>
+                <Button
+                    variant='success'
+                    onClick={
+                        () => ButtonActions.addAndUpdateOperation(
+                            nameOperationValue,
+                            sumOperationValue,
+                            DataProcessing.changeIdForSendToMainProcess(firstOperationCategoryValue.value),
+                            DataProcessing.changeIdForSendToMainProcess(secondOperationCategoryValue.value)
+                        )
+                    }
+                >
+                    Добавить
+                </Button>
             </td>
         </tr>
     </>;

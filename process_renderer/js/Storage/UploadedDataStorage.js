@@ -9,6 +9,9 @@ const $expensesCategories = createStore([]).on(setExpensesCategories, (state, do
 const setBudgetUnits = createEvent();
 const $budgetUnits = createStore([]).on(setBudgetUnits, (state, done) => done);
 
+const setFinancialOperations = createEvent();
+const $financialOperations = createStore([]).on(setFinancialOperations, (state, done) => done);
+
 export default {
     setDistributionFinancesTypes,
     $distributionFinancesTypes,
@@ -17,5 +20,8 @@ export default {
     $expensesCategories,
 
     setBudgetUnits,
-    $budgetUnits
+    $budgetUnits,
+
+    setFinancialOperations,
+    $financialOperations
 }
