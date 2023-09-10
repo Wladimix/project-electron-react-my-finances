@@ -58,7 +58,7 @@ export default function RowWithAdditionOperation() {
                 <Select
                     classNamePrefix='grouped-react-select'
                     options={ DataProcessing.makeDataToDisplayBudgetCategories(distributionFinancesTypes, expensesCategories) }
-                    placeholder='Категория'
+                    placeholder='Категория расходов'
                     onChange={ newValue => InputsActions.changeOfSecondOperationCategoryValue(newValue) }
                 />
             </td>

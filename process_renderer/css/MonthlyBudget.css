@@ -54,6 +54,10 @@
     font-size: 1.5vw;
 }
 
+.creatable-react-select__value-container {
+    
+}
+
 .cell-with-finance-operation-data {
     position: relative;
     overflow: visible;
@@ -66,7 +70,7 @@
 .cell-property {
     font-size: 25px;
     position: absolute;
-    transition-duration: 0.5s;
+    transition-duration: 0.2s;
     transition-property: transform;
     white-space: nowrap;
     overflow: hidden;
@@ -83,13 +87,18 @@
 }
 
 .cell-input {
+    opacity: 0;
     top: 55px;
     position: absolute;
-    transition-duration: 0.5s;
+    transition-duration: 0.2s;
     transition-property: transform;
 }
 
 .cell-input.editing-mode {
     z-index: 1;
-    transform: translateY(-55px);
+    transform: translateY(-50px);
+}
+
+.cell-input.not-hidden {
+    opacity: 1;
 }

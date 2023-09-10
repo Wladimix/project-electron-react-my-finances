@@ -1,11 +1,15 @@
-import React  from 'react';
+import React from 'react';
 
 import { useStore } from 'effector-react';
 
 import UploadedDataStorage from '../../../../../Storage/UploadedDataStorage';
 import ComponentsModesStorage from '../../../../../Storage/ComponentsModesStorage';
 import ComponentsAnimationsStorage from '../../../../../Storage/ComponentsAnimationsStorage';
+
 import OperationNameCell from './CellsWithFinancialOperationsData/OperationNameCell';
+import OperationAmountCell from './CellsWithFinancialOperationsData/OperationAmountCell';
+import DistributionFinancesCell from './CellsWithFinancialOperationsData/DistributionFinancesCell';
+import ExpensesTypeCell from './CellsWithFinancialOperationsData/ExpensesTypeCell';
 
 
 export default function RowsWithOperation() {
@@ -14,7 +18,8 @@ export default function RowsWithOperation() {
     const rowEditingMode = useStore(ComponentsModesStorage.$rowEditingMode);
     const selectedRow = useStore(ComponentsAnimationsStorage.$selectedRow);
     const cellsOverflowIsHidden = useStore(ComponentsAnimationsStorage.$cellsOverflowIsHidden);
-    const divisionsWithOperationsDataIsHidden = useStore(ComponentsAnimationsStorage.$divisionsWithOperationsDataIsHidden);
+    const textWithOperationsDataIsHidden = useStore(ComponentsAnimationsStorage.$textWithOperationsDataIsHidden);
+    const inputWithOperationsDataIsNotHidden = useStore(ComponentsAnimationsStorage.$inputWithOperationsDataIsNotHidden);
 
     function changeRowMode(selectedRowId) {
         ComponentsAnimationsStorage.setSelectedRow(selectedRowId);
@@ -22,19 +27,21 @@ export default function RowsWithOperation() {
 
         if (!rowEditingMode) {
             ComponentsAnimationsStorage.setCellsOverflowIsHidden(true);
+            ComponentsAnimationsStorage.setInputWithOperationsDataIsNotHidden(true);
 
             setTimeout(() => {
-                ComponentsAnimationsStorage.setDivisionsWithOperationsDataIsHidden(true);
+                ComponentsAnimationsStorage.setTextWithOperationsDataIsHidden(true);
                 ComponentsAnimationsStorage.setCellsOverflowIsHidden(false);
-            }, 500);
+            }, 200);
 
         } if (rowEditingMode) {
             ComponentsAnimationsStorage.setCellsOverflowIsHidden(true);
-            ComponentsAnimationsStorage.setDivisionsWithOperationsDataIsHidden(false);
+            ComponentsAnimationsStorage.setTextWithOperationsDataIsHidden(false);
 
             setTimeout(() => {
                 ComponentsAnimationsStorage.setCellsOverflowIsHidden(false);
-            }, 500);
+                ComponentsAnimationsStorage.setInputWithOperationsDataIsNotHidden(false);
+            }, 200);
         }
     }
 
@@ -43,27 +50,31 @@ export default function RowsWithOperation() {
         if (rowEditingMode) editingMode = 'editing-mode'
         else editingMode = '';
 
-        let divHidden = '';
-        if (divisionsWithOperationsDataIsHidden) divHidden = 'hidden'
-        else divHidden = '';
+        let textHidden = '';
+        if (textWithOperationsDataIsHidden) textHidden = 'hidden'
+        else textHidden = '';
+
+        let inputHidden = '';
+        if (inputWithOperationsDataIsNotHidden) inputHidden = 'not-hidden'
+        else inputHidden = '';
 
         let cellClassName = '';
         if (cellsOverflowIsHidden) cellClassName = 'cell-with-finance-operation-data hidden'
         else cellClassName = 'cell-with-finance-operation-data';
 
-        let divisionClassName = '';
+        let textClassName = '';
         let inputClassName = '';
         if (index === selectedRow) {
-            divisionClassName = `cell-property ${editingMode} ${divHidden}`;
-            inputClassName = `cell-input ${editingMode}`;
+            textClassName = `cell-property ${editingMode} ${textHidden}`;
+            inputClassName = `cell-input ${editingMode} ${inputHidden}`;
         } else {
-            divisionClassName = 'cell-property';
+            textClassName = 'cell-property';
             inputClassName = 'cell-input';
         }
 
         return {
             cellClassName: cellClassName,
-            divisionClassName: divisionClassName,
+            textClassName: textClassName,
             inputClassName: inputClassName
         };
     }
@@ -72,10 +83,10 @@ export default function RowsWithOperation() {
         financialOperations.map((elem, index) => {
             return <tr key={index}>
                 <td>{elem.operation_date}</td>
-                <OperationNameCell operationName={elem.operation_name} classesNames={makeClassesNamesForRow(index)}/>
-                <td>{elem.operation_amount}</td>
-                <td>{elem.first_category_name}</td>
-                <td>{elem.second_category_name}</td>
+                <OperationNameCell operationName={ elem.operation_name } classesNames={ makeClassesNamesForRow(index) }/>
+                <OperationAmountCell operationAmount={ elem.operation_amount } classesNames={ makeClassesNamesForRow(index) } />
+                <DistributionFinancesCell distributionFinances={ elem.first_category_name } classesNames={ makeClassesNamesForRow(index) }/>
+                <ExpensesTypeCell expensesType={ elem.second_category_name } classesNames={ makeClassesNamesForRow(index) } />
                 <td><button onClick={() => { changeRowMode(index) }}>test</button></td>
             </tr>;
         })
