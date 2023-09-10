@@ -1,58 +1,83 @@
-import React, { useState } from 'react';
+import React  from 'react';
 
 import { useStore } from 'effector-react';
 
 import UploadedDataStorage from '../../../../../Storage/UploadedDataStorage';
+import ComponentsModesStorage from '../../../../../Storage/ComponentsModesStorage';
+import ComponentsAnimationsStorage from '../../../../../Storage/ComponentsAnimationsStorage';
 import OperationNameCell from './CellsWithFinancialOperationsData/OperationNameCell';
 
 
 export default function RowsWithOperation() {
     const financialOperations = useStore(UploadedDataStorage.$financialOperations);
 
-    const [selectedRow, setSelectedRow] = useState('');
-
-    const [rowEditingMode, setRowEditingMode] = useState(false);
-    const [cellsOverflowIsHidden, setCellsOverflowIsHidden] = useState(false);
-
-    const [divisionsWithOperationsDataIsHidden, setDivisionsWithOperationsDataIsHidden] = useState(false);
-    // возможно, не понадобится
-    const [inputsWithOperationsDataIsHidden, setInputsWithOperationsDataIsHidden] = useState(false);
+    const rowEditingMode = useStore(ComponentsModesStorage.$rowEditingMode);
+    const selectedRow = useStore(ComponentsAnimationsStorage.$selectedRow);
+    const cellsOverflowIsHidden = useStore(ComponentsAnimationsStorage.$cellsOverflowIsHidden);
+    const divisionsWithOperationsDataIsHidden = useStore(ComponentsAnimationsStorage.$divisionsWithOperationsDataIsHidden);
 
     function changeRowMode(selectedRowId) {
-        setSelectedRow(selectedRowId)
-        setRowEditingMode(!rowEditingMode);
+        ComponentsAnimationsStorage.setSelectedRow(selectedRowId);
+        ComponentsModesStorage.setRowEditingMode(!rowEditingMode);
+
         if (!rowEditingMode) {
-            setCellsOverflowIsHidden(true);
+            ComponentsAnimationsStorage.setCellsOverflowIsHidden(true);
+
             setTimeout(() => {
-                setDivisionsWithOperationsDataIsHidden(true);
-                setCellsOverflowIsHidden(false);
-            }, 1000);
+                ComponentsAnimationsStorage.setDivisionsWithOperationsDataIsHidden(true);
+                ComponentsAnimationsStorage.setCellsOverflowIsHidden(false);
+            }, 500);
+
         } if (rowEditingMode) {
-            setCellsOverflowIsHidden(true);
-            setDivisionsWithOperationsDataIsHidden(false);
+            ComponentsAnimationsStorage.setCellsOverflowIsHidden(true);
+            ComponentsAnimationsStorage.setDivisionsWithOperationsDataIsHidden(false);
+
             setTimeout(() => {
-                setCellsOverflowIsHidden(false);
-            }, 1000);
+                ComponentsAnimationsStorage.setCellsOverflowIsHidden(false);
+            }, 500);
         }
     }
 
-    return <> {
+    function makeClassesNamesForRow(index) {
+        let editingMode = '';
+        if (rowEditingMode) editingMode = 'editing-mode'
+        else editingMode = '';
+
+        let divHidden = '';
+        if (divisionsWithOperationsDataIsHidden) divHidden = 'hidden'
+        else divHidden = '';
+
+        let cellClassName = '';
+        if (cellsOverflowIsHidden) cellClassName = 'cell-with-finance-operation-data hidden'
+        else cellClassName = 'cell-with-finance-operation-data';
+
+        let divisionClassName = '';
+        let inputClassName = '';
+        if (index === selectedRow) {
+            divisionClassName = `cell-property ${editingMode} ${divHidden}`;
+            inputClassName = `cell-input ${editingMode}`;
+        } else {
+            divisionClassName = 'cell-property';
+            inputClassName = 'cell-input';
+        }
+
+        return {
+            cellClassName: cellClassName,
+            divisionClassName: divisionClassName,
+            inputClassName: inputClassName
+        };
+    }
+
+    return <>{
         financialOperations.map((elem, index) => {
             return <tr key={index}>
                 <td>{elem.operation_date}</td>
-                <OperationNameCell
-                    index={index}
-                    selectedRow={selectedRow}
-                    operationName={elem.operation_name}
-                    cellsOverflowIsHidden={cellsOverflowIsHidden}
-                    rowEditingMode={rowEditingMode}
-                    divisionsWithOperationsDataIsHidden={divisionsWithOperationsDataIsHidden}
-                />
+                <OperationNameCell operationName={elem.operation_name} classesNames={makeClassesNamesForRow(index)}/>
                 <td>{elem.operation_amount}</td>
                 <td>{elem.first_category_name}</td>
                 <td>{elem.second_category_name}</td>
                 <td><button onClick={() => { changeRowMode(index) }}>test</button></td>
             </tr>;
         })
-    } </>;
+    }</>;
 }

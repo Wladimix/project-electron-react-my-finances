@@ -66,7 +66,7 @@
 .cell-property {
     font-size: 25px;
     position: absolute;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
     transition-property: transform;
     white-space: nowrap;
     overflow: hidden;
@@ -85,7 +85,7 @@
 .cell-input {
     top: 55px;
     position: absolute;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
     transition-property: transform;
 }
 

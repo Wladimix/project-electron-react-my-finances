@@ -8,7 +8,7 @@ import RowWithAdditionOperation from './Rows/RowWithAdditionOperation';
 export default function OperationsTable() {
     return <>
         <Table striped bordered hover>
-            <tbody style={{position: 'relative'}}>
+            <tbody>
                 <RowsWithOperation/>
                 <RowWithAdditionOperation/>
             </tbody>
