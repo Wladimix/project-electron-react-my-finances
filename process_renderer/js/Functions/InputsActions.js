@@ -9,7 +9,8 @@ function changeOfExpenseCategoryValue(event) {
 }
 
 function changeOfNameOperationValue(newValue) {
-    InputsValuesStorage.setNameOperationValue(newValue);
+    if (newValue === null) InputsValuesStorage.setNameOperationValue('')
+    else InputsValuesStorage.setNameOperationValue(newValue.label);
 }
 
 function changeOfSumOperationValue(event) {

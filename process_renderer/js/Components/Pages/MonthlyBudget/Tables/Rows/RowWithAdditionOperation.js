@@ -28,37 +28,40 @@ export default function RowWithAdditionOperation() {
             <td>
                 Дата
             </td>
-            <td>
+            <td className='column-with-operation-name'>
                 <CreatableSelect
                     classNamePrefix='creatable-react-select'
-                    value={ DataProcessing.assignEmptyString(nameOperationValue) }
+                    isClearable
                     placeholder='Ед. бюджета'
                     formatCreateLabel={inputValue => `Добавить "${inputValue}"`}
+                    value={ DataProcessing.assignEmptyString(nameOperationValue) }
                     options={ DataProcessing.makeDataToDisplayBudgetUnits(budgetUnits) }
-                    onChange={ newValue => InputsActions.changeOfNameOperationValue(newValue.label) }
+                    onChange={ newValue => InputsActions.changeOfNameOperationValue(newValue) }
                 />
             </td>
-            <td>
-                <Form.Control
-                    type='text'
-                    placeholder='Сумма'
-                    value={ sumOperationValue }
-                    onChange={ event => InputsActions.changeOfSumOperationValue(event) }
-                />
+            <td className='column-with-operation-amount'>
+                <Form>
+                    <Form.Control
+                        type='text'
+                        placeholder='Сумма'
+                        value={ sumOperationValue }
+                        onChange={ event => InputsActions.changeOfSumOperationValue(event) }
+                    />
+                </Form>
             </td>
-            <td>
+            <td className='column-with-distribution-finances'>
                 <Select
                     classNamePrefix="single-react-select"
-                    options={ DataProcessing.makeDataWithDistributionFinancesTypes(distributionFinancesTypes) }
                     placeholder='Распределение финансов'
+                    options={ DataProcessing.makeDataWithDistributionFinancesTypes(distributionFinancesTypes) }
                     onChange={ newValue => InputsActions.changeOfFirstOperationCategoryValue(newValue) }
                 />
             </td>
-            <td>
+            <td className='column-with-expenses-category'>
                 <Select
                     classNamePrefix='grouped-react-select'
-                    options={ DataProcessing.makeDataToDisplayBudgetCategories(distributionFinancesTypes, expensesCategories) }
                     placeholder='Категория расходов'
+                    options={ DataProcessing.makeDataToDisplayBudgetCategories(distributionFinancesTypes, expensesCategories) }
                     onChange={ newValue => InputsActions.changeOfSecondOperationCategoryValue(newValue) }
                 />
             </td>

@@ -7,11 +7,10 @@ export default function ExpensesTypeCell({ expensesType, classesNames }) {
         <div className={classesNames.textClassName}>
             {expensesType}
         </div>
-        <div className={classesNames.inputClassName}>
-            <Select
-                classNamePrefix='grouped-react-select'
-                placeholder='Категория расходов'
-            />
-        </div>
+        <Select
+            className={classesNames.inputClassName}
+            classNamePrefix='grouped-react-select'
+            placeholder='Категория расходов'
+        />
     </td>;
 }

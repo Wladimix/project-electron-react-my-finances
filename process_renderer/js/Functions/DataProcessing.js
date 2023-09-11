@@ -15,13 +15,13 @@ function makeDataToDisplayBudgetCategories(loadedDistributionFinancesTypes, load
 
 function makeDataWithDistributionFinancesTypes(loadedDistributionFinancesTypes) {
     return loadedDistributionFinancesTypes.map((elem) => {
-        return { value: changeIdForSelect(elem.id, DISTRIBUTION_OF_FINANCES), label: elem.name, type: elem.type };
+        return { value: changeIdForSelect(elem.id, DISTRIBUTION_OF_FINANCES), label: elem.name };
     });
 }
 
 function makeDataWithExpensesCategories(loadedExpensesTypes) {
     return loadedExpensesTypes.map((elem) => {
-        return { value: changeIdForSelect(elem.id, EXPENSES_CATEGORIES), label: elem.name, type: elem.type };
+        return { value: changeIdForSelect(elem.id, EXPENSES_CATEGORIES), label: elem.name };
     });
 }
 

@@ -7,11 +7,10 @@ export default function DistributionFinancesCell({ distributionFinances, classes
         <div className={classesNames.textClassName}>
             {distributionFinances}
         </div>
-        <div className={classesNames.inputClassName}>
-            <Select
-                classNamePrefix='single-react-select'
-                placeholder='Распределение финансов'
-            />
-        </div>
+        <Select
+            className={classesNames.inputClassName}
+            classNamePrefix='single-react-select'
+            placeholder='Распределение финансов'
+        />
     </td>;
 }

@@ -7,11 +7,10 @@ export default function OperationNameCell({ operationName, classesNames }) {
         <div className={classesNames.textClassName}>
             {operationName}
         </div>
-        <div className={classesNames.inputClassName}>
-            <CreatableSelect
-                classNamePrefix='creatable-react-select'
-                placeholder='Ед. бюджета'
-            />
-        </div>
+        <CreatableSelect
+            className={classesNames.inputClassName}
+            classNamePrefix='creatable-react-select'
+            placeholder='Ед. бюджета'
+        />
     </td>;
 }

@@ -7,11 +7,11 @@ export default function OperationAmountCell({ operationAmount, classesNames }) {
         <div className={classesNames.textClassName}>
             {operationAmount}
         </div>
-        <div className={classesNames.inputClassName}>
+        <Form className={classesNames.inputClassName}>
             <Form.Control
                 type='text'
                 placeholder='Сумма'
             />
-        </div>
+        </Form >
     </td>;
 }

@@ -54,8 +54,20 @@
     font-size: 1.5vw;
 }
 
-.creatable-react-select__value-container {
-    
+.column-with-operation-name {
+    width: 22vw;
+}
+
+.column-with-operation-amount {
+    width: 10vw;
+}
+
+.column-with-distribution-finances {
+    width: 22vw;
+}
+
+.column-with-expenses-category {
+    width: 22vw;
 }
 
 .cell-with-finance-operation-data {
@@ -75,7 +87,6 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 90%;
 }
 
 .cell-property.editing-mode {
@@ -83,22 +94,33 @@
 }
 
 .cell-property.hidden {
+    pointer-events: none;
     opacity: 0;
 }
 
 .cell-input {
     opacity: 0;
+    pointer-events: none;
     top: 55px;
-    position: absolute;
+    position: relative;
     transition-duration: 0.2s;
     transition-property: transform;
 }
 
 .cell-input.editing-mode {
     z-index: 1;
-    transform: translateY(-50px);
+    transform: translateY(-55px);
 }
 
 .cell-input.not-hidden {
+    pointer-events: all;
     opacity: 1;
+}
+
+.creatable-react-select__value-container,
+.single-react-select__value-container,
+.grouped-react-select__value-container {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
