@@ -33,7 +33,7 @@ export default function RowWithAdditionOperation() {
                     classNamePrefix='creatable-react-select'
                     isClearable
                     placeholder='Ед. бюджета'
-                    formatCreateLabel={inputValue => `Добавить "${inputValue}"`}
+                    formatCreateLabel={ inputValue => `Добавить "${inputValue}"` }
                     value={ DataProcessing.assignEmptyString(nameOperationValue) }
                     options={ DataProcessing.makeDataToDisplayBudgetUnits(budgetUnits) }
                     onChange={ newValue => InputsActions.changeOfNameOperationValue(newValue) }

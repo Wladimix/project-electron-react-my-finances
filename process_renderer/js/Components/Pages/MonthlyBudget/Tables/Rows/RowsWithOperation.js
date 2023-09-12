@@ -81,12 +81,20 @@ export default function RowsWithOperation() {
 
     return <>{
         financialOperations.map((elem, index) => {
+            function determineValueOfOperationType(elem) {
+                if (elem.operation_type === 'replenishment' || elem.operation_type === 'translation') {
+                    return elem.second_distribution_type;
+                } if (elem.operation_type === 'buy') {
+                    return elem.expense_category;
+                }
+            }
+
             return <tr key={index}>
-                <td>{elem.operation_date}</td>
+                <td>{ elem.operation_date }</td>
                 <OperationNameCell operationName={ elem.operation_name } classesNames={ makeClassesNamesForRow(index) }/>
                 <OperationAmountCell operationAmount={ elem.operation_amount } classesNames={ makeClassesNamesForRow(index) } />
-                <DistributionFinancesCell distributionFinances={ elem.first_category_name } classesNames={ makeClassesNamesForRow(index) }/>
-                <ExpensesTypeCell expensesType={ elem.second_category_name } classesNames={ makeClassesNamesForRow(index) } />
+                <DistributionFinancesCell distributionFinances={ elem.first_distribution_type } classesNames={ makeClassesNamesForRow(index) }/>
+                <ExpensesTypeCell expensesType={ determineValueOfOperationType(elem) } classesNames={ makeClassesNamesForRow(index) } />
                 <td><button onClick={() => { changeRowMode(index) }}>test</button></td>
             </tr>;
         })

@@ -27,6 +27,7 @@ function updateBudgetUnits() {
 
 function updateOperations() {
     window.databaseManagement.getOperations().then((result) => {
+        console.log(result);
         UploadedDataStorage.setFinancialOperations(result);
     })
 }
