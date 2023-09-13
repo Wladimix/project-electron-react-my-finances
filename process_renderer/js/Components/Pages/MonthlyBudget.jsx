@@ -1,12 +1,10 @@
 import React from "react";
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import "../../../css/MonthlyBudget.css";
+import TableHeader from "../Tables/TableHeader.jsx";
 
 export default function MonthlyBudget() {
     return <>
-        <Row>
-            <Col>1</Col>
-        </Row>
+        <TableHeader/>
     </>;
 }

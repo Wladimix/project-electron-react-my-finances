@@ -1,0 +1,11 @@
+.table-header .table-row {
+    vertical-align: middle;
+}
+
+.table-header .text-in-table-header.big {
+    font-size: 3vw;
+}
+
+.table-header .text-in-table-header.small {
+    font-size: 2vw;
+}
