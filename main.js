@@ -39,7 +39,7 @@ app.whenReady().then(() => {
     ipcMain.handle('get-budget-units', () => { return BudgetUnits.getUnits(knex) });
 
     ipcMain.handle('get-operations', () => { return BudgetOperations.getOperations(knex)});
-    ipcMain.handle('add-operation-and-unit', (event, newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId) => { return WorkingWithDatabase.addOperationAndUnit(knex, newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId) });
+    ipcMain.handle('add-operation-and-unit', (event, newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId, operationType) => { return WorkingWithDatabase.addOperationAndUnit(knex, newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId, operationType) });
 
     createWindow();
 });

@@ -12,6 +12,9 @@ import ButtonActions from '../../../../../Functions/ButtonActions';
 import InputsActions from '../../../../../Functions/InputsActions';
 import DataProcessing from '../../../../../Functions/DataProcessing';
 
+import { REPLENISHMENT, TRANSLATION, BUY } from '../../../../../Constants';
+import { DISTRIBUTION_OF_FINANCES, EXPENSES_CATEGORIES } from '../../../../../Constants';
+
 export default function RowWithAdditionOperation() {
     const distributionFinancesTypes = useStore(UploadedDataStorage.$distributionFinancesTypes);
     const expensesCategories = useStore(UploadedDataStorage.$expensesCategories);
@@ -23,63 +26,80 @@ export default function RowWithAdditionOperation() {
 
     const budgetUnits = useStore(UploadedDataStorage.$budgetUnits);
 
-    return <>
-        <tr>
-            <td>
-                Дата
-            </td>
-            <td className='column-with-operation-name'>
-                <CreatableSelect
-                    classNamePrefix='creatable-react-select'
-                    isClearable
-                    placeholder='Ед. бюджета'
-                    formatCreateLabel={ inputValue => `Добавить "${inputValue}"` }
-                    value={ DataProcessing.assignEmptyString(nameOperationValue) }
-                    options={ DataProcessing.makeDataToDisplayBudgetUnits(budgetUnits) }
-                    onChange={ newValue => InputsActions.changeOfNameOperationValue(newValue) }
+    function determineValueOfOperationTypeForSendToMainProcess(firstOperationCategoryValue, secondOperationCategoryValue) {
+        if (
+            firstOperationCategoryValue.value === undefined &&
+            secondOperationCategoryValue.value !== undefined &&
+            secondOperationCategoryValue.value.includes(DISTRIBUTION_OF_FINANCES)
+        ) { return REPLENISHMENT }
+        if (
+            firstOperationCategoryValue.value !== undefined &&
+            secondOperationCategoryValue.value !== undefined &&
+            firstOperationCategoryValue.value.includes(DISTRIBUTION_OF_FINANCES) &&
+            secondOperationCategoryValue.value.includes(DISTRIBUTION_OF_FINANCES)
+        ) { return TRANSLATION }
+        if (
+            firstOperationCategoryValue.value !== undefined &&
+            secondOperationCategoryValue.value !== undefined &&
+            firstOperationCategoryValue.value.includes(DISTRIBUTION_OF_FINANCES) &&
+            secondOperationCategoryValue.value.includes(EXPENSES_CATEGORIES)
+        ) { return BUY }
+    }
+
+    return <tr>
+        <td>
+            Дата
+        </td>
+        <td className='column-with-operation-name'>
+            <CreatableSelect
+                classNamePrefix='creatable-react-select'
+                isClearable
+                placeholder='Ед. бюджета'
+                formatCreateLabel={ inputValue => `Добавить "${inputValue}"` }
+                value={ DataProcessing.assignEmptyString(nameOperationValue) }
+                options={ DataProcessing.makeDataToDisplayBudgetUnits(budgetUnits) }
+                onChange={ newValue => InputsActions.changeOfNameOperationValue(newValue) }
+            />
+        </td>
+        <td className='column-with-operation-amount'>
+            <Form>
+                <Form.Control
+                    type='text'
+                    placeholder='Сумма'
+                    value={ sumOperationValue }
+                    onChange={ event => InputsActions.changeOfSumOperationValue(event) }
                 />
-            </td>
-            <td className='column-with-operation-amount'>
-                <Form>
-                    <Form.Control
-                        type='text'
-                        placeholder='Сумма'
-                        value={ sumOperationValue }
-                        onChange={ event => InputsActions.changeOfSumOperationValue(event) }
-                    />
-                </Form>
-            </td>
-            <td className='column-with-distribution-finances'>
-                <Select
-                    classNamePrefix="single-react-select"
-                    placeholder='Распределение финансов'
-                    options={ DataProcessing.makeDataWithDistributionFinancesTypes(distributionFinancesTypes) }
-                    onChange={ newValue => InputsActions.changeOfFirstOperationCategoryValue(newValue) }
-                />
-            </td>
-            <td className='column-with-expenses-category'>
-                <Select
-                    classNamePrefix='grouped-react-select'
-                    placeholder='Категория расходов'
-                    options={ DataProcessing.makeDataToDisplayBudgetCategories(distributionFinancesTypes, expensesCategories) }
-                    onChange={ newValue => InputsActions.changeOfSecondOperationCategoryValue(newValue) }
-                />
-            </td>
-            <td>
-                <Button
-                    variant='success'
-                    onClick={
-                        () => ButtonActions.addAndUpdateOperation(
-                            nameOperationValue,
-                            sumOperationValue,
-                            DataProcessing.changeIdForSendToMainProcess(firstOperationCategoryValue.value),
-                            DataProcessing.changeIdForSendToMainProcess(secondOperationCategoryValue.value)
-                        )
-                    }
-                >
-                    Добавить
-                </Button>
-            </td>
-        </tr>
-    </>;
+            </Form>
+        </td>
+        <td className='column-with-distribution-finances'>
+            <Select
+                classNamePrefix="single-react-select"
+                placeholder='Распределение финансов'
+                options={ DataProcessing.makeDataWithDistributionFinancesTypes(distributionFinancesTypes) }
+                onChange={ newValue => InputsActions.changeOfFirstOperationCategoryValue(newValue) }
+            />
+        </td>
+        <td className='column-with-expenses-category'>
+            <Select
+                classNamePrefix='grouped-react-select'
+                placeholder='Категория расходов'
+                options={ DataProcessing.makeDataToDisplayBudgetCategories(distributionFinancesTypes, expensesCategories) }
+                onChange={ newValue => InputsActions.changeOfSecondOperationCategoryValue(newValue) }
+            />
+        </td>
+        <td>
+            <Button
+                variant='success'
+                onClick={ () => ButtonActions.addAndUpdateOperation(
+                    nameOperationValue,
+                    sumOperationValue,
+                    DataProcessing.changeIdForSendToMainProcess(firstOperationCategoryValue.value),
+                    DataProcessing.changeIdForSendToMainProcess(secondOperationCategoryValue.value),
+                    determineValueOfOperationTypeForSendToMainProcess(firstOperationCategoryValue, secondOperationCategoryValue)
+                )}
+            >
+                Добавить
+            </Button>
+        </td>
+    </tr>
 }

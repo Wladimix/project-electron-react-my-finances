@@ -10,5 +10,5 @@ contextBridge.exposeInMainWorld('databaseManagement', {
     getBudgetUnits: () => ipcRenderer.invoke('get-budget-units'),
 
     getOperations: () => ipcRenderer.invoke('get-operations'),
-    addOperation: (newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId) => ipcRenderer.invoke('add-operation-and-unit', newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId)
+    addOperation: (newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId, operationType) => ipcRenderer.invoke('add-operation-and-unit', newUnitName, newOperationSum, firstOperationCategoryId, secondOperationCategoryId, operationType)
 });

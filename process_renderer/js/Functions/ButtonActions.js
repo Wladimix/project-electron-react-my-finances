@@ -13,8 +13,8 @@ function addAndUpdateExpenseCategory(expenseCategoryName) {
     });
 }
 
-function addAndUpdateOperation(nameOperationValue, sumOperationValue, firstOperationCategoryId, secondOperationCategoryId) {
-    window.databaseManagement.addOperation(nameOperationValue, sumOperationValue, firstOperationCategoryId, secondOperationCategoryId).then(() => {
+function addAndUpdateOperation(nameOperationValue, sumOperationValue, firstOperationCategoryId, secondOperationCategoryId, operationType) {
+    window.databaseManagement.addOperation(nameOperationValue, sumOperationValue, firstOperationCategoryId, secondOperationCategoryId, operationType).then(() => {
         InputsValuesStorage.setNameOperationValue('');
         InputsValuesStorage.setSumOperationValue('');
         LoadingData.updateBudgetUnits();

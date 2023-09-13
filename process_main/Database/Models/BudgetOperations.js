@@ -34,14 +34,13 @@ function getOperations(knex) {
             `${Constants.BUDGET_OPERATIONS_TABLE_NAME}.operation_type as operation_type`
         ).then((result) => {
             console.log(`Данные из таблицы "${Constants.BUDGET_OPERATIONS_TABLE_NAME}" загружены`);
-            console.log(result);
             return result;
         }).catch((error) => {
             console.error(error);
         });
 }
 
-function addOperation(knex, newUnitId, newOperationSum, firstOperationCategoryId, secondOperationCategoryId) {
+function addOperation(knex, newUnitId, newOperationSum, firstOperationCategoryId, secondOperationCategoryId, operationType) {
     return knex(Constants.BUDGET_OPERATIONS_TABLE_NAME).insert({
         date: '2022-01-01',
         amount: newOperationSum,
@@ -49,7 +48,7 @@ function addOperation(knex, newUnitId, newOperationSum, firstOperationCategoryId
         first_distribution_type_id: firstOperationCategoryId,
         second_distribution_type_id: secondOperationCategoryId,
         expense_category_id: secondOperationCategoryId,
-        operation_type: 'translation'
+        operation_type: operationType
     }).then((result) => {
         console.log(`Запись в таблицу "${Constants.BUDGET_OPERATIONS_TABLE_NAME}" добавлена`);
         return result;

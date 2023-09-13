@@ -34,7 +34,8 @@ function changeIdForSelect(id, type) {
 }
 
 function changeIdForSendToMainProcess(id) {
-    return Number(id[0]);
+    if (id !== undefined) return Number(id[0]);
+    return '';
 }
 
 function makeDataToDisplayBudgetUnits(loadedUnits) {
