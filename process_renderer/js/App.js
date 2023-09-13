@@ -1,18 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, { useEffect } from 'react';
-
-import MonthlyBudget from './Components/Pages/MonthlyBudget/MonthlyBudget';
-import LoadingData from './Functions/LoadingData';
+import React from 'react';
 
 export default function App() {
-    useEffect(() => {
-        LoadingData.loadingAllData();
-    }, []);
-
-    return <>
-        <div className='app-container'>
-            <MonthlyBudget/>
-        </div>
-    </>;
+    return <div className='app-container'></div>;
 }
