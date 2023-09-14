@@ -2,8 +2,13 @@ import React from "react";
 
 import Table from "react-bootstrap/Table";
 
-export default function FinancialOperationsTable() {
-    return <Table striped bordered hover>
+export default function BudgetOperationsTable() {
+    return <Table className="budget-operations-table" striped bordered hover>
+        <thead>
+            <tr className="table-row">
+                <th colSpan={6}>Финансовые операции</th>
+            </tr>
+        </thead>
         <tbody>
             <tr>
                 <td>1</td>

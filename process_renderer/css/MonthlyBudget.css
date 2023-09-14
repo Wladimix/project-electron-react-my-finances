@@ -18,3 +18,35 @@
 .table-header .text-in-table-header.small {
     font-size: 1.5vw;
 }
+
+.budget-operations-table {
+    margin: 0px;
+}
+
+.budget-operations-table thead .table-row {
+    text-align: center;
+}
+
+.distribution-finances-table {
+    margin: 0px;
+}
+
+.distribution-finances-table thead .table-row {
+    text-align: center;
+}
+
+.distribution-finances-table-container {
+    flex-basis: 100%;
+}
+
+.expense-categories-table {
+    margin: 0px;
+}
+
+.expense-categories-table thead .table-row {
+    text-align: center;
+}
+
+.expense-categories-table-container {
+    flex-basis: 100%;
+}
