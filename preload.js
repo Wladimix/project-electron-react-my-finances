@@ -6,5 +6,6 @@ contextBridge.exposeInMainWorld('constants', {
 });
 
 contextBridge.exposeInMainWorld('databaseManagement', {
-    //
+    loadDistributionFinances: () => ipcRenderer.invoke('load-distribution-finances'),
+    addAndLoadDistributionFinancesType: (distributionFinancesTypeName) => ipcRenderer.invoke('add-and-load-distribution-finances-type', distributionFinancesTypeName)
 });

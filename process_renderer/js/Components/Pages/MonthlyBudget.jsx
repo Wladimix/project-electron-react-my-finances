@@ -10,9 +10,9 @@ export default function MonthlyBudget() {
     return <>
         <TableHeader/>
         <BudgetOperationsTable/>
-        <div className="d-flex">
-            <div className="distribution-finances-table-container"><DistributionFinancesTable/></div>
-            <div className="expense-categories-table-container"><ExpenseCategoriesTable/></div>
+        <div className='d-flex'>
+            <div className='distribution-finances-table-container'><DistributionFinancesTable/></div>
+            <div className='expense-categories-table-container'><ExpenseCategoriesTable/></div>
         </div>
 
     </>;

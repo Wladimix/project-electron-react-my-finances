@@ -27,6 +27,10 @@
     text-align: center;
 }
 
+.budget-operations-table .table-cell {
+    text-align: center;
+}
+
 .distribution-finances-table-container {
     flex-basis: 100%;
 }
