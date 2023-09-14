@@ -1,6 +1,7 @@
 import React from "react";
 
 import Table from "react-bootstrap/Table";
+import AdditionDistributionFinancesTypeRow from "../TablesRows/AdditionDistributionFinancesTypeRow.jsx";
 
 export default function DistributionFinancesTable() {
     return <Table className="distribution-finances-table" striped bordered>
@@ -18,10 +19,7 @@ export default function DistributionFinancesTable() {
                 <td>1</td>
                 <td>2</td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>2</td>
-            </tr>
+            <AdditionDistributionFinancesTypeRow/>
         </tbody>
     </Table>;
 }

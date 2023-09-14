@@ -27,6 +27,10 @@
     text-align: center;
 }
 
+.distribution-finances-table-container {
+    flex-basis: 100%;
+}
+
 .distribution-finances-table {
     margin: 0px;
 }
@@ -35,7 +39,11 @@
     text-align: center;
 }
 
-.distribution-finances-table-container {
+.distribution-finances-table .table-cell {
+    text-align: center;
+}
+
+.expense-categories-table-container {
     flex-basis: 100%;
 }
 
@@ -47,6 +55,6 @@
     text-align: center;
 }
 
-.expense-categories-table-container {
-    flex-basis: 100%;
+.expense-categories-table .table-cell {
+    text-align: center;
 }

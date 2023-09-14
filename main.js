@@ -1,5 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
-const path = require('path');
+const { app, BrowserWindow, ipcMain } = require("electron");
+const path = require("path");
+
+const CreateTablesController = require("./process_main/Controllers/CreateTablesController.js");
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -21,6 +23,8 @@ require('electron-reload')(__dirname, {
 });
 
 app.whenReady().then(() => {
+    CreateTablesController.createTables();
+
     createWindow();
 });
 
