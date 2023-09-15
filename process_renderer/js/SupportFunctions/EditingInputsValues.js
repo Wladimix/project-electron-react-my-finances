@@ -4,6 +4,11 @@ function changeDistributionFinancesType(event) {
     InputsValuesStorage.changeDistributionFinancesType(event.target.value);
 }
 
+function changeExpenseCategory(event) {
+    InputsValuesStorage.changeExpenseCategory(event.target.value);
+}
+
 export default {
-    changeDistributionFinancesType
+    changeDistributionFinancesType,
+    changeExpenseCategory
 }

@@ -3,6 +3,7 @@ const path = require("path");
 
 const CreateTablesController = require("./process_main/Controllers/CreateTablesController.js");
 const DistributionFinancesController = require("./process_main/Controllers/DistributionFinancesController.js");
+const ExpensesCategoriesController = require("./process_main/Controllers/ExpensesCategoriesController.js");
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -25,8 +26,12 @@ require('electron-reload')(__dirname, {
 
 app.whenReady().then(() => {
     CreateTablesController.createTables();
+
     ipcMain.handle('load-distribution-finances', (e) => { return DistributionFinancesController.loadDistributionFinances() });
     ipcMain.handle('add-and-load-distribution-finances-type', (e, distributionFinancesTypeName) => { return DistributionFinancesController.addAndLoadDistributionFinancesType(distributionFinancesTypeName) });
+
+    ipcMain.handle('load-expenses-categories', (e) => { return ExpensesCategoriesController.loadExpensesCategories() });
+    ipcMain.handle('add-and-load-expense-category', (e, expenseCategoryName) => { return ExpensesCategoriesController.addAndLoadExpenseCategory(expenseCategoryName) });
 
     createWindow();
 });
