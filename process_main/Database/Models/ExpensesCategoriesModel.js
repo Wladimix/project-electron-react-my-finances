@@ -14,12 +14,14 @@ function getExpensesCategories(knex, queryResult = null) {
         return queryResult.then(() => {
             return knex
                 .select()
-                .from(Constants.EXPENSES_CATEGORIES_TABLE_NAME);
+                .from(Constants.EXPENSES_CATEGORIES_TABLE_NAME)
+                .orderBy('name');
         })
     } else {
         return knex
             .select()
-            .from(Constants.EXPENSES_CATEGORIES_TABLE_NAME);
+            .from(Constants.EXPENSES_CATEGORIES_TABLE_NAME)
+            .orderBy('name');
     }
 }
 

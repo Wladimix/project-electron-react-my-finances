@@ -14,12 +14,14 @@ function getDistributionFinances(knex, queryResult = null) {
         return queryResult.then(() => {
             return knex
                 .select()
-                .from(Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME);
+                .from(Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+                .orderBy('name');
         })
     } else {
         return knex
             .select()
-            .from(Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME);
+            .from(Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+            .orderBy('name');
     }
 }
 
