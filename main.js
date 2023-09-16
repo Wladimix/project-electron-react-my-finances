@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 
+const Constants = require("./process_main/Constants.js");
 const CreateTablesController = require("./process_main/Controllers/CreateTablesController.js");
 const DistributionFinancesController = require("./process_main/Controllers/DistributionFinancesController.js");
 const ExpensesCategoriesController = require("./process_main/Controllers/ExpensesCategoriesController.js");
@@ -10,7 +11,8 @@ function createWindow() {
         width: 1400,
         height: 500,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, 'preload.js'),
+            additionalArguments: Constants
         }
     });
 

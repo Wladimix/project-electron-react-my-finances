@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useStore } from "effector-react";
 import Table from "react-bootstrap/Table";
 
@@ -12,10 +11,10 @@ import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 export default function ExpensesCategoriesTable() {
     const isLoadingExpensesCategories = useStore(DownloadProcessStorage.$isLoadingExpensesCategories);
 
-    return <Table className='expense-categories-table' striped bordered>
+    return <Table className='expense-categories-table table-secondary' striped bordered>
         <thead>
             <tr className='table-row'>
-                <th colSpan={2}>Категории расходов</th>
+                <th colSpan={3}>Категории расходов</th>
             </tr>
         </thead>
         <tbody>

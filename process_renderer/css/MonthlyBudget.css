@@ -24,6 +24,7 @@
 }
 
 .budget-operations-table thead .table-row {
+    font-size: 1.5vw;
     text-align: center;
 }
 
@@ -40,6 +41,7 @@
 }
 
 .distribution-finances-table thead .table-row {
+    font-size: 1.3vw;
     text-align: center;
 }
 
@@ -56,6 +58,7 @@
 }
 
 .expense-categories-table thead .table-row {
+    font-size: 1.3vw;
     text-align: center;
 }
 

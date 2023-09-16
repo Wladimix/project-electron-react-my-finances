@@ -1,6 +1,5 @@
 import React from "react";
 
-import "../../../css/MonthlyBudget.css";
 import TableHeader from "../Tables/TableHeader.jsx";
 import BudgetOperationsTable from "../Tables/BudgetOperationsTable.jsx";
 import DistributionFinancesTable from "../Tables/DistributionFinancesTable.jsx";

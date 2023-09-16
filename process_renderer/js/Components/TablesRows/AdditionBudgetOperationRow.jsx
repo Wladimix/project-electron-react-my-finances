@@ -1,6 +1,6 @@
 import React from "react";
 
-import Button from "../TablesCellsContent/Button.jsx";
+import CustomButton from "../TablesCellsContent/CustomButton.jsx";
 
 export default function AdditionBudgetOperationRow() {
     return <tr className='table-row'>
@@ -10,7 +10,7 @@ export default function AdditionBudgetOperationRow() {
         <td className='table-cell'>Источник транзакции</td>
         <td className='table-cell'>Цель транзакции</td>
         <td className='table-cell'>
-            <Button textButton='Добавить операцию' />
+            <CustomButton textButton='Добавить' />
         </td>
     </tr>;
 }

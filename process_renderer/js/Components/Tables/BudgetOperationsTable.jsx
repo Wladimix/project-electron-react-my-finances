@@ -1,11 +1,10 @@
 import React from "react";
-
 import Table from "react-bootstrap/Table";
 
 import AdditionBudgetOperationRow from "../TablesRows/AdditionBudgetOperationRow.jsx";
 
 export default function BudgetOperationsTable() {
-    return <Table className='budget-operations-table' striped bordered hover>
+    return <Table className='budget-operations-table table-light' striped bordered hover>
         <thead>
             <tr className='table-row'>
                 <th colSpan={6}>Финансовые операции</th>

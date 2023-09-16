@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useStore } from "effector-react";
 import Table from "react-bootstrap/Table";
 
@@ -12,10 +11,10 @@ import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 export default function DistributionFinancesTable() {
     const isLoadingDistributionFinances = useStore(DownloadProcessStorage.$isLoadingDistributionFinances);
 
-    return <Table className='distribution-finances-table' striped bordered>
+    return <Table className='distribution-finances-table table-info' striped bordered>
         <thead>
             <tr className='table-row'>
-                <th colSpan={2}>Распределение финансов</th>
+                <th colSpan={3}>Распределение финансов</th>
             </tr>
         </thead>
         <tbody>

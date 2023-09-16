@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useStore } from "effector-react";
 import Toast from "react-bootstrap/Toast";
 
