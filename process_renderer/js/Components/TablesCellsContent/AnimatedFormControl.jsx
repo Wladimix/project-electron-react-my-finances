@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
 
-export default function AnimatedFormControl({ divValue, classesNames }) {
+export default function AnimatedFormControl({ divValue, placeholder, classesNames }) {
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
 
     return <>
@@ -14,7 +14,7 @@ export default function AnimatedFormControl({ divValue, classesNames }) {
         <Form className={rowEditingMode.isDelete ? 'animation-cell-value d-flex justify-content-around' : classesNames.animationClassName }>
             <Form.Control
                 type='text'
-                placeholder='Тип распределения финансов'
+                placeholder={ placeholder }
             />
         </Form >
     </>;

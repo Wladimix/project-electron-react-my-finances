@@ -5,3 +5,7 @@
     -ms-user-select: none;
     user-select: none;
 }
+
+body {
+    overflow-y: scroll;
+}

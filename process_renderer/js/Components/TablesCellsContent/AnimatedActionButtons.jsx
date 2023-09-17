@@ -12,19 +12,20 @@ import Animation from "../../SupportFunctions/Animation.js";
 
 export default function AnimatedActionButtons({ index, classesNames }) {
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
+    const cellsOverflowIsHidden = useStore(ComponentsAnimationStorage.$cellsOverflowIsHidden);
 
     return <>
         <div className={ classesNames.defaultClassName }>
             <Button
                 variant='warning'
-                disabled={rowEditingMode.editingMode ? true : false}
+                disabled={ rowEditingMode.editingMode }
                 onClick={() => Animation.changeRowEditingMode(index, rowEditingMode.editingMode, false)}
             >
                 { pencilSquare }
             </Button>
             <Button
                 variant='danger'
-                disabled={rowEditingMode.editingMode ? true : false}
+                disabled={ rowEditingMode.editingMode }
                 onClick={() => Animation.changeRowEditingMode(index, rowEditingMode.editingMode, true)}
             >
                 { trash }
@@ -33,11 +34,15 @@ export default function AnimatedActionButtons({ index, classesNames }) {
         <div className={ classesNames.animationClassName }>
             <Button
                 variant='danger'
+                disabled={ cellsOverflowIsHidden }
                 onClick={() => Animation.changeRowEditingMode(index, rowEditingMode.editingMode)}
             >
                 { xCircle }
             </Button>
-            <Button variant='success'>
+            <Button
+                variant='success'
+                disabled={ cellsOverflowIsHidden }
+            >
                 { checkCircle }
             </Button>
         </div >

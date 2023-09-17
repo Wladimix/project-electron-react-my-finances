@@ -1,8 +1,7 @@
 import React from "react";
 import { useStore } from "effector-react";
-
-import FormControl from "../TablesCellsContent/FormControl.jsx";
-import CustomButton from "../TablesCellsContent/CustomButton.jsx";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import ExpensesCategoriesController from "../../Controllers/ExpensesCategoriesController.js";
 import EditingInputsValues from "../../SupportFunctions/EditingInputsValues.js";
@@ -17,19 +16,21 @@ export default function AdditionExpenseCategoryRow() {
 
     return <tr className='table-row'>
         <td className='table-cell' colSpan={2}>
-            <FormControl
-                placeholder='Новый тип'
+            <Form.Control
+                disabled={ rowEditingMode.editingMode }
+                placeholder='Новая категория'
                 value={ expenseCategory }
                 onChange={ e => EditingInputsValues.changeExpenseCategory(e) }
             />
         </td>
         <td className='table-cell'>
-            <CustomButton
+            <Button
                 disabled={ isLoadingExpensesCategories || rowEditingMode.editingMode}
                 variant='success'
-                textButton='Добавить'
                 onClick={ e => ExpensesCategoriesController.addAndLoadExpenseCategory(expenseCategory) }
-            />
+            >
+                Добавить
+            </Button>
         </td>
     </tr>;
 }

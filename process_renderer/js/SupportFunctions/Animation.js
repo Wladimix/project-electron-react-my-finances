@@ -11,20 +11,20 @@ function changeRowEditingMode(selectedRowId, rowEditingMode, isDelete) {
 
     if (!rowEditingMode) {
         ComponentsAnimationStorage.setCellsOverflowIsHidden(true);
-        ComponentsAnimationStorage.setAlterCellValue(true);
+        ComponentsAnimationStorage.setAlterCellValueIsNotHidden(true);
 
         setTimeout(() => {
-            ComponentsAnimationStorage.setDefaultCellValue(true);
+            ComponentsAnimationStorage.setDefaultCellValueIsHidden(true);
             ComponentsAnimationStorage.setCellsOverflowIsHidden(false);
         }, 200);
 
     } if (rowEditingMode) {
         ComponentsAnimationStorage.setCellsOverflowIsHidden(true);
-        ComponentsAnimationStorage.setDefaultCellValue(false);
+        ComponentsAnimationStorage.setDefaultCellValueIsHidden(false);
 
         setTimeout(() => {
             ComponentsAnimationStorage.setCellsOverflowIsHidden(false);
-            ComponentsAnimationStorage.setAlterCellValue(false);
+            ComponentsAnimationStorage.setAlterCellValueIsNotHidden(false);
         }, 200);
     }
 }
@@ -43,11 +43,11 @@ function makeClassesNamesForRow(index, { ...Animation }) {
     else cellOverflowHidden = '';
 
     let defaultHidden = '';
-    if (Animation.defaultCellValue) defaultHidden = 'hidden'
+    if (Animation.defaultCellValueIsHidden) defaultHidden = 'hidden'
     else defaultHidden = '';
 
     let animationHidden = '';
-    if (Animation.alterCellValue) animationHidden = 'not-hidden'
+    if (Animation.alterCellValueIsNotHidden) animationHidden = 'not-hidden'
     else animationHidden = '';
 
     let cellClassName;

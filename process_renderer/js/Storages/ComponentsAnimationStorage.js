@@ -9,11 +9,11 @@ const $selectedRow = createStore('').on(setSelectedRow, (_, newValue) => newValu
 const setCellsOverflowIsHidden = createEvent();
 const $cellsOverflowIsHidden = createStore(false).on(setCellsOverflowIsHidden, (_, newValue) => newValue);
 
-const setDefaultCellValue = createEvent();
-const $defaultCellValue = createStore(false).on(setDefaultCellValue, (_, newValue) => newValue);
+const setDefaultCellValueIsHidden = createEvent();
+const $defaultCellValueIsHidden = createStore(false).on(setDefaultCellValueIsHidden, (_, newValue) => newValue);
 
-const setAlterCellValue = createEvent();
-const $alterCellValue = createStore(false).on(setAlterCellValue, (_, newValue) => newValue);
+const setAlterCellValueIsNotHidden = createEvent();
+const $alterCellValueIsNotHidden = createStore(false).on(setAlterCellValueIsNotHidden, (_, newValue) => newValue);
 
 export default {
     setRowEditingMode,
@@ -25,9 +25,9 @@ export default {
     setCellsOverflowIsHidden,
     $cellsOverflowIsHidden,
 
-    setDefaultCellValue,
-    $defaultCellValue,
+    setDefaultCellValueIsHidden,
+    $defaultCellValueIsHidden,
 
-    setAlterCellValue,
-    $alterCellValue
+    setAlterCellValueIsNotHidden,
+    $alterCellValueIsNotHidden
 }

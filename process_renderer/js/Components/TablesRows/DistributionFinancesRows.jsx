@@ -14,8 +14,8 @@ export default function DistributionFinancesRows() {
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
     const selectedRow = useStore(ComponentsAnimationStorage.$selectedRow);
     const cellsOverflowIsHidden = useStore(ComponentsAnimationStorage.$cellsOverflowIsHidden);
-    const defaultCellValue = useStore(ComponentsAnimationStorage.$defaultCellValue);
-    const alterCellValue = useStore(ComponentsAnimationStorage.$alterCellValue);
+    const defaultCellValueIsHidden = useStore(ComponentsAnimationStorage.$defaultCellValueIsHidden);
+    const alterCellValueIsNotHidden = useStore(ComponentsAnimationStorage.$alterCellValueIsNotHidden);
 
     return <>{
         dataForDistributionFinancesTable.map((elem) => {
@@ -25,8 +25,8 @@ export default function DistributionFinancesRows() {
                     rowEditingMode: rowEditingMode,
                     selectedRow: selectedRow,
                     cellsOverflowIsHidden: cellsOverflowIsHidden,
-                    defaultCellValue: defaultCellValue,
-                    alterCellValue: alterCellValue
+                    defaultCellValueIsHidden: defaultCellValueIsHidden,
+                    alterCellValueIsNotHidden: alterCellValueIsNotHidden
                 }
             );
 
@@ -34,6 +34,7 @@ export default function DistributionFinancesRows() {
                 <td className={ classesNamesForRow.cellClassName }>
                     <AnimatedFormControl
                         divValue={ elem.name }
+                        placeholder='Тип распределения финансов'
                         classesNames={ classesNamesForRow }
                     />
                 </td>

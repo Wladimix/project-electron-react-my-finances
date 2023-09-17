@@ -1,8 +1,7 @@
 import React from "react";
 import { useStore } from "effector-react";
-
-import FormControl from "../TablesCellsContent/FormControl.jsx";
-import CustomButton from "../TablesCellsContent/CustomButton.jsx";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import DistributionFinancesController from "../../Controllers/DistributionFinancesController.js";
 import EditingInputsValues from "../../SupportFunctions/EditingInputsValues.js";
@@ -17,19 +16,21 @@ export default function AdditionDistributionFinancesTypeRow() {
 
     return <tr className='table-row'>
         <td className='table-cell' colSpan={2}>
-            <FormControl
+            <Form.Control
+                disabled={ rowEditingMode.editingMode }
                 placeholder='Новый тип'
                 value={ distributionFinancesType }
                 onChange={ e => EditingInputsValues.changeDistributionFinancesType(e) }
             />
         </td>
         <td className='table-cell'>
-            <CustomButton
+            <Button
                 disabled={ isLoadingDistributionFinances || rowEditingMode.editingMode }
                 variant='success'
-                textButton='Добавить'
                 onClick={ e => DistributionFinancesController.addAndLoadDistributionFinancesType(distributionFinancesType) }
-            />
+            >
+                Добавить
+            </Button>
         </td>
     </tr>;
 }
