@@ -3,7 +3,7 @@ import { useStore } from "effector-react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import DistributionFinancesController from "../../Controllers/DistributionFinancesController.js";
+import DistributionFinancesController from "../../0_Controllers/DistributionFinancesController.js";
 import EditingInputsValues from "../../SupportFunctions/EditingInputsValues.js";
 import InputsValuesStorage from "../../Storages/InputsValuesStorage.js";
 import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";

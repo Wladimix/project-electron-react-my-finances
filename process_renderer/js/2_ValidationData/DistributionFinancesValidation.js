@@ -1,7 +1,6 @@
 import EditingToastsValues from "../SupportFunctions/EditingToastsValues.js";
 import ValidationValues from "../SupportFunctions/ValidationValues.js";
 import DataFromDatabaseStorage from "../Storages/DataFromDatabaseStorage.js";
-import InputsValuesStorage from "../Storages/InputsValuesStorage.js";
 
 function addAndLoadDistributionFinancesTypeValidation(distributionFinancesType) {
     if (distributionFinancesType === '') {
@@ -17,8 +16,7 @@ function addAndLoadDistributionFinancesTypeValidation(distributionFinancesType) 
     }
     
     let dataForDistributionFinancesTable = DataFromDatabaseStorage.$dataForDistributionFinancesTable.getState();
-    let distributionFinancesTypeValue = InputsValuesStorage.$distributionFinancesType.getState();
-    if (ValidationValues.findElementInObjectsArray(dataForDistributionFinancesTable, 'name', distributionFinancesTypeValue)) {
+    if (ValidationValues.findElementInObjectsArray(dataForDistributionFinancesTable, 'name', distributionFinancesType)) {
         EditingToastsValues.changeNotificationText('Данный тип распределения финансов уже существует.');
         EditingToastsValues.showNotification();
         return false;

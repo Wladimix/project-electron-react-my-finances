@@ -9,7 +9,7 @@ import "../css/Animation.css";
 import MonthlyBudget from "./Components/Pages/MonthlyBudget.jsx";
 import NotificationsAboutDataValidation from "./Components/Notifications/NotificationsAboutDataValidation.jsx";
 
-import loadAllData from "./Controllers/LoadAllDataController.js";
+import loadAllData from "./0_Controllers/LoadAllDataController.js";
 
 export default function App() {
     useEffect(() => {

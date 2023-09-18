@@ -1,7 +1,6 @@
 import EditingToastsValues from "../SupportFunctions/EditingToastsValues.js";
 import ValidationValues from "../SupportFunctions/ValidationValues.js";
 import DataFromDatabaseStorage from "../Storages/DataFromDatabaseStorage.js";
-import InputsValuesStorage from "../Storages/InputsValuesStorage.js";
 
 function addAndLoadExpenseCategoryValidation(expenseCategory) {
     if (expenseCategory === '') {
@@ -17,8 +16,7 @@ function addAndLoadExpenseCategoryValidation(expenseCategory) {
     }
 
     let dataForExpensesCategoriesTable = DataFromDatabaseStorage.$dataForExpensesCategoriesTable.getState();
-    let expenseCategoryValue = InputsValuesStorage.$expenseCategory.getState();
-    if (ValidationValues.findElementInObjectsArray(dataForExpensesCategoriesTable, 'name', expenseCategoryValue)) {
+    if (ValidationValues.findElementInObjectsArray(dataForExpensesCategoriesTable, 'name', expenseCategory)) {
         EditingToastsValues.changeNotificationText('Данная категория расходов уже существует.');
         EditingToastsValues.showNotification();
         return false;
