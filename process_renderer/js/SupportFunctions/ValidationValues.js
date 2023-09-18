@@ -1,5 +1,5 @@
 function findElementInObjectsArray(array, desiredKey, condition) {
-    return array.find(item => item[desiredKey] === condition);
+    return array.find(item => item[desiredKey].toLowerCase() === condition.toLowerCase());
 }
 
 function removeExtraSpaces(string) {
