@@ -40,9 +40,16 @@ function editDistributionFinancesType(knex, newTypeName, currentTypeName) {
         })
 }
 
+function deleteDistributionFinancesType(knex, distributionFinancesTypeName) {
+    return knex(Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+        .where('name', '=', distributionFinancesTypeName)
+        .del();
+}
+
 module.exports = {
     createTable,
     getDistributionFinances,
     addDistributionFinancesType,
-    editDistributionFinancesType
+    editDistributionFinancesType,
+    deleteDistributionFinancesType
 }

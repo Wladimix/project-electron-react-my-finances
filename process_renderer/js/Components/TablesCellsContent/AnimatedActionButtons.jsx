@@ -15,7 +15,7 @@ export default function AnimatedActionButtons({ index, changeInputValueStorageFu
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
     const cellsOverflowIsHidden = useStore(ComponentsAnimationStorage.$cellsOverflowIsHidden);
     const isLoadingDistributionFinancesAfterEditing = useStore(DownloadProcessStorage.$isLoadingDistributionFinancesAfterEditing);
-
+    
     return <>
         <div className={ classesNames.defaultClassName }>
             <Button
@@ -56,7 +56,8 @@ export default function AnimatedActionButtons({ index, changeInputValueStorageFu
                 variant='success'
                 disabled={ cellsOverflowIsHidden }
                 onClick={ () => {
-                    editFunction();
+                    if (rowEditingMode.isDelete) deleteFunction()
+                    else editFunction();
                     Animation.changeRowEditingMode(index, rowEditingMode.editingMode);
                 }}
             >

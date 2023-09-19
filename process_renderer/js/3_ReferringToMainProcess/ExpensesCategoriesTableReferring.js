@@ -28,8 +28,18 @@ function editAndLoadExpenseCategoryFromMainProcess(newCategoryName, currentCateg
         });
 }
 
+function deleteAndLoadExpenseCategoryFromMainProcess(expenseCategory) {
+    DownloadProcessStorage.setIsLoadingExpensesCategoriesAfterEditing(true);
+    window.databaseManagement.deleteAndLoadExpenseCategory(expenseCategory)
+        .then((result) => {
+            DataFromDatabaseStorage.changeDataForExpensesCategoriesTable(result);
+            DownloadProcessStorage.setIsLoadingExpensesCategoriesAfterEditing(false);
+        });
+}
+
 export default {
     loadExpensesCategoriesFromMainProcess,
     addAndLoadExpenseCategoryFromMainProcess,
-    editAndLoadExpenseCategoryFromMainProcess
+    editAndLoadExpenseCategoryFromMainProcess,
+    deleteAndLoadExpenseCategoryFromMainProcess
 }

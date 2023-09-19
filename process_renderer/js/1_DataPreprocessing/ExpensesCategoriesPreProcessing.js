@@ -8,7 +8,12 @@ function editAndLoadExpenseCategoryPreprocessing(newCategoryName) {
     return ValidationValues.removeExtraSpaces(newCategoryName);
 }
 
+function deleteAndLoadExpenseCategoryPreprocessing(expenseCategory) {
+    return ValidationValues.removeExtraSpaces(expenseCategory);
+}
+
 export default {
     addAndLoadExpenseCategoryPreprocessing,
-    editAndLoadExpenseCategoryPreprocessing
+    editAndLoadExpenseCategoryPreprocessing,
+    deleteAndLoadExpenseCategoryPreprocessing
 }

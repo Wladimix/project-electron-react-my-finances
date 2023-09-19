@@ -24,8 +24,16 @@ function editAndLoadExpenseCategory(newCategoryName, currentCategoryName) {
     }, ANIMATION_TIME);
 }
 
+function deleteAndLoadExpenseCategory(expenseCategory) {
+    expenseCategory = ExpensesCategoriesPreProcessing.deleteAndLoadExpenseCategoryPreprocessing(expenseCategory);
+    setTimeout(() => {
+        ExpensesCategoriesReferring.deleteAndLoadExpenseCategoryFromMainProcess(expenseCategory);
+    }, ANIMATION_TIME);
+}
+
 export default {
     loadExpensesCategories,
     addAndLoadExpenseCategory,
-    editAndLoadExpenseCategory
+    editAndLoadExpenseCategory,
+    deleteAndLoadExpenseCategory
 }

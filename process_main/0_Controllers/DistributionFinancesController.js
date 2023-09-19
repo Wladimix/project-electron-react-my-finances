@@ -29,8 +29,19 @@ function editAndLoadDistributionFinancesType(newTypeName, currentTypeName) {
     return getDistributionFinancesProcessingPromise;
 }
 
+function deleteAndLoadDistributionFinancesType(distributionFinancesTypeName) {
+    let deleteDistributionFinancesTypePromise = DistributionFinancesModel.deleteDistributionFinancesType(knex, distributionFinancesTypeName);
+    let deleteDistributionFinancesTypeProcessingPromise = DistributionFinancesProcessing.deleteDistributionFinancesTypeProcessing(deleteDistributionFinancesTypePromise);
+
+    let getDistributionFinancesPromise = DistributionFinancesModel.getDistributionFinances(knex, deleteDistributionFinancesTypeProcessingPromise);
+    let getDistributionFinancesProcessingPromise = DistributionFinancesProcessing.getDistributionFinancesProcessing(getDistributionFinancesPromise);
+
+    return getDistributionFinancesProcessingPromise;
+}
+
 module.exports = {
     loadDistributionFinances,
     addAndLoadDistributionFinancesType,
-    editAndLoadDistributionFinancesType
+    editAndLoadDistributionFinancesType,
+    deleteAndLoadDistributionFinancesType
 }

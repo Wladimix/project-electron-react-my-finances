@@ -40,9 +40,16 @@ function editExpenseCategory(knex, newCategoryName, currentCategoryName) {
         })
 }
 
+function deleteExpenseCategory(knex, expenseCategoryName) {
+    return knex(Constants.EXPENSES_CATEGORIES_TABLE_NAME)
+        .where('name', '=', expenseCategoryName)
+        .del();
+}
+
 module.exports = {
     createTable,
     getExpensesCategories,
     addExpenseCategory,
-    editExpenseCategory
+    editExpenseCategory,
+    deleteExpenseCategory
 }

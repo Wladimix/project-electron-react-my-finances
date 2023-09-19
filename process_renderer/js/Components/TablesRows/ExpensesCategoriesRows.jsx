@@ -58,6 +58,7 @@ export default function ExpensesCategoriesRows() {
                         typeOrCategoryName={ elem.name }
                         changeInputValueStorageFunction={ () => InputsValuesStorage.changeEditableExpenseCategory(elem.name) }
                         editFunction={ () => ExpensesCategoriesController.editAndLoadExpenseCategory(editableExpenseCategory, elem.name) }
+                        deleteFunction={ () => ExpensesCategoriesController.deleteAndLoadExpenseCategory(elem.name) }
                     />
                 </td>
             </tr>

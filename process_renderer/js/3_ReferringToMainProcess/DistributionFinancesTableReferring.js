@@ -28,8 +28,18 @@ function editAndLoadDistributionFinancesTypeFromMainProcess(newTypeName, current
         });
 }
 
+function deleteAndLoadDistributionFinancesTypeFromMainProcess(distributionFinancesType) {
+    DownloadProcessStorage.setIsLoadingDistributionFinancesAfterEditing(true);
+    window.databaseManagement.deleteAndLoadDistributionFinancesType(distributionFinancesType)
+        .then((result) => {
+            DataFromDatabaseStorage.changeDataForDistributionFinancesTable(result);
+            DownloadProcessStorage.setIsLoadingDistributionFinancesAfterEditing(false);
+        });
+}
+
 export default {
     loadDistributionFinancesFromMainProcess,
     addAndLoadDistributionFinancesTypeFromMainProcess,
-    editAndLoadDistributionFinancesTypeFromMainProcess
+    editAndLoadDistributionFinancesTypeFromMainProcess,
+    deleteAndLoadDistributionFinancesTypeFromMainProcess
 }

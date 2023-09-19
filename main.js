@@ -32,10 +32,12 @@ app.whenReady().then(() => {
     ipcMain.handle('load-distribution-finances', (e) => { return DistributionFinancesController.loadDistributionFinances() });
     ipcMain.handle('add-and-load-distribution-finances-type', (e, distributionFinancesTypeName) => { return DistributionFinancesController.addAndLoadDistributionFinancesType(distributionFinancesTypeName) });
     ipcMain.handle('edit-and-load-distribution-finances-type', (e, newTypeName, currentTypeName) => { return DistributionFinancesController.editAndLoadDistributionFinancesType(newTypeName, currentTypeName) });
+    ipcMain.handle('delete-and-load-distribution-finances-type', (e, distributionFinancesTypeName) => { return DistributionFinancesController.deleteAndLoadDistributionFinancesType(distributionFinancesTypeName) });
 
     ipcMain.handle('load-expenses-categories', (e) => { return ExpensesCategoriesController.loadExpensesCategories() });
     ipcMain.handle('add-and-load-expense-category', (e, expenseCategoryName) => { return ExpensesCategoriesController.addAndLoadExpenseCategory(expenseCategoryName) });
     ipcMain.handle('edit-and-load-expense-category', (e, newCategoryName, currentCategoryName) => { return ExpensesCategoriesController.editAndLoadExpenseCategory(newCategoryName, currentCategoryName) });
+    ipcMain.handle('delete-and-load-expense-category', (e, expenseCategoryName) => { return ExpensesCategoriesController.deleteAndLoadExpenseCategory(expenseCategoryName) });
 
     createWindow();
 });

@@ -29,8 +29,19 @@ function editAndLoadExpenseCategory(newCategoryName, currentCategoryName) {
     return getExpensesCategoriesProcessingPromise;
 }
 
+function deleteAndLoadExpenseCategory(expenseCategoryName) {
+    let deleteExpenseCategoryPromise = ExpensesCategoriesModel.deleteExpenseCategory(knex, expenseCategoryName)
+    let deleteExpenseCategoryProcessingPromise = ExpensesCategoriesProcessing.deleteExpenseCategoryProcessing(deleteExpenseCategoryPromise)
+
+    let getExpensesCategoriesPromise = ExpensesCategoriesModel.getExpensesCategories(knex, deleteExpenseCategoryProcessingPromise);
+    let getExpensesCategoriesProcessingPromise = ExpensesCategoriesProcessing.getExpensesCategoriesProcessing(getExpensesCategoriesPromise);
+
+    return getExpensesCategoriesProcessingPromise;
+}
+
 module.exports = {
     loadExpensesCategories,
     addAndLoadExpenseCategory,
-    editAndLoadExpenseCategory
+    editAndLoadExpenseCategory,
+    deleteAndLoadExpenseCategory
 }

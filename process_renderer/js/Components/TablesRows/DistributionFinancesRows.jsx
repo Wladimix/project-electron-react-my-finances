@@ -58,7 +58,7 @@ export default function DistributionFinancesRows() {
                         typeOrCategoryName={ elem.name }
                         changeInputValueStorageFunction={ () => InputsValuesStorage.changeEditableDistributionFinancesType(elem.name) }
                         editFunction={ () => DistributionFinancesController.editAndLoadDistributionFinancesType(editableDistributionFinancesType, elem.name) }
-
+                        deleteFunction={ () => DistributionFinancesController.deleteAndLoadDistributionFinancesType(elem.name) }
                     />
                 </td>
             </tr>

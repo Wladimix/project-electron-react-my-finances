@@ -24,8 +24,16 @@ function editAndLoadDistributionFinancesType(newTypeName, currentTypeName) {
     }, ANIMATION_TIME);
 }
 
+function deleteAndLoadDistributionFinancesType(distributionFinancesType) {
+    distributionFinancesType = DistributionFinancesPreProcessing.editAndLoadDistributionFinancesTypePreprocessing(distributionFinancesType);
+    setTimeout(() => {
+        DistributionFinancesReferring.deleteAndLoadDistributionFinancesTypeFromMainProcess(distributionFinancesType);
+    }, ANIMATION_TIME);
+}
+
 export default {
     loadDistributionFinances,
     addAndLoadDistributionFinancesType,
-    editAndLoadDistributionFinancesType
+    editAndLoadDistributionFinancesType,
+    deleteAndLoadDistributionFinancesType
 }

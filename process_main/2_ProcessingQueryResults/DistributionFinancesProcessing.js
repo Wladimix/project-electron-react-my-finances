@@ -42,9 +42,21 @@ function editDistributionFinancesTypeProcessing(queryResult) {
         })
 }
 
+function deleteDistributionFinancesTypeProcessing(queryResult) {
+    return queryResult
+        .then((result) => {
+            console.log(`Данные из таблицы ${Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME} удалены.`);
+            return result;
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+}
+
 module.exports = {
     createTableProcessing,
     getDistributionFinancesProcessing,
     addDistributionFinancesTypeProcessing,
-    editDistributionFinancesTypeProcessing
+    editDistributionFinancesTypeProcessing,
+    deleteDistributionFinancesTypeProcessing
 }

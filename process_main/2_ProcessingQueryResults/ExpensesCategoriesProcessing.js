@@ -42,9 +42,21 @@ function editExpenseCategoryProcessing(queryResult) {
         })
 }
 
+function deleteExpenseCategoryProcessing(queryResult) {
+    return queryResult
+        .then((result) => {
+            console.log(`Данные из таблицы ${Constants.EXPENSES_CATEGORIES_TABLE_NAME} удалены.`);
+            return result;
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+}
+
 module.exports = {
     createTableProcessing,
     getExpensesCategoriesProcessing,
     addExpenseCategoryProcessing,
-    editExpenseCategoryProcessing
+    editExpenseCategoryProcessing,
+    deleteExpenseCategoryProcessing
 }
