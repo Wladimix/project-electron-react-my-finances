@@ -2,9 +2,9 @@ import React from "react";
 import { useStore } from "effector-react";
 import Table from "react-bootstrap/Table";
 
-import RowWithDownloadNotification from "../TablesRows/RowWithDownloadNotification.jsx";
-import ExpensesCategoriesRows from "../TablesRows/ExpensesCategoriesRows.jsx";
 import AdditionExpenseCategoryRow from "../TablesRows/AdditionExpenseCategoryRow.jsx";
+import ExpensesCategoriesRows from "../TablesRows/ExpensesCategoriesRows.jsx";
+import RowWithDownloadNotification from "../TablesRows/RowWithDownloadNotification.jsx";
 
 import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 

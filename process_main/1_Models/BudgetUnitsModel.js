@@ -1,4 +1,4 @@
-const Constants = require('../../Constants');
+const Constants = require('../../MainConstants');
 
 function createTable() {
     //

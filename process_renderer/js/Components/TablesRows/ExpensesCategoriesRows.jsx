@@ -5,12 +5,14 @@ import AnimatedFormControl from "../TablesCellsContent/AnimatedFormControl.jsx";
 import AnimatedActionButtons from "../TablesCellsContent/AnimatedActionButtons.jsx";
 
 import ExpensesCategoriesController from "../../0_Controllers/ExpensesCategoriesController.js";
-import DataFromDatabaseStorage from "../../Storages/DataFromDatabaseStorage.js";
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
-import InputsValuesStorage from "../../Storages/InputsValuesStorage.js";
+import DataFromDatabaseStorage from "../../Storages/DataFromDatabaseStorage.js";
 import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
+import InputsValuesStorage from "../../Storages/InputsValuesStorage.js";
 import Animation from "../../SupportFunctions/Animation.js";
 import EditingInputsValues from "../../SupportFunctions/EditingInputsValues.js";
+
+import { EXPENSES_CATEGORIES_EXTRA_ID } from "../../RendererConstants.js";
 
 export default function ExpensesCategoriesRows() {
     const dataForExpensesCategoriesTable = useStore(DataFromDatabaseStorage.$dataForExpensesCategoriesTable);
@@ -26,7 +28,7 @@ export default function ExpensesCategoriesRows() {
     return <>{
         dataForExpensesCategoriesTable.map((elem) => {
             let classesNamesForRow = Animation.makeClassesNamesForRow(
-                elem.id + '-expenses-categories',
+                elem.id + EXPENSES_CATEGORIES_EXTRA_ID,
                 {
                     rowEditingMode: rowEditingMode,
                     selectedRow: selectedRow,
@@ -52,7 +54,7 @@ export default function ExpensesCategoriesRows() {
                 <td className={ classesNamesForRow.cellClassName }>
                     <AnimatedActionButtons
                         classesNames={ classesNamesForRow }
-                        index={ elem.id + '-expenses-categories' }
+                        index={ elem.id + EXPENSES_CATEGORIES_EXTRA_ID }
                         typeOrCategoryName={ elem.name }
                         changeInputValueStorageFunction={ () => InputsValuesStorage.changeEditableExpenseCategory(elem.name) }
                         editFunction={ () => ExpensesCategoriesController.editAndLoadExpenseCategory(editableExpenseCategory, elem.name) }

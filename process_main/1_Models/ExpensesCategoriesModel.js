@@ -1,4 +1,4 @@
-const Constants = require('../Constants.js');
+const Constants = require('../MainConstants.js');
 
 function createTable(knex) {
     return knex.schema.createTable(Constants.EXPENSES_CATEGORIES_TABLE_NAME, function (table) {

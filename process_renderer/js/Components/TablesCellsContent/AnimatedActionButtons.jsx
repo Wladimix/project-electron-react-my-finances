@@ -2,10 +2,10 @@ import React from "react";
 import { useStore } from "effector-react";
 import Button from "react-bootstrap/Button";
 
+import checkCircle from "../icons/check-circle.jsx";
 import pencilSquare from "../icons/pencil-square.jsx";
 import trash from "../icons/trash.jsx";
 import xCircle from "../icons/x-circle.jsx";
-import checkCircle from "../icons/check-circle.jsx";
 
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
 import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";

@@ -1,6 +1,6 @@
-const knex = require("../ConnectionDB.js");
 const ExpensesCategoriesModel = require("../1_Models/ExpensesCategoriesModel.js")
 const ExpensesCategoriesProcessing = require("../2_ProcessingQueryResults/ExpensesCategoriesProcessing.js");
+const knex = require("../ConnectionDB.js");
 
 function loadExpensesCategories() {
     let getExpensesCategoriesPromise = ExpensesCategoriesModel.getExpensesCategories(knex);

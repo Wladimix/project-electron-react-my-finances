@@ -1,4 +1,4 @@
-const Constants = require('../process_main/Constants.js');
+const Constants = require('../process_main/MainConstants.js');
 
 module.exports = require('knex')({
     client: 'sqlite3',

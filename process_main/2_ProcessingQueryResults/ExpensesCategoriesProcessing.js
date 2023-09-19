@@ -1,4 +1,4 @@
-const Constants = require("../Constants.js");
+const Constants = require("../MainConstants.js");
 
 function createTableProcessing(queryResult) {
     queryResult

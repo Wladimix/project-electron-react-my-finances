@@ -1,9 +1,9 @@
 import React from "react";
 
-import TableHeader from "../Tables/TableHeader.jsx";
 import BudgetOperationsTable from "../Tables/BudgetOperationsTable.jsx";
 import DistributionFinancesTable from "../Tables/DistributionFinancesTable.jsx";
 import ExpensesCategoriesTable from "../Tables/ExpensesCategoriesTable.jsx";
+import TableHeader from "../Tables/TableHeader.jsx";
 
 export default function MonthlyBudget() {
     return <>

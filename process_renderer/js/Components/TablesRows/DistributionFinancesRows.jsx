@@ -1,16 +1,18 @@
 import React from "react";
 import { useStore } from "effector-react";
 
-import AnimatedFormControl from "../TablesCellsContent/AnimatedFormControl.jsx";
 import AnimatedActionButtons from "../TablesCellsContent/AnimatedActionButtons.jsx";
+import AnimatedFormControl from "../TablesCellsContent/AnimatedFormControl.jsx";
 
 import DistributionFinancesController from "../../0_Controllers/DistributionFinancesController.js";
-import DataFromDatabaseStorage from "../../Storages/DataFromDatabaseStorage.js";
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
-import InputsValuesStorage from "../../Storages/InputsValuesStorage.js";
+import DataFromDatabaseStorage from "../../Storages/DataFromDatabaseStorage.js";
 import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
+import InputsValuesStorage from "../../Storages/InputsValuesStorage.js";
 import Animation from "../../SupportFunctions/Animation.js";
 import EditingInputsValues from "../../SupportFunctions/EditingInputsValues.js";
+
+import { DISTRIBUTION_FINANCES_EXTRA_ID } from "../../RendererConstants.js";
 
 export default function DistributionFinancesRows() {
     const dataForDistributionFinancesTable = useStore(DataFromDatabaseStorage.$dataForDistributionFinancesTable);
@@ -26,7 +28,7 @@ export default function DistributionFinancesRows() {
     return <>{
         dataForDistributionFinancesTable.map((elem) => {
             let classesNamesForRow = Animation.makeClassesNamesForRow(
-                elem.id + '-distribution-finances',
+                elem.id + DISTRIBUTION_FINANCES_EXTRA_ID,
                 {
                     rowEditingMode: rowEditingMode,
                     selectedRow: selectedRow,
@@ -52,7 +54,7 @@ export default function DistributionFinancesRows() {
                 <td className={ classesNamesForRow.cellClassName }>
                     <AnimatedActionButtons
                         classesNames={ classesNamesForRow }
-                        index={ elem.id + '-distribution-finances' }
+                        index={ elem.id + DISTRIBUTION_FINANCES_EXTRA_ID }
                         typeOrCategoryName={ elem.name }
                         changeInputValueStorageFunction={ () => InputsValuesStorage.changeEditableDistributionFinancesType(elem.name) }
                         editFunction={ () => DistributionFinancesController.editAndLoadDistributionFinancesType(editableDistributionFinancesType, elem.name) }

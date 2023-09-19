@@ -1,6 +1,6 @@
-const knex = require("../ConnectionDB.js");
 const DistributionFinancesModel = require("../1_Models/DistributionFinancesModel.js");
 const DistributionFinancesProcessing = require("../2_ProcessingQueryResults/DistributionFinancesProcessing.js");
+const knex = require("../ConnectionDB.js");
 
 function loadDistributionFinances() {
     let getDistributionFinancesPromise = DistributionFinancesModel.getDistributionFinances(knex);

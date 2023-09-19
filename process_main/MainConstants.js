@@ -5,7 +5,6 @@ const EXPENSES_CATEGORIES_TABLE_NAME = 'expenses_categories';
 
 module.exports = {
     DATABASE_PATH,
-
     DISTRIBUTION_OF_FINANCES_TABLE_NAME,
     EXPENSES_CATEGORIES_TABLE_NAME
 }

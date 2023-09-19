@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 
-const Constants = require("./process_main/Constants.js");
+const Constants = require("./process_main/MainConstants.js");
 const CreateTablesController = require("./process_main/0_Controllers/CreateTablesController.js");
 const DistributionFinancesController = require("./process_main/0_Controllers/DistributionFinancesController.js");
 const ExpensesCategoriesController = require("./process_main/0_Controllers/ExpensesCategoriesController.js");
