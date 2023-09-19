@@ -13,12 +13,16 @@ export default function AdditionDistributionFinancesTypeRow() {
     const addedDistributionFinancesType = useStore(InputsValuesStorage.$addedDistributionFinancesType);
     const isLoadingDistributionFinancesAfterAdding = useStore(DownloadProcessStorage.$isLoadingDistributionFinancesAfterAdding);
     const isLoadingDistributionFinancesAfterEditing = useStore(DownloadProcessStorage.$isLoadingDistributionFinancesAfterEditing);
+    const cellsOverflowIsHidden = useStore(ComponentsAnimationStorage.$cellsOverflowIsHidden);
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
 
     return <tr className='table-row'>
         <td className='table-cell' colSpan={2}>
             <Form.Control
-                disabled={ rowEditingMode.editingMode }
+                disabled={
+                    rowEditingMode.editingMode ||
+                    cellsOverflowIsHidden
+                }
                 placeholder='Новый тип'
                 value={ addedDistributionFinancesType }
                 onChange={ e => EditingInputsValues.changeAddedDistributionFinancesType(e) }
@@ -26,7 +30,12 @@ export default function AdditionDistributionFinancesTypeRow() {
         </td>
         <td className='table-cell'>
             <Button
-                disabled={isLoadingDistributionFinancesAfterAdding || isLoadingDistributionFinancesAfterEditing || rowEditingMode.editingMode }
+                disabled={
+                    isLoadingDistributionFinancesAfterAdding ||
+                    isLoadingDistributionFinancesAfterEditing ||
+                    rowEditingMode.editingMode ||
+                    cellsOverflowIsHidden
+                }
                 variant='success'
                 onClick={ e => DistributionFinancesController.addAndLoadDistributionFinancesType(addedDistributionFinancesType) }
             >

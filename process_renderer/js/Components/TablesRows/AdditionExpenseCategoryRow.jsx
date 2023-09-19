@@ -12,12 +12,17 @@ import EditingInputsValues from "../../SupportFunctions/EditingInputsValues.js";
 export default function AdditionExpenseCategoryRow() {
     const addedExpenseCategory = useStore(InputsValuesStorage.$addedExpenseCategory);
     const isLoadingExpensesCategoriesAfterAdding = useStore(DownloadProcessStorage.$isLoadingExpensesCategoriesAfterAdding);
+    const isLoadingExpensesCategoriesAfterEditing = useStore(DownloadProcessStorage.$isLoadingExpensesCategoriesAfterEditing);
+    const cellsOverflowIsHidden = useStore(ComponentsAnimationStorage.$cellsOverflowIsHidden);
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
 
     return <tr className='table-row'>
         <td className='table-cell' colSpan={2}>
             <Form.Control
-                disabled={ rowEditingMode.editingMode }
+                disabled={
+                    rowEditingMode.editingMode ||
+                    cellsOverflowIsHidden
+                }
                 placeholder='Новая категория'
                 value={ addedExpenseCategory }
                 onChange={ e => EditingInputsValues.changeAddedExpenseCategory(e) }
@@ -25,7 +30,12 @@ export default function AdditionExpenseCategoryRow() {
         </td>
         <td className='table-cell'>
             <Button
-                disabled={ isLoadingExpensesCategoriesAfterAdding || rowEditingMode.editingMode}
+                disabled={
+                    isLoadingExpensesCategoriesAfterAdding ||
+                    isLoadingExpensesCategoriesAfterEditing ||
+                    rowEditingMode.editingMode ||
+                    cellsOverflowIsHidden
+                }
                 variant='success'
                 onClick={ e => ExpensesCategoriesController.addAndLoadExpenseCategory(addedExpenseCategory) }
             >

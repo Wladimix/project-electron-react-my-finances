@@ -20,7 +20,11 @@ export default function AnimatedActionButtons({ index, changeInputValueStorageFu
         <div className={ classesNames.defaultClassName }>
             <Button
                 variant='warning'
-                disabled={ isLoadingDistributionFinancesAfterEditing || rowEditingMode.editingMode }
+                disabled={
+                    isLoadingDistributionFinancesAfterEditing ||
+                    rowEditingMode.editingMode ||
+                    cellsOverflowIsHidden
+                }
                 onClick={ () => {
                     changeInputValueStorageFunction();
                     Animation.changeRowEditingMode(index, rowEditingMode.editingMode, false);
@@ -30,7 +34,11 @@ export default function AnimatedActionButtons({ index, changeInputValueStorageFu
             </Button>
             <Button
                 variant='danger'
-                disabled={ isLoadingDistributionFinancesAfterEditing || rowEditingMode.editingMode }
+                disabled={
+                    isLoadingDistributionFinancesAfterEditing ||
+                    rowEditingMode.editingMode ||
+                    cellsOverflowIsHidden
+                }
                 onClick={() => Animation.changeRowEditingMode(index, rowEditingMode.editingMode, true)}
             >
                 { trash }

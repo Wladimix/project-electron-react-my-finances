@@ -26,6 +26,12 @@ function addAndLoadExpenseCategoryValidation(expenseCategory) {
 }
 
 function editAndLoadExpenseCategoryValidation(newCategoryName, currentCategoryName) {
+    if (newCategoryName === currentCategoryName) {
+        EditingToastsValues.changeNotificationText('Название поля не изменено.');
+        EditingToastsValues.showNotification();
+        return false;
+    }
+
     if (newCategoryName === '') {
         EditingToastsValues.changeNotificationText('Поле с редактируемой категорией расходов не должно быть пустым.');
         EditingToastsValues.showNotification();

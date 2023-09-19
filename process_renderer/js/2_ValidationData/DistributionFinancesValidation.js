@@ -26,6 +26,12 @@ function addAndLoadDistributionFinancesTypeValidation(distributionFinancesType) 
 }
 
 function editAndLoadDistributionFinancesTypeValidation(newTypeName, currentTypeName) {
+    if (newTypeName === currentTypeName) {
+        EditingToastsValues.changeNotificationText('Название поля не изменено.');
+        EditingToastsValues.showNotification();
+        return false;
+    }
+
     if (newTypeName === '') {
         EditingToastsValues.changeNotificationText('Поле с редактируемым типом распределения финансов не должно быть пустым.');
         EditingToastsValues.showNotification();

@@ -3,6 +3,8 @@ import DistributionFinancesValidation from "../2_ValidationData/DistributionFina
 import DistributionFinancesReferring from "../3_ReferringToMainProcess/DistributionFinancesTableReferring.js";
 import InputsValuesStorage from "../Storages/InputsValuesStorage.js";
 
+import { ANIMATION_TIME } from "../RendererConstants.js";
+
 function loadDistributionFinances() {
     DistributionFinancesReferring.loadDistributionFinancesFromMainProcess();
 }
@@ -17,7 +19,9 @@ function addAndLoadDistributionFinancesType(distributionFinancesType) {
 function editAndLoadDistributionFinancesType(newTypeName, currentTypeName) {
     newTypeName = DistributionFinancesPreProcessing.editAndLoadDistributionFinancesTypePreprocessing(newTypeName);
     if (DistributionFinancesValidation.editAndLoadDistributionFinancesTypeValidation(newTypeName, currentTypeName))
-    DistributionFinancesReferring.editAndLoadDistributionFinancesTypeFromMainProcess(newTypeName, currentTypeName);
+    setTimeout(() => {
+        DistributionFinancesReferring.editAndLoadDistributionFinancesTypeFromMainProcess(newTypeName, currentTypeName);
+    }, ANIMATION_TIME);
 }
 
 export default {

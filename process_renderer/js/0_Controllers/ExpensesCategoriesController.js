@@ -3,6 +3,8 @@ import ExpensesCategoriesValidation from "../2_ValidationData/ExpensesCategories
 import ExpensesCategoriesReferring from "../3_ReferringToMainProcess/ExpensesCategoriesTableReferring.js";
 import InputsValuesStorage from "../Storages/InputsValuesStorage.js";
 
+import { ANIMATION_TIME } from "../RendererConstants.js";
+
 function loadExpensesCategories() {
     ExpensesCategoriesReferring.loadExpensesCategoriesFromMainProcess();
 }
@@ -17,7 +19,9 @@ function addAndLoadExpenseCategory(expenseCategory) {
 function editAndLoadExpenseCategory(newCategoryName, currentCategoryName) {
     newCategoryName = ExpensesCategoriesPreProcessing.editAndLoadExpenseCategoryPreprocessing(newCategoryName);
     if (ExpensesCategoriesValidation.editAndLoadExpenseCategoryValidation(newCategoryName, currentCategoryName))
-    ExpensesCategoriesReferring.editAndLoadExpenseCategoryFromMainProcess(newCategoryName, currentCategoryName);
+    setTimeout(() => {
+        ExpensesCategoriesReferring.editAndLoadExpenseCategoryFromMainProcess(newCategoryName, currentCategoryName);
+    }, ANIMATION_TIME);
 }
 
 export default {

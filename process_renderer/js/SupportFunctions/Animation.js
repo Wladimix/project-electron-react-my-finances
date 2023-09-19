@@ -1,5 +1,7 @@
 import ComponentsAnimationStorage from "../Storages/ComponentsAnimationStorage.js";
 
+import { ANIMATION_TIME } from "../RendererConstants.js";
+
 function changeRowEditingMode(selectedRowId, rowEditingMode, isDelete) {
     ComponentsAnimationStorage.setSelectedRow(selectedRowId);
 
@@ -16,7 +18,7 @@ function changeRowEditingMode(selectedRowId, rowEditingMode, isDelete) {
         setTimeout(() => {
             ComponentsAnimationStorage.setDefaultCellValueIsHidden(true);
             ComponentsAnimationStorage.setCellsOverflowIsHidden(false);
-        }, 200);
+        }, ANIMATION_TIME);
 
     } if (rowEditingMode) {
         ComponentsAnimationStorage.setCellsOverflowIsHidden(true);
@@ -25,7 +27,7 @@ function changeRowEditingMode(selectedRowId, rowEditingMode, isDelete) {
         setTimeout(() => {
             ComponentsAnimationStorage.setCellsOverflowIsHidden(false);
             ComponentsAnimationStorage.setAlterCellValueIsNotHidden(false);
-        }, 200);
+        }, ANIMATION_TIME);
     }
 }
 
