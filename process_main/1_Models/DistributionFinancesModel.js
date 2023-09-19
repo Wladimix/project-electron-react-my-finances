@@ -1,4 +1,4 @@
-const Constants = require('../../Constants');
+const Constants = require('../Constants.js');
 
 function createTable(knex) {
     return knex.schema.createTable(Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME, function (table) {
@@ -32,8 +32,17 @@ function addDistributionFinancesType(knex, distributionFinancesTypeName) {
         });
 }
 
+function editDistributionFinancesType(knex, newTypeName, currentTypeName) {
+    return knex(Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+        .where('name', '=', currentTypeName)
+        .update({
+            name: newTypeName
+        })
+}
+
 module.exports = {
     createTable,
     getDistributionFinances,
-    addDistributionFinancesType
+    addDistributionFinancesType,
+    editDistributionFinancesType
 }

@@ -10,8 +10,8 @@ import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
 
 export default function AdditionExpenseCategoryRow() {
-    const expenseCategory = useStore(InputsValuesStorage.$expenseCategory);
-    const isLoadingExpensesCategories = useStore(DownloadProcessStorage.$isLoadingExpensesCategories);
+    const addedExpenseCategory = useStore(InputsValuesStorage.$addedExpenseCategory);
+    const isLoadingExpensesCategoriesAfterAdding = useStore(DownloadProcessStorage.$isLoadingExpensesCategoriesAfterAdding);
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
 
     return <tr className='table-row'>
@@ -19,15 +19,15 @@ export default function AdditionExpenseCategoryRow() {
             <Form.Control
                 disabled={ rowEditingMode.editingMode }
                 placeholder='Новая категория'
-                value={ expenseCategory }
-                onChange={ e => EditingInputsValues.changeExpenseCategory(e) }
+                value={ addedExpenseCategory }
+                onChange={ e => EditingInputsValues.changeAddedExpenseCategory(e) }
             />
         </td>
         <td className='table-cell'>
             <Button
-                disabled={ isLoadingExpensesCategories || rowEditingMode.editingMode}
+                disabled={ isLoadingExpensesCategoriesAfterAdding || rowEditingMode.editingMode}
                 variant='success'
-                onClick={ e => ExpensesCategoriesController.addAndLoadExpenseCategory(expenseCategory) }
+                onClick={ e => ExpensesCategoriesController.addAndLoadExpenseCategory(addedExpenseCategory) }
             >
                 Добавить
             </Button>

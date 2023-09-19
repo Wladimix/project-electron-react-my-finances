@@ -8,24 +8,29 @@ import xCircle from "../icons/x-circle.jsx";
 import checkCircle from "../icons/check-circle.jsx";
 
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
+import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 import Animation from "../../SupportFunctions/Animation.js";
 
-export default function AnimatedActionButtons({ index, classesNames }) {
+export default function AnimatedActionButtons({ index, changeInputValueStorageFunction, editFunction, deleteFunction, classesNames }) {
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
     const cellsOverflowIsHidden = useStore(ComponentsAnimationStorage.$cellsOverflowIsHidden);
+    const isLoadingDistributionFinancesAfterEditing = useStore(DownloadProcessStorage.$isLoadingDistributionFinancesAfterEditing);
 
     return <>
         <div className={ classesNames.defaultClassName }>
             <Button
                 variant='warning'
-                disabled={ rowEditingMode.editingMode }
-                onClick={() => Animation.changeRowEditingMode(index, rowEditingMode.editingMode, false)}
+                disabled={ isLoadingDistributionFinancesAfterEditing || rowEditingMode.editingMode }
+                onClick={ () => {
+                    changeInputValueStorageFunction();
+                    Animation.changeRowEditingMode(index, rowEditingMode.editingMode, false);
+                }}
             >
                 { pencilSquare }
             </Button>
             <Button
                 variant='danger'
-                disabled={ rowEditingMode.editingMode }
+                disabled={ isLoadingDistributionFinancesAfterEditing || rowEditingMode.editingMode }
                 onClick={() => Animation.changeRowEditingMode(index, rowEditingMode.editingMode, true)}
             >
                 { trash }
@@ -42,6 +47,10 @@ export default function AnimatedActionButtons({ index, classesNames }) {
             <Button
                 variant='success'
                 disabled={ cellsOverflowIsHidden }
+                onClick={ () => {
+                    editFunction();
+                    Animation.changeRowEditingMode(index, rowEditingMode.editingMode);
+                }}
             >
                 { checkCircle }
             </Button>

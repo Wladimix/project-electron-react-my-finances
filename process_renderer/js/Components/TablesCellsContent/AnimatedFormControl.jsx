@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
 
-export default function AnimatedFormControl({ divValue, placeholder, classesNames }) {
+export default function AnimatedFormControl({ divValue, placeholder, formControlValue, onChange, classesNames }) {
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
 
     return <>
@@ -15,6 +15,8 @@ export default function AnimatedFormControl({ divValue, placeholder, classesName
             <Form.Control
                 type='text'
                 placeholder={ placeholder }
+                value={ formControlValue }
+                onChange={ onChange }
             />
         </Form >
     </>;

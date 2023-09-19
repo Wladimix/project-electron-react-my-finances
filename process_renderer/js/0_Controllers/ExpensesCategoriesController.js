@@ -11,10 +11,17 @@ function addAndLoadExpenseCategory(expenseCategory) {
     expenseCategory = ExpensesCategoriesPreProcessing.addAndLoadExpenseCategoryPreprocessing(expenseCategory);
     if (ExpensesCategoriesValidation.addAndLoadExpenseCategoryValidation(expenseCategory))
     ExpensesCategoriesReferring.addAndLoadExpenseCategoryFromMainProcess(expenseCategory);
-    InputsValuesStorage.changeExpenseCategory('');
+    InputsValuesStorage.changeAddedExpenseCategory('');
+}
+
+function editAndLoadExpenseCategory(newCategoryName, currentCategoryName) {
+    newCategoryName = ExpensesCategoriesPreProcessing.editAndLoadExpenseCategoryPreprocessing(newCategoryName);
+    if (ExpensesCategoriesValidation.editAndLoadExpenseCategoryValidation(newCategoryName, currentCategoryName))
+    ExpensesCategoriesReferring.editAndLoadExpenseCategoryFromMainProcess(newCategoryName, currentCategoryName);
 }
 
 export default {
     loadExpensesCategories,
-    addAndLoadExpenseCategory
+    addAndLoadExpenseCategory,
+    editAndLoadExpenseCategory
 }

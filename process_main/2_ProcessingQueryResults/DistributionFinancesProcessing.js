@@ -1,4 +1,4 @@
-const Constants = require("../../Constants.js");
+const Constants = require("../Constants.js");
 
 function createTableProcessing(queryResult) {
     queryResult
@@ -31,8 +31,20 @@ function addDistributionFinancesTypeProcessing(queryResult) {
         })
 }
 
+function editDistributionFinancesTypeProcessing(queryResult) {
+    return queryResult
+        .then((result) => {
+            console.log(`Данные в таблице ${Constants.DISTRIBUTION_OF_FINANCES_TABLE_NAME} изменены.`);
+            return result;
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+}
+
 module.exports = {
     createTableProcessing,
     getDistributionFinancesProcessing,
-    addDistributionFinancesTypeProcessing
+    addDistributionFinancesTypeProcessing,
+    editDistributionFinancesTypeProcessing
 }

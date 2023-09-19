@@ -2,24 +2,34 @@ import DataFromDatabaseStorage from "../Storages/DataFromDatabaseStorage.js";
 import DownloadProcessStorage from "../Storages/DownloadProcessStorage.js";
 
 function loadExpensesCategoriesFromMainProcess() {
-    DownloadProcessStorage.setIsLoadingExpensesCategories(true);
+    DownloadProcessStorage.setIsLoadingExpensesCategoriesAfterAdding(true);
     window.databaseManagement.loadExpensesCategories()
         .then((result) => {
             DataFromDatabaseStorage.changeDataForExpensesCategoriesTable(result);
-            DownloadProcessStorage.setIsLoadingExpensesCategories(false);
+            DownloadProcessStorage.setIsLoadingExpensesCategoriesAfterAdding(false);
         });
 }
 
 function addAndLoadExpenseCategoryFromMainProcess(expenseCategory) {
-    DownloadProcessStorage.setIsLoadingExpensesCategories(true);
+    DownloadProcessStorage.setIsLoadingExpensesCategoriesAfterAdding(true);
     window.databaseManagement.addAndLoadExpenseCategory(expenseCategory)
         .then((result) => {
             DataFromDatabaseStorage.changeDataForExpensesCategoriesTable(result);
-            DownloadProcessStorage.setIsLoadingExpensesCategories(false);
+            DownloadProcessStorage.setIsLoadingExpensesCategoriesAfterAdding(false);
+        });
+}
+
+function editAndLoadExpenseCategoryFromMainProcess(newCategoryName, currentCategoryName) {
+    DownloadProcessStorage.setIsLoadingExpensesCategoriesAfterEditing(true);
+    window.databaseManagement.editAndLoadExpenseCategory(newCategoryName, currentCategoryName)
+        .then((result) => {
+            DataFromDatabaseStorage.changeDataForExpensesCategoriesTable(result);
+            DownloadProcessStorage.setIsLoadingExpensesCategoriesAfterEditing(false);
         });
 }
 
 export default {
     loadExpensesCategoriesFromMainProcess,
-    addAndLoadExpenseCategoryFromMainProcess
+    addAndLoadExpenseCategoryFromMainProcess,
+    editAndLoadExpenseCategoryFromMainProcess
 }

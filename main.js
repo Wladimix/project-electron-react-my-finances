@@ -2,9 +2,9 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 
 const Constants = require("./process_main/Constants.js");
-const CreateTablesController = require("./process_main/Controllers/CreateTablesController.js");
-const DistributionFinancesController = require("./process_main/Controllers/DistributionFinancesController.js");
-const ExpensesCategoriesController = require("./process_main/Controllers/ExpensesCategoriesController.js");
+const CreateTablesController = require("./process_main/0_Controllers/CreateTablesController.js");
+const DistributionFinancesController = require("./process_main/0_Controllers/DistributionFinancesController.js");
+const ExpensesCategoriesController = require("./process_main/0_Controllers/ExpensesCategoriesController.js");
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -31,9 +31,11 @@ app.whenReady().then(() => {
 
     ipcMain.handle('load-distribution-finances', (e) => { return DistributionFinancesController.loadDistributionFinances() });
     ipcMain.handle('add-and-load-distribution-finances-type', (e, distributionFinancesTypeName) => { return DistributionFinancesController.addAndLoadDistributionFinancesType(distributionFinancesTypeName) });
+    ipcMain.handle('edit-and-load-distribution-finances-type', (e, newTypeName, currentTypeName) => { return DistributionFinancesController.editAndLoadDistributionFinancesType(newTypeName, currentTypeName) });
 
     ipcMain.handle('load-expenses-categories', (e) => { return ExpensesCategoriesController.loadExpensesCategories() });
     ipcMain.handle('add-and-load-expense-category', (e, expenseCategoryName) => { return ExpensesCategoriesController.addAndLoadExpenseCategory(expenseCategoryName) });
+    ipcMain.handle('edit-and-load-expense-category', (e, newCategoryName, currentCategoryName) => { return ExpensesCategoriesController.editAndLoadExpenseCategory(newCategoryName, currentCategoryName) });
 
     createWindow();
 });

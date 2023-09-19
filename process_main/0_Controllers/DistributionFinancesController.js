@@ -1,6 +1,6 @@
-const knex = require("../Database/ConnectionDB.js");
-const DistributionFinancesModel = require("../Database/Models/DistributionFinancesModel.js");
-const DistributionFinancesProcessing = require("../Database/ProcessingQueryResults/DistributionFinancesProcessing.js");
+const knex = require("../ConnectionDB.js");
+const DistributionFinancesModel = require("../1_Models/DistributionFinancesModel.js");
+const DistributionFinancesProcessing = require("../2_ProcessingQueryResults/DistributionFinancesProcessing.js");
 
 function loadDistributionFinances() {
     let getDistributionFinancesPromise = DistributionFinancesModel.getDistributionFinances(knex);
@@ -19,7 +19,18 @@ function addAndLoadDistributionFinancesType(distributionFinancesTypeName) {
     return getDistributionFinancesProcessingPromise;
 }
 
+function editAndLoadDistributionFinancesType(newTypeName, currentTypeName) {
+    let editDistributionFinancesTypePromise = DistributionFinancesModel.editDistributionFinancesType(knex, newTypeName, currentTypeName);
+    let editDistributionFinancesTypeProcessingPromise = DistributionFinancesProcessing.editDistributionFinancesTypeProcessing(editDistributionFinancesTypePromise);
+
+    let getDistributionFinancesPromise = DistributionFinancesModel.getDistributionFinances(knex, editDistributionFinancesTypeProcessingPromise);
+    let getDistributionFinancesProcessingPromise = DistributionFinancesProcessing.getDistributionFinancesProcessing(getDistributionFinancesPromise);
+
+    return getDistributionFinancesProcessingPromise;
+}
+
 module.exports = {
     loadDistributionFinances,
-    addAndLoadDistributionFinancesType
+    addAndLoadDistributionFinancesType,
+    editAndLoadDistributionFinancesType
 }

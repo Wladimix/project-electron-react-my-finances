@@ -1,5 +1,13 @@
-function findElementInObjectsArray(array, desiredKey, condition) {
+function checkPresenceElementInObjectsArray(array, desiredKey, condition) {
     return array.find(item => item[desiredKey].toLowerCase() === condition.toLowerCase());
+}
+
+function findIndexOfElementInArray(array, condition) {
+    return array.findIndex(item => item.name.toLowerCase() === condition.toLowerCase());
+}
+
+function deleteArrayElement(array, condition) {
+    return array.filter(item => item.name.toLowerCase() !== condition.toLowerCase());
 }
 
 function removeExtraSpaces(string) {
@@ -7,6 +15,8 @@ function removeExtraSpaces(string) {
 }
 
 export default {
-    findElementInObjectsArray,
+    checkPresenceElementInObjectsArray,
+    findIndexOfElementInArray,
+    deleteArrayElement,
     removeExtraSpaces
 }

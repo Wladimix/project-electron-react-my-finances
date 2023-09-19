@@ -4,6 +4,11 @@ function addAndLoadExpenseCategoryPreprocessing(expenseCategory) {
     return ValidationValues.removeExtraSpaces(expenseCategory);
 }
 
+function editAndLoadExpenseCategoryPreprocessing(newCategoryName) {
+    return ValidationValues.removeExtraSpaces(newCategoryName);
+}
+
 export default {
-    addAndLoadExpenseCategoryPreprocessing
+    addAndLoadExpenseCategoryPreprocessing,
+    editAndLoadExpenseCategoryPreprocessing
 }

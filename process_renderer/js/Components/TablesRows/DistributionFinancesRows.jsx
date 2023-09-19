@@ -4,12 +4,18 @@ import { useStore } from "effector-react";
 import AnimatedFormControl from "../TablesCellsContent/AnimatedFormControl.jsx";
 import AnimatedActionButtons from "../TablesCellsContent/AnimatedActionButtons.jsx";
 
+import DistributionFinancesController from "../../0_Controllers/DistributionFinancesController.js";
 import DataFromDatabaseStorage from "../../Storages/DataFromDatabaseStorage.js";
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
+import InputsValuesStorage from "../../Storages/InputsValuesStorage.js";
+import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 import Animation from "../../SupportFunctions/Animation.js";
+import EditingInputsValues from "../../SupportFunctions/EditingInputsValues.js";
 
 export default function DistributionFinancesRows() {
     const dataForDistributionFinancesTable = useStore(DataFromDatabaseStorage.$dataForDistributionFinancesTable);
+    const editableDistributionFinancesType = useStore(InputsValuesStorage.$editableDistributionFinancesType);
+    const isLoadingDistributionFinancesAfterEditing = useStore(DownloadProcessStorage.$isLoadingDistributionFinancesAfterEditing);
     
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
     const selectedRow = useStore(ComponentsAnimationStorage.$selectedRow);
@@ -33,9 +39,11 @@ export default function DistributionFinancesRows() {
             return <tr className='table-row' key={ elem.id }>
                 <td className={ classesNamesForRow.cellClassName }>
                     <AnimatedFormControl
-                        divValue={ elem.name }
-                        placeholder='Тип распределения финансов'
                         classesNames={ classesNamesForRow }
+                        placeholder='Тип распределения финансов'
+                        divValue={ isLoadingDistributionFinancesAfterEditing ? 'загрузка' : elem.name }
+                        formControlValue={ editableDistributionFinancesType }
+                        onChange={ e => EditingInputsValues.changeEditableDistributionFinancesType(e) }
                     />
                 </td>
                 <td className={ classesNamesForRow.cellClassName }>
@@ -43,8 +51,12 @@ export default function DistributionFinancesRows() {
                 </td>
                 <td className={ classesNamesForRow.cellClassName }>
                     <AnimatedActionButtons
-                        index={ elem.id + '-distribution-finances' }
                         classesNames={ classesNamesForRow }
+                        index={ elem.id + '-distribution-finances' }
+                        typeOrCategoryName={ elem.name }
+                        changeInputValueStorageFunction={ () => InputsValuesStorage.changeEditableDistributionFinancesType(elem.name) }
+                        editFunction={ () => DistributionFinancesController.editAndLoadDistributionFinancesType(editableDistributionFinancesType, elem.name) }
+
                     />
                 </td>
             </tr>

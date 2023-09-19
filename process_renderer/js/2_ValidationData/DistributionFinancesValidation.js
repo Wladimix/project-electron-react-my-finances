@@ -16,7 +16,31 @@ function addAndLoadDistributionFinancesTypeValidation(distributionFinancesType) 
     }
     
     let dataForDistributionFinancesTable = DataFromDatabaseStorage.$dataForDistributionFinancesTable.getState();
-    if (ValidationValues.findElementInObjectsArray(dataForDistributionFinancesTable, 'name', distributionFinancesType)) {
+    if (ValidationValues.checkPresenceElementInObjectsArray(dataForDistributionFinancesTable, 'name', distributionFinancesType)) {
+        EditingToastsValues.changeNotificationText('Данный тип распределения финансов уже существует.');
+        EditingToastsValues.showNotification();
+        return false;
+    }
+
+    return true;
+}
+
+function editAndLoadDistributionFinancesTypeValidation(newTypeName, currentTypeName) {
+    if (newTypeName === '') {
+        EditingToastsValues.changeNotificationText('Поле с редактируемым типом распределения финансов не должно быть пустым.');
+        EditingToastsValues.showNotification();
+        return false;
+    }
+
+    if (newTypeName.length > 50) {
+        EditingToastsValues.changeNotificationText('Название редактируемого типа распределения финансов не должно превышать 50 символов.');
+        EditingToastsValues.showNotification();
+        return false;
+    }
+
+    let dataForDistributionFinancesTable = DataFromDatabaseStorage.$dataForDistributionFinancesTable.getState();
+    let filteredData = ValidationValues.deleteArrayElement(dataForDistributionFinancesTable, currentTypeName);
+    if (ValidationValues.checkPresenceElementInObjectsArray(filteredData, 'name', newTypeName)) {
         EditingToastsValues.changeNotificationText('Данный тип распределения финансов уже существует.');
         EditingToastsValues.showNotification();
         return false;
@@ -26,5 +50,6 @@ function addAndLoadDistributionFinancesTypeValidation(distributionFinancesType) 
 }
 
 export default {
-    addAndLoadDistributionFinancesTypeValidation
+    addAndLoadDistributionFinancesTypeValidation,
+    editAndLoadDistributionFinancesTypeValidation
 }

@@ -11,10 +11,17 @@ function addAndLoadDistributionFinancesType(distributionFinancesType) {
     distributionFinancesType = DistributionFinancesPreProcessing.addAndLoadDistributionFinancesTypePreprocessing(distributionFinancesType);
     if (DistributionFinancesValidation.addAndLoadDistributionFinancesTypeValidation(distributionFinancesType))
     DistributionFinancesReferring.addAndLoadDistributionFinancesTypeFromMainProcess(distributionFinancesType);
-    InputsValuesStorage.changeDistributionFinancesType('');
+    InputsValuesStorage.changeAddedDistributionFinancesType('');
+}
+
+function editAndLoadDistributionFinancesType(newTypeName, currentTypeName) {
+    newTypeName = DistributionFinancesPreProcessing.editAndLoadDistributionFinancesTypePreprocessing(newTypeName);
+    if (DistributionFinancesValidation.editAndLoadDistributionFinancesTypeValidation(newTypeName, currentTypeName))
+    DistributionFinancesReferring.editAndLoadDistributionFinancesTypeFromMainProcess(newTypeName, currentTypeName);
 }
 
 export default {
     loadDistributionFinances,
-    addAndLoadDistributionFinancesType
+    addAndLoadDistributionFinancesType,
+    editAndLoadDistributionFinancesType
 }

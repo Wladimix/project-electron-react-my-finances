@@ -1,14 +1,24 @@
 import InputsValuesStorage from "../Storages/InputsValuesStorage.js";
 
-function changeDistributionFinancesType(event) {
-    InputsValuesStorage.changeDistributionFinancesType(event.target.value);
+function changeAddedDistributionFinancesType(event) {
+    InputsValuesStorage.changeAddedDistributionFinancesType(event.target.value);
 }
 
-function changeExpenseCategory(event) {
-    InputsValuesStorage.changeExpenseCategory(event.target.value);
+function changeEditableDistributionFinancesType(event) {
+    InputsValuesStorage.changeEditableDistributionFinancesType(event.target.value);
+}
+
+function changeAddedExpenseCategory(event) {
+    InputsValuesStorage.changeAddedExpenseCategory(event.target.value);
+}
+
+function changeEditableExpenseCategory(event) {
+    InputsValuesStorage.changeEditableExpenseCategory(event.target.value);
 }
 
 export default {
-    changeDistributionFinancesType,
-    changeExpenseCategory
+    changeAddedDistributionFinancesType,
+    changeEditableDistributionFinancesType,
+    changeAddedExpenseCategory,
+    changeEditableExpenseCategory
 }

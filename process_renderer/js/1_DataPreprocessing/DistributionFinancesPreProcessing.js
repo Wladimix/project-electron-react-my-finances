@@ -4,6 +4,11 @@ function addAndLoadDistributionFinancesTypePreprocessing(distributionFinancesTyp
     return ValidationValues.removeExtraSpaces(distributionFinancesType);
 }
 
+function editAndLoadDistributionFinancesTypePreprocessing(newTypeName) {
+    return ValidationValues.removeExtraSpaces(newTypeName);
+}
+
 export default {
-    addAndLoadDistributionFinancesTypePreprocessing
+    addAndLoadDistributionFinancesTypePreprocessing,
+    editAndLoadDistributionFinancesTypePreprocessing
 }

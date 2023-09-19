@@ -1,15 +1,27 @@
 import { createEvent, createStore } from "effector";
 
-const changeDistributionFinancesType = createEvent();
-const $distributionFinancesType = createStore('').on(changeDistributionFinancesType, (_, newValue) => newValue);
+const changeAddedDistributionFinancesType = createEvent();
+const $addedDistributionFinancesType = createStore('').on(changeAddedDistributionFinancesType, (_, newValue) => newValue);
 
-const changeExpenseCategory = createEvent();
-const $expenseCategory = createStore('').on(changeExpenseCategory, (_, newValue) => newValue);
+const changeEditableDistributionFinancesType = createEvent();
+const $editableDistributionFinancesType = createStore('').on(changeEditableDistributionFinancesType, (_, newValue) => newValue);
+
+const changeAddedExpenseCategory = createEvent();
+const $addedExpenseCategory = createStore('').on(changeAddedExpenseCategory, (_, newValue) => newValue);
+
+const changeEditableExpenseCategory = createEvent();
+const $editableExpenseCategory = createStore('').on(changeEditableExpenseCategory, (_, newValue) => newValue);
 
 export default {
-    changeDistributionFinancesType,
-    $distributionFinancesType,
+    changeAddedDistributionFinancesType,
+    $addedDistributionFinancesType,
 
-    changeExpenseCategory,
-    $expenseCategory
+    changeEditableDistributionFinancesType,
+    $editableDistributionFinancesType,
+
+    changeAddedExpenseCategory,
+    $addedExpenseCategory,
+
+    changeEditableExpenseCategory,
+    $editableExpenseCategory
 }

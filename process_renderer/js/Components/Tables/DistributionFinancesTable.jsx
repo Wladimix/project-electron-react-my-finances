@@ -9,7 +9,7 @@ import AdditionDistributionFinancesTypeRow from "../TablesRows/AdditionDistribut
 import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 
 export default function DistributionFinancesTable() {
-    const isLoadingDistributionFinances = useStore(DownloadProcessStorage.$isLoadingDistributionFinances);
+    const isLoadingDistributionFinancesAfterAdding = useStore(DownloadProcessStorage.$isLoadingDistributionFinancesAfterAdding);
 
     return <Table className='distribution-finances-table table-info' striped bordered>
         <thead>
@@ -18,7 +18,7 @@ export default function DistributionFinancesTable() {
             </tr>
         </thead>
         <tbody>
-            {isLoadingDistributionFinances ? (
+            {isLoadingDistributionFinancesAfterAdding ? (
                 <RowWithDownloadNotification
                     notificationText='Загрузка таблицы распределения финансов'
                     colSpan={2}

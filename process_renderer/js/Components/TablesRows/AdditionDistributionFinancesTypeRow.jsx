@@ -10,8 +10,9 @@ import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 import ComponentsAnimationStorage from "../../Storages/ComponentsAnimationStorage.js";
 
 export default function AdditionDistributionFinancesTypeRow() {
-    const distributionFinancesType = useStore(InputsValuesStorage.$distributionFinancesType);
-    const isLoadingDistributionFinances = useStore(DownloadProcessStorage.$isLoadingDistributionFinances);
+    const addedDistributionFinancesType = useStore(InputsValuesStorage.$addedDistributionFinancesType);
+    const isLoadingDistributionFinancesAfterAdding = useStore(DownloadProcessStorage.$isLoadingDistributionFinancesAfterAdding);
+    const isLoadingDistributionFinancesAfterEditing = useStore(DownloadProcessStorage.$isLoadingDistributionFinancesAfterEditing);
     const rowEditingMode = useStore(ComponentsAnimationStorage.$rowEditingMode);
 
     return <tr className='table-row'>
@@ -19,15 +20,15 @@ export default function AdditionDistributionFinancesTypeRow() {
             <Form.Control
                 disabled={ rowEditingMode.editingMode }
                 placeholder='Новый тип'
-                value={ distributionFinancesType }
-                onChange={ e => EditingInputsValues.changeDistributionFinancesType(e) }
+                value={ addedDistributionFinancesType }
+                onChange={ e => EditingInputsValues.changeAddedDistributionFinancesType(e) }
             />
         </td>
         <td className='table-cell'>
             <Button
-                disabled={ isLoadingDistributionFinances || rowEditingMode.editingMode }
+                disabled={isLoadingDistributionFinancesAfterAdding || isLoadingDistributionFinancesAfterEditing || rowEditingMode.editingMode }
                 variant='success'
-                onClick={ e => DistributionFinancesController.addAndLoadDistributionFinancesType(distributionFinancesType) }
+                onClick={ e => DistributionFinancesController.addAndLoadDistributionFinancesType(addedDistributionFinancesType) }
             >
                 Добавить
             </Button>

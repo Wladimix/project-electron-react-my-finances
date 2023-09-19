@@ -9,7 +9,7 @@ import AdditionExpenseCategoryRow from "../TablesRows/AdditionExpenseCategoryRow
 import DownloadProcessStorage from "../../Storages/DownloadProcessStorage.js";
 
 export default function ExpensesCategoriesTable() {
-    const isLoadingExpensesCategories = useStore(DownloadProcessStorage.$isLoadingExpensesCategories);
+    const isLoadingExpensesCategoriesAfterAdding = useStore(DownloadProcessStorage.$isLoadingExpensesCategoriesAfterAdding);
 
     return <Table className='expense-categories-table table-secondary' striped bordered>
         <thead>
@@ -18,7 +18,7 @@ export default function ExpensesCategoriesTable() {
             </tr>
         </thead>
         <tbody>
-            {isLoadingExpensesCategories ? (
+            {isLoadingExpensesCategoriesAfterAdding ? (
                 <RowWithDownloadNotification
                     notificationText='Загрузка таблицы категорий расходов'
                     colSpan={2}

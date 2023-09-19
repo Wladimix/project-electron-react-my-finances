@@ -16,7 +16,31 @@ function addAndLoadExpenseCategoryValidation(expenseCategory) {
     }
 
     let dataForExpensesCategoriesTable = DataFromDatabaseStorage.$dataForExpensesCategoriesTable.getState();
-    if (ValidationValues.findElementInObjectsArray(dataForExpensesCategoriesTable, 'name', expenseCategory)) {
+    if (ValidationValues.checkPresenceElementInObjectsArray(dataForExpensesCategoriesTable, 'name', expenseCategory)) {
+        EditingToastsValues.changeNotificationText('Данная категория расходов уже существует.');
+        EditingToastsValues.showNotification();
+        return false;
+    }
+
+    return true;
+}
+
+function editAndLoadExpenseCategoryValidation(newCategoryName, currentCategoryName) {
+    if (newCategoryName === '') {
+        EditingToastsValues.changeNotificationText('Поле с редактируемой категорией расходов не должно быть пустым.');
+        EditingToastsValues.showNotification();
+        return false;
+    }
+
+    if (newCategoryName.length > 50) {
+        EditingToastsValues.changeNotificationText('Название редактируемой категории расходов не должно превышать 50 символов.');
+        EditingToastsValues.showNotification();
+        return false;
+    }
+
+    let dataForExpensesCategoriesTable = DataFromDatabaseStorage.$dataForExpensesCategoriesTable.getState();
+    let filteredData = ValidationValues.deleteArrayElement(dataForExpensesCategoriesTable, currentCategoryName);
+    if (ValidationValues.checkPresenceElementInObjectsArray(filteredData, 'name', newCategoryName)) {
         EditingToastsValues.changeNotificationText('Данная категория расходов уже существует.');
         EditingToastsValues.showNotification();
         return false;
@@ -26,5 +50,6 @@ function addAndLoadExpenseCategoryValidation(expenseCategory) {
 }
 
 export default {
-    addAndLoadExpenseCategoryValidation
+    addAndLoadExpenseCategoryValidation,
+    editAndLoadExpenseCategoryValidation
 }

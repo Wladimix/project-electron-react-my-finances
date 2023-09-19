@@ -1,4 +1,4 @@
-const Constants = require('../../Constants');
+const Constants = require('../Constants.js');
 
 function createTable(knex) {
     return knex.schema.createTable(Constants.EXPENSES_CATEGORIES_TABLE_NAME, function (table) {
@@ -32,8 +32,17 @@ function addExpenseCategory(knex, expenseCategoryName) {
         });
 }
 
+function editExpenseCategory(knex, newCategoryName, currentCategoryName) {
+    return knex(Constants.EXPENSES_CATEGORIES_TABLE_NAME)
+        .where('name', '=', currentCategoryName)
+        .update({
+            name: newCategoryName
+        })
+}
+
 module.exports = {
     createTable,
     getExpensesCategories,
-    addExpenseCategory
+    addExpenseCategory,
+    editExpenseCategory
 }
