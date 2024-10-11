@@ -1,5 +1,7 @@
-const { app, BrowserWindow, ipcMain, Notification } = require("electron");
 const path = require("path");
+
+const { app, BrowserWindow, ipcMain, Notification } = require("electron");
+const { createTables } = require("./process_main/StartApplication/StartController.js");
 
 const isDev = !app.isPackaged;
 
@@ -29,4 +31,8 @@ ipcMain.on("test-notify", (_, message) => {
     new Notification({ title: "Notification", body: message }).show();
 })
 
-app.whenReady().then(createWindow);
+app.whenReady().then(async () => {
+    console.log("Запуск приложения");
+    await createTables();
+    createWindow();
+});
