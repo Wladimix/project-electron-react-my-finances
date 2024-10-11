@@ -1,9 +1,9 @@
 const fs = require("fs");
-const knex = require("../ConnectionDB.js");
+const knex = require("@/ConnectionDB.js");
 
-const { createTable: createDistributionTable } = require("../DistributionFinances/DistributionModel.js");
-const { createTable: createCategoriesTable } = require("../SpendingCategory/CategoryModel.js");
-const { SPENDING_CATEGORIES_TABLE_NAME, DATABASE_PATH, DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("../MainConstants.js");
+const { createTable: createDistributionTable } = require("@/DistributionFinances/DistributionModel.js");
+const { createTable: createCategoriesTable } = require("@/SpendingCategory/CategoryModel.js");
+const { SPENDING_CATEGORIES_TABLE_NAME, DATABASE_PATH, DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("@/MainConstants.js");
 
 class StartService {
 

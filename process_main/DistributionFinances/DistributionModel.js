@@ -1,4 +1,4 @@
-const { DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("../MainConstants.js");
+const { DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("@/MainConstants.js");
 
 class DistributionModel {
 

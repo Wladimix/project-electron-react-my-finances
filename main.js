@@ -1,7 +1,9 @@
+require('module-alias/register');
+
 const path = require("path");
 
 const { app, BrowserWindow, ipcMain, Notification } = require("electron");
-const { createTables } = require("./process_main/StartApplication/StartController.js");
+const { createTables } = require("@/StartApplication/StartController.js");
 
 const isDev = !app.isPackaged;
 
