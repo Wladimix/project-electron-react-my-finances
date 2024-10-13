@@ -1,4 +1,4 @@
-import CategoryManagementModal from "@renderer/components/Modals/CategoryManagementModal.jsx";
+import DistributionAndCategoryModal from "@renderer/components/Modals/DistributionAndCategoryModal.jsx";
 import EditTransactionModal from "@renderer/components/Modals/EditTransactionModal.jsx";
 import MonthlyYearlyResults from "@renderer/components/MonthlyYearlyResults.jsx";
 import React from "react";
@@ -21,7 +21,7 @@ export default function App() {
             </div>
 
             <EditTransactionModal />
-            <CategoryManagementModal />
+            <DistributionAndCategoryModal />
         </>
     );
 };
