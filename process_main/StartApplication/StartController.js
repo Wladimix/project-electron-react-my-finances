@@ -1,4 +1,4 @@
-const { createTablesIfNotExist } = require("@/StartApplication/StartService.js");
+const { createTablesIfNotExist } = require("@main/StartApplication/StartService.js");
 
 class StartController {
 

@@ -1,4 +1,4 @@
-const { DATABASE_PATH } = require("./MainConstants.js");
+const { DATABASE_PATH } = require("@main/MainConstants.js");
 
 module.exports = require("knex")({
     client: "sqlite3",

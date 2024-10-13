@@ -34,7 +34,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: [".js"]
+        extensions: [".js"],
+        alias: {
+            "@renderer": path.resolve(__dirname, "./process_renderer/")
+        }
     },
     output: {
         filename: "app.js",

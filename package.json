@@ -5,7 +5,9 @@
     "author": "Vladimir Maximov",
     "license": "ISC",
     "main": "main.js",
-    "_moduleAliases": { "@": "process_main" },
+    "_moduleAliases": {
+        "@main": "process_main"
+    },
     "scripts": {
         "start": "electron .",
         "watch": "webpack --config webpack.common.js --watch",

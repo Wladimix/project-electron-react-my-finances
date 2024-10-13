@@ -1,4 +1,4 @@
-const { SPENDING_CATEGORIES_TABLE_NAME } = require("@/MainConstants.js");
+const { SPENDING_CATEGORIES_TABLE_NAME } = require("@main/MainConstants.js");
 
 class CategoryModel {
 
