@@ -1,9 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electron", {
-    notificationApi: {
-        sendNotification(message) {
-            ipcRenderer.send("test-notify", message);
-        }
-    }
+    addDistributionType: (name, amount) => ipcRenderer.invoke("add-distribution-type", name, amount)
 });

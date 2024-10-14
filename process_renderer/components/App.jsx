@@ -10,7 +10,7 @@ export default function App() {
     return (
         <>
             <button onClick={() => {
-                electron.notificationApi.sendNotification("Моё сообщение")
+                electron.addDistributionType('Name', 1000.00).then((res) => console.log(res))
             }}>test</button>
 
             <div className="uk-container uk-container-expand uk-padding">

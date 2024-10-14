@@ -1,6 +1,7 @@
 require('module-alias/register');
 
 const path = require("path");
+const useRouter = require('./router');
 
 const { app, BrowserWindow, ipcMain, Notification } = require("electron");
 const { createTables } = require("@main/StartApplication/StartController.js");
@@ -29,12 +30,10 @@ if (isDev) {
     });
 }
 
-ipcMain.on("test-notify", (_, message) => {
-    new Notification({ title: "Notification", body: message }).show();
-})
-
 app.whenReady().then(async () => {
     console.log("Запуск приложения");
+
     await createTables();
+    useRouter();
     createWindow();
 });

@@ -1,5 +1,4 @@
 const fs = require("fs");
-const knex = require("@main/ConnectionDB.js");
 
 const { createTable: createDistributionTable } = require("@main/DistributionFinances/DistributionModel.js");
 const { createTable: createCategoriesTable } = require("@main/SpendingCategory/CategoryModel.js");
@@ -10,10 +9,10 @@ class StartService {
     async createTablesIfNotExist() {
         if (!fs.existsSync(DATABASE_PATH)) {
 
-            await createDistributionTable(knex);
+            await createDistributionTable();
             console.log(`Таблица "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" создана`);
 
-            await createCategoriesTable(knex);
+            await createCategoriesTable();
             console.log(`Таблица "${SPENDING_CATEGORIES_TABLE_NAME}" создана`);
 
         }

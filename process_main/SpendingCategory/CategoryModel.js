@@ -1,8 +1,10 @@
+const knex = require("@main/ConnectionDB.js");
+
 const { SPENDING_CATEGORIES_TABLE_NAME } = require("@main/MainConstants.js");
 
 class CategoryModel {
 
-    async createTable(knex) {
+    async createTable() {
         return knex.schema
             .createTable(SPENDING_CATEGORIES_TABLE_NAME, function (table) {
                 table.increments('id');
