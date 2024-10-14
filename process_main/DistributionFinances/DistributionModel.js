@@ -9,13 +9,20 @@ class DistributionModel {
             .createTable(DISTRIBUTION_OF_FINANCES_TABLE_NAME, function (table) {
                 table.increments('id');
                 table.string('name', [50]).notNullable();
-                table.float('amount', 2).notNullable().defaultTo(0);
+                table.float('amount', 2).notNullable();
 
                 table.unique(['name']);
             });
     };
 
-    add(name, amount) {
+    getAll() {
+        return knex
+            .select()
+            .from(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+            .orderBy('name');
+    };
+
+    add({ name, amount }) {
         return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
             .insert({
                 name,
