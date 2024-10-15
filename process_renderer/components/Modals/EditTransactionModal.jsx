@@ -2,7 +2,7 @@ import React from "react";
 
 export default function EditTransactionModal() {
     return (
-        <div id="transaction" data-uk-modal>
+        <div id="transaction" data-uk-modal container="false">
             <div className="uk-modal-dialog">
 
                 <div className="uk-modal-header">

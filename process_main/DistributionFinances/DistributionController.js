@@ -2,10 +2,18 @@ const { addDistributionType, getAllDistributionTypes } = require("@main/Distribu
 
 class DistributionController {
 
+    async getAllDistributionTypes() {
+        try {
+            return await getAllDistributionTypes();
+        } catch (err) {
+            console.log("Ошибка при получении типов распределения финансов:");
+            console.log(err.message);
+        }
+    }
+
     async addDistributionType(event, data) {
         try {
             await addDistributionType(data);
-            return await getAllDistributionTypes();
         } catch (err) {
             console.log("Ошибка при добавлении типа распределения финансов:");
             console.log(err.message);

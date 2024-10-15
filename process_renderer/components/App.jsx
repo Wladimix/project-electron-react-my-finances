@@ -9,10 +9,6 @@ import Transactions from "@renderer/components/Transactions.jsx";
 export default function App() {
     return (
         <>
-            <button onClick={() => {
-                electron.addDistributionType('Name', 1000.00).then((res) => console.log(res))
-            }}>test</button>
-
             <div className="uk-container uk-container-expand uk-padding">
                 <TotalCard />
                 <MonthlyYearlyResults />

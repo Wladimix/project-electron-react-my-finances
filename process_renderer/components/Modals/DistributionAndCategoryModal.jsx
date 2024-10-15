@@ -4,7 +4,7 @@ import React from "react";
 
 export default function DistributionAndCategoryModal() {
     return (
-        <div id="category-management" className="uk-modal-container" data-uk-modal>
+        <div id="category-management" className="uk-modal-container" data-uk-modal container="false">
             <div className="uk-modal-dialog">
 
                 <div className="uk-modal-header">
