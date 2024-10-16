@@ -4,7 +4,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function DistributionManagement() {
-    const distributionTypes = useSelector(state => state.distributionFinances);
+    const distributionTypes = useSelector(state => state.data.distributionFinancesTypes);
 
     const displayDistributionTypes = () => distributionTypes.map(distributionType => (
         <div key={distributionType.id}>

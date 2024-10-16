@@ -1,9 +1,9 @@
-import distributionReducer from "@renderer/storage/DistributionSlice.js";
+import dataReducer from "@renderer/storage/DataSlice.js";
 
 import { configureStore } from "@reduxjs/toolkit";
 
 export default configureStore({
     reducer: {
-        distributionFinances: distributionReducer
+        data: dataReducer
     }
 });
