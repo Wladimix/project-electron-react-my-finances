@@ -15,10 +15,12 @@
         "make": "electron-forge make"
     },
     "dependencies": {
+        "@reduxjs/toolkit": "^2.3.0",
         "knex": "^3.1.0",
         "module-alias": "^2.2.3",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
+        "react-redux": "^9.1.2",
         "sqlite3": "^5.1.7"
     },
     "devDependencies": {

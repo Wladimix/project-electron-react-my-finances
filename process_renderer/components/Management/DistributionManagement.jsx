@@ -1,7 +1,17 @@
 import DistributionCard from "@renderer/components/Cards/DistributionCard.jsx";
 import React from "react";
 
+import { useSelector } from "react-redux";
+
 export default function DistributionManagement() {
+    const distributionTypes = useSelector(state => state.distributionFinances);
+
+    const displayDistributionTypes = () => distributionTypes.map(distributionType => (
+        <div key={distributionType.id}>
+            <DistributionCard distributionType={distributionType} />
+        </div>
+    ));
+
     return (
         <>
             <h3 className="uk-heading-line uk-width-expand">
@@ -9,18 +19,7 @@ export default function DistributionManagement() {
             </h3>
 
             <div className="uk-child-width-1-3@s uk-grid-match" data-uk-grid>
-                <div>
-                    <DistributionCard />
-                </div>
-                <div>
-                    <DistributionCard />
-                </div>
-                <div>
-                    <DistributionCard />
-                </div>
-                <div>
-                    <DistributionCard />
-                </div>
+                {displayDistributionTypes()}
 
                 <div>
                     <div className="uk-card uk-card-default uk-card-hover">
