@@ -1,9 +1,17 @@
 import DistributionCard from "@renderer/components/Cards/DistributionCard.jsx";
-import React from "react";
+import React, { useState } from "react";
+import Services from "@renderer/services.js";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function DistributionManagement() {
+    const [name, setName] = useState("");
+    const [amount, setAmount] = useState("");
+
+    const changeName = e => { setName(e.target.value) };
+    const changeAmount = e => { setAmount(e.target.value) };
+
+    const dispatch = useDispatch();
     const distributionTypes = useSelector(state => state.data.distributionFinancesTypes);
 
     const displayDistributionTypes = () => distributionTypes.map(distributionType => (
@@ -12,6 +20,12 @@ export default function DistributionManagement() {
         </div>
     ));
 
+    const addDistributionTypeEvent = () => {
+        Services.addDistributionType(dispatch, name, amount);
+        setName("");
+        setAmount("");
+    };
+
     return (
         <>
             <h3 className="uk-heading-line uk-width-expand">
@@ -19,27 +33,37 @@ export default function DistributionManagement() {
             </h3>
 
             <div className="uk-child-width-1-3@s uk-grid-match" data-uk-grid>
+
                 {displayDistributionTypes()}
 
                 <div>
                     <div className="uk-card uk-card-default uk-card-hover">
                         <div className="uk-card-body">
-                            <input className="uk-input uk-margin" type="text" />
-                            <input className="uk-input uk-form-large" type="text" />
+                            <input
+                                className="uk-input uk-margin"
+                                onChange={changeName}
+                                type="text"
+                                value={name}
+                            />
+                            <input
+                                className="uk-input uk-form-large"
+                                onChange={changeAmount}
+                                type="text"
+                                value={amount}
+                            />
                         </div>
                         <div className="uk-card-footer uk-text-right">
                             <button
                                 className="uk-button uk-button-default uk-button-primary uk-button-small"
-                                onClick={() => {
-                                    electron.addDistributionType({ name: "Name", amount: "10000.05" })
-                                    electron.getAllDistributionTypes().then((res) => console.log(res))
-                                }}
+                                disabled={!Services.checkDistributionType(name, amount)}
+                                onClick={addDistributionTypeEvent}
                             >
                                 ДОБАВИТЬ
                             </button>
                         </div>
                     </div>
                 </div>
+
             </div>
         </>
     );

@@ -25,7 +25,7 @@ class DataService {
 
     processDataOut(data) {
         return data.map(elem =>
-            elem.amount
+            elem.amount !== ""
                 ? { ...elem, amount: this.#processAmountOut(elem.amount) }
                 : elem
         );

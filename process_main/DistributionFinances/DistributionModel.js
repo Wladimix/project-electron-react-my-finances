@@ -19,7 +19,7 @@ class DistributionModel {
         return knex
             .select()
             .from(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
-            .orderBy('name');
+            .orderBy('name', 'asc');
     };
 
     add({ name, amount }) {
