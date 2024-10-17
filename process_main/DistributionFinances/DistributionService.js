@@ -7,6 +7,8 @@ class DistributionService {
 
     async getAllDistributionTypes() {
         const DistributionTypes = await getAll();
+        console.info(`Получены данные из таблицы "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}"`);
+
         return DS.processDataOut(DistributionTypes);
     }
 
@@ -14,7 +16,7 @@ class DistributionService {
         DS.processDataIn(data);
 
         await add(data);
-        console.log(`Запись "${data.name}" в таблице "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" создана`);
+        console.info(`Запись "${data.name}" в таблице "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" создана`);
     };
 
 };

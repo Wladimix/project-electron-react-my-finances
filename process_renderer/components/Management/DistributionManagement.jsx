@@ -1,6 +1,6 @@
 import DistributionCard from "@renderer/components/Cards/DistributionCard.jsx";
+import DistributionService from "@renderer/services/DistributionService";
 import React, { useState } from "react";
-import Services from "@renderer/services.js";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,12 +12,13 @@ export default function DistributionManagement() {
     const changeAmount = e => { setAmount(e.target.value) };
 
     const dispatch = useDispatch();
+    const distributionService = new DistributionService(dispatch);
+
     const distributionTypes = useSelector(state => state.data.distributionFinancesTypes);
     const distributionLoader = useSelector(state => state.loaders.distributionFinancesLoader);
 
     const addDistributionTypeEvent = () => {
-        // UIkit.notification({message: "сообщение"})
-        Services.addDistributionType(dispatch, name, amount);
+        distributionService.addDistributionType(name, amount);
         setName("");
         setAmount("");
     };
@@ -60,7 +61,7 @@ export default function DistributionManagement() {
                                     <div className="uk-card-footer uk-text-right">
                                         <button
                                             className="uk-button uk-button-default uk-button-primary uk-button-small"
-                                            disabled={!Services.checkDistributionType(name, amount)}
+                                            disabled={!distributionService.checkDistributionType(name, amount)}
                                             onClick={addDistributionTypeEvent}
                                         >
                                             ДОБАВИТЬ
