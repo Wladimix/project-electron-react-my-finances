@@ -7,6 +7,8 @@ export default function DistributionAndCategoryModal() {
         <div id="category-management" className="uk-modal-container" data-uk-modal container="false">
             <div className="uk-modal-dialog">
 
+                <button class="uk-modal-close-default" type="button" data-uk-close></button>
+
                 <div className="uk-modal-header">
                     <h2 className="uk-modal-title">Управление категориями</h2>
                 </div>

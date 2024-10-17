@@ -5,6 +5,8 @@ export default function EditTransactionModal() {
         <div id="transaction" data-uk-modal container="false">
             <div className="uk-modal-dialog">
 
+                <button class="uk-modal-close-default" type="button" data-uk-close></button>
+
                 <div className="uk-modal-header">
                     <h2 className="uk-modal-title">Новая транзакция</h2>
                 </div>
