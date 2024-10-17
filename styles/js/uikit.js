@@ -1,4 +1,4 @@
-/*! UIkit 3.21.13 | https://www.getuikit.com | (c) 2014 - 2024 YOOtheme | MIT License */
+/*! UIkit 3.21.11 | https://www.getuikit.com | (c) 2014 - 2024 YOOtheme | MIT License */
 
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1245,11 +1245,7 @@
             if (parents2[0] === element2 && scroll + top < maxScroll) {
               diff = offset(targetEl).top + (isScrollingElement ? 0 : element2.scrollTop) - targetTop - dimensions$1(getCoveringElement(targetEl)).height;
             }
-            if (css(element2, "scrollBehavior") !== "auto") {
-              css(element2, "scrollBehavior", "auto");
-            }
             element2.scrollTop = scroll + (top + diff) * percent;
-            css(element2, "scrollBehavior", "");
             if (percent === 1 && (prev === diff || !frames--)) {
               resolve();
             } else {
@@ -2396,12 +2392,9 @@
       return ["filter", "sort"].every((prop) => isEqual(stateA[prop], stateB[prop]));
     }
     function applyState(state, target, children) {
+      const selector = Object.values(state.filter).join("");
       for (const el of children) {
-        css(
-          el,
-          "display",
-          Object.values(state.filter).every((selector) => !selector || matches(el, selector)) ? "" : "none"
-        );
+        css(el, "display", selector && !matches(el, selector) ? "none" : "");
       }
       const [sort, order] = state.sort;
       if (sort) {
@@ -2580,10 +2573,10 @@
             changed = toggled === el.hidden;
             changed && (el.hidden = !toggled);
           }
+          $$("[autofocus]", el).some((el2) => isVisible(el2) ? el2.focus() || true : el2.blur());
           if (changed) {
             trigger(el, "toggled", [toggled, this]);
           }
-          $$("[autofocus]", el).some((el2) => isVisible(el2) ? el2.focus() || true : el2.blur());
         }
       }
     };
@@ -3529,7 +3522,7 @@
     };
     App.util = util;
     App.options = {};
-    App.version = "3.21.13";
+    App.version = "3.21.11";
 
     const PREFIX = "uk-";
     const DATA = "__uikit__";
@@ -6680,13 +6673,11 @@
       ],
       observe: [
         intersection({
-          filter: ({ $el, autoplay }) => autoplay !== "hover" && isVideo($el),
+          filter: ({ $el, autoplay }) => autoplay && autoplay !== "hover" && isVideo($el),
           handler([{ isIntersecting }]) {
             if (!document.fullscreenElement) {
               if (isIntersecting) {
-                if (this.autoplay) {
-                  play(this.$el);
-                }
+                play(this.$el);
               } else {
                 pause(this.$el);
               }
@@ -8687,7 +8678,8 @@
           self: true,
           handler() {
             if (this.mode === "reveal" && !hasClass(parent(this.panel), this.clsMode)) {
-              addClass(wrapAll(this.panel, "<div>"), this.clsMode);
+              wrapAll(this.panel, "<div>");
+              addClass(parent(this.panel), this.clsMode);
             }
             const { body, scrollingElement } = document;
             addClass(body, this.clsContainer, this.clsFlip);
@@ -8718,7 +8710,7 @@
           self: true,
           handler() {
             this.clsContainerAnimation && resumeUserScale();
-            if (this.mode === "reveal" && hasClass(parent(this.panel), this.clsMode)) {
+            if (this.mode === "reveal") {
               unwrap(this.panel);
             }
             removeClass(this.panel, this.clsSidebarAnimation, this.clsMode);
@@ -9120,15 +9112,6 @@
             if (this.inactive) {
               return;
             }
-            const dynamicViewport = height(window);
-            const maxScrollHeight = Math.max(
-              0,
-              document.scrollingElement.scrollHeight - dynamicViewport
-            );
-            if (!maxScrollHeight) {
-              this.inactive = true;
-              return;
-            }
             const hide = this.isFixed && types.has("update");
             if (hide) {
               preventTransition(this.target);
@@ -9142,6 +9125,11 @@
               this.show();
             }
             const viewport2 = toPx("100vh", "height");
+            const dynamicViewport = height(window);
+            const maxScrollHeight = Math.max(
+              0,
+              document.scrollingElement.scrollHeight - viewport2
+            );
             let position = this.position;
             if (this.overflowFlip && height$1 > viewport2) {
               position = position === "top" ? "bottom" : "top";
@@ -9160,10 +9148,10 @@
               maxScrollHeight,
               parseProp(this.end, this.$el, topOffset + height$1, true) - elHeight - offset$1 + overflow
             );
-            sticky = !this.showOnUp && start + offset$1 === topOffset && end === Math.min(
+            sticky = maxScrollHeight && !this.showOnUp && start + offset$1 === topOffset && end === Math.min(
               maxScrollHeight,
               parseProp(true, this.$el, 0, true) - elHeight - offset$1 + overflow
-            ) && css(getVisibleParent(this.$el), "overflowY") !== "hidden";
+            ) && css(getVisibleParent(this.$el), "overflowY") === "visible";
             return {
               start,
               end,

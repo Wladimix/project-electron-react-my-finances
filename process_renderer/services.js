@@ -1,4 +1,5 @@
 import { setData } from "@renderer/storage/DataSlice.js";
+import { setDistributionLoader } from "@renderer/storage/LoadersSlice.js";
 
 class Services {
 
@@ -8,9 +9,11 @@ class Services {
     };
 
     async addDistributionType(dispatch, name, amount) {
+        dispatch(setDistributionLoader(true));
         await electron.addDistributionType({ name, amount });
         const allDistributionTypes = await electron.getAllDistributionTypes();
         dispatch(setData(allDistributionTypes));
+        dispatch(setDistributionLoader(false));
     };
 
     checkDistributionType(name, amount) {

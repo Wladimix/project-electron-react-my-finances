@@ -5,7 +5,7 @@ const distributionSlice = createSlice({
     initialState: {
         distributionFinancesTypes: [],
         spendingCategories: [],
-        transactions: [],
+        transactions: []
     },
     reducers: {
         setData: (state, action) => ({ ...state, distributionFinancesTypes: action.payload })

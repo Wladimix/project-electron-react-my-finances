@@ -20,6 +20,7 @@ class DataService {
     };
 
     #processAmountIn(amount) {
+        amount = amount === "" ? "0" : amount;
         return parseFloat(this.#removeSpaces(amount, true));
     };
 
