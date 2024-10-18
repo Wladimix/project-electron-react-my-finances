@@ -1,6 +1,6 @@
 const ErrorService = require("@main/Error/ErrorService.js");
 
-const { getAllDistributionTypes, addDistributionType, editDistributionType } = require("@main/DistributionFinances/DistributionService");
+const { getAllDistributionTypes, addDistributionType, editDistributionType, deleteDistributionType } = require("@main/DistributionFinances/DistributionService");
 const { REQUEST_STATUS_SUCCESS, REQUEST_STATUS_ERROR } = require("@main/MainConstants.js");
 
 class DistributionController {
@@ -54,6 +54,22 @@ class DistributionController {
             };
         };
 
+    };
+
+    async deleteDistributionType(event, id) {
+        try {
+            await deleteDistributionType(id);
+
+            return {
+                status: REQUEST_STATUS_SUCCESS,
+                message: "Тип распределения финансов удалён"
+            };
+        } catch (error) {
+            return {
+                status: REQUEST_STATUS_ERROR,
+                message: await ErrorService.makeErrorMessage(error, "Ошибка удаления типа распределения финансов")
+            };
+        };
     };
 
 };

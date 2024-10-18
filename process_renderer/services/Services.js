@@ -34,4 +34,8 @@ export default class Services {
         return /^[\d\s]*?(\.\d{1,2})?$/.test(amount);
     };
 
+    convertAmountToNumber(amount) {
+        return Number(amount.replace(/[₽\s]+/g, ""));
+    };
+
 };

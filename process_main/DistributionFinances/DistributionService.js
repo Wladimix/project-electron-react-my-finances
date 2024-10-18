@@ -1,6 +1,6 @@
 const DataService = require("@main/Data/DataService");
 
-const { getAll, add, edit } = require("@main/DistributionFinances/DistributionModel");
+const { getAll, add, editById, deleteById } = require("@main/DistributionFinances/DistributionModel");
 const { DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("@main/MainConstants.js");
 
 class DistributionService {
@@ -22,9 +22,14 @@ class DistributionService {
     async editDistributionType(data) {
         DataService.processDataIn(data);
 
-        await edit(data);
+        await editById(data);
         console.info(`Запись #${data.id} в таблице "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" отредактирована`);
-    }
+    };
+
+    async deleteDistributionType(id) {
+        await deleteById(id);
+        console.info(`Запись #${id} удалена из таблицы "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}"`);
+    };
 
 };
 

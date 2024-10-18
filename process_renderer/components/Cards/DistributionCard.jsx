@@ -23,6 +23,10 @@ export default function DistributionCard({ distributionType }) {
         setAmount("");
     };
 
+    const deleteDistributionTypeEvent = () => {
+        distributionService.deleteDistributionType(distributionType.id);
+    };
+
     return (
         <>
             {
@@ -59,6 +63,8 @@ export default function DistributionCard({ distributionType }) {
                                     </button>
                                     <button
                                         className="uk-button uk-button-default uk-button-small"
+                                        disabled={distributionService.convertAmountToNumber(distributionType.amount) > 0}
+                                        onClick={deleteDistributionTypeEvent}
                                     >
                                         УДАЛИТЬ
                                     </button>

@@ -30,13 +30,19 @@ class DistributionModel {
             });
     };
 
-    edit({ id, name, amount }) {
+    editById({ id, name, amount }) {
         return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
             .where("id", "=", id)
             .update({
                 name,
                 amount
             });
+    };
+
+    deleteById(id) {
+        return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+            .where("id", "=", id)
+            .del();
     };
 
 };
