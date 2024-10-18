@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const loadersSlice = createSlice({
     name: 'loaders',
     initialState: {
-        distributionFinancesLoader: false
+        addingDistributionFinancesLoader: false,
+        editingDistributionFinancesLoader: false
     },
     reducers: {
-        setDistributionLoader: (state, action) => ({ ...state, distributionFinancesLoader: action.payload })
+        setAddingDistributionLoader: (state, action) => ({ ...state, addingDistributionFinancesLoader: action.payload }),
+        setEditingDistributionLoader: (state, action) => ({ ...state, editingDistributionFinancesLoader: action.payload })
     }
 });
 
-export const { setDistributionLoader } = loadersSlice.actions;
+export const { setAddingDistributionLoader, setEditingDistributionLoader } = loadersSlice.actions;
 export default loadersSlice.reducer;

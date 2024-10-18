@@ -7,11 +7,11 @@ class DistributionModel {
     createTable() {
         return knex.schema
             .createTable(DISTRIBUTION_OF_FINANCES_TABLE_NAME, function (table) {
-                table.increments('id');
-                table.string('name', [50]).notNullable();
-                table.float('amount', 2).notNullable();
+                table.increments("id");
+                table.string("name", [50]).notNullable();
+                table.float("amount", 2).notNullable();
 
-                table.unique(['name']);
+                table.unique(["name"]);
             });
     };
 
@@ -19,12 +19,21 @@ class DistributionModel {
         return knex
             .select()
             .from(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
-            .orderBy('name', 'asc');
+            .orderBy("name", "asc");
     };
 
     add({ name, amount }) {
         return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
             .insert({
+                name,
+                amount
+            });
+    };
+
+    edit({ id, name, amount }) {
+        return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+            .where("id", "=", id)
+            .update({
                 name,
                 amount
             });

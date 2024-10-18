@@ -2,5 +2,6 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electron", {
     getAllDistributionTypes: () => ipcRenderer.invoke("get-all-distribution-types"),
-    addDistributionType: (name, amount) => ipcRenderer.invoke("add-distribution-type", name, amount)
+    addDistributionType: data => ipcRenderer.invoke("add-distribution-type", data),
+    editDistributionType: data => ipcRenderer.invoke("edit-distribution-type", data)
 });

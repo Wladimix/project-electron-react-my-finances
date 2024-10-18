@@ -15,7 +15,7 @@ export default function DistributionManagement() {
     const distributionService = new DistributionService(dispatch);
 
     const distributionTypes = useSelector(state => state.data.distributionFinancesTypes);
-    const distributionLoader = useSelector(state => state.loaders.distributionFinancesLoader);
+    const distributionLoader = useSelector(state => state.loaders.addingDistributionFinancesLoader);
 
     const addDistributionTypeEvent = () => {
         distributionService.addDistributionType(name, amount);
@@ -33,15 +33,16 @@ export default function DistributionManagement() {
 
                 {
                     distributionTypes.map(distributionType => (
-                        <div key={distributionType.id}>
-                            <DistributionCard distributionType={distributionType} />
-                        </div>
+                        <DistributionCard key={distributionType.id} distributionType={distributionType} />
                     ))
                 }
 
                 {
                     distributionLoader
-                        ?   <div className="uk-text-center"><div data-uk-spinner="ratio: 8" /></div>
+                        ?   <div className="uk-text-center">
+                                <div data-uk-spinner="ratio: 8" />
+                            </div>
+
                         :   <div>
                                 <div className="uk-card uk-card-default uk-card-hover">
                                     <div className="uk-card-body">

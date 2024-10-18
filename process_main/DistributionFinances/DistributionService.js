@@ -1,6 +1,6 @@
-const DS = require("@main/Data/DataService");
+const DataService = require("@main/Data/DataService");
 
-const { add, getAll } = require("@main/DistributionFinances/DistributionModel");
+const { getAll, add, edit } = require("@main/DistributionFinances/DistributionModel");
 const { DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("@main/MainConstants.js");
 
 class DistributionService {
@@ -9,15 +9,22 @@ class DistributionService {
         const DistributionTypes = await getAll();
         console.info(`Получены данные из таблицы "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}"`);
 
-        return DS.processDataOut(DistributionTypes);
+        return DataService.processDataOut(DistributionTypes);
     }
 
     async addDistributionType(data) {
-        DS.processDataIn(data);
+        DataService.processDataIn(data);
 
         await add(data);
         console.info(`Запись "${data.name}" в таблице "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" создана`);
     };
+
+    async editDistributionType(data) {
+        DataService.processDataIn(data);
+
+        await edit(data);
+        console.info(`Запись #${data.id} в таблице "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" отредактирована`);
+    }
 
 };
 
