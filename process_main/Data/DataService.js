@@ -51,6 +51,19 @@ class DataService {
         return result + " ₽";
     };
 
+    findSubString(targetString, searchStringsArray) {
+        let searchString = false;
+
+        for (let string of searchStringsArray) {
+            if (targetString.includes(string)) {
+                searchString = string;
+                break;
+            };
+        };
+
+        return searchString;
+    };
+
 };
 
 module.exports = new DataService();
