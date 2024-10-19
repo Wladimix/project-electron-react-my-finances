@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const distributionSlice = createSlice({
+const dataSlice = createSlice({
     name: 'data',
     initialState: {
         distributionFinancesTypes: [],
@@ -8,9 +8,10 @@ const distributionSlice = createSlice({
         transactions: []
     },
     reducers: {
-        setData: (state, action) => ({ ...state, distributionFinancesTypes: action.payload })
+        setDistributionTypes: (state, action) => ({ ...state, distributionFinancesTypes: action.payload }),
+        setCategories: (state, action) => ({ ...state, spendingCategories: action.payload })
     }
 });
 
-export const { setData } = distributionSlice.actions;
-export default distributionSlice.reducer;
+export const { setDistributionTypes, setCategories } = dataSlice.actions;
+export default dataSlice.reducer;

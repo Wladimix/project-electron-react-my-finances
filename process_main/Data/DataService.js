@@ -20,13 +20,13 @@ class DataService {
     };
 
     #processAmountIn(amount) {
-        amount = amount === "" ? "0" : amount;
+        amount = amount === "" ? "0.00" : amount;
         return parseFloat(this.#removeSpaces(amount, true));
     };
 
     processDataOut(data) {
         return data.map(elem =>
-            elem.amount !== ""
+            elem.amount !== undefined
                 ? { ...elem, amount: this.#processAmountOut(elem.amount) }
                 : elem
         );

@@ -1,6 +1,6 @@
-const DataService = require("@main/Data/DataService");
+const DataService = require("@main/Data/DataService.js");
 
-const { getAll, add, editById, deleteById } = require("@main/DistributionFinances/DistributionModel");
+const { getAll, add, editById, deleteById } = require("@main/DistributionFinances/DistributionModel.js");
 const { DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("@main/MainConstants.js");
 
 class DistributionService {
@@ -10,7 +10,7 @@ class DistributionService {
         console.info(`Получены данные из таблицы "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}"`);
 
         return DataService.processDataOut(DistributionTypes);
-    }
+    };
 
     async addDistributionType(data) {
         DataService.processDataIn(data);

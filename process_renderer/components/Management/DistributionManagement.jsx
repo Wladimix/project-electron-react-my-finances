@@ -1,5 +1,5 @@
 import DistributionCard from "@renderer/components/Cards/DistributionCard.jsx";
-import DistributionService from "@renderer/services/DistributionService";
+import DistributionService from "@renderer/services/DistributionService.js";
 import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";

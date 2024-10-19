@@ -31,7 +31,7 @@ export default function DistributionCard({ distributionType }) {
         <>
             {
                 distributionLoader === distributionType.id
-                    ?   <div className="uk-text-center" key={distributionType.id}>
+                    ?   <div className="uk-text-center">
                             <div data-uk-spinner="ratio: 8" />
                         </div>
 

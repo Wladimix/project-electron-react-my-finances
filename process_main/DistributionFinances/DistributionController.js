@@ -1,6 +1,6 @@
 const ErrorService = require("@main/Error/ErrorService.js");
 
-const { getAllDistributionTypes, addDistributionType, editDistributionType, deleteDistributionType } = require("@main/DistributionFinances/DistributionService");
+const { getAllDistributionTypes, addDistributionType, editDistributionType, deleteDistributionType } = require("@main/DistributionFinances/DistributionService.js");
 const { REQUEST_STATUS_SUCCESS, REQUEST_STATUS_ERROR } = require("@main/MainConstants.js");
 
 class DistributionController {
@@ -39,7 +39,6 @@ class DistributionController {
     };
 
     async editDistributionType(event, data) {
-        console.log(data);
         try {
             await editDistributionType(data);
 
@@ -53,7 +52,6 @@ class DistributionController {
                 message: await ErrorService.makeErrorMessage(error, "Ошибка редактирования типа распределения финансов")
             };
         };
-
     };
 
     async deleteDistributionType(event, id) {

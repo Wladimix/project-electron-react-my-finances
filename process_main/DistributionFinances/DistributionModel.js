@@ -6,7 +6,7 @@ class DistributionModel {
 
     createTable() {
         return knex.schema
-            .createTable(DISTRIBUTION_OF_FINANCES_TABLE_NAME, function (table) {
+            .createTable(DISTRIBUTION_OF_FINANCES_TABLE_NAME, table => {
                 table.increments("id");
                 table.string("name", [50]).notNullable();
                 table.float("amount", 2).notNullable();
@@ -32,7 +32,7 @@ class DistributionModel {
 
     editById({ id, name, amount }) {
         return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
-            .where("id", "=", id)
+            .where({ id })
             .update({
                 name,
                 amount
@@ -41,7 +41,7 @@ class DistributionModel {
 
     deleteById(id) {
         return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
-            .where("id", "=", id)
+            .where({ id })
             .del();
     };
 
