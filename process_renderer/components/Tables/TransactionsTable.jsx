@@ -1,7 +1,12 @@
 import React from "react";
 import TransactionsTableRow from "@renderer/components/Tables/TransactionsTableRow.jsx";
 
+import { useSelector } from "react-redux";
+
 export default function TransactionsTable() {
+    const transactions = useSelector(state => state.data.transactions);
+    console.log(transactions)
+
     return (
         <table className="uk-table uk-table-hover uk-table-divider uk-margin-remove-top uk-margin-small-bottom">
             <thead>
@@ -15,10 +20,13 @@ export default function TransactionsTable() {
                 </tr>
             </thead>
             <tbody>
-                <TransactionsTableRow />
-                <TransactionsTableRow />
-                <TransactionsTableRow />
-                <TransactionsTableRow />
+
+                {
+                    transactions.map(transaction => (
+                        <TransactionsTableRow />
+                    ))
+                }
+
             </tbody>
         </table>
     );

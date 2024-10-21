@@ -6,10 +6,10 @@ const { SPENDING_CATEGORIES_TABLE_NAME } = require("@main/MainConstants.js");
 class CategoryService {
 
     async getAllCategories() {
-        const Categories = await getAll();
+        const categories = await getAll();
         console.info(`Получены данные из таблицы "${SPENDING_CATEGORIES_TABLE_NAME}"`);
 
-        return DataService.processDataOut(Categories);
+        return DataService.processDataOut(categories);
     };
 
     async addCategory(name) {

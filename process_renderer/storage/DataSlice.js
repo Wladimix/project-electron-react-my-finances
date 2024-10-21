@@ -9,9 +9,10 @@ const dataSlice = createSlice({
     },
     reducers: {
         setDistributionTypes: (state, action) => ({ ...state, distributionFinancesTypes: action.payload }),
-        setCategories: (state, action) => ({ ...state, spendingCategories: action.payload })
+        setCategories: (state, action) => ({ ...state, spendingCategories: action.payload }),
+        setTransactions: (state, action) => ({ ...state, transactions: action.payload })
     }
 });
 
-export const { setDistributionTypes, setCategories } = dataSlice.actions;
+export const { setCategories, setDistributionTypes, setTransactions } = dataSlice.actions;
 export default dataSlice.reducer;

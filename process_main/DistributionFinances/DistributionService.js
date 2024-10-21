@@ -6,10 +6,10 @@ const { DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("@main/MainConstants.js"
 class DistributionService {
 
     async getAllDistributionTypes() {
-        const DistributionTypes = await getAll();
+        const distributionTypes = await getAll();
         console.info(`Получены данные из таблицы "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}"`);
 
-        return DataService.processDataOut(DistributionTypes);
+        return DataService.processDataOut(distributionTypes);
     };
 
     async addDistributionType(data) {
