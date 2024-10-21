@@ -7,10 +7,10 @@ class CategoryModel {
     async createTable() {
         return knex.schema
             .createTable(SPENDING_CATEGORIES_TABLE_NAME, table => {
-                table.increments('id');
-                table.string('name', [50]).notNullable();
+                table.increments("id");
+                table.string("name", [50]).notNullable();
 
-                table.unique(['name']);
+                table.unique(["name"]);
             });
     };
 

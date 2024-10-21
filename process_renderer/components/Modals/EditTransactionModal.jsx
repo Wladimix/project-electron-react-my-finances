@@ -44,7 +44,7 @@ export default function EditTransactionModal() {
                     </div>
 
                     <div className="uk-margin">
-                        <label className="uk-form-label" htmlFor="purpose-of-expenditure">Цель расхода</label>
+                        <label className="uk-form-label" htmlFor="purpose-of-expenditure">Примечание</label>
                         <div className="uk-form-controls">
                             <input className="uk-input" id="purpose-of-expenditure" type="text" />
                         </div>

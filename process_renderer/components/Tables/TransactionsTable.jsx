@@ -9,7 +9,7 @@ export default function TransactionsTable() {
                     <th className="uk-text-left">ДАТА</th>
                     <th className="uk-text-left">ИСТОЧНИК ТРАНЗАКЦИИ</th>
                     <th className="uk-text-left">КАТЕГОРИЯ / СЧЁТ</th>
-                    <th className="uk-text-left">ЦЕЛЬ РАСХОДА</th>
+                    <th className="uk-text-left">ПРИМЕЧАНИЕ</th>
                     <th className="uk-text-left">СУММА / ЦЕНА</th>
                     <th className="uk-text-left">ДЕЙСТВИЯ</th>
                 </tr>
