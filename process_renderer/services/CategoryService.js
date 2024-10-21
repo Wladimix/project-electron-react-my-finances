@@ -1,7 +1,7 @@
 import Services from "@renderer/services/Services.js";
 
-import { setCategories } from "@renderer/storage/DataSlice.js";
-import { setAddingCategoryLoader, setEditingCategoryLoader } from "@renderer/storage/LoadersSlice.js";
+import { setCategories } from "@renderer/storage/dataSlice.js";
+import { setAddingCategoryLoader, setEditingCategoryLoader } from "@renderer/storage/loadersSlice.js";
 
 export default class DistributionService extends Services {
 

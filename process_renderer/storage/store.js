@@ -1,5 +1,5 @@
-import dataReducer from "@renderer/storage/DataSlice.js";
-import loaderReducer from "@renderer/storage/LoadersSlice.js";
+import dataReducer from "@renderer/storage/dataSlice.js";
+import loaderReducer from "@renderer/storage/loadersSlice.js";
 
 import { configureStore } from "@reduxjs/toolkit";
 

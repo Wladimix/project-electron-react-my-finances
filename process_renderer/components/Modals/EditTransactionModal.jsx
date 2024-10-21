@@ -1,6 +1,24 @@
+import TransactionService from "@renderer/services/TransactionService.js";
 import React from "react";
 
+import { useDispatch } from "react-redux";
+
 export default function EditTransactionModal() {
+    const dispatch = useDispatch();
+    const transactionService = new TransactionService(dispatch);
+
+    const addTransactionEvent = () => {
+        transactionService.addTransaction({
+            date: Date.now(),
+            sourceOfTransactionId: 1,
+            transactionAddressId: 2,
+            spendingCategoryId: 1,
+            note: "note",
+            amount: "500",
+            transactionType: "type"
+        });
+    };
+
     return (
         <div id="transaction" data-uk-modal container="false">
             <div className="uk-modal-dialog">
@@ -72,7 +90,12 @@ export default function EditTransactionModal() {
 
                 <div className="uk-modal-footer uk-text-right">
                     <button className="uk-button uk-button-default uk-modal-close">ЗАКРЫТЬ</button>
-                    <button className="uk-button uk-button-primary uk-modal-close">ДОБАВИТЬ</button>
+                    <button
+                        className="uk-button uk-button-primary uk-modal-close"
+                        onClick={addTransactionEvent}
+                    >
+                        ДОБАВИТЬ
+                    </button>
                 </div>
 
             </div>

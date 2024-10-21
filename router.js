@@ -16,6 +16,7 @@ function useRouter() {
     ipcMain.handle("delete-category", CategoryController.deleteCategory);
 
     ipcMain.handle("get-all-transactions", TransactionController.getAllTransactions);
+    ipcMain.handle("add-transaction", TransactionController.addTransaction);
 
 }
 

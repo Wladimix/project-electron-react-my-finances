@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 
 export default function TransactionsTable() {
     const transactions = useSelector(state => state.data.transactions);
+    const addingTransactionLoader = useSelector(state => state.loaders.addingTransactionLoader);
+    // NOTE: удалить вывод
     console.log(transactions)
 
     return (
@@ -22,9 +24,23 @@ export default function TransactionsTable() {
             <tbody>
 
                 {
-                    transactions.map(transaction => (
-                        <TransactionsTableRow />
-                    ))
+                    addingTransactionLoader &&
+                    <tr>
+                        <td className="uk-text-large uk-text-center uk-text-warning" colSpan={6}>
+                            Добавление транзакции...
+                            <div className="uk-margin-left" data-uk-spinner />
+                        </td>
+                    </tr>
+                }
+
+                {
+                    transactions.length
+                        ?   transactions.map(transaction => (
+                                <TransactionsTableRow key={transaction.id} />
+                            ))
+                        :   <tr>
+                                <td className="uk-text-large uk-text-primary" colSpan={6}>Финансовые операции отсутствуют</td>
+                            </tr>
                 }
 
             </tbody>

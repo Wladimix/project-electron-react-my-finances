@@ -7,20 +7,32 @@ import Statistics from "@renderer/components/Statistics.jsx";
 import TotalCard from "@renderer/components/Cards/TotalCard.jsx";
 import Transactions from "@renderer/components/Transactions.jsx";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function App() {
     const dispatch = useDispatch();
     const services = new Services(dispatch);
     useEffect(() => { services.loadAllData() }, []);
 
+    const transactionsLoader = useSelector(state => state.loaders.transactionsLoader);
+
     return (
         <>
             <div className="uk-container uk-container-expand uk-padding">
+
                 <TotalCard />
                 <MonthlyYearlyResults />
-                <Transactions />
+
+                {
+                    transactionsLoader
+                        ?   <div className="uk-margin uk-text-large uk-text-center uk-alert-primary" data-uk-alert>
+                                Загрузка транзакций... <div data-uk-spinner />
+                            </div>
+                        :   <Transactions />
+                }
+
                 <Statistics />
+
             </div>
 
             <EditTransactionModal />

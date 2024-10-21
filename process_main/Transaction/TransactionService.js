@@ -12,6 +12,13 @@ class TransactionService {
         return DataService.processDataOut(transactions);
     };
 
+    async addTransaction(data) {
+        DataService.processDataIn(data);
+
+        await add(data);
+        console.info(`В таблицу "${FINANCIAL_TRANSACTIONS_TABLE_NAME}" добавлена транзакция`);
+    };
+
 };
 
 module.exports = new TransactionService();

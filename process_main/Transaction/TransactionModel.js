@@ -21,6 +21,7 @@ class TransactionModel {
     getAll() {
         return knex
             .select(
+                `${FINANCIAL_TRANSACTIONS_TABLE_NAME}.id`,
                 `${FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`,
                 "sources_of_financial_distribution.name as source_of_transaction",
                 "financial_distribution_addresses.name as transaction_address",
@@ -36,6 +37,19 @@ class TransactionModel {
             .join(SPENDING_CATEGORIES_TABLE_NAME, `${FINANCIAL_TRANSACTIONS_TABLE_NAME}.spending_category_id`, "=", `${SPENDING_CATEGORIES_TABLE_NAME}.id`)
 
             .orderBy(`${FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`);
+    };
+
+    add({ date, sourceOfTransactionId, transactionAddressId, spendingCategoryId, note, amount, transactionType }) {
+        return knex(FINANCIAL_TRANSACTIONS_TABLE_NAME)
+            .insert({
+                date,
+                source_of_transaction_id: sourceOfTransactionId,
+                transaction_address_id: transactionAddressId,
+                spending_category_id: spendingCategoryId,
+                note,
+                amount,
+                transaction_type: transactionType
+            });
     };
 
 };

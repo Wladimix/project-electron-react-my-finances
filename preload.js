@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld("electron", {
     editCategory: data => ipcRenderer.invoke("edit-category", data),
     deleteCategory: id => ipcRenderer.invoke("delete-category", id),
 
-    getAllTransactions: () => ipcRenderer.invoke("get-all-transactions")
+    getAllTransactions: () => ipcRenderer.invoke("get-all-transactions"),
+    addTransaction: data => ipcRenderer.invoke("add-transaction", data)
 
 });

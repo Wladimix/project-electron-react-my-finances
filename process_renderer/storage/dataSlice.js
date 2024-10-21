@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const setStateObject = keyStateObject => (
+    (state, action) => ({ ...state, [keyStateObject]: action.payload })
+);
+
 const dataSlice = createSlice({
     name: 'data',
     initialState: {
@@ -8,9 +12,9 @@ const dataSlice = createSlice({
         transactions: []
     },
     reducers: {
-        setDistributionTypes: (state, action) => ({ ...state, distributionFinancesTypes: action.payload }),
-        setCategories: (state, action) => ({ ...state, spendingCategories: action.payload }),
-        setTransactions: (state, action) => ({ ...state, transactions: action.payload })
+        setDistributionTypes: setStateObject("distributionFinancesTypes"),
+        setCategories: setStateObject("spendingCategories"),
+        setTransactions: setStateObject("transactions")
     }
 });
 
