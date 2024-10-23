@@ -21,7 +21,7 @@ export default function TransactionsTableRow({ transaction }) {
 
                     :   <tr>
                             <td>{transactionService.makeDate(transaction.date)}</td>
-                            <td>Карта МИР</td>
+                            <td>{transaction.sourceOfTransactionName}</td>
                             <td>Продукты</td>
                             <td>Молоко</td>
                             <td className="uk-text-large uk-text-bold">500</td>
