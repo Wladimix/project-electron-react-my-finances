@@ -49,4 +49,17 @@ export default class Services {
         return Number(amount.replace(/[₽\s]+/g, ""));
     };
 
+    makeDate(timestamp) {
+        return (
+            new Date(timestamp).getFullYear() + "."
+            + this.#processMonthAndDay(new Date(timestamp).getMonth(), true) + "."
+            + this.#processMonthAndDay(new Date(timestamp).getDate())
+        );
+    };
+
+    #processMonthAndDay(monthOrDay, isMonth = false) {
+        monthOrDay = isMonth ? ++monthOrDay : monthOrDay;
+        return monthOrDay < 10 ? "0" + monthOrDay : monthOrDay
+    };
+
 };

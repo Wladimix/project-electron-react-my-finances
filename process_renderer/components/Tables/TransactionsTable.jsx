@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 export default function TransactionsTable() {
     const transactions = useSelector(state => state.data.transactions);
     const addingTransactionLoader = useSelector(state => state.loaders.addingTransactionLoader);
-    // NOTE: удалить вывод
+    // NOTE: загруженные транзакции
+    console.log("transactions")
     console.log(transactions)
 
     return (
@@ -36,7 +37,7 @@ export default function TransactionsTable() {
                 {
                     transactions.length
                         ?   transactions.map(transaction => (
-                                <TransactionsTableRow key={transaction.id} />
+                                <TransactionsTableRow key={transaction.id} transaction={transaction} />
                             ))
                         :   <tr>
                                 <td className="uk-text-large uk-text-primary" colSpan={6}>Финансовые операции отсутствуют</td>

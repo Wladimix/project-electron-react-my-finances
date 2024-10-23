@@ -1,13 +1,31 @@
 import React from "react";
+import TransactionService from "@renderer/services/TransactionService";
 import TransactionsTable from "@renderer/components/Tables/TransactionsTable.jsx";
 
+import { ADD_TRANSACTION_EVENT_TYPE } from "@renderer/RendererConstants.js";
+import { useDispatch, useSelector } from "react-redux";
+
 export default function Transactions() {
+    const dispatch = useDispatch();
+    const transactionService = new TransactionService(dispatch);
+    const transactionData = useSelector(state => state.transactionData.data);
+
     return (
         <>
             <div className="uk-grid">
                 <h1 className="uk-padding-small">Транзакции</h1>
 
-                <button className="uk-icon-link uk-padding-remove" data-uk-icon="icon: plus-circle; ratio: 2.5" data-uk-toggle="target: #transaction"></button>
+                <button
+                    className="uk-icon-link uk-padding-remove"
+                    data-uk-icon="icon: plus-circle; ratio: 2.5"
+                    data-uk-toggle="target: #transaction"
+                    onClick={
+                        () => { transactionService.writeTransactionData(
+                            { ...transactionData, date: new Date() },
+                            ADD_TRANSACTION_EVENT_TYPE
+                        )}
+                    }
+                />
 
                 <div className="uk-width-expand uk-text-right">
                     <div className="uk-inline">

@@ -22,14 +22,14 @@ const loadersSlice = createSlice({
     reducers: {
 
         setAddingDistributionLoader: setStateObject("addingDistributionFinancesLoader"),
-        setEditingDistributionLoader: (state, action) => ({ ...state, editingDistributionFinancesLoader: action.payload }),
+        setEditingDistributionLoader: setStateObject("editingDistributionFinancesLoader"),
 
-        setAddingCategoryLoader: (state, action) => ({ ...state, addingSpendingCategoryLoader: action.payload }),
-        setEditingCategoryLoader: (state, action) => ({ ...state, editingSpendingCategoryLoader: action.payload }),
+        setAddingCategoryLoader: setStateObject("addingSpendingCategoryLoader"),
+        setEditingCategoryLoader: setStateObject("editingSpendingCategoryLoader"),
 
-        setTransactionsLoader: (state, action) => ({ ...state, transactionsLoader: action.payload }),
-        setAddingTransactionLoader: (state, action) => ({ ...state, addingTransactionLoader: action.payload }),
-        setEditingTransactionLoader: (state, action) => ({ ...state, editingTransactionLoader: action.payload })
+        setTransactionsLoader: setStateObject("transactionsLoader"),
+        setAddingTransactionLoader: setStateObject("addingTransactionLoader"),
+        setEditingTransactionLoader: setStateObject("editingTransactionLoader")
 
     }
 });

@@ -1,22 +1,28 @@
+import DateInput from "@renderer/components/TransactionInputs/DateInput.jsx";
 import TransactionService from "@renderer/services/TransactionService.js";
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE } from "@renderer/RendererConstants.js";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function EditTransactionModal() {
     const dispatch = useDispatch();
     const transactionService = new TransactionService(dispatch);
+    const transactionData = useSelector(state => state.transactionData);
 
-    const addTransactionEvent = () => {
-        transactionService.addTransaction({
-            date: Date.now(),
-            sourceOfTransactionId: 1,
-            transactionAddressId: 2,
-            spendingCategoryId: 1,
-            note: "note",
-            amount: "500",
-            transactionType: "type"
-        });
+    const windowHeaders = {
+        [ADD_TRANSACTION_EVENT_TYPE]: "Новая транзакция",
+        [EDIT_TRANSACTION_EVENT_TYPE]: "Редактирование транзакции"
+    };
+
+    const transactionEvents = {
+        [ADD_TRANSACTION_EVENT_TYPE]: () => { transactionService.addTransaction(transactionData.data) },
+        [EDIT_TRANSACTION_EVENT_TYPE]: () => { transactionService.editTransaction(transactionData.data) }
+    };
+
+    const buttonValue = {
+        [ADD_TRANSACTION_EVENT_TYPE]: "ДОБАВИТЬ",
+        [EDIT_TRANSACTION_EVENT_TYPE]: "РЕДАКТИРОВАТЬ"
     };
 
     return (
@@ -26,16 +32,13 @@ export default function EditTransactionModal() {
                 <button className="uk-modal-close-default" type="button" data-uk-close></button>
 
                 <div className="uk-modal-header">
-                    <h2 className="uk-modal-title">Новая транзакция</h2>
+                    <h2 className="uk-modal-title">
+                        { windowHeaders[transactionData.eventType] }
+                    </h2>
                 </div>
 
                 <div className="uk-modal-body">
-                    <div className="uk-margin">
-                        <label className="uk-form-label" htmlFor="transaction-date">Дата транзакции</label>
-                        <div className="uk-form-controls">
-                            <input className="uk-input" id="transaction-date" type="text" />
-                        </div>
-                    </div>
+                    <DateInput />
 
                     <div className="uk-margin">
                         <label className="uk-form-label" htmlFor="transaction-source">Источник транзакции</label>
@@ -92,9 +95,9 @@ export default function EditTransactionModal() {
                     <button className="uk-button uk-button-default uk-modal-close">ЗАКРЫТЬ</button>
                     <button
                         className="uk-button uk-button-primary uk-modal-close"
-                        onClick={addTransactionEvent}
+                        onClick={transactionEvents[transactionData.eventType]}
                     >
-                        ДОБАВИТЬ
+                        {buttonValue[transactionData.eventType]}
                     </button>
                 </div>
 

@@ -19,6 +19,13 @@ class TransactionService {
         console.info(`В таблицу "${FINANCIAL_TRANSACTIONS_TABLE_NAME}" добавлена транзакция`);
     };
 
+    async editTransaction(data) {
+        DataService.processDataIn(data);
+
+        await editById(data);
+        console.info(`Запись #${data.id} в таблице "${FINANCIAL_TRANSACTIONS_TABLE_NAME}" отредактирована`);
+    };
+
 };
 
 module.exports = new TransactionService();

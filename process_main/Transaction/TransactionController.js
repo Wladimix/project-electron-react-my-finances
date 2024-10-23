@@ -1,6 +1,6 @@
 const ErrorService = require("@main/Error/ErrorService.js");
 
-const { getAllTransactions, addTransaction } = require("@main/Transaction/TransactionService.js");
+const { getAllTransactions, addTransaction, editTransaction } = require("@main/Transaction/TransactionService.js");
 const { REQUEST_STATUS_SUCCESS, REQUEST_STATUS_ERROR } = require("@main/MainConstants.js");
 
 class TransactionController {
@@ -34,6 +34,22 @@ class TransactionController {
             return {
                 status: REQUEST_STATUS_ERROR,
                 message: await ErrorService.makeErrorMessage(error, "Ошибка добавления финансовой транзакции")
+            };
+        };
+    };
+
+    async editTransaction(event, data) {
+        try {
+            await editTransaction(data);
+
+            return {
+                status: REQUEST_STATUS_SUCCESS,
+                message: "Финансовая транзакция отредактирована"
+            };
+        } catch (error) {
+            return {
+                status: REQUEST_STATUS_ERROR,
+                message: await ErrorService.makeErrorMessage(error, "Ошибка редактирования финансовой транзакции")
             };
         };
     };
