@@ -63,4 +63,10 @@ export default class TransactionService extends Services {
         this.dispatch(setTransactionData(data));
     };
 
+    makeInitialValues(initialValues, transactionData) {
+        return Object.keys(initialValues).reduce((acc, curr) => (
+            { ...acc, date: new Date(), [curr]: acc[curr] ?? initialValues[curr] }
+        ), transactionData);
+    };
+
 };

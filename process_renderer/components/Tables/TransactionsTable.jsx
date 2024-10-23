@@ -16,7 +16,7 @@ export default function TransactionsTable() {
                 <tr>
                     <th className="uk-text-left">ДАТА</th>
                     <th className="uk-text-left">ИСТОЧНИК ТРАНЗАКЦИИ</th>
-                    <th className="uk-text-left">КАТЕГОРИЯ / СЧЁТ</th>
+                    <th className="uk-text-left">АДРЕС / КАТЕГОРИЯ</th>
                     <th className="uk-text-left">ПРИМЕЧАНИЕ</th>
                     <th className="uk-text-left">СУММА / ЦЕНА</th>
                     <th className="uk-text-left">ДЕЙСТВИЯ</th>

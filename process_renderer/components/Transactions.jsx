@@ -1,5 +1,5 @@
 import React from "react";
-import TransactionService from "@renderer/services/TransactionService";
+import TransactionService from "@renderer/services/TransactionService.js";
 import TransactionsTable from "@renderer/components/Tables/TransactionsTable.jsx";
 
 import { ADD_TRANSACTION_EVENT_TYPE } from "@renderer/RendererConstants.js";
@@ -21,9 +21,16 @@ export default function Transactions() {
                     data-uk-toggle="target: #transaction"
                     onClick={
                         () => { transactionService.writeTransactionData(
-                            { ...transactionData, date: new Date() },
+                            transactionService.makeInitialValues({
+                                sourceOfTransactionId: 1,
+                                transactionAddressId: 1,
+                                spendingCategoryId: 1,
+                                note: "note",
+                                amount: "5000",
+                                transactionType: "type"
+                            }, transactionData),
                             ADD_TRANSACTION_EVENT_TYPE
-                        )}
+                        ) }
                     }
                 />
 

@@ -1,3 +1,4 @@
+import AddressOrCategoryInput from "@renderer/components/TransactionInputs/AddressOrCategoryInput.jsx";
 import DateInput from "@renderer/components/TransactionInputs/DateInput.jsx";
 import SourceOfTransactionInput from "@renderer/components/TransactionInputs/SourceOfTransactionInput.jsx";
 import TransactionService from "@renderer/services/TransactionService.js";
@@ -41,18 +42,7 @@ export default function EditTransactionModal() {
                 <div className="uk-modal-body">
                     <DateInput />
                     <SourceOfTransactionInput />
-
-                    <div className="uk-margin">
-                        <label className="uk-form-label" htmlFor="category">Категория / Счёт</label>
-                        <div className="uk-form-controls">
-                            <select className="uk-select" id="category">
-                                <option>Не выбран...</option>
-                                <option>Карта МИР</option>
-                                <option>Карта ВТБ</option>
-                                <option>Ещё что-то</option>
-                            </select>
-                        </div>
-                    </div>
+                    <AddressOrCategoryInput />
 
                     <div className="uk-margin">
                         <label className="uk-form-label" htmlFor="purpose-of-expenditure">Примечание</label>

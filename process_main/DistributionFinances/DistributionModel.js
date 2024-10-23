@@ -19,6 +19,7 @@ class DistributionModel {
         return knex
             .select()
             .from(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+            .whereNot({ id: 1 })
             .orderBy("name", "asc");
     };
 

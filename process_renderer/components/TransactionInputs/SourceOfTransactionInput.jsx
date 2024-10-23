@@ -17,11 +17,12 @@ export default function SourceOfTransactionInput() {
                     className="uk-select"
                     id="source-of-transaction"
                     onChange={e => transactionService.changeTransactionDataStorage(
-                        { ...transactionData, sourceOfTransactionId: e.target.value}
+                        { ...transactionData, sourceOfTransactionId: e.target.value }
                     )}
                     value={transactionData.sourceOfTransactionId}
                 >
 
+                    <option value={1}>значение не выбрано</option>
                     {
                         distributionTypes.map(distributionType => (
                             <option

@@ -1,9 +1,8 @@
-require('module-alias/register');
-
+require("module-alias/register");
 const path = require("path");
-const useRouter = require('./router');
+const useRouter = require("./router.js");
 
-const { app, BrowserWindow, ipcMain, Notification } = require("electron");
+const { app, BrowserWindow } = require("electron");
 const { createTables } = require("@main/StartApplication/StartController.js");
 
 const isDev = !app.isPackaged;

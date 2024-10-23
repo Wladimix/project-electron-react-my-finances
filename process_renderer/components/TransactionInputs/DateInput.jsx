@@ -1,7 +1,7 @@
 import DatePicker from "react-datepicker";
 import React from "react";
 import ru from "date-fns/locale/ru";
-import TransactionService from "@renderer/services/TransactionService";
+import TransactionService from "@renderer/services/TransactionService.js";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,9 +22,9 @@ export default function DateInput() {
                     id="transaction-date"
                     locale={ru}
                     onChange={date => transactionService.changeTransactionDataStorage(
-                        { ...transactionData, date}
+                        { ...transactionData, date }
                     )}
-                    selected={transactionData.date}
+                    selected={transactionData.date ? new Date(transactionData.date) : new Date()}
                     showTimeSelect
                     timeFormat="HH:mm"
                 />

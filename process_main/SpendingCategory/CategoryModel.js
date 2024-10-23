@@ -18,6 +18,7 @@ class CategoryModel {
         return knex
             .select()
             .from(SPENDING_CATEGORIES_TABLE_NAME)
+            .whereNot({ id: 1 })
             .orderBy("name", "asc");
     };
 
