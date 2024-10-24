@@ -8,9 +8,10 @@ import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE } from "@render
 import { useDispatch, useSelector } from "react-redux";
 
 export default function EditTransactionModal() {
-    const dispatch = useDispatch();
-    const transactionService = new TransactionService(dispatch);
     const transactionData = useSelector(state => state.transactionData);
+
+    const dispatch = useDispatch();
+    const transactionService = new TransactionService(dispatch, transactionData.data);
 
     const windowHeaders = {
         [ADD_TRANSACTION_EVENT_TYPE]: "Новая транзакция",
@@ -18,8 +19,8 @@ export default function EditTransactionModal() {
     };
 
     const transactionEvents = {
-        [ADD_TRANSACTION_EVENT_TYPE]: () => { transactionService.addTransaction(transactionData.data) },
-        [EDIT_TRANSACTION_EVENT_TYPE]: () => { transactionService.editTransaction(transactionData.data) }
+        [ADD_TRANSACTION_EVENT_TYPE]: () => { transactionService.addTransaction() },
+        [EDIT_TRANSACTION_EVENT_TYPE]: () => { transactionService.editTransaction() }
     };
 
     const buttonValue = {

@@ -5,10 +5,24 @@ import TransactionsTable from "@renderer/components/Tables/TransactionsTable.jsx
 import { ADD_TRANSACTION_EVENT_TYPE } from "@renderer/RendererConstants.js";
 import { useDispatch, useSelector } from "react-redux";
 
+const initialValues = {
+    sourceOfTransactionId: 1,
+    transactionAddressId: 1,
+    spendingCategoryId: 1,
+    note: "note",
+    amount: "5000",
+    transactionType: "type"
+};
+
 export default function Transactions() {
-    const dispatch = useDispatch();
-    const transactionService = new TransactionService(dispatch);
     const transactionData = useSelector(state => state.transactionData.data);
+
+    const dispatch = useDispatch();
+    const transactionService = new TransactionService(dispatch, transactionData);
+
+    const openModalEvent = () => {
+        transactionService.writeTransactionData(ADD_TRANSACTION_EVENT_TYPE, initialValues);
+    };
 
     return (
         <>
@@ -19,19 +33,7 @@ export default function Transactions() {
                     className="uk-icon-link uk-padding-remove"
                     data-uk-icon="icon: plus-circle; ratio: 2.5"
                     data-uk-toggle="target: #transaction"
-                    onClick={
-                        () => { transactionService.writeTransactionData(
-                            transactionService.makeInitialValues({
-                                sourceOfTransactionId: 1,
-                                transactionAddressId: 1,
-                                spendingCategoryId: 1,
-                                note: "note",
-                                amount: "5000",
-                                transactionType: "type"
-                            }, transactionData),
-                            ADD_TRANSACTION_EVENT_TYPE
-                        ) }
-                    }
+                    onClick={openModalEvent}
                 />
 
                 <div className="uk-width-expand uk-text-right">

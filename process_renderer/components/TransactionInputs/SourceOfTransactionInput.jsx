@@ -9,6 +9,10 @@ export default function SourceOfTransactionInput() {
     const transactionData = useSelector(state => state.transactionData.data);
     const distributionTypes = useSelector(state => state.data.distributionFinancesTypes);
 
+    const changeTransactionDataEvent = e => transactionService.changeTransactionDataStorage(
+        { ...transactionData, sourceOfTransactionId: e.target.value }
+    );
+
     return (
         <div className="uk-margin">
             <label className="uk-form-label" htmlFor="source-of-transaction">Источник транзакции</label>
@@ -16,9 +20,7 @@ export default function SourceOfTransactionInput() {
                 <select
                     className="uk-select"
                     id="source-of-transaction"
-                    onChange={e => transactionService.changeTransactionDataStorage(
-                        { ...transactionData, sourceOfTransactionId: e.target.value }
-                    )}
+                    onChange={changeTransactionDataEvent}
                     value={transactionData.sourceOfTransactionId}
                 >
 

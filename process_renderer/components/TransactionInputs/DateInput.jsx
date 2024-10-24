@@ -12,6 +12,10 @@ export default function DateInput() {
     const transactionService = new TransactionService(dispatch);
     const transactionData = useSelector(state => state.transactionData.data);
 
+    const changeTransactionDataEvent = date => transactionService.changeTransactionDataStorage(
+        { ...transactionData, date }
+    );
+
     return (
         <div className="uk-margin">
             <label className="uk-form-label" htmlFor="transaction-date">Дата транзакции</label>
@@ -21,9 +25,7 @@ export default function DateInput() {
                     dateFormat="dd MMMM YYYY"
                     id="transaction-date"
                     locale={ru}
-                    onChange={date => transactionService.changeTransactionDataStorage(
-                        { ...transactionData, date }
-                    )}
+                    onChange={changeTransactionDataEvent}
                     selected={transactionData.date ? new Date(transactionData.date) : new Date()}
                     showTimeSelect
                     timeFormat="HH:mm"

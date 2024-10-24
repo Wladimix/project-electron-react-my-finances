@@ -1,37 +1,22 @@
 import React from "react";
+import TransactionModalOutputService from "@renderer/services/TransactionModalOutputService.js";
 import TransactionService from "@renderer/services/TransactionService.js";
 
 import { DISTRIBUTION_MODIFIER_ID, SPENDING_CATEGORY_MODIFIER_ID } from "@renderer/RendererConstants.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function AddressOrCategoryInput() {
-    const dispatch = useDispatch();
-    const transactionService = new TransactionService(dispatch);
     const transactionData = useSelector(state => state.transactionData.data);
     const distributionTypes = useSelector(state => state.data.distributionFinancesTypes);
     const spendingCategories = useSelector(state => state.data.spendingCategories);
 
-    function identifyAddressOrCategoryToSend(valueToSend) {
-        const transactionAddressId = valueToSend.includes(DISTRIBUTION_MODIFIER_ID) ? clearId(valueToSend) : 1;
-        const spendingCategoryId = valueToSend.includes(SPENDING_CATEGORY_MODIFIER_ID) ? clearId(valueToSend) : 1;
-        return { ...transactionData, transactionAddressId, spendingCategoryId };
-    };
+    const dispatch = useDispatch();
+    const transactionService = new TransactionService(dispatch, transactionData);
+    const transactionModalOutputService = new TransactionModalOutputService(dispatch, transactionData)
 
-    function identifyAddressOrCategoryToShow() {
-        const transactionAddressId = transactionData.transactionAddressId !== 1
-            ? DISTRIBUTION_MODIFIER_ID + transactionData.transactionAddressId
-            : transactionData.transactionAddressId;
-
-        const spendingCategoryId = transactionData.spendingCategoryId !== 1
-            ? SPENDING_CATEGORY_MODIFIER_ID + transactionData.spendingCategoryId
-            : transactionData.spendingCategoryId;
-
-        return transactionAddressId !== 1 ? transactionAddressId : spendingCategoryId;
-    };
-
-    function clearId(id) {
-        return +id.replace(/^\D+/g, "");
-    };
+    const changeTransactionDataEvent = e => transactionService.changeTransactionDataStorage(
+        transactionService.identifyAddressOrCategoryToSend(e.target.value)
+    );
 
     return (
         <div className="uk-margin">
@@ -40,10 +25,8 @@ export default function AddressOrCategoryInput() {
                 <select
                     className="uk-select"
                     id="address-or-category"
-                    onChange={e => transactionService.changeTransactionDataStorage(
-                        identifyAddressOrCategoryToSend(e.target.value)
-                    )}
-                    value={identifyAddressOrCategoryToShow()}
+                    onChange={changeTransactionDataEvent}
+                    value={transactionModalOutputService.identifyAddressOrCategoryToShow()}
                 >
 
                     <option value={1}>значение не выбрано</option>
