@@ -27,10 +27,10 @@ export default function Transactions() {
     return (
         <>
             <div className="uk-grid">
-                <h1 className="uk-padding-small">Транзакции</h1>
+                <h1>Транзакции</h1>
 
                 <button
-                    className="uk-icon-link uk-padding-remove"
+                    className="uk-icon-link uk-padding-remove uk-margin-small-left"
                     data-uk-icon="icon: plus-circle; ratio: 2.5"
                     data-uk-toggle="target: #transaction"
                     onClick={openModalEvent}
@@ -51,26 +51,25 @@ export default function Transactions() {
                         <option>Траты</option>
                     </select>
                 </div>
-
-                <label><input className="uk-checkbox uk-margin-small-right" type="checkbox" />За всё время</label>
             </div>
 
             <TransactionsTable />
 
-            <nav aria-label="Pagination">
-                <ul className="uk-pagination uk-flex-center" data-uk-margin>
+            <nav>
+                <ul className="uk-pagination uk-flex-center">
                     <li><a href="#"><span data-uk-pagination-previous></span></a></li>
-                    <li><a href="#">1</a></li>
-                    <li className="uk-disabled"><span>…</span></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li className="uk-active"><span aria-current="page">7</span></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li className="uk-disabled"><span>…</span></li>
-                    <li><a href="#">20</a></li>
+                    <li><a href="#">янв</a></li>
+                    <li><a href="#">фев</a></li>
+                    <li><a href="#">мар</a></li>
+                    <li><a href="#">апр</a></li>
+                    <li className="uk-active"><span>май</span></li>
+                    <li><a href="#">июн</a></li>
+                    <li><a href="#">июл</a></li>
+                    <li><a href="#">авг</a></li>
+                    <li><a href="#">сен</a></li>
+                    <li><a href="#">окт</a></li>
+                    <li><a href="#">ноя</a></li>
+                    <li><a href="#">дек</a></li>
                     <li><a href="#"><span data-uk-pagination-next></span></a></li>
                 </ul>
             </nav>
