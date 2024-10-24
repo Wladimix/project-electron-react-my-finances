@@ -4,7 +4,7 @@ import SourceOfTransactionInput from "@renderer/components/TransactionInputs/Sou
 import TransactionService from "@renderer/services/TransactionService.js";
 import React from "react";
 
-import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE } from "@renderer/RendererConstants.js";
+import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function EditTransactionModal() {
@@ -23,9 +23,16 @@ export default function EditTransactionModal() {
         [EDIT_TRANSACTION_EVENT_TYPE]: () => { transactionService.editTransaction() }
     };
 
-    const buttonValue = {
+    const buttonValues = {
         [ADD_TRANSACTION_EVENT_TYPE]: "ДОБАВИТЬ",
         [EDIT_TRANSACTION_EVENT_TYPE]: "РЕДАКТИРОВАТЬ"
+    };
+
+    const alertClasses = {
+        [FINANCIAL_INCOME]: "uk-text-center uk-alert-success",
+        [FINANCIAL_TRANSFER]: "uk-text-center uk-alert-warning",
+        [FINANCIAL_EXPENCE]: "uk-text-center uk-alert-danger",
+        [TYPE_NOT_DEFINE]: "uk-text-center",
     };
 
     return (
@@ -70,6 +77,10 @@ export default function EditTransactionModal() {
                             <input className="uk-input" id="price" type="text" />
                         </div>
                     </div>
+
+                    <div className={alertClasses[transactionData.data.transactionType]} data-uk-alert>
+                        <p>{transactionData.data.transactionType}</p>
+                    </div>
                 </div>
 
                 <div className="uk-modal-footer uk-text-right">
@@ -78,7 +89,7 @@ export default function EditTransactionModal() {
                         className="uk-button uk-button-primary uk-modal-close"
                         onClick={transactionEvents[transactionData.eventType]}
                     >
-                        {buttonValue[transactionData.eventType]}
+                        {buttonValues[transactionData.eventType]}
                     </button>
                 </div>
 

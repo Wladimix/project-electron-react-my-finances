@@ -1,8 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const setStateObject = keyStateObject => (
-    (state, action) => ({ ...state, [keyStateObject]: action.payload })
-);
+import { FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+
+const determineTransactionType = transactionData => {
+    const income = transactionData.sourceOfTransactionId === 1
+        && transactionData.transactionAddressId !== 1
+        && transactionData.spendingCategoryId === 1;
+
+    const transfer = transactionData.sourceOfTransactionId !== 1
+        && transactionData.transactionAddressId !== 1
+        && transactionData.spendingCategoryId === 1;
+
+    const expence = transactionData.sourceOfTransactionId !== 1
+        && transactionData.transactionAddressId === 1
+        && transactionData.spendingCategoryId !== 1;
+
+    return {
+        ...transactionData,
+        transactionType: income ? FINANCIAL_INCOME : transfer ? FINANCIAL_TRANSFER : expence ? FINANCIAL_EXPENCE : TYPE_NOT_DEFINE
+    };
+};
 
 const transactionSlice = createSlice({
     name: 'transactionData',
@@ -11,8 +28,8 @@ const transactionSlice = createSlice({
         data: {}
     },
     reducers: {
-        setEventType: setStateObject("eventType"),
-        setData: setStateObject("data")
+        setEventType: (state, action) => ({ ...state, eventType: action.payload }),
+        setData: (state, action) => ({ ...state, data: determineTransactionType(action.payload) })
     }
 });
 

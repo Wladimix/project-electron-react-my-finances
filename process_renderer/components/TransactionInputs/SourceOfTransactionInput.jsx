@@ -4,13 +4,14 @@ import TransactionService from "@renderer/services/TransactionService.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SourceOfTransactionInput() {
-    const dispatch = useDispatch();
-    const transactionService = new TransactionService(dispatch);
     const transactionData = useSelector(state => state.transactionData.data);
     const distributionTypes = useSelector(state => state.data.distributionFinancesTypes);
 
+    const dispatch = useDispatch();
+    const transactionService = new TransactionService(dispatch);
+
     const changeTransactionDataEvent = e => transactionService.changeTransactionDataStorage(
-        { ...transactionData, sourceOfTransactionId: e.target.value }
+        { ...transactionData, sourceOfTransactionId: Number(e.target.value) }
     );
 
     return (
