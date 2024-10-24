@@ -5,7 +5,7 @@ const setStateObject = keyStateObject => (
 );
 
 const loadersSlice = createSlice({
-    name: 'loaders',
+    name: "loaders",
     initialState: {
 
         addingDistributionFinancesLoader: false,

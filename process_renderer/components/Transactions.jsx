@@ -9,7 +9,7 @@ const initialValues = {
     sourceOfTransactionId: 1,
     transactionAddressId: 1,
     spendingCategoryId: 1,
-    note: "note",
+    note: "",
     amount: "5000",
     transactionType: "type"
 };

@@ -9,6 +9,8 @@ export const EDIT_TRANSACTION_EVENT_TYPE = "editTransaction";
 export const DISTRIBUTION_MODIFIER_ID = "distribution-";
 export const SPENDING_CATEGORY_MODIFIER_ID = "spending-category-";
 
+export const NOTE_MISSING = "примечание отсутствует";
+
 export default {
 
     FINANCIAL_INCOME,
@@ -20,6 +22,8 @@ export default {
     EDIT_TRANSACTION_EVENT_TYPE,
 
     DISTRIBUTION_MODIFIER_ID,
-    SPENDING_CATEGORY_MODIFIER_ID
+    SPENDING_CATEGORY_MODIFIER_ID,
+
+    NOTE_MISSING
 
 };

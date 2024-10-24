@@ -1,10 +1,11 @@
 import AddressOrCategoryInput from "@renderer/components/TransactionInputs/AddressOrCategoryInput.jsx";
 import DateInput from "@renderer/components/TransactionInputs/DateInput.jsx";
+import NoteInput from "@renderer/components/TransactionInputs/NoteInput.jsx";
 import SourceOfTransactionInput from "@renderer/components/TransactionInputs/SourceOfTransactionInput.jsx";
 import TransactionService from "@renderer/services/TransactionService.js";
 import React from "react";
 
-import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function EditTransactionModal() {
@@ -51,25 +52,7 @@ export default function EditTransactionModal() {
                     <DateInput />
                     <SourceOfTransactionInput />
                     <AddressOrCategoryInput />
-
-                    <div className="uk-margin">
-                        <label className="uk-form-label" htmlFor="purpose-of-expenditure">Примечание</label>
-                        <div className="uk-form-controls">
-                            <input className="uk-input" id="purpose-of-expenditure" type="text" />
-                        </div>
-                    </div>
-
-                    <div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Молоко</div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Хлеб</div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Secondary</div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Secondary</div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Secondary</div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Secondary</div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Secondary</div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Secondary</div>
-                        <div className="uk-button uk-button-secondary uk-margin-small-bottom uk-margin-small-right">Secondary</div>
-                    </div>
+                    <NoteInput />
 
                     <div className="uk-margin">
                         <label className="uk-form-label" htmlFor="price">Сумма / Цена</label>

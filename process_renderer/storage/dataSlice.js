@@ -5,7 +5,7 @@ const setStateObject = keyStateObject => (
 );
 
 const dataSlice = createSlice({
-    name: 'data',
+    name: "data",
     initialState: {
         distributionFinancesTypes: [],
         spendingCategories: [],
