@@ -1,6 +1,6 @@
 const knex = require("@main/ConnectionDB.js");
 
-const { NOTES_TABLE } = require("@main/MainConstants.js");
+const { NOTES_TABLE, NOTE_MISSING } = require("@main/MainConstants.js");
 
 class NoteModel {
 
@@ -34,10 +34,14 @@ class NoteModel {
             .insert({ note });
     };
 
-    deleteById(id) {
-        return knex(NOTES_TABLE)
-            .where({ id })
-            .del();
+    deleteByNote(note) {
+        if (note !== NOTE_MISSING) {
+            return knex(NOTES_TABLE)
+                .where({ note })
+                .del();
+        };
+
+        return false;
     };
 
 };

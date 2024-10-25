@@ -43,6 +43,15 @@ class TransactionModel {
             .orderBy(`${FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, "desc");
     };
 
+    getNotes(note = {}) {
+        return knex
+            .select(`${NOTES_TABLE}.note`)
+            .distinct(`${NOTES_TABLE}.note`)
+            .from(FINANCIAL_TRANSACTIONS_TABLE_NAME)
+            .join(NOTES_TABLE, `${FINANCIAL_TRANSACTIONS_TABLE_NAME}.note_id`, "=", `${NOTES_TABLE}.id`)
+            .where(note);
+    };
+
     add({ date, sourceOfTransactionId, transactionAddressId, spendingCategoryId, noteId, amount, transactionType }) {
         return knex(FINANCIAL_TRANSACTIONS_TABLE_NAME)
             .insert({

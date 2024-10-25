@@ -1,13 +1,13 @@
 const ErrorService = require("@main/Error/ErrorService.js");
 
-const { getAllTransactions, addTransaction, editTransaction } = require("@main/Transaction/TransactionService.js");
+const TransactionService = require("@main/Transaction/TransactionService.js");
 const { REQUEST_STATUS_SUCCESS, REQUEST_STATUS_ERROR } = require("@main/MainConstants.js");
 
 class TransactionController {
 
     async getAllTransactions() {
         try {
-            const allTransactions = await getAllTransactions();
+            const allTransactions = await TransactionService.getAllTransactions();
 
             return {
                 data: allTransactions,
@@ -24,7 +24,7 @@ class TransactionController {
 
     async addTransaction(event, data) {
         try {
-            await addTransaction(data);
+            await TransactionService.addTransaction(data);
 
             return {
                 status: REQUEST_STATUS_SUCCESS,
@@ -40,7 +40,7 @@ class TransactionController {
 
     async editTransaction(event, data) {
         try {
-            await editTransaction(data);
+            await TransactionService.editTransaction(data);
 
             return {
                 status: REQUEST_STATUS_SUCCESS,

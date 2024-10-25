@@ -10,6 +10,8 @@ class MainConstants {
     get SPENDING_CATEGORIES_TABLE_NAME() { return "spending_categories" };
     get FINANCIAL_TRANSACTIONS_TABLE_NAME() { return "financial_transactions" };
     get NOTES_TABLE() { return "notes" };
+
+    get NOTE_MISSING() { return "примечание отсутствует" };
 }
 
 module.exports = new MainConstants();

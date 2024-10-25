@@ -1,4 +1,4 @@
-const { getAll, getOne, add, deleteById } = require("@main/Note/NoteModel.js");
+const { getAll, getOne, add } = require("@main/Note/NoteModel.js");
 const { NOTES_TABLE } = require("@main/MainConstants.js");
 
 class NoteService {
