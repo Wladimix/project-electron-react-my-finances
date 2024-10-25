@@ -14,12 +14,13 @@ class NoteModel {
             });
     };
 
-    getAll() {
+    findMatches(substring) {
         return knex
             .select()
             .from(NOTES_TABLE)
             .whereNot({ id: 1 })
-            .orderBy("name", "asc");
+            .whereLike("note", `%${substring}%`)
+            .orderBy("note", "asc");
     };
 
     getOne(note) {

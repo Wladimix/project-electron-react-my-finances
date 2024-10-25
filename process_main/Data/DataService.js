@@ -4,8 +4,10 @@ class DataService {
         for (const key in data) {
             switch (key) {
                 case "name":
-                case "note":
                     data[key] = this.#removeSpaces(data[key]);
+                    break;
+                case "note":
+                    data[key] = this.#removeSpaces(data[key]).toLowerCase();
                     break;
                 case "amount":
                     data[key] = this.#processAmountIn(data[key]);

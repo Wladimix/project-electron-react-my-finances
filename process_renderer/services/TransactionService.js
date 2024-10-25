@@ -4,7 +4,7 @@ import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_
 import { setAddingTransactionLoader, setEditingTransactionLoader } from "@renderer/storage/loadersSlice.js";
 import { setData as setTransactionData } from "@renderer/storage/transactionSlice.js";
 import { setEventType } from "@renderer/storage/transactionSlice.js";
-import { setTransactions } from "@renderer/storage/dataSlice.js";
+import { setTransactions, setNotes } from "@renderer/storage/dataSlice.js";
 
 export default class TransactionService extends Services {
 
@@ -27,6 +27,7 @@ export default class TransactionService extends Services {
         this.showNotification(allTransactions, true);
 
         this.dispatch(setTransactions(allTransactions.data));
+        this.dispatch(setNotes([]));
         this.dispatch(setAddingTransactionLoader(false));
     };
 
@@ -44,6 +45,7 @@ export default class TransactionService extends Services {
         this.showNotification(allTransactions, true);
 
         this.dispatch(setTransactions(allTransactions.data));
+        this.dispatch(setNotes([]));
         this.dispatch(setEditingTransactionLoader(false));
     };
 

@@ -1,6 +1,8 @@
-const CategoryController = require('@main/SpendingCategory/CategoryController.js');
-const DistributionController = require('@main/DistributionFinances/DistributionController.js');
+const CategoryController = require("@main/SpendingCategory/CategoryController.js");
+const DistributionController = require("@main/DistributionFinances/DistributionController.js");
+const NoteController = require("@main/Note/NoteController.js");
 const TransactionController = require("@main/Transaction/TransactionController.js");
+
 const { ipcMain } = require("electron");
 
 function useRouter() {
@@ -18,6 +20,8 @@ function useRouter() {
     ipcMain.handle("get-all-transactions", TransactionController.getAllTransactions);
     ipcMain.handle("add-transaction", TransactionController.addTransaction);
     ipcMain.handle("edit-transaction", TransactionController.editTransaction);
+
+    ipcMain.handle("get-all-notes", NoteController.getAllNotes);
 
 }
 

@@ -18,6 +18,8 @@ const loadersSlice = createSlice({
         addingTransactionLoader: false,
         editingTransactionLoader: false,
 
+        notesLoader: false
+
     },
     reducers: {
 
@@ -29,7 +31,9 @@ const loadersSlice = createSlice({
 
         setTransactionsLoader: setStateObject("transactionsLoader"),
         setAddingTransactionLoader: setStateObject("addingTransactionLoader"),
-        setEditingTransactionLoader: setStateObject("editingTransactionLoader")
+        setEditingTransactionLoader: setStateObject("editingTransactionLoader"),
+
+        setNotesLoader: setStateObject("notesLoader")
 
     }
 });
@@ -44,7 +48,9 @@ export const {
 
     setTransactionsLoader,
     setAddingTransactionLoader,
-    setEditingTransactionLoader
+    setEditingTransactionLoader,
+
+    setNotesLoader
 
 } = loadersSlice.actions;
 

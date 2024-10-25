@@ -14,6 +14,8 @@ contextBridge.exposeInMainWorld("electron", {
 
     getAllTransactions: () => ipcRenderer.invoke("get-all-transactions"),
     addTransaction: data => ipcRenderer.invoke("add-transaction", data),
-    editTransaction: data => ipcRenderer.invoke("edit-transaction", data)
+    editTransaction: data => ipcRenderer.invoke("edit-transaction", data),
+
+    getAllNotes: substring => ipcRenderer.invoke("get-all-notes", substring)
 
 });

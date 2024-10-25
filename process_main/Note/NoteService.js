@@ -1,10 +1,10 @@
-const { getAll, getOne, add } = require("@main/Note/NoteModel.js");
+const { findMatches, getOne, add } = require("@main/Note/NoteModel.js");
 const { NOTES_TABLE } = require("@main/MainConstants.js");
 
 class NoteService {
 
-    async getAllNotes() {
-        const notes = await getAll();
+    async getAllNotes(substring) {
+        const notes = await findMatches(substring);
         console.info(`Получены данные из таблицы "${NOTES_TABLE}"`);
 
         return notes;

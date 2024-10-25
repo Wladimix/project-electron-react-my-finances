@@ -6,6 +6,7 @@ import TransactionService from "@renderer/services/TransactionService.js";
 import React from "react";
 
 import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { setNotes } from "@renderer/storage/dataSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function EditTransactionModal() {
@@ -67,7 +68,12 @@ export default function EditTransactionModal() {
                 </div>
 
                 <div className="uk-modal-footer uk-text-right">
-                    <button className="uk-button uk-button-default uk-modal-close">ЗАКРЫТЬ</button>
+                    <button
+                        className="uk-button uk-button-default uk-modal-close"
+                        onClick={() => { dispatch(setNotes([])) }}
+                    >
+                        ЗАКРЫТЬ
+                    </button>
                     <button
                         className="uk-button uk-button-primary uk-modal-close"
                         onClick={transactionEvents[transactionData.eventType]}
