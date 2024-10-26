@@ -1,6 +1,7 @@
 export const FINANCIAL_INCOME = "ДОХОД";
 export const FINANCIAL_TRANSFER = "ПЕРЕВОД";
 export const FINANCIAL_EXPENCE = "РАСХОД";
+export const PRICE_MONITORING = "МОНИТОРИНГ ЦЕНЫ";
 export const TYPE_NOT_DEFINE = "———";
 
 export const ADD_TRANSACTION_EVENT_TYPE = "addTransaction";
@@ -16,6 +17,7 @@ export default {
     FINANCIAL_INCOME,
     FINANCIAL_TRANSFER,
     FINANCIAL_EXPENCE,
+    PRICE_MONITORING,
     TYPE_NOT_DEFINE,
 
     ADD_TRANSACTION_EVENT_TYPE,

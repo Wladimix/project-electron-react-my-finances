@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 
 const processData = transactionData => {
     return {
@@ -13,35 +13,27 @@ const processData = transactionData => {
 const determineTransactionType = transactionData => {
     const income = transactionData.sourceOfTransactionId === 1
         && transactionData.transactionAddressId !== 1
-        && transactionData.spendingCategoryId === 1;
+        && transactionData.spendingCategoryId === 1
+        && transactionData.amount;
 
     const transfer = transactionData.sourceOfTransactionId !== 1
         && transactionData.transactionAddressId !== 1
-        && transactionData.spendingCategoryId === 1;
+        && transactionData.sourceOfTransactionId !== transactionData.transactionAddressId
+        && transactionData.spendingCategoryId === 1
+        && transactionData.amount;
 
     const expence = transactionData.sourceOfTransactionId !== 1
         && transactionData.transactionAddressId === 1
-        && transactionData.spendingCategoryId !== 1;
+        && transactionData.spendingCategoryId !== 1
+        && transactionData.amount;
 
-    return income ? FINANCIAL_INCOME : transfer ? FINANCIAL_TRANSFER : expence ? FINANCIAL_EXPENCE : TYPE_NOT_DEFINE;
-
-
-    /* const income = transactionData.sourceOfTransactionId === 1
-        && transactionData.transactionAddressId !== 1
-        && transactionData.spendingCategoryId === 1;
-
-    const transfer = transactionData.sourceOfTransactionId !== 1
-        && transactionData.transactionAddressId !== 1
-        && transactionData.spendingCategoryId === 1;
-
-    const expence = transactionData.sourceOfTransactionId !== 1
+    const priceMonitoring = transactionData.sourceOfTransactionId === 1
         && transactionData.transactionAddressId === 1
-        && transactionData.spendingCategoryId !== 1;
+        && transactionData.spendingCategoryId === 1
+        && (transactionData.note && transactionData.note !== " " && transactionData.note !== NOTE_MISSING)
+        && transactionData.amount;
 
-    return {
-        ...transactionData,
-        transactionType: income ? FINANCIAL_INCOME : transfer ? FINANCIAL_TRANSFER : expence ? FINANCIAL_EXPENCE : TYPE_NOT_DEFINE
-    }; */
+    return income ? FINANCIAL_INCOME : transfer ? FINANCIAL_TRANSFER : expence ? FINANCIAL_EXPENCE : priceMonitoring ? PRICE_MONITORING : TYPE_NOT_DEFINE;
 };
 
 const processNote = note => {return note === "" || /^\s+$/g.test(note) ? NOTE_MISSING : note};

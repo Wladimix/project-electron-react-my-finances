@@ -3,7 +3,7 @@ import TransactionService from "@renderer/services/TransactionService.js";
 
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Amountinput() {
+export default function AmountInput() {
     const transactionData = useSelector(state => state.transactionData.data);
 
     const dispatch = useDispatch();

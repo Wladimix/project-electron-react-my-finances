@@ -1,7 +1,7 @@
 import React from "react";
 import TransactionService from "@renderer/services/TransactionService.js";
 
-import { EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function TransactionsTableRow({ transaction }) {
@@ -14,6 +14,7 @@ export default function TransactionsTableRow({ transaction }) {
         [FINANCIAL_INCOME]: "uk-text-large uk-text-bold uk-text-success",
         [FINANCIAL_TRANSFER]: "uk-text-large uk-text-bold uk-text-warning",
         [FINANCIAL_EXPENCE]: "uk-text-large uk-text-bold uk-text-danger",
+        [PRICE_MONITORING]: "uk-text-large uk-text-bold",
         [TYPE_NOT_DEFINE]: "uk-text-large uk-text-bold",
     };
 

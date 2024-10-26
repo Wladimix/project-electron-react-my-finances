@@ -42,7 +42,7 @@ export default class Services {
     };
 
     checkAmount(amount) {
-        return /^[\d\s]*?(\.\d{1,2})?$/.test(amount);
+        return /^[\d\s]*?(\.\d{1,2})?(\s₽)?$/.test(amount);
     };
 
     convertAmountToNumber(amount) {

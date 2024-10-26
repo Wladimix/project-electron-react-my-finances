@@ -1,14 +1,14 @@
 import AddressOrCategoryInput from "@renderer/components/TransactionInputs/AddressOrCategoryInput.jsx";
+import Amountinput from "@renderer/components/TransactionInputs/AmountInput.jsx";
 import DateInput from "@renderer/components/TransactionInputs/DateInput.jsx";
 import NoteInput from "@renderer/components/TransactionInputs/NoteInput.jsx";
 import SourceOfTransactionInput from "@renderer/components/TransactionInputs/SourceOfTransactionInput.jsx";
 import TransactionService from "@renderer/services/TransactionService.js";
 import React from "react";
 
-import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, PRICE_MONITORING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { setNotes } from "@renderer/storage/dataSlice.js";
 import { useDispatch, useSelector } from "react-redux";
-import Amountinput from "../TransactionInputs/AmountInput";
 
 export default function EditTransactionModal() {
     const transactionData = useSelector(state => state.transactionData);
@@ -35,6 +35,7 @@ export default function EditTransactionModal() {
         [FINANCIAL_INCOME]: "uk-text-center uk-text-large uk-text-success",
         [FINANCIAL_TRANSFER]: "uk-text-center uk-text-large uk-text-warning",
         [FINANCIAL_EXPENCE]: "uk-text-center uk-text-large uk-text-danger",
+        [PRICE_MONITORING]: "uk-text-center uk-text-large",
         [TYPE_NOT_DEFINE]: "uk-text-center uk-text-large",
     };
 
@@ -71,6 +72,7 @@ export default function EditTransactionModal() {
                     </button>
                     <button
                         className="uk-button uk-button-primary uk-modal-close"
+                        disabled={!transactionService.checkTransaction(transactionData.data)}
                         onClick={transactionEvents[transactionData.eventType]}
                     >
                         {buttonValues[transactionData.eventType]}

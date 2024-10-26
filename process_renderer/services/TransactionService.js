@@ -1,6 +1,6 @@
 import Services from "@renderer/services/Services.js";
 
-import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_EVENT_TYPE, SPENDING_CATEGORY_MODIFIER_ID } from "@renderer/RendererConstants.js";
+import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_EVENT_TYPE, SPENDING_CATEGORY_MODIFIER_ID, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { setAddingTransactionLoader, setEditingTransactionLoader } from "@renderer/storage/loadersSlice.js";
 import { setData as setTransactionData } from "@renderer/storage/transactionSlice.js";
 import { setEventType } from "@renderer/storage/transactionSlice.js";
@@ -102,6 +102,10 @@ export default class TransactionService extends Services {
 
     #clearId(id) {
         return +id.replace(/^\D+/g, "");
+    };
+
+    checkTransaction(transactionData) {
+        return this.checkAmount(transactionData.amount) && transactionData.transactionType !== TYPE_NOT_DEFINE;
     };
 
 };
