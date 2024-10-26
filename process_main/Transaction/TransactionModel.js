@@ -79,6 +79,12 @@ class TransactionModel {
             });
     };
 
+    deleteById(id) {
+        return knex(FINANCIAL_TRANSACTIONS_TABLE_NAME)
+            .where({ id })
+            .del();
+    };
+
 };
 
 module.exports = new TransactionModel();

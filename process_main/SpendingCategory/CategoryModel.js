@@ -35,8 +35,8 @@ class CategoryModel {
 
     deleteById(id) {
         return knex(SPENDING_CATEGORIES_TABLE_NAME)
-        .where({ id })
-        .del();
+            .where({ id })
+            .del();
     };
 
 };

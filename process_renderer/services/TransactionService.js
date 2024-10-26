@@ -49,6 +49,20 @@ export default class TransactionService extends Services {
         this.dispatch(setEditingTransactionLoader(false));
     };
 
+    async deleteTransaction() {
+        this.dispatch(setEditingTransactionLoader(this.transactionData.id));
+
+        const resultDeleting = await electron.deleteTransaction(this.transactionData);
+        this.showNotification(resultDeleting);
+
+        const allTransactions = await electron.getAllTransactions();
+        this.showNotification(allTransactions, true);
+
+        this.dispatch(setTransactions(allTransactions.data));
+        this.dispatch(setNotes([]));
+        this.dispatch(setEditingTransactionLoader(false));
+    };
+
     writeTransactionData(transactionEventType, initialValues = {}) {
         const transactionData = this.#makeInitialValues(initialValues);
 

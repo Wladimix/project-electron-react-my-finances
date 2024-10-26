@@ -1,6 +1,7 @@
 const DataService = require("@main/Data/DataService.js");
 const TransactionModel = require("@main/Transaction/TransactionModel.js");
 
+const { deleteExtraNote } = require("@main/Note/NoteService.js");
 const { deleteByNote: deleteNote } = require("@main/Note/NoteModel.js");
 const { FINANCIAL_TRANSACTIONS_TABLE_NAME } = require("@main/MainConstants.js");
 const { findOrAddNote } = require("@main/Note/NoteService.js");
@@ -26,35 +27,30 @@ class TransactionService {
     async editTransaction(data) {
         DataService.processDataIn(data);
 
-        const noteBeforeEditing = (await this.getNoteBeforeEditing(data.id))[0];
+        const noteBeforeEditing = await this.getNoteBeforeEditing(data.id);
         const noteForEditing = await findOrAddNote(data.note);
 
         await TransactionModel.editById({ ...data, noteId: noteForEditing.id });
         console.info(`Запись #${data.id} в таблице "${FINANCIAL_TRANSACTIONS_TABLE_NAME}" отредактирована`);
 
-        if (noteBeforeEditing.note !== noteForEditing.note) {
-            await this.deleteExtraNote(noteBeforeEditing);
+        if (noteBeforeEditing !== noteForEditing.note) {
+            await deleteExtraNote(noteBeforeEditing);
         };
     };
 
     async getNoteBeforeEditing(transactionId) {
-        console.info("Получение примечания до редактирования транзакции");
+        console.info("Получение примечания до редактирования / удаления транзакции");
         const columnName = `${FINANCIAL_TRANSACTIONS_TABLE_NAME}.id`
-        return await TransactionModel.getNotes({ [columnName]: transactionId });
+        return (await TransactionModel.getNotes({ [columnName]: transactionId }))[0].note;
     };
 
-    async deleteExtraNote(noteBeforeEditing) {
-        const notesList = await TransactionModel.getNotes();
-        console.info("Получен список примечаний");
+    async deleteTransaction(data) {
+        const noteBeforeDeleting = await this.getNoteBeforeEditing(data.id);
 
-        for (let note of notesList) {
-            if (note.note === noteBeforeEditing.note) {
-                return;
-            };
-        }
+        await TransactionModel.deleteById(data.id);
+        console.info(`Запись #${data.id} удалена из таблицы "${FINANCIAL_TRANSACTIONS_TABLE_NAME}"`);
 
-        const result = await deleteNote(noteBeforeEditing.note);
-        if (result) console.info("Удалено лишнее примечание");
+        await deleteExtraNote(noteBeforeDeleting);
     };
 
 };

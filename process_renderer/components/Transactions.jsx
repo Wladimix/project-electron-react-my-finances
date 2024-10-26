@@ -2,15 +2,15 @@ import React from "react";
 import TransactionService from "@renderer/services/TransactionService.js";
 import TransactionsTable from "@renderer/components/Tables/TransactionsTable.jsx";
 
-import { ADD_TRANSACTION_EVENT_TYPE } from "@renderer/RendererConstants.js";
+import { ADD_TRANSACTION_EVENT_TYPE, NOTE_MISSING } from "@renderer/RendererConstants.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const initialValues = {
     sourceOfTransactionId: 1,
     transactionAddressId: 1,
     spendingCategoryId: 1,
-    note: "",
-    amount: "5000",
+    note: NOTE_MISSING,
+    amount: "",
     transactionType: "type"
 };
 

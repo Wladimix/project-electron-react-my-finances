@@ -22,12 +22,16 @@ export default function TransactionsTableRow({ transaction }) {
         transactionService.writeTransactionData(EDIT_TRANSACTION_EVENT_TYPE);
     };
 
+    const deleteTransactionEvent = () => {
+        transactionService.deleteTransaction();
+    };
+
     return (
         <>
-            {   transactionLoader
+            {   transactionLoader === transaction.id
                     ?  <tr>
                             <td className="uk-text-large uk-text-center uk-text-warning" colSpan={6}>
-                                Редактирование транзакции...
+                                Работа с транзакцией...
                                 <div className="uk-margin-left" data-uk-spinner />
                             </td>
                         </tr>
@@ -45,7 +49,11 @@ export default function TransactionsTableRow({ transaction }) {
                                     data-uk-toggle="target: #transaction"
                                     onClick={openModalEvent}
                                 />
-                                <button className="uk-icon-link" data-uk-icon="icon: trash; ratio: 1.5" />
+                                <button
+                                    className="uk-icon-link"
+                                    data-uk-icon="icon: trash; ratio: 1.5"
+                                    onClick={deleteTransactionEvent}
+                                />
                             </td>
                         </tr>
 

@@ -1,3 +1,6 @@
+const TransactionModel = require("@main/Transaction/TransactionModel.js");
+
+const { deleteByNote } = require("@main/Note/NoteModel.js");
 const { findMatches, getOne, add } = require("@main/Note/NoteModel.js");
 const { NOTES_TABLE } = require("@main/MainConstants.js");
 
@@ -29,6 +32,20 @@ class NoteService {
     async addNote(data) {
         await add(data);
         console.info(`В таблицу "${NOTES_TABLE}" добавлено примечание`);
+    };
+
+    async deleteExtraNote(noteForDeleting) {
+        const notesList = await TransactionModel.getNotes();
+        console.info("Получен список примечаний");
+
+        for (let note of notesList) {
+            if (note.note === noteForDeleting) {
+                return;
+            };
+        }
+
+        const result = await deleteByNote(noteForDeleting);
+        if (result) console.info("Удалено лишнее примечание");
     };
 
 };

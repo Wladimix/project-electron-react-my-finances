@@ -54,6 +54,22 @@ class TransactionController {
         };
     };
 
+    async deleteTransaction(event, data) {
+        try {
+            await TransactionService.deleteTransaction(data);
+
+            return {
+                status: REQUEST_STATUS_SUCCESS,
+                message: "Финансовая транзакция удалена"
+            };
+        } catch (error) {
+            return {
+                status: REQUEST_STATUS_ERROR,
+                message: await ErrorService.makeErrorMessage(error, "Ошибка удаления финансовой транзакции")
+            };
+        };
+    };
+
 };
 
 module.exports = new TransactionController();
