@@ -1,7 +1,7 @@
 import React from "react";
 import TransactionService from "@renderer/services/TransactionService.js";
 
-import { EDIT_TRANSACTION_EVENT_TYPE, NOTE_MISSING } from "@renderer/RendererConstants.js";
+import { EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function TransactionsTableRow({ transaction }) {
@@ -9,6 +9,13 @@ export default function TransactionsTableRow({ transaction }) {
 
     const dispatch = useDispatch();
     const transactionService = new TransactionService(dispatch, transaction);
+
+    const textClasses = {
+        [FINANCIAL_INCOME]: "uk-text-large uk-text-bold uk-text-success",
+        [FINANCIAL_TRANSFER]: "uk-text-large uk-text-bold uk-text-warning",
+        [FINANCIAL_EXPENCE]: "uk-text-large uk-text-bold uk-text-danger",
+        [TYPE_NOT_DEFINE]: "uk-text-large uk-text-bold",
+    };
 
     const openModalEvent = () => {
         transactionService.writeTransactionData(EDIT_TRANSACTION_EVENT_TYPE);
@@ -29,7 +36,7 @@ export default function TransactionsTableRow({ transaction }) {
                             <td>{transaction.sourceOfTransactionId !== 1 ? transaction.sourceOfTransactionName : "-"}</td>
                             <td>{transactionService.identifyAddressOrCategoryToShow(transaction)}</td>
                             <td>{transaction.note === NOTE_MISSING ? "-" : transaction.note}</td>
-                            <td className="uk-text-large uk-text-bold">500</td>
+                            <td className={textClasses[transaction.transactionType]}>{transaction.amount}</td>
                             <td>
                                 <button
                                     className="uk-icon-link"

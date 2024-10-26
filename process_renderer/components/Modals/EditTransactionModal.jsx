@@ -8,6 +8,7 @@ import React from "react";
 import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { setNotes } from "@renderer/storage/dataSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import Amountinput from "../TransactionInputs/AmountInput";
 
 export default function EditTransactionModal() {
     const transactionData = useSelector(state => state.transactionData);
@@ -21,8 +22,8 @@ export default function EditTransactionModal() {
     };
 
     const transactionEvents = {
-        [ADD_TRANSACTION_EVENT_TYPE]: () => { transactionService.addTransaction() },
-        [EDIT_TRANSACTION_EVENT_TYPE]: () => { transactionService.editTransaction() }
+        [ADD_TRANSACTION_EVENT_TYPE]: () => transactionService.addTransaction(),
+        [EDIT_TRANSACTION_EVENT_TYPE]: () => transactionService.editTransaction()
     };
 
     const buttonValues = {
@@ -30,11 +31,11 @@ export default function EditTransactionModal() {
         [EDIT_TRANSACTION_EVENT_TYPE]: "РЕДАКТИРОВАТЬ"
     };
 
-    const alertClasses = {
-        [FINANCIAL_INCOME]: "uk-text-center uk-alert-success",
-        [FINANCIAL_TRANSFER]: "uk-text-center uk-alert-warning",
-        [FINANCIAL_EXPENCE]: "uk-text-center uk-alert-danger",
-        [TYPE_NOT_DEFINE]: "uk-text-center",
+    const textClasses = {
+        [FINANCIAL_INCOME]: "uk-text-center uk-text-large uk-text-success",
+        [FINANCIAL_TRANSFER]: "uk-text-center uk-text-large uk-text-warning",
+        [FINANCIAL_EXPENCE]: "uk-text-center uk-text-large uk-text-danger",
+        [TYPE_NOT_DEFINE]: "uk-text-center uk-text-large",
     };
 
     return (
@@ -54,15 +55,9 @@ export default function EditTransactionModal() {
                     <SourceOfTransactionInput />
                     <AddressOrCategoryInput />
                     <NoteInput />
+                    <Amountinput />
 
-                    <div className="uk-margin">
-                        <label className="uk-form-label" htmlFor="price">Сумма / Цена</label>
-                        <div className="uk-form-controls">
-                            <input className="uk-input" id="price" type="text" />
-                        </div>
-                    </div>
-
-                    <div className={alertClasses[transactionData.data.transactionType]} data-uk-alert>
+                    <div className={textClasses[transactionData.data.transactionType]}>
                         <p>{transactionData.data.transactionType}</p>
                     </div>
                 </div>
