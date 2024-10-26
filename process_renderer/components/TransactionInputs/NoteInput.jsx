@@ -1,6 +1,6 @@
+import DebounceDecorator from "@renderer/services/DebounceDecorator";
 import NoteService from "@renderer/services/NoteService";
-import React from "react";
-import Services from "@renderer/services/Services";
+import React, { useState } from "react";
 import TransactionService from "@renderer/services/TransactionService.js";
 
 import { NOTE_MISSING } from "@renderer/RendererConstants.js";
@@ -10,10 +10,8 @@ export default function NoteInput() {
     const transactionData = useSelector(state => state.transactionData.data);
     const notesLoader = useSelector(state => state.loaders.notesLoader);
     const notes = useSelector(state => state.data.notes);
-    const timer = useSelector(state => state.timer);
 
     const dispatch = useDispatch();
-    const services = new Services(dispatch);
     const transactionService = new TransactionService(dispatch);
     const noteService = new NoteService(dispatch);
 
@@ -21,10 +19,13 @@ export default function NoteInput() {
         transactionService.changeTransactionDataStorage({ ...transactionData, note: value.note });
     };
 
+    const [timerId, setTimerId] = useState("");
+    const loadNotesDecorator = new DebounceDecorator(noteService.loadAllNotes, timerId, setTimerId, 1000);
+
     const changeNoteInputEvent = e => {
         transactionService.changeTransactionDataStorage({ ...transactionData, note: e.target.value.toLowerCase().replace(/ +/g, ' ') });
 
-        noteService.loadAllNotes = services.debounceDecorator(noteService.loadAllNotes, 1000, timer);
+        noteService.loadAllNotes = loadNotesDecorator;
         noteService.loadAllNotes(e.target.value.toLowerCase().trim().replace(/ +/g, ' '));
     };
 

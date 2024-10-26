@@ -1,5 +1,4 @@
 import { setCategories, setDistributionTypes, setTransactions } from "@renderer/storage/dataSlice.js";
-import { setTimer } from "@renderer/storage/timerSlice.js";
 import { setTransactionsLoader } from "@renderer/storage/loadersSlice.js";
 
 export default class Services {
@@ -61,15 +60,6 @@ export default class Services {
     #processMonthAndDay(monthOrDay, isMonth = false) {
         monthOrDay = isMonth ? ++monthOrDay : monthOrDay;
         return monthOrDay < 10 ? "0" + monthOrDay : monthOrDay
-    };
-
-    debounceDecorator(func, ms, timerId) {
-        return function() {
-            clearTimeout(timerId);
-            this.dispatch(setTimer(
-                setTimeout(() => func.apply(this, arguments), ms)
-            ));
-        };
     };
 
 };
