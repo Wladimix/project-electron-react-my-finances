@@ -36,7 +36,9 @@ const determineTransactionType = transactionData => {
     return income ? FINANCIAL_INCOME : transfer ? FINANCIAL_TRANSFER : expence ? FINANCIAL_EXPENCE : priceMonitoring ? PRICE_MONITORING : TYPE_NOT_DEFINE;
 };
 
-const processNote = note => {return note === "" || /^\s+$/g.test(note) ? NOTE_MISSING : note};
+const processNote = note => {
+    return note === "" || /^\s+$/g.test(note) ? NOTE_MISSING : note
+};
 
 const transactionSlice = createSlice({
     name: "transactionData",

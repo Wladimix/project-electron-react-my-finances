@@ -27,8 +27,19 @@ class CategoryService {
         console.info(`Запись #${data.id} в таблице "${SPENDING_CATEGORIES_TABLE_NAME}" отредактирована`);
     };
 
-    async deleteCategory(id) {
-        await deleteById(id);
+    async deleteCategory(data) {
+        const currentDate = new Date().getFullYear() + "."
+            + (new Date().getMonth() + 1) + "."
+            + new Date().getDate() + " "
+            + new Date().getHours() + ":"
+            + new Date().getMinutes() + ":"
+            + new Date().getMilliseconds();
+
+        const id = data.id;
+        const newName = data.name + `(удалено ${currentDate})`;
+
+        await editById({ id, name: newName });
+        await deleteById(data.id);
         console.info(`Запись #${id} удалена из таблицы "${SPENDING_CATEGORIES_TABLE_NAME}"`);
     };
 

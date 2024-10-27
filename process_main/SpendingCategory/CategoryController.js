@@ -54,9 +54,9 @@ class CategoryController {
         };
     };
 
-    async deleteCategory(event, id) {
+    async deleteCategory(event, data) {
         try {
-            await deleteCategory(id);
+            await deleteCategory(data);
 
             return {
                 status: REQUEST_STATUS_SUCCESS,

@@ -10,6 +10,7 @@ class DistributionModel {
                 table.increments("id");
                 table.string("name", [50]).notNullable();
                 table.float("amount", 2).notNullable();
+                table.boolean("is_deleted").notNullable().defaultTo(false);
 
                 table.unique(["name"]);
             });
@@ -17,9 +18,9 @@ class DistributionModel {
 
     getAll() {
         return knex
-            .select()
+            .select("id", "name", "amount")
             .from(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
-            .whereNot({ id: 1 })
+            .whereNot({ id: 1, is_deleted: true })
             .orderBy("name", "asc");
     };
 
@@ -43,7 +44,7 @@ class DistributionModel {
     deleteById(id) {
         return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
             .where({ id })
-            .del();
+            .update({ is_deleted: true });
     };
 
 };

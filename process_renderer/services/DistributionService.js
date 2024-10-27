@@ -31,10 +31,10 @@ export default class DistributionService extends Services {
         this.dispatch(setEditingDistributionLoader(false));
     };
 
-    async deleteDistributionType(id) {
+    async deleteDistributionType(id, name, amount) {
         this.dispatch(setEditingDistributionLoader(id));
 
-        const resultDeleting = await electron.deleteDistributionType(id);
+        const resultDeleting = await electron.deleteDistributionType({ id, name, amount });
         this.showNotification(resultDeleting);
 
         const allDistributionTypes = await electron.getAllDistributionTypes();

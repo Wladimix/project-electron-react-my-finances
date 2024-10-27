@@ -54,9 +54,9 @@ class DistributionController {
         };
     };
 
-    async deleteDistributionType(event, id) {
+    async deleteDistributionType(event, data) {
         try {
-            await deleteDistributionType(id);
+            await deleteDistributionType(data);
 
             return {
                 status: REQUEST_STATUS_SUCCESS,

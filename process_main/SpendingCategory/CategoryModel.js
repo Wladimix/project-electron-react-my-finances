@@ -9,6 +9,7 @@ class CategoryModel {
             .createTable(SPENDING_CATEGORIES_TABLE_NAME, table => {
                 table.increments("id");
                 table.string("name", [50]).notNullable();
+                table.boolean("is_deleted").notNullable().defaultTo(false);
 
                 table.unique(["name"]);
             });
@@ -16,9 +17,9 @@ class CategoryModel {
 
     getAll() {
         return knex
-            .select()
+            .select("id", "name")
             .from(SPENDING_CATEGORIES_TABLE_NAME)
-            .whereNot({ id: 1 })
+            .whereNot({ id: 1, is_deleted: true })
             .orderBy("name", "asc");
     };
 
@@ -36,7 +37,7 @@ class CategoryModel {
     deleteById(id) {
         return knex(SPENDING_CATEGORIES_TABLE_NAME)
             .where({ id })
-            .del();
+            .update({ is_deleted: true });
     };
 
 };

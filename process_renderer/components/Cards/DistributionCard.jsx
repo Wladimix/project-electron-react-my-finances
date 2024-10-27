@@ -7,8 +7,8 @@ export default function DistributionCard({ distributionType }) {
     const [name, setName] = useState("");
     const [amount, setAmount] = useState("");
 
-    const changeName = e => { setName(e.target.value) };
-    const changeAmount = e => { setAmount(e.target.value) };
+    const changeName = e => setName(e.target.value);
+    const changeAmount = e => setAmount(e.target.value);
 
     const dispatch = useDispatch();
     const distributionService = new DistributionService(dispatch);
@@ -24,7 +24,7 @@ export default function DistributionCard({ distributionType }) {
     };
 
     const deleteDistributionTypeEvent = () => {
-        distributionService.deleteDistributionType(distributionType.id);
+        distributionService.deleteDistributionType(distributionType.id, distributionType.name, distributionType.amount);
     };
 
     return (

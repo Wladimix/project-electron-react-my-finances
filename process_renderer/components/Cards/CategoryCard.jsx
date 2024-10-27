@@ -20,7 +20,7 @@ export default function CategoryCard({ categoriyType }) {
     };
 
     const deleteCategoryEvent = () => {
-        categoryService.deleteCategory(categoriyType.id);
+        categoryService.deleteCategory(categoriyType.id, categoriyType.name);
     };
 
     return (

@@ -1,6 +1,6 @@
 import Services from "@renderer/services/Services.js";
 
-import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_EVENT_TYPE, SPENDING_CATEGORY_MODIFIER_ID, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, SPENDING_CATEGORY_MODIFIER_ID, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { setAddingTransactionLoader, setEditingTransactionLoader } from "@renderer/storage/loadersSlice.js";
 import { setData as setTransactionData } from "@renderer/storage/transactionSlice.js";
 import { setEventType } from "@renderer/storage/transactionSlice.js";
@@ -92,17 +92,57 @@ export default class TransactionService extends Services {
         this.dispatch(setTransactionData(data));
     };
 
-    identifyAddressOrCategoryToShow() {
+    makeTransactionParamsToShow() {
+        const date = this.makeDate(this.transactionData.date);
+        const sourceOfTransaction = this.transactionData.sourceOfTransactionId !== 1 ? this.transactionData.sourceOfTransactionName : "-";
+        const addressOrCategory = this.#identifyAddressOrCategoryToShow(this.transactionData.transactionAddressId, this.transactionData.spendingCategoryId );
+        const note = this.transactionData.note === NOTE_MISSING ? "-" : this.transactionData.note;
+        const amount = this.transactionData.amount;
 
-        if (this.transactionData.transactionAddressId === 1 && this.transactionData.spendingCategoryId === 1) {
+        const amountClasses = {
+            [FINANCIAL_INCOME]: "uk-text-large uk-text-bold uk-text-success",
+            [FINANCIAL_TRANSFER]: "uk-text-large uk-text-bold uk-text-warning",
+            [FINANCIAL_EXPENCE]: "uk-text-large uk-text-bold uk-text-danger",
+            [PRICE_MONITORING]: "uk-text-large uk-text-bold",
+            [TYPE_NOT_DEFINE]: "uk-text-large uk-text-bold",
+        };
+
+        const deletedParamsRegular = /\(удалено.+\)/g;
+
+        const sourceOfTransactionClass = deletedParamsRegular.test(sourceOfTransaction) ? "uk-text-danger" : "";
+        const addressOrCategoryClass = deletedParamsRegular.test(addressOrCategory) ? "uk-text-danger" : "";
+        const amountClass = amountClasses[this.transactionData.transactionType];
+
+        const thereDeletedParameters = deletedParamsRegular.test(sourceOfTransaction) || deletedParamsRegular.test(addressOrCategory) ? true : false;
+
+        return {
+            data: {
+                date,
+                sourceOfTransaction: sourceOfTransaction.replace(deletedParamsRegular, ""),
+                addressOrCategory: addressOrCategory.replace(deletedParamsRegular, ""),
+                note,
+                amount
+            },
+            classes: {
+                sourceOfTransaction: sourceOfTransactionClass,
+                addressOrCategory: addressOrCategoryClass,
+                amount: amountClass
+            },
+            thereDeletedParameters
+        };
+    };
+
+    #identifyAddressOrCategoryToShow(transactionAddressId, spendingCategoryId) {
+
+        if (transactionAddressId === 1 && spendingCategoryId === 1) {
             return "-";
         };
 
-        if (this.transactionData.transactionAddressId !== 1 && this.transactionData.spendingCategoryId === 1) {
+        if (transactionAddressId !== 1 && spendingCategoryId === 1) {
             return this.transactionData.transactionAddressName;
         };
 
-        if (this.transactionData.transactionAddressId === 1 && this.transactionData.spendingCategoryId !== 1) {
+        if (transactionAddressId === 1 && spendingCategoryId !== 1) {
             return this.transactionData.spendingCategoryName;
         };
 

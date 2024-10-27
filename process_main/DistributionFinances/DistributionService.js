@@ -26,9 +26,26 @@ class DistributionService {
         console.info(`Запись #${data.id} в таблице "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" отредактирована`);
     };
 
-    async deleteDistributionType(id) {
+    async deleteDistributionType(data) {
+        DataService.processDataIn(data);
+
+        if (data.amount !== 0) {
+            throw new Error("Удаление невозможно, сумма должна равняться 0");
+        };
+
+        const currentDate = new Date().getFullYear() + "."
+            + (new Date().getMonth() + 1) + "."
+            + new Date().getDate() + " "
+            + new Date().getHours() + ":"
+            + new Date().getMinutes() + ":"
+            + new Date().getMilliseconds();
+
+        const id = data.id;
+        const newName = data.name + `(удалено ${currentDate})`;
+
+        await editById({ id, name: newName, amount: 0 });
         await deleteById(id);
-        console.info(`Запись #${id} удалена из таблицы "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}"`);
+        console.info(`Запись #${id} в таблице "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" отмечена, как удалённая`);
     };
 
 };
