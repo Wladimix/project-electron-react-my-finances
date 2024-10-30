@@ -119,7 +119,7 @@ export default class TransactionService extends Services {
             [TYPE_NOT_DEFINE]: "uk-text-large uk-text-bold",
         };
 
-        const deletedParamsRegular = /\(удалено.+\)/g;
+        const deletedParamsRegular = /\(удалено.+\)/;
 
         const sourceOfTransactionClass = deletedParamsRegular.test(sourceOfTransaction) ? "uk-text-danger" : "";
         const addressOrCategoryClass = deletedParamsRegular.test(addressOrCategory) ? "uk-text-danger" : "";
