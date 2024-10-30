@@ -45,6 +45,13 @@ class TransactionModel {
             .orderBy(`${FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, "desc");
     };
 
+    getOneById(id) {
+        return knex
+            .select()
+            .from(FINANCIAL_TRANSACTIONS_TABLE_NAME)
+            .where({ id });
+    };
+
     getNotes(note = {}) {
         return knex
             .select(`${NOTES_TABLE}.note`)

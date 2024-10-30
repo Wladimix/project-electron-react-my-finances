@@ -3,7 +3,7 @@ import React from "react";
 
 import { useSelector } from "react-redux";
 
-export default function TotalResult() {
+export default function TotalCard() {
     const distributionTypes = useSelector(state => state.data.distributionFinancesTypes);
 
     const financeService = new FinanceService();

@@ -24,6 +24,13 @@ class DistributionModel {
             .orderBy("name", "asc");
     };
 
+    getOneById(id) {
+        return knex
+            .select("id", "name", "amount")
+            .from(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
+            .where({ id });
+    };
+
     add({ name, amount }) {
         return knex(DISTRIBUTION_OF_FINANCES_TABLE_NAME)
             .insert({

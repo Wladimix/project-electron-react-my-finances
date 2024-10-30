@@ -4,7 +4,7 @@ import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_
 import { setAddingTransactionLoader, setEditingTransactionLoader } from "@renderer/storage/loadersSlice.js";
 import { setData as setTransactionData } from "@renderer/storage/transactionSlice.js";
 import { setEventType } from "@renderer/storage/transactionSlice.js";
-import { setTransactions, setNotes } from "@renderer/storage/dataSlice.js";
+import { setDistributionTypes, setTransactions, setNotes } from "@renderer/storage/dataSlice.js";
 
 export default class TransactionService extends Services {
 
@@ -26,9 +26,13 @@ export default class TransactionService extends Services {
         const allTransactions = await electron.getAllTransactions();
         this.showNotification(allTransactions, true);
 
+        const allDistributionTypes = await electron.getAllDistributionTypes();
+        this.showNotification(allDistributionTypes, true);
+
         this.dispatch(setTransactions(allTransactions.data));
         this.dispatch(setNotes([]));
         this.dispatch(setAddingTransactionLoader(false));
+        this.dispatch(setDistributionTypes(allDistributionTypes.data));
     };
 
     async editTransaction() {
@@ -44,9 +48,13 @@ export default class TransactionService extends Services {
         const allTransactions = await electron.getAllTransactions();
         this.showNotification(allTransactions, true);
 
+        const allDistributionTypes = await electron.getAllDistributionTypes();
+        this.showNotification(allDistributionTypes, true);
+
         this.dispatch(setTransactions(allTransactions.data));
         this.dispatch(setNotes([]));
         this.dispatch(setEditingTransactionLoader(false));
+        this.dispatch(setDistributionTypes(allDistributionTypes.data));
     };
 
     async deleteTransaction() {
@@ -58,9 +66,13 @@ export default class TransactionService extends Services {
         const allTransactions = await electron.getAllTransactions();
         this.showNotification(allTransactions, true);
 
+        const allDistributionTypes = await electron.getAllDistributionTypes();
+        this.showNotification(allDistributionTypes, true);
+
         this.dispatch(setTransactions(allTransactions.data));
         this.dispatch(setNotes([]));
         this.dispatch(setEditingTransactionLoader(false));
+        this.dispatch(setDistributionTypes(allDistributionTypes.data));
     };
 
     writeTransactionData(transactionEventType, initialValues = {}) {

@@ -1,6 +1,6 @@
 const DataService = require("@main/Data/DataService.js");
 
-const { getAll, add, editById, deleteById } = require("@main/DistributionFinances/DistributionModel.js");
+const { getAll, getOneById, add, editById, deleteById } = require("@main/DistributionFinances/DistributionModel.js");
 const { DISTRIBUTION_OF_FINANCES_TABLE_NAME } = require("@main/MainConstants.js");
 
 class DistributionService {
@@ -46,6 +46,22 @@ class DistributionService {
         await editById({ id, name: newName, amount: 0 });
         await deleteById(id);
         console.info(`Запись #${id} в таблице "${DISTRIBUTION_OF_FINANCES_TABLE_NAME}" отмечена, как удалённая`);
+    };
+
+    async addAmountToDistribution(id, amount) {
+        const distributionType = (await getOneById(id))[0];
+        const name = distributionType.name;
+        const newAmount = distributionType.amount + amount;
+        await editById({ id, name, amount: newAmount });
+        console.info(`В записи "${name}" увеличена сумма`);
+    };
+
+    async subtractAmountFromDistribution(id, amount) {
+        const distributionType = (await getOneById(id))[0];
+        const name = distributionType.name;
+        const newAmount = distributionType.amount - amount;
+        await editById({ id, name, amount: newAmount });
+        console.info(`В записи "${name}" уменьшена сумма`);
     };
 
 };

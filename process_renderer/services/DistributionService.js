@@ -1,6 +1,6 @@
 import Services from "@renderer/services/Services.js";
 
-import { setDistributionTypes } from "@renderer/storage/dataSlice.js";
+import { setDistributionTypes, setTransactions } from "@renderer/storage/dataSlice.js";
 import { setAddingDistributionLoader, setEditingDistributionLoader } from "@renderer/storage/loadersSlice.js";
 
 export default class DistributionService extends Services {
@@ -27,7 +27,11 @@ export default class DistributionService extends Services {
         const allDistributionTypes = await electron.getAllDistributionTypes();
         this.showNotification(allDistributionTypes, true);
 
+        const allTransactions = await electron.getAllTransactions();
+        this.showNotification(allTransactions, true);
+
         this.dispatch(setDistributionTypes(allDistributionTypes.data));
+        this.dispatch(setTransactions(allTransactions.data));
         this.dispatch(setEditingDistributionLoader(false));
     };
 
@@ -40,7 +44,11 @@ export default class DistributionService extends Services {
         const allDistributionTypes = await electron.getAllDistributionTypes();
         this.showNotification(allDistributionTypes, true);
 
+        const allTransactions = await electron.getAllTransactions();
+        this.showNotification(allTransactions, true);
+
         this.dispatch(setDistributionTypes(allDistributionTypes.data));
+        this.dispatch(setTransactions(allTransactions.data));
         this.dispatch(setEditingDistributionLoader(false));
     }
 
