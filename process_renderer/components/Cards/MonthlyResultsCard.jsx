@@ -1,33 +1,60 @@
+import GeneralMonthlyStatistics from "@renderer/components/Statistics/GeneralMonthlyStatistics.jsx";
 import React from "react";
+import TransactionService from "@renderer/services/TransactionService.js";
+
+import { NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { selectMonth } from "@renderer/storage/selectedDateSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function MonthlyResultsCard() {
+    const dispatch = useDispatch();
+    const transactionService = new TransactionService(dispatch);
+
+    const dates = useSelector(state => state.data.dates);
+    const selectedYear = useSelector(state => state.selectedDate.year);
+    const selectedMonth = useSelector(state => state.selectedDate.month);
+
+    const months = dates[selectedYear] ? [ ...dates[selectedYear] ].reverse() : [];
+
+    const changeMonthEvent = e => {
+        transactionService.loadTransactions({ year: selectedYear, month: e.target.value });
+        dispatch(selectMonth(e.target.value));
+    };
+
+    /* // NOTE: выбранный год
+    console.log("выбранный год")
+    console.log(selectedYear)
+
+    // NOTE: выбранный месяц
+    console.log("выбранный месяц")
+    console.log(selectedMonth) */
+
     return (
         <div className="uk-card uk-card-default uk-card-body uk-background-muted">
             <table className="uk-table uk-table-small">
                 <tbody>
                     <tr>
                         <td><h1>Месяц</h1></td>
-                        <td className="uk-text-right uk-width-1-3">
-                            <select className="uk-select uk-text-large">
-                                <option>Август</option>
-                                <option>Сентябрь</option>
-                                <option>Октябрь</option>
-                                <option>Ноябрь</option>
+                        <td className="uk-text-right uk-width-small">
+                            <select
+                                className="uk-select uk-text-large"
+                                onChange={changeMonthEvent}
+                                defaultValue={selectedMonth}
+                            >
+                                <option>{NOT_DEFINE}</option>
+                                {
+                                    months.map(month => (
+                                        <option key={month}>{month}</option>
+                                    ))
+                                }
                             </select>
                         </td>
                     </tr>
-                    <tr>
-                        <td className="uk-text-large">Доходы</td>
-                        <td className="uk-text-large uk-text-right">3000</td>
-                    </tr>
-                    <tr>
-                        <td className="uk-text-large">Расходы</td>
-                        <td className="uk-text-large uk-text-right">2000</td>
-                    </tr>
-                    <tr>
-                        <td className="uk-text-success uk-text-large">Экономия</td>
-                        <td className="uk-text-success uk-text-right uk-text-large">1000</td>
-                    </tr>
+                    {
+                        selectedMonth !== NOT_DEFINE
+                        ? <GeneralMonthlyStatistics />
+                        : ""
+                    }
                 </tbody>
             </table>
         </div>

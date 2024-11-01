@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function TransactionsTableRow({ transaction }) {
     const transactionLoader = useSelector(state => state.loaders.editingTransactionLoader);
+    const selectedYear = useSelector(state => state.selectedDate.year);
+    const selectedMonth = useSelector(state => state.selectedDate.month);
 
     const dispatch = useDispatch();
     const transactionService = new TransactionService(dispatch, transaction);
@@ -18,9 +20,7 @@ export default function TransactionsTableRow({ transaction }) {
         transactionService.writeTransactionData(EDIT_TRANSACTION_EVENT_TYPE);
     };
 
-    const deleteTransactionEvent = () => {
-        transactionService.deleteTransaction();
-    };
+    const deleteTransactionEvent = () => transactionService.deleteTransaction({ year: selectedYear, month: selectedMonth });
 
     return (
         <>

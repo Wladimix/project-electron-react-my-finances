@@ -37,19 +37,10 @@ export default function Transactions() {
                 />
 
                 <div className="uk-width-expand uk-text-right">
-                    <div className="uk-inline">
+                    <div className="uk-inline uk-width-1-2">
                         <span className="uk-form-icon" data-uk-icon="icon: search"></span>
                         <input className="uk-input" type="text" placeholder="примечание" aria-label="Not clickable icon" />
                     </div>
-                </div>
-
-                <div className="uk-form-controls">
-                    <select className="uk-select" id="form-stacked-select">
-                        <option>Все транзакции</option>
-                        <option>Пополнения</option>
-                        <option>Переводы</option>
-                        <option>Траты</option>
-                    </select>
                 </div>
             </div>
 

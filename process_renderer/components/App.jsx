@@ -10,11 +10,14 @@ import Transactions from "@renderer/components/Transactions.jsx";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function App() {
+    const selectedYear = useSelector(state => state.selectedDate.year);
+    const selectedMonth = useSelector(state => state.selectedDate.month);
+    const transactionsLoader = useSelector(state => state.loaders.transactionsLoader);
+
     const dispatch = useDispatch();
     const services = new Services(dispatch);
-    useEffect(() => { services.loadAllData() }, []);
 
-    const transactionsLoader = useSelector(state => state.loaders.transactionsLoader);
+    useEffect(() => { services.loadAllData({ year: selectedYear, month: selectedMonth }) }, []);
 
     return (
         <>

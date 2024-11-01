@@ -16,9 +16,6 @@ class DeletingTransaction {
             this.fictitiousData.sourceOfTransaction = Object.assign({}, this.sourceOfTransaction);
             this.fictitiousData.transactionAddress = Object.assign({}, this.transactionAddress);
 
-            console.log("до");
-            console.log(this.fictitiousData);
-
             return this;
 
         })();
@@ -38,9 +35,6 @@ class DeletingTransaction {
         if (this.transactionData.transactionType === FINANCIAL_EXPENCE) {
             this.fictitiousData.sourceOfTransaction.amount += this.transactionData.amount;
         };
-
-        console.log("после");
-        console.log(this.fictitiousData);
 
         if (this.fictitiousData.transactionAddress.amount < 0) {
             throw new Error("Удаление транзакции невозможно: недостаточно средств");

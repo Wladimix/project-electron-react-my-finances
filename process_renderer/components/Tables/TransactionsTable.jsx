@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 export default function TransactionsTable() {
     const transactions = useSelector(state => state.data.transactions);
     const addingTransactionLoader = useSelector(state => state.loaders.addingTransactionLoader);
-    // NOTE: загруженные транзакции
+    /* // NOTE: загруженные транзакции
     console.log("transactions")
-    console.log(transactions)
+    console.log(transactions) */
 
     return (
         <table className="uk-table uk-table-hover uk-table-divider uk-margin-remove-top uk-margin-small-bottom">

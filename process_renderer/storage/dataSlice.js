@@ -10,15 +10,17 @@ const dataSlice = createSlice({
         distributionFinancesTypes: [],
         spendingCategories: [],
         transactions: [],
-        notes: []
+        notes: [],
+        dates: {}
     },
     reducers: {
         setDistributionTypes: setStateObject("distributionFinancesTypes"),
         setCategories: setStateObject("spendingCategories"),
         setTransactions: setStateObject("transactions"),
-        setNotes: setStateObject("notes")
+        setNotes: setStateObject("notes"),
+        setDates: setStateObject("dates")
     }
 });
 
-export const { setCategories, setDistributionTypes, setNotes, setTransactions } = dataSlice.actions;
+export const { setCategories, setDates, setDistributionTypes, setNotes, setTransactions } = dataSlice.actions;
 export default dataSlice.reducer;

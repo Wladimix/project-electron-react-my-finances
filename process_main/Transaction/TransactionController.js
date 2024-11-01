@@ -5,9 +5,9 @@ const { REQUEST_STATUS_SUCCESS, REQUEST_STATUS_ERROR } = require("@main/MainCons
 
 class TransactionController {
 
-    async getAllTransactions() {
+    async getAllTransactions(event, date) {
         try {
-            const allTransactions = await TransactionService.getAllTransactions();
+            const allTransactions = await TransactionService.getAllTransactions(date);
 
             return {
                 data: allTransactions,
@@ -66,6 +66,23 @@ class TransactionController {
             return {
                 status: REQUEST_STATUS_ERROR,
                 message: await ErrorService.makeErrorMessage(error, "Ошибка удаления финансовой транзакции")
+            };
+        };
+    };
+
+    async getAllTransactionDates() {
+        try {
+            const allDates = await TransactionService.getAllTransactionDates();
+
+            return {
+                data: allDates,
+                status: REQUEST_STATUS_SUCCESS,
+                message: "Получены даты транзакций"
+            };
+        } catch (error) {
+            return {
+                status: REQUEST_STATUS_ERROR,
+                message: await ErrorService.makeErrorMessage(error, "Ошибка получения дат транзакций")
             };
         };
     };

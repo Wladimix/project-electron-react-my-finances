@@ -10,7 +10,7 @@ class ErrorService {
 
     async makeErrorMessage(errorObject, commonErrorMessage) {
         console.error(commonErrorMessage + ":");
-        console.log(errorObject.message);
+        console.log(errorObject);
 
         const tables = await getTablesNames();
         const currentTable = DataService.findSubString(errorObject.message, tables);

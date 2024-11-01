@@ -1,10 +1,10 @@
 import Services from "@renderer/services/Services.js";
 
-import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, SPENDING_CATEGORY_MODIFIER_ID, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
-import { setAddingTransactionLoader, setEditingTransactionLoader } from "@renderer/storage/loadersSlice.js";
+import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, SPENDING_CATEGORY_MODIFIER_ID, NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { setAddingTransactionLoader, setEditingTransactionLoader, setTransactionsLoader } from "@renderer/storage/loadersSlice.js";
 import { setData as setTransactionData } from "@renderer/storage/transactionSlice.js";
 import { setEventType } from "@renderer/storage/transactionSlice.js";
-import { setDistributionTypes, setTransactions, setNotes } from "@renderer/storage/dataSlice.js";
+import { setDates, setDistributionTypes, setTransactions, setNotes } from "@renderer/storage/dataSlice.js";
 
 export default class TransactionService extends Services {
 
@@ -13,62 +13,82 @@ export default class TransactionService extends Services {
         this.transactionData = transactionData;
     };
 
-    async addTransaction() {
+    async loadTransactions(date) {
+        this.dispatch(setTransactionsLoader(true));
+        const allTransactions = await electron.getAllTransactions(date);
+        this.showNotification(allTransactions, true);
+        this.dispatch(setTransactions(allTransactions.data));
+        this.dispatch(setTransactionsLoader(false));
+    };
+
+    async addTransaction(date) {
         // NOTE: добавление в БД
-        console.log("addData")
-        console.log(this.transactionData)
+        /* console.log("addData")
+        console.log(this.transactionData) */
 
         this.dispatch(setAddingTransactionLoader(true));
 
         const resultAdding = await electron.addTransaction(this.transactionData);
         this.showNotification(resultAdding);
 
-        const allTransactions = await electron.getAllTransactions();
+        const allDates = await electron.getAllTransactionDates();
+        this.showNotification(allDates, true);
+
+        const allTransactions = await electron.getAllTransactions(date);
         this.showNotification(allTransactions, true);
 
         const allDistributionTypes = await electron.getAllDistributionTypes();
         this.showNotification(allDistributionTypes, true);
 
+        this.dispatch(setDates(allDates.data));
         this.dispatch(setTransactions(allTransactions.data));
         this.dispatch(setNotes([]));
         this.dispatch(setAddingTransactionLoader(false));
         this.dispatch(setDistributionTypes(allDistributionTypes.data));
     };
 
-    async editTransaction() {
+    async editTransaction(date) {
         // NOTE: редактирование в БД
-        console.log("editData")
-        console.log(this.transactionData)
+        /* console.log("editData")
+        console.log(this.transactionData) */
 
         this.dispatch(setEditingTransactionLoader(this.transactionData.id));
 
         const resultEditing = await electron.editTransaction(this.transactionData);
         this.showNotification(resultEditing);
 
-        const allTransactions = await electron.getAllTransactions();
+        const allDates = await electron.getAllTransactionDates();
+        this.showNotification(allDates, true);
+
+        const allTransactions = await electron.getAllTransactions(date);
         this.showNotification(allTransactions, true);
 
         const allDistributionTypes = await electron.getAllDistributionTypes();
         this.showNotification(allDistributionTypes, true);
 
+        this.dispatch(setDates(allDates.data));
         this.dispatch(setTransactions(allTransactions.data));
         this.dispatch(setNotes([]));
         this.dispatch(setEditingTransactionLoader(false));
         this.dispatch(setDistributionTypes(allDistributionTypes.data));
     };
 
-    async deleteTransaction() {
+    async deleteTransaction(date) {
         this.dispatch(setEditingTransactionLoader(this.transactionData.id));
 
         const resultDeleting = await electron.deleteTransaction(this.transactionData);
         this.showNotification(resultDeleting);
 
-        const allTransactions = await electron.getAllTransactions();
+        const allDates = await electron.getAllTransactionDates();
+        this.showNotification(allDates, true);
+
+        const allTransactions = await electron.getAllTransactions(date);
         this.showNotification(allTransactions, true);
 
         const allDistributionTypes = await electron.getAllDistributionTypes();
         this.showNotification(allDistributionTypes, true);
 
+        this.dispatch(setDates(allDates.data));
         this.dispatch(setTransactions(allTransactions.data));
         this.dispatch(setNotes([]));
         this.dispatch(setEditingTransactionLoader(false));
@@ -79,8 +99,8 @@ export default class TransactionService extends Services {
         const transactionData = this.#makeInitialValues(initialValues);
 
         // NOTE: запись в стор
-        console.log("writeData")
-        console.log(transactionData)
+        /* console.log("writeData")
+        console.log(transactionData) */
 
         if (transactionEventType === ADD_TRANSACTION_EVENT_TYPE) {
             this.dispatch(setEventType(ADD_TRANSACTION_EVENT_TYPE));
@@ -116,7 +136,7 @@ export default class TransactionService extends Services {
             [FINANCIAL_TRANSFER]: "uk-text-large uk-text-bold uk-text-warning",
             [FINANCIAL_EXPENCE]: "uk-text-large uk-text-bold uk-text-danger",
             [PRICE_MONITORING]: "uk-text-large uk-text-bold",
-            [TYPE_NOT_DEFINE]: "uk-text-large uk-text-bold",
+            [NOT_DEFINE]: "uk-text-large uk-text-bold",
         };
 
         const deletedParamsRegular = /\(удалено.+\)/;
@@ -171,7 +191,7 @@ export default class TransactionService extends Services {
     };
 
     checkTransaction(transactionData) {
-        return this.checkAmount(transactionData.amount) && transactionData.transactionType !== TYPE_NOT_DEFINE;
+        return this.checkAmount(transactionData.amount) && transactionData.transactionType !== NOT_DEFINE;
     };
 
 };

@@ -56,8 +56,6 @@ class EditingTransaction {
             this.fictitiousData[this.sourceOfTransaction.id].amount -= this.transactionData.amount;
         };
 
-        console.log(this.fictitiousData);
-
         for (let distributionType in this.fictitiousData) {
             if (this.fictitiousData[distributionType].amount < 0) {
                 throw new Error("Редактирование транзакции невозможно: недостаточно средств");

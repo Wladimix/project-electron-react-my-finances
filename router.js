@@ -21,6 +21,7 @@ function useRouter() {
     ipcMain.handle("add-transaction", TransactionController.addTransaction);
     ipcMain.handle("edit-transaction", TransactionController.editTransaction);
     ipcMain.handle("delete-transaction", TransactionController.deleteTransaction);
+    ipcMain.handle("get-all-dates", TransactionController.getAllTransactionDates);
 
     ipcMain.handle("get-all-notes", NoteController.getAllNotes);
 

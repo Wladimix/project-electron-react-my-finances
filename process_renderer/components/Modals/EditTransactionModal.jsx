@@ -6,12 +6,14 @@ import SourceOfTransactionInput from "@renderer/components/TransactionInputs/Sou
 import TransactionService from "@renderer/services/TransactionService.js";
 import React from "react";
 
-import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, PRICE_MONITORING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { ADD_TRANSACTION_EVENT_TYPE, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, PRICE_MONITORING, NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { setNotes } from "@renderer/storage/dataSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function EditTransactionModal() {
     const transactionData = useSelector(state => state.transactionData);
+    const selectedYear = useSelector(state => state.selectedDate.year);
+    const selectedMonth = useSelector(state => state.selectedDate.month);
 
     const dispatch = useDispatch();
     const transactionService = new TransactionService(dispatch, transactionData.data);
@@ -22,8 +24,8 @@ export default function EditTransactionModal() {
     };
 
     const transactionEvents = {
-        [ADD_TRANSACTION_EVENT_TYPE]: () => transactionService.addTransaction(),
-        [EDIT_TRANSACTION_EVENT_TYPE]: () => transactionService.editTransaction()
+        [ADD_TRANSACTION_EVENT_TYPE]: () => transactionService.addTransaction({ year: selectedYear, month: selectedMonth }),
+        [EDIT_TRANSACTION_EVENT_TYPE]: () => transactionService.editTransaction({ year: selectedYear, month: selectedMonth })
     };
 
     const buttonValues = {
@@ -36,7 +38,7 @@ export default function EditTransactionModal() {
         [FINANCIAL_TRANSFER]: "uk-text-center uk-text-large uk-text-warning",
         [FINANCIAL_EXPENCE]: "uk-text-center uk-text-large uk-text-danger",
         [PRICE_MONITORING]: "uk-text-center uk-text-large",
-        [TYPE_NOT_DEFINE]: "uk-text-center uk-text-large",
+        [NOT_DEFINE]: "uk-text-center uk-text-large",
     };
 
     return (

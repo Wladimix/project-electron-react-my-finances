@@ -1,4 +1,4 @@
-import { setCategories, setDistributionTypes, setTransactions } from "@renderer/storage/dataSlice.js";
+import { setCategories, setDates, setDistributionTypes, setTransactions } from "@renderer/storage/dataSlice.js";
 import { setTransactionsLoader } from "@renderer/storage/loadersSlice.js";
 
 export default class Services {
@@ -7,7 +7,7 @@ export default class Services {
         this.dispatch = dispatch;
     };
 
-    async loadAllData() {
+    async loadAllData(date) {
         const allDistributionTypes = await electron.getAllDistributionTypes();
         this.showNotification(allDistributionTypes, true);
         this.dispatch(setDistributionTypes(allDistributionTypes.data));
@@ -15,6 +15,10 @@ export default class Services {
         const allCategories = await electron.getAllCategories();
         this.showNotification(allCategories, true);
         this.dispatch(setCategories(allCategories.data));
+
+        const allDates = await electron.getAllTransactionDates(date);
+        this.showNotification(allDates, true);
+        this.dispatch(setDates(allDates.data));
 
         this.dispatch(setTransactionsLoader(true));
         const allTransactions = await electron.getAllTransactions();

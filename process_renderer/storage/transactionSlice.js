@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, TYPE_NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, NOT_DEFINE } from "@renderer/RendererConstants.js";
 
 const processData = transactionData => {
     return {
@@ -33,7 +33,7 @@ const determineTransactionType = transactionData => {
         && (transactionData.note && transactionData.note !== " " && transactionData.note !== NOTE_MISSING)
         && transactionData.amount;
 
-    return income ? FINANCIAL_INCOME : transfer ? FINANCIAL_TRANSFER : expence ? FINANCIAL_EXPENCE : priceMonitoring ? PRICE_MONITORING : TYPE_NOT_DEFINE;
+    return income ? FINANCIAL_INCOME : transfer ? FINANCIAL_TRANSFER : expence ? FINANCIAL_EXPENCE : priceMonitoring ? PRICE_MONITORING : NOT_DEFINE;
 };
 
 const processNote = note => {

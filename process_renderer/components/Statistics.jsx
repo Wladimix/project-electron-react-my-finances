@@ -7,7 +7,12 @@ export default function Statistics() {
         <>
             <h1 className="uk-heading-line uk-width-expand">
                 <span>
-                    <button className="uk-button uk-button-primary uk-margin-right" data-uk-toggle="target: #category-management">УПРАВЛЯТЬ КАТЕГОРИЯМИ</button>
+                    <button
+                        className="uk-button uk-button-primary uk-margin-right"
+                        uk-toggle="target: #category-management"
+                    >
+                        УПРАВЛЯТЬ КАТЕГОРИЯМИ
+                    </button>
                     Статистика расходов
                 </span>
             </h1>

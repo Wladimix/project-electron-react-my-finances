@@ -18,6 +18,8 @@ class MainConstants {
 
     get NOTE_MISSING() { return "примечание отсутствует" };
 
+    get NOT_DEFINE() { return "———" };
+
 }
 
 module.exports = new MainConstants();
