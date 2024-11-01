@@ -1,6 +1,6 @@
 const knex = require("@main/ConnectionDB.js");
 
-const { DISTRIBUTION_OF_FINANCES_TABLE_NAME, FINANCIAL_TRANSACTIONS_TABLE_NAME, NOTES_TABLE, SPENDING_CATEGORIES_TABLE_NAME } = require("@main/MainConstants.js");
+const { DISTRIBUTION_OF_FINANCES_TABLE_NAME, FINANCIAL_EXPENCE, FINANCIAL_TRANSACTIONS_TABLE_NAME, NOTES_TABLE, SPENDING_CATEGORIES_TABLE_NAME } = require("@main/MainConstants.js");
 
 class TransactionModel {
 
@@ -66,6 +66,16 @@ class TransactionModel {
             .from(FINANCIAL_TRANSACTIONS_TABLE_NAME)
             .join(NOTES_TABLE, `${FINANCIAL_TRANSACTIONS_TABLE_NAME}.note_id`, "=", `${NOTES_TABLE}.id`)
             .where(note);
+    };
+
+    getAmountOfExpensesByCategory() {
+        return knex
+            .select(`${SPENDING_CATEGORIES_TABLE_NAME}.name as purchase`)
+            .sum({ amount: "amount" })
+            .from(FINANCIAL_TRANSACTIONS_TABLE_NAME)
+            .join(SPENDING_CATEGORIES_TABLE_NAME, `${FINANCIAL_TRANSACTIONS_TABLE_NAME}.spending_category_id`, "=", `${SPENDING_CATEGORIES_TABLE_NAME}.id`)
+            .where({ transaction_type: FINANCIAL_EXPENCE })
+            .groupBy("purchase");
     };
 
     add({ date, sourceOfTransactionId, transactionAddressId, spendingCategoryId, noteId, amount, transactionType }) {

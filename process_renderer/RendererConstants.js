@@ -12,6 +12,8 @@ export const SPENDING_CATEGORY_MODIFIER_ID = "spending-category-";
 export const NOTE_MISSING = "примечание отсутствует";
 export const NOT_DEFINE = "———";
 
+export const DELETED_PARAMS_REGULAR = /\(удалено.+\)/;
+
 
 export default {
 
@@ -27,6 +29,8 @@ export default {
     SPENDING_CATEGORY_MODIFIER_ID,
 
     NOTE_MISSING,
-    NOT_DEFINE
+    NOT_DEFINE,
+
+    DELETED_PARAMS_REGULAR
 
 };

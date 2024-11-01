@@ -32,7 +32,6 @@ class ErrorService {
 };
 
 module.exports = new ErrorService({
-
     "no such column":                                             "Ошибка в таблице «--table-name--»: обращение к несуществующей колонке",
     "SQLITE_CONSTRAINT: UNIQUE":                                  "Такое значение уже существует",
     "SQLITE_CONSTRAINT: NOT NULL constraint failed":              "Ошибка в таблице «--table-name--»: некоторые значения не допускают NULL",

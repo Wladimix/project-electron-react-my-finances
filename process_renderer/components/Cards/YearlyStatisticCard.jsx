@@ -1,25 +1,19 @@
 import React from "react";
+import ExpenditureStatistics from "@renderer/components/Statistics/ExpenditureStatistics.jsx";
+
+import { NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { useSelector } from "react-redux";
 
 export default function YearlyStatisticCard() {
+    const selectedYear = useSelector(state => state.selectedDate.year);
+
     return (
         <div className="uk-card uk-card-default uk-card-body uk-background-muted">
-            <button className="uk-button uk-button-default uk-card-badge uk-label">ГОДОВАЯ СТАТИСТИКА</button>
-            <h1 className="uk-heading-medium uk-width-expand">2024</h1>
-
-            <div className="uk-grid-small" data-uk-grid>
-                <div className="uk-width-expand uk-text-large" data-uk-leader>Продукты</div>
-                <div className="uk-text-large">100</div>
-            </div>
-
-            <div className="uk-grid-small" data-uk-grid>
-                <div className="uk-width-expand uk-text-large" data-uk-leader>Одежда</div>
-                <div className="uk-text-large">100</div>
-            </div>
-
-            <div className="uk-grid-small" data-uk-grid>
-                <div className="uk-width-expand uk-text-large" data-uk-leader>Спорт</div>
-                <div className="uk-text-large">100</div>
-            </div>
+            <button className="uk-button uk-button-default uk-card-badge uk-label">СТАТИСТИКА ПО ГОДАМ</button>
+            <h1 className="uk-heading-medium">
+                {selectedYear !== NOT_DEFINE ? selectedYear : <span data-uk-icon="icon: calendar; ratio: 3"></span>}
+            </h1>
+            <ExpenditureStatistics date={{ year: selectedYear }} />
         </div>
     );
 };

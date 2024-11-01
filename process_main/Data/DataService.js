@@ -1,6 +1,5 @@
 const { NOT_DEFINE } = require("@main/MainConstants.js");
 
-
 class DataService {
 
     processDataIn(data) {
@@ -68,6 +67,13 @@ class DataService {
         };
 
         return searchString;
+    };
+
+    makeDateSearchOptions(year, month) {
+        return [
+            new Date(year && year !== NOT_DEFINE ? year : 1970,                     month && month !== NOT_DEFINE ? month : 0,  1,                           0,  0,  0),
+            new Date(year && year !== NOT_DEFINE ? year : new Date().getFullYear(), month && month !== NOT_DEFINE ? month : 11, this.getLastMonthDay(month), 23, 59, 59)
+        ];
     };
 
     getLastMonthDay(month) {

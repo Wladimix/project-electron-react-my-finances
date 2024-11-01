@@ -1,3 +1,4 @@
+const CalculationController = require("@main/Calculation/CalculationController.js");
 const CategoryController = require("@main/SpendingCategory/CategoryController.js");
 const DistributionController = require("@main/DistributionFinances/DistributionController.js");
 const NoteController = require("@main/Note/NoteController.js");
@@ -24,6 +25,8 @@ function useRouter() {
     ipcMain.handle("get-all-dates", TransactionController.getAllTransactionDates);
 
     ipcMain.handle("get-all-notes", NoteController.getAllNotes);
+
+    ipcMain.handle("get-statistics-on-expenses", CalculationController.getStatisticsOnExpenses);
 
 }
 

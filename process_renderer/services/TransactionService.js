@@ -1,6 +1,6 @@
 import Services from "@renderer/services/Services.js";
 
-import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, SPENDING_CATEGORY_MODIFIER_ID, NOT_DEFINE } from "@renderer/RendererConstants.js";
+import { ADD_TRANSACTION_EVENT_TYPE, DISTRIBUTION_MODIFIER_ID, DELETED_PARAMS_REGULAR, EDIT_TRANSACTION_EVENT_TYPE, FINANCIAL_INCOME, FINANCIAL_TRANSFER, FINANCIAL_EXPENCE, NOTE_MISSING, PRICE_MONITORING, SPENDING_CATEGORY_MODIFIER_ID, NOT_DEFINE } from "@renderer/RendererConstants.js";
 import { setAddingTransactionLoader, setEditingTransactionLoader, setTransactionsLoader } from "@renderer/storage/loadersSlice.js";
 import { setData as setTransactionData } from "@renderer/storage/transactionSlice.js";
 import { setEventType } from "@renderer/storage/transactionSlice.js";
@@ -139,19 +139,17 @@ export default class TransactionService extends Services {
             [NOT_DEFINE]: "uk-text-large uk-text-bold",
         };
 
-        const deletedParamsRegular = /\(удалено.+\)/;
-
-        const sourceOfTransactionClass = deletedParamsRegular.test(sourceOfTransaction) ? "uk-text-danger" : "";
-        const addressOrCategoryClass = deletedParamsRegular.test(addressOrCategory) ? "uk-text-danger" : "";
+        const sourceOfTransactionClass = DELETED_PARAMS_REGULAR.test(sourceOfTransaction) ? "uk-text-danger" : "";
+        const addressOrCategoryClass = DELETED_PARAMS_REGULAR.test(addressOrCategory) ? "uk-text-danger" : "";
         const amountClass = amountClasses[this.transactionData.transactionType];
 
-        const thereDeletedParameters = deletedParamsRegular.test(sourceOfTransaction) || deletedParamsRegular.test(addressOrCategory) ? true : false;
+        const thereDeletedParameters = DELETED_PARAMS_REGULAR.test(sourceOfTransaction) || DELETED_PARAMS_REGULAR.test(addressOrCategory) ? true : false;
 
         return {
             data: {
                 date,
-                sourceOfTransaction: sourceOfTransaction.replace(deletedParamsRegular, ""),
-                addressOrCategory: addressOrCategory.replace(deletedParamsRegular, ""),
+                sourceOfTransaction: sourceOfTransaction.replace(DELETED_PARAMS_REGULAR, ""),
+                addressOrCategory: addressOrCategory.replace(DELETED_PARAMS_REGULAR, ""),
                 note,
                 amount
             },

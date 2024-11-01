@@ -5,7 +5,7 @@ const EditingTransaction = require("@main/Transaction/ExecutionOfTransactions/Ed
 const TransactionModel = require("@main/Transaction/TransactionModel.js");
 
 const { deleteExtraNote } = require("@main/Note/NoteService.js");
-const { FINANCIAL_TRANSACTIONS_TABLE_NAME, NOT_DEFINE } = require("@main/MainConstants.js");
+const { FINANCIAL_TRANSACTIONS_TABLE_NAME } = require("@main/MainConstants.js");
 const { findOrAddNote } = require("@main/Note/NoteService.js");
 
 class TransactionService {
@@ -14,10 +14,7 @@ class TransactionService {
         const transactions = TransactionModel.getAll();
         const { year, month } = date;
 
-        const result = await transactions.whereBetween(`${FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, [
-            new Date(year && year !== NOT_DEFINE ? year : 1970,                     month && month !== NOT_DEFINE ? month : 0,  1,                                  0,  0,  0),
-            new Date(year && year !== NOT_DEFINE ? year : new Date().getFullYear(), month && month !== NOT_DEFINE ? month : 11, DataService.getLastMonthDay(month), 23, 59, 59)
-        ]);
+        const result = await transactions.whereBetween(`${FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, DataService.makeDateSearchOptions(year, month));
         console.info(`Получены данные из таблицы "${FINANCIAL_TRANSACTIONS_TABLE_NAME}"`);
 
         return DataService.processDataOut(result);
