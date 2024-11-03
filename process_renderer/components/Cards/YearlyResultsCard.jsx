@@ -1,4 +1,4 @@
-import GeneralYearlyStatistics from "@renderer/components/Statistics/GeneralYearlyStatistics.jsx";
+import GeneralStatistics from "@renderer/components/Statistics/GeneralStatistics.jsx";
 import React from "react";
 import TransactionService from "@renderer/services/TransactionService.js";
 
@@ -44,7 +44,7 @@ export default function YearlyResultsCard() {
                     </tr>
                     {
                         selectedYear !== NOT_DEFINE
-                        ? <GeneralYearlyStatistics />
+                        ? <GeneralStatistics date={{ year: selectedYear }} />
                         : ""
                     }
                 </tbody>

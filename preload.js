@@ -20,6 +20,7 @@ contextBridge.exposeInMainWorld("electron", {
 
     getAllNotes: substring => ipcRenderer.invoke("get-all-notes", substring),
 
-    getStatisticsOnExpenses: date => ipcRenderer.invoke("get-statistics-on-expenses", date)
+    getStatisticsOnExpenses: date => ipcRenderer.invoke("get-statistics-on-expenses", date),
+    getTotalAmount: date => ipcRenderer.invoke("get-total-amount", date)
 
 });

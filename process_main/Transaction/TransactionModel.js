@@ -68,6 +68,14 @@ class TransactionModel {
             .where(note);
     };
 
+    getTotalAmount(transactionType) {
+        return knex
+            .select("amount")
+            .sum({ amount: "amount" })
+            .from(FINANCIAL_TRANSACTIONS_TABLE_NAME)
+            .where({ transaction_type: transactionType });
+    };
+
     getAmountOfExpensesByCategory() {
         return knex
             .select(`${SPENDING_CATEGORIES_TABLE_NAME}.name as purchase`)

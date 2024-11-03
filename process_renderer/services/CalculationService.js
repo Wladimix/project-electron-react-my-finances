@@ -8,4 +8,11 @@ export default class CalculationService {
         setAmountOfExpenses(amountOfExpenses.data);
     };
 
+    static async getTotalAmount(setTotalStatistics, date) {
+        const services = new Services();
+        const totalStatistics = await electron.getTotalAmount(date);
+        services.showNotification(totalStatistics, true);
+        setTotalStatistics(totalStatistics.data);
+    };
+
 };

@@ -11,7 +11,7 @@ export default function Statistics() {
                         className="uk-button uk-button-primary uk-margin-right"
                         uk-toggle="target: #category-management"
                     >
-                        УПРАВЛЯТЬ КАТЕГОРИЯМИ
+                        УПРАВЛЕНИЕ КАТЕГОРИЯМИ
                     </button>
                     Статистика расходов
                 </span>

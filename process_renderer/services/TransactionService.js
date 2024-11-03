@@ -22,10 +22,6 @@ export default class TransactionService extends Services {
     };
 
     async addTransaction(date) {
-        // NOTE: добавление в БД
-        /* console.log("addData")
-        console.log(this.transactionData) */
-
         this.dispatch(setAddingTransactionLoader(true));
 
         const resultAdding = await electron.addTransaction(this.transactionData);
@@ -48,10 +44,6 @@ export default class TransactionService extends Services {
     };
 
     async editTransaction(date) {
-        // NOTE: редактирование в БД
-        /* console.log("editData")
-        console.log(this.transactionData) */
-
         this.dispatch(setEditingTransactionLoader(this.transactionData.id));
 
         const resultEditing = await electron.editTransaction(this.transactionData);
@@ -98,10 +90,6 @@ export default class TransactionService extends Services {
     writeTransactionData(transactionEventType, initialValues = {}) {
         const transactionData = this.#makeInitialValues(initialValues);
 
-        // NOTE: запись в стор
-        /* console.log("writeData")
-        console.log(transactionData) */
-
         if (transactionEventType === ADD_TRANSACTION_EVENT_TYPE) {
             this.dispatch(setEventType(ADD_TRANSACTION_EVENT_TYPE));
         };
@@ -111,7 +99,6 @@ export default class TransactionService extends Services {
         };
 
         this.dispatch(setTransactionData(transactionData));
-
     };
 
     #makeInitialValues(initialValues) {

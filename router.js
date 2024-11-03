@@ -27,6 +27,7 @@ function useRouter() {
     ipcMain.handle("get-all-notes", NoteController.getAllNotes);
 
     ipcMain.handle("get-statistics-on-expenses", CalculationController.getStatisticsOnExpenses);
+    ipcMain.handle("get-total-amount", CalculationController.getTotalAmount);
 
 }
 

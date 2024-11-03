@@ -1,4 +1,4 @@
-import GeneralMonthlyStatistics from "@renderer/components/Statistics/GeneralMonthlyStatistics.jsx";
+import GeneralStatistics from "@renderer/components/Statistics/GeneralStatistics.jsx";
 import React from "react";
 import TransactionService from "@renderer/services/TransactionService.js";
 
@@ -20,14 +20,6 @@ export default function MonthlyResultsCard() {
         transactionService.loadTransactions({ year: selectedYear, month: e.target.value });
         dispatch(selectMonth(e.target.value));
     };
-
-    /* // NOTE: выбранный год
-    console.log("выбранный год")
-    console.log(selectedYear)
-
-    // NOTE: выбранный месяц
-    console.log("выбранный месяц")
-    console.log(selectedMonth) */
 
     return (
         <div className="uk-card uk-card-default uk-card-body uk-background-muted">
@@ -52,7 +44,7 @@ export default function MonthlyResultsCard() {
                     </tr>
                     {
                         selectedMonth !== NOT_DEFINE
-                        ? <GeneralMonthlyStatistics />
+                        ? <GeneralStatistics date={{ year: selectedYear, month: selectedMonth }} />
                         : ""
                     }
                 </tbody>
