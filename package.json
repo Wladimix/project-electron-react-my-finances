@@ -1,48 +1,39 @@
 {
     "name": "my-finances",
-    "version": "1.0.0",
-    "description": "Budget management application.",
+    "description": "Budget management application",
     "author": "Vladimir Maximov",
+    "version": "1.0.0",
     "license": "ISC",
-    "main": "main.js",
-    "_moduleAliases": {
-        "@main": "process_main"
-    },
+    "main": "build/main.js",
     "scripts": {
-        "start": "electron .",
-        "watch": "webpack --config webpack.common.js --watch",
-        "package": "electron-forge package",
-        "make": "electron-forge make"
-    },
-    "dependencies": {
-        "@reduxjs/toolkit": "^2.3.0",
-        "date-fns": "^4.1.0",
-        "knex": "^3.1.0",
-        "module-alias": "^2.2.3",
-        "react": "^18.3.1",
-        "react-datepicker": "^7.5.0",
-        "react-dom": "^18.3.1",
-        "react-redux": "^9.1.2",
-        "sqlite3": "^5.1.7"
+        "build": "webpack --config ./webpack.config.js",
+        "watch": "webpack --config ./webpack.config.js --watch",
+        "start": "npm run build && electron ./build/main.js",
+        "start:dev": "npm-run-all --parallel watch start",
+        "dist:mac": "npm run build && electron-builder --mac --arm64",
+        "dist:win": "npm run build && electron-builder --win --x64",
+        "dist:linux": "npm run build && electron-builder --linux --x64"
     },
     "devDependencies": {
-        "@babel/core": "^7.25.7",
-        "@babel/preset-env": "^7.25.7",
-        "@babel/preset-react": "^7.25.7",
-        "@electron-forge/cli": "^7.5.0",
-        "@electron-forge/maker-deb": "^7.5.0",
-        "@electron-forge/maker-rpm": "^7.5.0",
-        "@electron-forge/maker-squirrel": "^7.5.0",
-        "@electron-forge/maker-zip": "^7.5.0",
-        "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
-        "babel-loader": "^9.2.1",
+        "@types/knex": "^0.16.1",
+        "@types/react": "^18.3.12",
+        "@types/react-dom": "^18.3.1",
         "css-loader": "^7.1.2",
-        "electron": "^32.2.0",
-        "electron-reload": "^2.0.0-alpha.1",
-        "sass": "^1.79.4",
-        "sass-loader": "^16.0.2",
+        "electron": "^33.1.0",
+        "electron-builder": "^25.1.8",
+        "html-webpack-plugin": "^5.6.3",
+        "npm-run-all": "^4.1.5",
         "style-loader": "^4.0.0",
-        "webpack": "^5.95.0",
+        "ts-loader": "^9.5.1",
+        "tsconfig-paths-webpack-plugin": "^4.1.0",
+        "typescript": "^5.6.3",
+        "webpack": "^5.96.1",
         "webpack-cli": "^5.1.4"
+    },
+    "dependencies": {
+        "knex": "^3.1.0",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "sqlite3": "^5.1.7"
     }
 }

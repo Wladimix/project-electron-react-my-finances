@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "target": "ESNext",
+        "module": "NodeNext",
+        "noImplicitAny": false,
+        "types": ["../types"]
+    }
+}
