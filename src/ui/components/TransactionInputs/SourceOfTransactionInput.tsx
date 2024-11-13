@@ -1,4 +1,16 @@
+import { setTransactionData } from "../../storage/transactionSlice";
+import { useAppDispatch, useAppSelector } from "../../storage/store";
+
 export default function SourceOfTransactionInput() {
+    const transactionData = useAppSelector(state => state.transaction.transactionData);
+    const distribytionTypes = useAppSelector(state => state.data.distributionFinancesTypes);
+
+    const dispatch = useAppDispatch();
+
+    const changeSourceOfTransactionEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+        dispatch(setTransactionData({ ...transactionData, sourceOfTransactionId: Number(e.target.value) }));
+    };
+
     return (
         <div className="uk-margin">
             <label className="uk-form-label" htmlFor="source-of-transaction">Источник транзакции</label>
@@ -6,18 +18,18 @@ export default function SourceOfTransactionInput() {
                 <select
                     className="uk-select"
                     id="source-of-transaction"
-                    onChange={() => {}}
-                    value={""}
+                    onChange={changeSourceOfTransactionEvent}
+                    value={transactionData.sourceOfTransactionId}
                 >
 
                     <option value={1}>значение не выбрано</option>
                     {
-                        ['test'].map(distributionType => (
+                        distribytionTypes.map(distributionType => (
                             <option
-                                key={distributionType[0]}
-                                value={""}
+                                key={distributionType.id}
+                                value={distributionType.id}
                             >
-                                {'distributionType.name'}
+                                {distributionType.name}
                             </option>
                         ))
                     }

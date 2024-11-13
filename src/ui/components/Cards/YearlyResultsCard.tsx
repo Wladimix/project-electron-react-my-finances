@@ -1,6 +1,24 @@
 import GeneralStatistics from "../Statistics/GeneralStatistics";
+import TransactionService from "../../services/Transaction/TransactionService";
+
+import { NOT_DEFINE } from "../../constants";
+import { selectMonth, selectYear } from "../../storage/dateSlice";
+import { useAppDispatch, useAppSelector } from "../../storage/store";
 
 export default function YearlyResultsCard() {
+    const date = useAppSelector(state => state.date);
+
+    const dispatch = useAppDispatch();
+    const transactionService = new TransactionService(dispatch);
+
+    const years = Object.keys(date.dates).reverse();
+
+    const changeYearEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+        transactionService.loadTransactions({ year: e.target.value, month: NOT_DEFINE });
+        dispatch(selectYear(e.target.value));
+        dispatch(selectMonth(NOT_DEFINE));
+    };
+
     return (
         <div className="uk-card uk-card-default uk-card-body uk-background-muted">
             <table className="uk-table uk-table-small">
@@ -10,19 +28,23 @@ export default function YearlyResultsCard() {
                         <td className="uk-text-right uk-width-small">
                             <select
                                 className="uk-select uk-text-large"
-                                onChange={() => {}}
-                                defaultValue={""}
+                                onChange={changeYearEvent}
+                                defaultValue={date.selectedYear}
                             >
-                                <option>{"NOT_DEFINE"}</option>
+                                <option>{NOT_DEFINE}</option>
                                 {
-                                    ['test'].map(year => (
+                                    years.map(year => (
                                         <option key={year}>{year}</option>
                                     ))
                                 }
                             </select>
                         </td>
                     </tr>
-                    <GeneralStatistics />
+                    {
+                        date.selectedYear !== NOT_DEFINE
+                        ? <GeneralStatistics date={{ selectedYear: date.selectedYear, selectedMonth: NOT_DEFINE }} />
+                        : ""
+                    }
                 </tbody>
             </table>
         </div>

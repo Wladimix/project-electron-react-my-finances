@@ -1,6 +1,27 @@
 import DistributionCard from "../Cards/DistributionCard";
+import DistributionService from '../../services/DistributionService';
+import React, { useState } from "react";
+
+import { useAppDispatch, useAppSelector } from "../../storage/store";
 
 export default function DistributionManagement() {
+    const distribytionTypes = useAppSelector(state => state.data.distributionFinancesTypes);
+
+    const [name, setName] = useState<string>("");
+    const [amount, setAmount] = useState<string>("");
+
+    const changeNameEvent = (e: React.ChangeEvent<HTMLInputElement>): void => { setName(e.target.value) };
+    const changeAmountEvent = (e: React.ChangeEvent<HTMLInputElement>): void => { setAmount(e.target.value) };
+
+    const dispath = useAppDispatch();
+    const distributionService = new DistributionService(dispath);
+
+    const addDistributionTypeEvent = (): void => {
+        distributionService.addDistributionType(name, amount);
+        setName("");
+        setAmount("");
+    };
+
     return (
         <>
             <h3 className="uk-heading-line uk-width-expand">
@@ -10,8 +31,8 @@ export default function DistributionManagement() {
             <div className="uk-child-width-1-3@s uk-grid-match" data-uk-grid>
 
                 {
-                    ['test'].map(distributionType => (
-                        <DistributionCard key={distributionType[0]} />
+                    distribytionTypes.map(distributionType => (
+                        <DistributionCard key={distributionType.id} distributionType={distributionType} />
                     ))
                 }
 
@@ -20,22 +41,22 @@ export default function DistributionManagement() {
                         <div className="uk-card-body">
                             <input
                                 className="uk-input uk-margin"
-                                onChange={() => {}}
+                                onChange={changeNameEvent}
                                 type="text"
-                                value={""}
+                                value={name}
                             />
                             <input
                                 className="uk-input uk-form-large"
-                                onChange={() => {}}
+                                onChange={changeAmountEvent}
                                 type="text"
-                                value={""}
+                                value={amount}
                             />
                         </div>
                         <div className="uk-card-footer uk-text-right">
                             <button
                                 className="uk-button uk-button-default uk-button-primary uk-button-small"
-                                disabled={false}
-                                onClick={() => {}}
+                                disabled={!distributionService.checkDistributionType(name, amount)}
+                                onClick={addDistributionTypeEvent}
                             >
                                 ДОБАВИТЬ
                             </button>

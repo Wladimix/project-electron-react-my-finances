@@ -1,6 +1,10 @@
 import TransactionsTableRow from "./TransactionsTableRow";
 
+import { useAppSelector } from "../../storage/store";
+
 export default function TransactionsTable() {
+    const transactions = useAppSelector(state => state.data.transactions);
+
     return (
         <table className="uk-table uk-table-hover uk-table-divider uk-margin-remove-top uk-margin-small-bottom">
             <thead>
@@ -15,8 +19,8 @@ export default function TransactionsTable() {
             </thead>
             <tbody>
                 {
-                    ['test'].map(transaction => (
-                        <TransactionsTableRow key={transaction[0]} />
+                    transactions.map(transaction => (
+                        <TransactionsTableRow key={transaction.id} transaction={transaction} />
                     ))
                 }
             </tbody>

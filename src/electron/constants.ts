@@ -1,7 +1,5 @@
-import os from "os";
-import path from 'path';
-
-export const DATABASE_PATH = path.join(os.homedir(), "my_finances_db.sqlite3")
+export const VALUE_MISSING = "-"
+export const NOT_DEFINE = "———"
 
 export enum TablesNames {
     DISTRIBUTION_OF_FINANCES_TABLE_NAME = "distribution_of_finances",
@@ -13,4 +11,10 @@ export enum TablesNames {
 export enum RequestStatuses {
     SUCCESS = "success",
     ERROR = "error"
+}
+
+export enum TransactionTypes {
+    FINANCIAL_INCOME = "ДОХОД",
+    FINANCIAL_TRANSFER = "ПЕРЕВОД",
+    FINANCIAL_EXPENCE = "РАСХОД"
 }

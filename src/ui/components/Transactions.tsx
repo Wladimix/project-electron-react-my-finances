@@ -1,24 +1,36 @@
-import AddCircleSVG from "./SVG/AddCircleSVG";
-import SearchAltSVG from "./SVG/SearchAltSVG";
 import TransactionsTable from "./Tables/TransactionsTable";
 
+import { setEventType, setTransactionData } from "../storage/transactionSlice";
+import { TransactionEvent } from "../constants";
+import { useAppDispatch, useAppSelector } from "../storage/store";
+import { setNotes } from "../storage/dataSlice";
+
 export default function Transactions() {
+    const transactionData = useAppSelector(state => state.transaction.transactionData);
+
+    const dispatch = useAppDispatch();
+
+    const openModalEvent = (): void => {
+        dispatch(setEventType(TransactionEvent.ADD));
+        dispatch(setNotes([]));
+        dispatch(setTransactionData({ ...transactionData, date: new Date() }));
+    };
+
     return (
         <>
             <div className="uk-grid">
                 <h1>Транзакции</h1>
+
                 <button
                     className="uk-icon-link uk-padding-remove uk-margin-small-left"
-                    uk-icon="icon: circle"
+                    uk-icon="icon: plus-circle; ratio: 2.5"
                     uk-toggle="target: #transaction"
-                    onClick={() => {}}
-                >
-                    <AddCircleSVG />
-                </button>
+                    onClick={openModalEvent}
+                />
 
                 <div className="uk-width-expand uk-text-right">
                     <div className="uk-inline uk-width-1-2">
-                        <span className="uk-form-icon" data-uk-icon="icon: search"><SearchAltSVG /></span>
+                        <span className="uk-form-icon" data-uk-icon="icon: search; ratio: 1.2" />
                         <input className="uk-input" type="text" placeholder="примечание" aria-label="Not clickable icon" />
                     </div>
                 </div>

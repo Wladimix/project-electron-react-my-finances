@@ -1,6 +1,24 @@
 import CategoryCard from "../Cards/CategoryCard";
+import SpendingCategoryService from "../../services/SpendingCategoryService";
+
+import { useAppDispatch, useAppSelector } from "../../storage/store";
+import { useState } from "react";
 
 export default function CategoryManagement() {
+    const spendingCategories = useAppSelector(state => state.data.spendingCategories);
+
+    const [name, setName] = useState<string>("");
+
+    const changeName = (e: React.ChangeEvent<HTMLInputElement>): void => { setName(e.target.value) };
+
+    const dispath = useAppDispatch();
+    const categoryService = new SpendingCategoryService(dispath);
+
+    const addSpendingCategoryEvent = (): void => {
+        categoryService.addSpendingCategory(name);
+        setName("");
+    };
+
     return (
         <>
             <h3 className="uk-heading-line uk-width-expand">
@@ -10,8 +28,8 @@ export default function CategoryManagement() {
             <div className="uk-child-width-1-3@s uk-grid-match" data-uk-grid>
 
                 {
-                    ['test'].map(categoriyType => (
-                        <CategoryCard key={categoriyType[0]} />
+                    spendingCategories.map(spendingCategory => (
+                        <CategoryCard key={spendingCategory.id} spendingCategory={spendingCategory} />
                     ))
                 }
 
@@ -20,16 +38,16 @@ export default function CategoryManagement() {
                         <div className="uk-card-body">
                             <input
                                 className="uk-input uk-form-large"
-                                onChange={() => {}}
+                                onChange={changeName}
                                 type="text"
-                                value={""}
+                                value={name}
                             />
                         </div>
                         <div className="uk-card-footer uk-text-right">
                             <button
                                 className="uk-button uk-button-default uk-button-primary uk-button-small"
-                                disabled={false}
-                                onClick={() => {}}
+                                disabled={!categoryService.checkSpendingCategory(name)}
+                                onClick={addSpendingCategoryEvent}
                             >
                                 ДОБАВИТЬ
                             </button>

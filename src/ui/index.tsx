@@ -1,11 +1,17 @@
 import App from './components/App';
 
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { store } from './storage/store';
 
-import "./styles/uikit/css/uikit.min.css";
-import "./styles/uikit/js/uikit.min.js";
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
+UIkit.use(Icons);
+import 'uikit/dist/css/uikit.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    <App />
+    <Provider store={store}>
+        <App />
+    </Provider>
 );

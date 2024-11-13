@@ -1,6 +1,5 @@
 import path from "path";
-import router from "./router";
-import StartController from "./StartApplication/StartController";
+import StartApplication from "./StartApplication";
 
 import { app, BrowserWindow } from "electron";
 
@@ -28,8 +27,8 @@ function createWindow() {
 app.whenReady().then(async () => {
     console.log("Запуск приложения");
 
-    await StartController.createTables();
-    router();
+    await StartApplication.createTablesIfNotExist();
+    StartApplication.createRouter();
     createWindow();
 });
 
