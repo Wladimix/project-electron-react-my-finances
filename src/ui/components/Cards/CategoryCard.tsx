@@ -9,6 +9,7 @@ type CategoryCardProps = {
 
 export default function CategoryCard({ spendingCategory }: CategoryCardProps) {
     const date = useAppSelector(state => state.date);
+    const requiredNote = useAppSelector(state => state.transaction.requiredNote);
 
     const [name, setName] = useState<string>("");
 
@@ -19,12 +20,22 @@ export default function CategoryCard({ spendingCategory }: CategoryCardProps) {
 
     const editSpendingCategoryEvent = (): void => {
         const spendingCategoryName = name ? name : spendingCategory.name;
-        spendingCategoryService.editSpendingCategory(spendingCategory.id, spendingCategoryName, { year: date.selectedYear, month: date.selectedMonth });
+
+        spendingCategoryService.editSpendingCategory(
+            spendingCategory.id,
+            spendingCategoryName,
+            { year: date.selectedYear, month: date.selectedMonth, note: requiredNote }
+        );
+
         setName("");
     };
 
     const deleteSpendingCategoryEvent = (): void => {
-        spendingCategoryService.deleteSpendingCategory(spendingCategory.id, spendingCategory.name, { year: date.selectedYear, month: date.selectedMonth });
+        spendingCategoryService.deleteSpendingCategory(
+            spendingCategory.id,
+            spendingCategory.name,
+            { year: date.selectedYear, month: date.selectedMonth, note: requiredNote }
+        );
     };
 
     return (

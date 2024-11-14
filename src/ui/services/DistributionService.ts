@@ -27,24 +27,24 @@ export default class DistributionService {
         this.loadDistributionTypes();
     };
 
-    async editDistributionType(id: number, name: string, amount: string, date: DateDTO) {
+    async editDistributionType(id: number, name: string, amount: string, filter: TransactionFilter) {
         const distributionType: EditDistributionTypeDTO = { id, name, amount };
 
         const resultEditing = await window.electron.editDistributionType(distributionType);
         showNotification(resultEditing);
 
         this.loadDistributionTypes();
-        await new TransactionService(this.dispatch).loadTransactions(date);
+        await new TransactionService(this.dispatch).loadTransactions(filter);
     };
 
-    async deleteDistributionType(id: number, name: string, amount: string, date: DateDTO) {
+    async deleteDistributionType(id: number, name: string, amount: string, filter: TransactionFilter) {
         const distributionType: DeleteDistributionTypeDTO = { id, name, amount };
 
         const resultDeleting = await window.electron.deleteDistributionType(distributionType);
         showNotification(resultDeleting);
 
         this.loadDistributionTypes();
-        await new TransactionService(this.dispatch).loadTransactions(date);
+        await new TransactionService(this.dispatch).loadTransactions(filter);
     };
 
     checkDistributionType(name: string, amount: string): boolean {

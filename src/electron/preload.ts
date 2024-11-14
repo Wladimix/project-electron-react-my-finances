@@ -12,7 +12,7 @@ const api: ElectronApi = {
     editSpendingCategory: (spendingCategory: EditSpendingCategoryDTO) => ipcRenderer.invoke("editSpendingCategory", spendingCategory),
     deleteSpendingCategory: (spendingCategory: DeleteSpendingCategoryDTO) => ipcRenderer.invoke("deleteSpendingCategory", spendingCategory),
 
-    getAllTransactions: (date: DateDTO) => ipcRenderer.invoke("getAllTransactions", date),
+    getAllTransactions: (filter: TransactionFilter) => ipcRenderer.invoke("getAllTransactions", filter),
     getAllTransactionDates: () => ipcRenderer.invoke("getAllTransactionDates"),
     addTransaction: (transaction: AddTransactionDTO) => ipcRenderer.invoke("addTransaction", transaction),
     editTransaction: (transaction: EditTransactionDTO) => ipcRenderer.invoke("editTransaction", transaction),

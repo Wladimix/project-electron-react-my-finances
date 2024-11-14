@@ -20,7 +20,7 @@ class TransactionModel {
             });
     };
 
-    getAll(): Knex.QueryBuilder {
+    getAll(note: string): Knex.QueryBuilder {
         return knex
             .select(
                 `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.id`,
@@ -43,6 +43,8 @@ class TransactionModel {
             .join(`${TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME} as financial_distribution_addresses`, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.transaction_address_id`, "=", "financial_distribution_addresses.id")
             .join(TablesNames.SPENDING_CATEGORIES_TABLE_NAME, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.spending_category_id`, "=", `${TablesNames.SPENDING_CATEGORIES_TABLE_NAME}.id`)
             .join(TablesNames.NOTES_TABLE, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.note_id`, "=", `${TablesNames.NOTES_TABLE}.id`)
+
+            .whereLike(`${TablesNames.NOTES_TABLE}.name`, `%${note}%`)
 
             .orderBy(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, "desc");
     };

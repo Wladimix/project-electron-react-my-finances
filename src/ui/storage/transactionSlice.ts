@@ -7,6 +7,7 @@ const initialState: transactionState = {
     eventType: TransactionEvent.ADD,
     loader: false,
     id: 0,
+    requiredNote: "",
     transactionData: {
         date: new Date(),
         sourceOfTransactionId: 1,
@@ -25,6 +26,7 @@ const transactionSlice = createSlice({
         setEventType: (state, action) => ({ ...state, eventType: action.payload }),
         setTransactionLoader: (state, action) => ({ ...state, loader: action.payload }),
         setTransactionId: (state, action) => ({ ...state, id: action.payload }),
+        setRequiredNote: (state, action) => ({ ...state, requiredNote: action.payload }),
         setTransactionData: (state, action) => ({ ...state, transactionData: processTransactionData(action.payload) })
     }
 });
@@ -63,12 +65,13 @@ const determineTransactionType = (transactionData: AddTransactionDTO): Transacti
     return income ? TransactionsTypes.FINANCIAL_INCOME : transfer ? TransactionsTypes.FINANCIAL_TRANSFER : expence ? TransactionsTypes.FINANCIAL_EXPENCE : priceMonitoring ? TransactionsTypes.PRICE_MONITORING : NOT_DEFINE;
 };
 
-export const { setEventType, setTransactionLoader, setTransactionId, setTransactionData } = transactionSlice.actions;
+export const { setEventType, setTransactionLoader, setTransactionId, setRequiredNote, setTransactionData } = transactionSlice.actions;
 export default transactionSlice.reducer;
 
 export type transactionState = {
     eventType: TransactionEvent
     loader: boolean
     id: number
+    requiredNote: string
     transactionData: AddTransactionDTO
 };

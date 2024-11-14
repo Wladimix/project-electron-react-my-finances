@@ -28,24 +28,24 @@ export default class SpendingCategoryService {
         this.loadSpendingCategories();
     };
 
-    async editSpendingCategory(id: number, name: string, date: DateDTO) {
+    async editSpendingCategory(id: number, name: string, filter: TransactionFilter) {
         const spendingCategory: EditSpendingCategoryDTO = { id, name };
 
         const resultEditing = await window.electron.editSpendingCategory(spendingCategory);
         showNotification(resultEditing);
 
         this.loadSpendingCategories();
-        await new TransactionService(this.dispatch).loadTransactions(date);
+        await new TransactionService(this.dispatch).loadTransactions(filter);
     };
 
-    async deleteSpendingCategory(id: number, name: string, date: DateDTO) {
+    async deleteSpendingCategory(id: number, name: string, filter: TransactionFilter) {
         const spendingCategory: DeleteSpendingCategoryDTO = { id, name };
 
         const resultDeleting = await window.electron.deleteSpendingCategory(spendingCategory);
         showNotification(resultDeleting);
 
         this.loadSpendingCategories();
-        await new TransactionService(this.dispatch).loadTransactions(date);
+        await new TransactionService(this.dispatch).loadTransactions(filter);
     };
 
     checkSpendingCategory(name: string): boolean {

@@ -84,7 +84,7 @@ type EditTransactionDTO = {
 }
 type DeleteTransactionDTO = EditTransactionDTO
 interface ITransactionController {
-    getAllTransactions: (event: Electron.IpcMainInvokeEvent, date: DateDTO) => Promise<ResponceData<GetTransactionDTO[]>>
+    getAllTransactions: (event: Electron.IpcMainInvokeEvent, filter: TransactionFilter) => Promise<ResponceData<GetTransactionDTO[]>>
     getAllTransactionDates: () => Promise<ResponceData<GetDatesDTO>>
     addTransaction: (event: Electron.IpcMainInvokeEvent, transaction: AddTransactionDTO) => Promise<ResponceData<number>>
     editTransaction: (event: Electron.IpcMainInvokeEvent, transaction: EditTransactionDTO) => Promise<ResponceData<boolean>>
@@ -106,6 +106,11 @@ interface INoteController {
 type DateDTO = {
     year: string
     month: string
+}
+type TransactionFilter = {
+    year: string
+    month: string
+    note: string
 }
 type TotalStatisticsDTO = {
     totalIncomeAmount: string
@@ -158,7 +163,7 @@ type ElectronApi = {
     deleteSpendingCategory: (spendingCategory: DeleteSpendingCategoryDTO) => Promise<ResponceData<boolean>>,
 
 
-    getAllTransactions: (date: DateDTO) => Promise<ResponceData<GetTransactionDTO[]>>
+    getAllTransactions: (filter: TransactionFilter) => Promise<ResponceData<GetTransactionDTO[]>>
     getAllTransactionDates: () => Promise<ResponceData<any>>
     addTransaction: (transaction: AddTransactionDTO) => Promise<ResponceData<number>>
     editTransaction: (transaction: EditTransactionDTO) => Promise<ResponceData<boolean>>

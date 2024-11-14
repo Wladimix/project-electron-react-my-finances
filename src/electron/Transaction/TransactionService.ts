@@ -11,16 +11,16 @@ import { TablesNames } from "../constants";
 
 class TransactionService {
 
-    async getAll(date: DateDTO): Promise<AllTransactions>  {
-        const transactionsQuery = TransactionModel.getAll();
-        const { year, month } = date;
+    async getAll(filter: TransactionFilter): Promise<AllTransactions>  {
+        const transactionsQuery = TransactionModel.getAll(filter.note);
 
-        const result = await transactionsQuery.whereBetween(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, makeDateSearchOptions(year, month));
+        const result = await transactionsQuery.whereBetween(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, makeDateSearchOptions(filter.year, filter.month));
         console.info(`Получены данные из таблицы "${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}"`);
 
         return result.map(transaction => {
 
             const OE = new ObjectEditing(transaction);
+
             OE.changeProperty("date", timestamp => new Date(timestamp));
             OE.changeProperty("sourceOfTransactionDeleted", value => Boolean(value));
             OE.changeProperty("spendingCategoryDeleted", value => Boolean(value));

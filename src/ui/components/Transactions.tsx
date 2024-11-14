@@ -1,19 +1,37 @@
+import TransactionService from "../services/Transaction/TransactionService";
 import TransactionsTable from "./Tables/TransactionsTable";
 
-import { setEventType, setTransactionData } from "../storage/transactionSlice";
+import { setEventType, setRequiredNote, setTransactionData } from "../storage/transactionSlice";
 import { TransactionEvent } from "../constants";
 import { useAppDispatch, useAppSelector } from "../storage/store";
 import { setNotes } from "../storage/dataSlice";
+import { useState } from "react";
 
 export default function Transactions() {
-    const transactionData = useAppSelector(state => state.transaction.transactionData);
+    const transaction = useAppSelector(state => state.transaction);
+    const date = useAppSelector(state => state.date);
+
+    const [timerId, setTimerId] = useState<NodeJS.Timeout>();
 
     const dispatch = useAppDispatch();
 
     const openModalEvent = (): void => {
         dispatch(setEventType(TransactionEvent.ADD));
         dispatch(setNotes([]));
-        dispatch(setTransactionData({ ...transactionData, date: new Date() }));
+        dispatch(setTransactionData({ ...transaction.transactionData, date: new Date() }));
+    };
+
+    const changeNoteEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setRequiredNote(e.target.value.toLowerCase().replace(/ +/g, ' ')));
+
+        clearTimeout(timerId);
+        setTimerId(setTimeout(() => {
+
+            new TransactionService(dispatch).loadTransactions(
+                { year: date.selectedYear, month: date.selectedMonth, note: e.target.value.toLowerCase().trim().replace(/ +/g, ' ') }
+            );
+
+        }, 1000));
     };
 
     return (
@@ -31,7 +49,14 @@ export default function Transactions() {
                 <div className="uk-width-expand uk-text-right">
                     <div className="uk-inline uk-width-1-2">
                         <span className="uk-form-icon" data-uk-icon="icon: search; ratio: 1.2" />
-                        <input className="uk-input" type="text" placeholder="примечание" aria-label="Not clickable icon" />
+                        <input
+                            aria-label="Not clickable icon"
+                            className="uk-input"
+                            onChange={changeNoteEvent}
+                            placeholder="примечание"
+                            type="text"
+                            value={transaction.requiredNote}
+                        />
                     </div>
                 </div>
             </div>

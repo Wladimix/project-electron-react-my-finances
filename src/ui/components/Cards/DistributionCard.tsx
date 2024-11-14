@@ -11,6 +11,7 @@ type DistributionCardProps = {
 
 export default function DistributionCard({ distributionType }: DistributionCardProps) {
     const date = useAppSelector(state => state.date);
+    const requiredNote = useAppSelector(state => state.transaction.requiredNote);
 
     const [name, setName] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
@@ -24,13 +25,25 @@ export default function DistributionCard({ distributionType }: DistributionCardP
     const editDistributionTypeEvent = (): void => {
         const distributionTypeName = name ? name : distributionType.name;
         const distributionTypeAmount = amount ? amount : distributionType.amount;
-        distributionService.editDistributionType(distributionType.id, distributionTypeName, distributionTypeAmount, { year: date.selectedYear, month: date.selectedMonth });
+
+        distributionService.editDistributionType(
+            distributionType.id,
+            distributionTypeName,
+            distributionTypeAmount,
+            { year: date.selectedYear, month: date.selectedMonth, note: requiredNote }
+        );
+
         setName("");
         setAmount("");
     };
 
     const deleteDistributionTypeEvent = (): void => {
-        distributionService.deleteDistributionType(distributionType.id, distributionType.name, distributionType.amount, { year: date.selectedYear, month: date.selectedMonth });
+        distributionService.deleteDistributionType(
+            distributionType.id,
+            distributionType.name,
+            distributionType.amount,
+            { year: date.selectedYear, month: date.selectedMonth, note: requiredNote }
+        );
     };
 
     return (

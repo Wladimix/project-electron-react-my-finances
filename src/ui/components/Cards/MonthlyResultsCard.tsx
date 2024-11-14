@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../storage/store";
 
 export default function MonthlyResultsCard() {
     const date = useAppSelector(state => state.date);
+    const requiredNote = useAppSelector(state => state.transaction.requiredNote);
 
     const dispatch = useAppDispatch();
     const transactionService = new TransactionService(dispatch);
@@ -15,7 +16,7 @@ export default function MonthlyResultsCard() {
     const months = date.dates[date.selectedYear] ? [ ...date.dates[date.selectedYear] ].reverse() : [];
 
     const changeMonthEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        transactionService.loadTransactions({ year: date.selectedYear, month: e.target.value });
+        transactionService.loadTransactions({ year: date.selectedYear, month: e.target.value, note: requiredNote });
         dispatch(selectMonth(e.target.value));
     };
 

@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 export default function App() {
     const date = useAppSelector(state => state.date);
-    const transactionsLoader = useAppSelector(state => state.transaction.loader);
+    const transaction = useAppSelector(state => state.transaction);
 
     const dispath = useAppDispatch();
     const distributionService = new DistributionService(dispath);
@@ -23,7 +23,7 @@ export default function App() {
     const loadAllData = async (): Promise<void> => {
         await distributionService.loadDistributionTypes();
         await categoryService.loadSpendingCategories();
-        await transactionService.loadTransactions({ year: date.selectedYear, month: date.selectedMonth });
+        await transactionService.loadTransactions({ year: date.selectedYear, month: date.selectedMonth, note: transaction.requiredNote });
     };
 
     useEffect(() => { loadAllData() }, []);
@@ -36,7 +36,7 @@ export default function App() {
                 <MonthlyYearlyResults />
 
                 {
-                    transactionsLoader
+                    transaction.loader
                         ?   <div className="uk-margin uk-text-large uk-text-center uk-alert-primary" data-uk-alert>
                                 Загрузка транзакций... <div data-uk-spinner />
                             </div>

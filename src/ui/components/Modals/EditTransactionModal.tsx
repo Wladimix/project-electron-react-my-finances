@@ -25,8 +25,8 @@ export default function EditTransactionModal() {
     const transactionService = new TransactionService(dispatch);
 
     const transactionEvents = {
-        [TransactionEvent.ADD]: (): void => { transactionService.addTransaction( transaction.transactionData, { year: date.selectedYear, month: date.selectedMonth }) },
-        [TransactionEvent.EDIT]: (): void => { transactionService.editTransaction(transaction.id, transaction.transactionData, { year: date.selectedYear, month: date.selectedMonth }) }
+        [TransactionEvent.ADD]: (): void => { transactionService.addTransaction( transaction.transactionData, { year: date.selectedYear, month: date.selectedMonth, note: transaction.requiredNote }) },
+        [TransactionEvent.EDIT]: (): void => { transactionService.editTransaction(transaction.id, transaction.transactionData, { year: date.selectedYear, month: date.selectedMonth, note: transaction.requiredNote }) }
     };
 
     const buttonValues: TransactionModalParams = {
