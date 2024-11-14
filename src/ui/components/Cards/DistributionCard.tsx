@@ -54,6 +54,7 @@ export default function DistributionCard({ distributionType }: DistributionCardP
                         className="uk-input uk-margin"
                         onChange={changeNameEvent}
                         placeholder={distributionType.name}
+                        spellCheck="false"
                         type="text"
                         value={name}
                     />
@@ -61,6 +62,7 @@ export default function DistributionCard({ distributionType }: DistributionCardP
                         className="uk-input uk-form-large"
                         onChange={changeAmountEvent}
                         placeholder={distributionType.amount}
+                        spellCheck="false"
                         type="text"
                         value={amount}
                     />

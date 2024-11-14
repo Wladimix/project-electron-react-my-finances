@@ -6,7 +6,6 @@ import { RequestStatuses } from "../constants";
 class TransactionController implements ITransactionController {
 
     async getAllTransactions(event, filter: TransactionFilter): Promise<ResponceData<GetTransactionDTO[]>> {
-        console.log(filter);
         try {
             const allTransactions = await TransactionService.getAll(filter);
 

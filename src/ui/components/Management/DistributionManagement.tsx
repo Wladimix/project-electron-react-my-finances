@@ -42,12 +42,14 @@ export default function DistributionManagement() {
                             <input
                                 className="uk-input uk-margin"
                                 onChange={changeNameEvent}
+                                spellCheck="false"
                                 type="text"
                                 value={name}
                             />
                             <input
                                 className="uk-input uk-form-large"
                                 onChange={changeAmountEvent}
+                                spellCheck="false"
                                 type="text"
                                 value={amount}
                             />

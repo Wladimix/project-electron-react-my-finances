@@ -19,6 +19,7 @@ export default function SourceOfTransactionInput() {
                     className="uk-select"
                     id="source-of-transaction"
                     onChange={changeSourceOfTransactionEvent}
+                    spellCheck="false"
                     value={transactionData.sourceOfTransactionId}
                 >
 

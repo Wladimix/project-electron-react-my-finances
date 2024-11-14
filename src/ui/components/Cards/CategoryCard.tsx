@@ -46,6 +46,7 @@ export default function CategoryCard({ spendingCategory }: CategoryCardProps) {
                         className="uk-input uk-form-large"
                         onChange={changeNameEvent}
                         placeholder={spendingCategory.name}
+                        spellCheck="false"
                         type="text"
                         value={name}
                     />

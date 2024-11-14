@@ -43,6 +43,7 @@ export default function NoteInput() {
                         className="uk-input"
                         id="note"
                         onChange={changeNoteEvent}
+                        spellCheck="false"
                         type="text"
                         value={transactionFormService.showNote()}
                     />

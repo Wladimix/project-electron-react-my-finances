@@ -39,6 +39,7 @@ export default function CategoryManagement() {
                             <input
                                 className="uk-input uk-form-large"
                                 onChange={changeName}
+                                spellCheck="false"
                                 type="text"
                                 value={name}
                             />

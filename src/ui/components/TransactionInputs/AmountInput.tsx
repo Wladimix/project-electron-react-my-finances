@@ -20,6 +20,7 @@ export default function AmountInput() {
                     className="uk-input"
                     id="price"
                     onChange={changeAmountEvent}
+                    spellCheck="false"
                     type="text"
                     value={transactionData.amount}
                 />

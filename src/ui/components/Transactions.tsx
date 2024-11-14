@@ -54,6 +54,7 @@ export default function Transactions() {
                             className="uk-input"
                             onChange={changeNoteEvent}
                             placeholder="примечание"
+                            spellCheck="false"
                             type="text"
                             value={transaction.requiredNote}
                         />

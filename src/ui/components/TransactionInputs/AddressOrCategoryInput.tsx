@@ -27,6 +27,7 @@ export default function AddressOrCategoryInput() {
                     className="uk-select"
                     id="address-or-category"
                     onChange={changeAddressOrCategoryEvent}
+                    spellCheck="false"
                     value={transactionFormService.showAddressOrCategory()}
                 >
 
