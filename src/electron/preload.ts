@@ -14,6 +14,7 @@ const api: ElectronApi = {
 
     getAllTransactions: (filter: TransactionFilter) => ipcRenderer.invoke("getAllTransactions", filter),
     getAllTransactionDates: () => ipcRenderer.invoke("getAllTransactionDates"),
+    getNumberOfTransactions: () => ipcRenderer.invoke("getNumberOfTransactions"),
     addTransaction: (transaction: AddTransactionDTO) => ipcRenderer.invoke("addTransaction", transaction),
     editTransaction: (transaction: EditTransactionDTO) => ipcRenderer.invoke("editTransaction", transaction),
     deleteTransaction: (transaction: DeleteTransactionDTO) => ipcRenderer.invoke("deleteTransaction", transaction),

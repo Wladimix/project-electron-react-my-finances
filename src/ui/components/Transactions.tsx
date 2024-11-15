@@ -1,3 +1,4 @@
+import Pagination from "./Pagination";
 import TransactionService from "../services/Transaction/TransactionService";
 import TransactionsTable from "./Tables/TransactionsTable";
 
@@ -10,6 +11,7 @@ import { useState } from "react";
 export default function Transactions() {
     const transaction = useAppSelector(state => state.transaction);
     const date = useAppSelector(state => state.date);
+    const currentPage = useAppSelector(state => state.pagination);
 
     const [timerId, setTimerId] = useState<NodeJS.Timeout>();
 
@@ -27,9 +29,12 @@ export default function Transactions() {
         clearTimeout(timerId);
         setTimerId(setTimeout(() => {
 
-            new TransactionService(dispatch).loadTransactions(
-                { year: date.selectedYear, month: date.selectedMonth, note: e.target.value.toLowerCase().trim().replace(/ +/g, ' ') }
-            );
+            new TransactionService(dispatch).loadTransactions({
+                year: date.selectedYear,
+                month: date.selectedMonth,
+                note: e.target.value.toLowerCase().trim().replace(/ +/g, ' '),
+                page: currentPage
+            });
 
         }, 1000));
     };
@@ -63,24 +68,7 @@ export default function Transactions() {
             </div>
 
             <TransactionsTable />
-
-            <nav aria-label="Pagination">
-                <ul className="uk-pagination uk-flex-center" data-uk-margin>
-                    <li><a href="#"><span data-uk-pagination-previous></span></a></li>
-                    <li><a href="#">1</a></li>
-                    <li className="uk-disabled"><span>…</span></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">6</a></li>
-                    <li className="uk-active"><span aria-current="page">7</span></li>
-                    <li><a href="#">8</a></li>
-                    <li><a href="#">9</a></li>
-                    <li><a href="#">10</a></li>
-                    <li className="uk-disabled"><span>…</span></li>
-                    <li><a href="#">20</a></li>
-                    <li><a href="#"><span data-uk-pagination-next></span></a></li>
-                </ul>
-            </nav>
+            <Pagination />
         </>
     );
 };

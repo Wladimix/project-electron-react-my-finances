@@ -59,6 +59,7 @@ class StartService {
 
         this.ipcHandle("getAllTransactions", TransactionController.getAllTransactions);
         this.ipcHandle("getAllTransactionDates", TransactionController.getAllTransactionDates);
+        this.ipcHandle("getNumberOfTransactions", TransactionController.getNumberOfTransactions);
         this.ipcHandle("addTransaction", TransactionController.addTransaction);
         this.ipcHandle("editTransaction", TransactionController.editTransaction);
         this.ipcHandle("deleteTransaction", TransactionController.deleteTransaction);

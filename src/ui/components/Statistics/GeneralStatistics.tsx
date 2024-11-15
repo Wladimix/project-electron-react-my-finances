@@ -36,19 +36,21 @@ export default function GeneralStatistics({ date }: GeneralStatisticsProps) {
     const savingsClass = makeSavingsClass(totalStatistics.savings);
 
     return (
-        <>
-            <tr>
-                <td className="uk-text-large">Доходы</td>
-                <td className="uk-text-large uk-text-right">{totalStatistics.totalIncomeAmount}</td>
-            </tr>
-            <tr>
-                <td className="uk-text-large">Расходы</td>
-                <td className="uk-text-large uk-text-right">{totalStatistics.totalExpenceAmount}</td>
-            </tr>
-            <tr>
-                <td className={savingsClass}>Экономия</td>
-                <td className={savingsClass + " uk-text-right"}>{totalStatistics.savings}</td>
-            </tr>
-        </>
+        <table className="uk-table uk-table-small">
+            <tbody>
+                <tr>
+                    <td className="uk-text-large uk-width-small">Доходы</td>
+                    <td className="uk-text-large uk-text-right">{totalStatistics.totalIncomeAmount}</td>
+                </tr>
+                <tr>
+                    <td className="uk-text-large uk-width-small">Расходы</td>
+                    <td className="uk-text-large uk-text-right">{totalStatistics.totalExpenceAmount}</td>
+                </tr>
+                <tr>
+                    <td className={savingsClass + " uk-width-small"}>Экономия</td>
+                    <td className={savingsClass + " uk-text-right"}>{totalStatistics.savings}</td>
+                </tr>
+            </tbody>
+        </table>
     );
 };

@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../storage/store";
 export default function MonthlyResultsCard() {
     const date = useAppSelector(state => state.date);
     const requiredNote = useAppSelector(state => state.transaction.requiredNote);
+    const currentPage = useAppSelector(state => state.pagination);
 
     const dispatch = useAppDispatch();
     const transactionService = new TransactionService(dispatch);
@@ -16,7 +17,7 @@ export default function MonthlyResultsCard() {
     const months = date.dates[date.selectedYear] ? [ ...date.dates[date.selectedYear] ].reverse() : [];
 
     const changeMonthEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        transactionService.loadTransactions({ year: date.selectedYear, month: e.target.value, note: requiredNote });
+        transactionService.loadTransactions({ year: date.selectedYear, month: e.target.value, note: requiredNote, page: currentPage });
         dispatch(selectMonth(e.target.value));
     };
 
@@ -26,7 +27,7 @@ export default function MonthlyResultsCard() {
                 <tbody>
                     <tr>
                         <td><h1>Месяц</h1></td>
-                        <td className="uk-text-right uk-width-small">
+                        <td className="uk-text-right uk-width-1-3">
                             <select
                                 className="uk-select uk-text-large"
                                 onChange={changeMonthEvent}
@@ -41,13 +42,13 @@ export default function MonthlyResultsCard() {
                             </select>
                         </td>
                     </tr>
-                    {
-                        date.selectedMonth !== NOT_DEFINE
-                        ? <GeneralStatistics date={{ selectedYear: date.selectedYear, selectedMonth: date.selectedMonth }} />
-                        : ""
-                    }
                 </tbody>
             </table>
+            {
+                date.selectedMonth !== NOT_DEFINE
+                ? <GeneralStatistics date={{ selectedYear: date.selectedYear, selectedMonth: date.selectedMonth }} />
+                : ""
+            }
         </div>
     );
 };

@@ -14,6 +14,7 @@ import { useEffect } from "react";
 export default function App() {
     const date = useAppSelector(state => state.date);
     const transaction = useAppSelector(state => state.transaction);
+    const currentPage = useAppSelector(state => state.pagination);
 
     const dispath = useAppDispatch();
     const distributionService = new DistributionService(dispath);
@@ -23,7 +24,12 @@ export default function App() {
     const loadAllData = async (): Promise<void> => {
         await distributionService.loadDistributionTypes();
         await categoryService.loadSpendingCategories();
-        await transactionService.loadTransactions({ year: date.selectedYear, month: date.selectedMonth, note: transaction.requiredNote });
+        await transactionService.loadTransactions({
+            year: date.selectedYear,
+            month: date.selectedMonth,
+            note: transaction.requiredNote,
+            page: currentPage
+        });
     };
 
     useEffect(() => { loadAllData() }, []);

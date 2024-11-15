@@ -20,7 +20,7 @@ class TransactionModel {
             });
     };
 
-    getAll(note: string): Knex.QueryBuilder {
+    getAll(note: string, page: number): Knex.QueryBuilder {
         return knex
             .select(
                 `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.id`,
@@ -38,6 +38,7 @@ class TransactionModel {
                 `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.transaction_type as transactionType`,
             )
             .from(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME)
+            .offset(page * 20).limit(20)
 
             .join(`${TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME} as sources_of_financial_distribution`, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.source_of_transaction_id`, "=", "sources_of_financial_distribution.id")
             .join(`${TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME} as financial_distribution_addresses`, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.transaction_address_id`, "=", "financial_distribution_addresses.id")
@@ -45,8 +46,11 @@ class TransactionModel {
             .join(TablesNames.NOTES_TABLE, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.note_id`, "=", `${TablesNames.NOTES_TABLE}.id`)
 
             .whereLike(`${TablesNames.NOTES_TABLE}.name`, `%${note}%`)
-
             .orderBy(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, "desc");
+    };
+
+    async getCount(): Promise<number> {
+        return (await knex(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME).count("id as count"))[0].count as number;
     };
 
     async getOne(id: number): Promise<Transaction> {

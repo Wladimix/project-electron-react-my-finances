@@ -1,5 +1,6 @@
 import dataReducer from "./dataSlice";
 import dateReducer from "./dateSlice";
+import paginationReducer from './paginationSlice';
 import transactionReducer from "./transactionSlice";
 
 import { configureStore } from "@reduxjs/toolkit";
@@ -9,6 +10,7 @@ export const store = configureStore({
     reducer: {
         data: dataReducer,
         date: dateReducer,
+        pagination: paginationReducer,
         transaction: transactionReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

@@ -38,6 +38,17 @@ class CalculationService {
         };
     };
 
+    async calculatePageCount(setPageCount: React.Dispatch<React.SetStateAction<number>>): Promise<void> {
+        const numberOfTransactions = await window.electron.getNumberOfTransactions();
+        showNotification(numberOfTransactions, { onlyErrorChecking: true });
+
+        if (numberOfTransactions.data) {
+            setPageCount(Math.ceil(numberOfTransactions.data / 20));
+        } else {
+            setPageCount(1);
+        };
+    };
+
 };
 
 export default new CalculationService();

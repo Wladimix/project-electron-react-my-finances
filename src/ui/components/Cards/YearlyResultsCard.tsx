@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../storage/store";
 export default function YearlyResultsCard() {
     const date = useAppSelector(state => state.date);
     const requiredNote = useAppSelector(state => state.transaction.requiredNote);
+    const currentPage = useAppSelector(state => state.pagination);
 
     const dispatch = useAppDispatch();
     const transactionService = new TransactionService(dispatch);
@@ -15,7 +16,7 @@ export default function YearlyResultsCard() {
     const years = Object.keys(date.dates).reverse();
 
     const changeYearEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        transactionService.loadTransactions({ year: e.target.value, month: NOT_DEFINE, note: requiredNote });
+        transactionService.loadTransactions({ year: e.target.value, month: NOT_DEFINE, note: requiredNote, page: currentPage });
         dispatch(selectYear(e.target.value));
         dispatch(selectMonth(NOT_DEFINE));
     };
@@ -41,13 +42,13 @@ export default function YearlyResultsCard() {
                             </select>
                         </td>
                     </tr>
-                    {
-                        date.selectedYear !== NOT_DEFINE
-                        ? <GeneralStatistics date={{ selectedYear: date.selectedYear, selectedMonth: NOT_DEFINE }} />
-                        : ""
-                    }
                 </tbody>
             </table>
+            {
+                date.selectedYear !== NOT_DEFINE
+                ? <GeneralStatistics date={{ selectedYear: date.selectedYear, selectedMonth: NOT_DEFINE }} />
+                : ""
+            }
         </div>
     );
 };

@@ -41,6 +41,24 @@ class TransactionController implements ITransactionController {
         };
     };
 
+    async getNumberOfTransactions(): Promise<ResponceData<number>> {
+        try {
+            const numberOfTransactions = await TransactionService.getCount();
+
+            return {
+                data: numberOfTransactions,
+                status: RequestStatuses.SUCCESS,
+                message: "Получено количество транзакций"
+            };
+        } catch (error) {
+            return {
+                data: null,
+                status: RequestStatuses.ERROR,
+                message: await ErrorHandling.makeErrorMessage(error as Error, "Ошибка получения количества транзакций")
+            };
+        };
+    };
+
     async addTransaction(event, transaction: AddTransactionDTO): Promise<ResponceData<number>> {
         try {
             const transactionId = await TransactionService.add(transaction);

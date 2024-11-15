@@ -13,6 +13,7 @@ type TransactionsTableRowProps = {
 export default function TransactionsTableRow({ transaction }: TransactionsTableRowProps) {
     const date = useAppSelector(state => state.date);
     const requiredNote = useAppSelector(state => state.transaction.requiredNote);
+    const currentPage = useAppSelector(state => state.pagination);
 
     const transactionRowService = new TransactionRowService(transaction);
     const transactionParams = transactionRowService.makeTransactionParamsToShow();
@@ -37,7 +38,15 @@ export default function TransactionsTableRow({ transaction }: TransactionsTableR
     };
 
     const transactionService = new TransactionService(dispatch);
-    const deleteTransactionEvent = (): void => { transactionService.deleteTransaction(transaction, { year: date.selectedYear, month: date.selectedMonth, note: requiredNote }) };
+    const deleteTransactionEvent = (): void => {transactionService.deleteTransaction(
+        transaction,
+        {
+            year: date.selectedYear,
+            month: date.selectedMonth,
+            note: requiredNote,
+            page: currentPage
+        }
+    )};
 
     return (
         <>

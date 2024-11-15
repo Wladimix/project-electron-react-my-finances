@@ -18,10 +18,14 @@ export default function TransactionsTable() {
                 </tr>
             </thead>
             <tbody>
-                {
-                    transactions.map(transaction => (
-                        <TransactionsTableRow key={transaction.id} transaction={transaction} />
-                    ))
+            {
+                    transactions.length
+                        ?   transactions.map(transaction => (
+                                <TransactionsTableRow key={transaction.id} transaction={transaction} />
+                            ))
+                        :   <tr>
+                                <td className="uk-text-large uk-text-primary" colSpan={6}>Финансовые операции отсутствуют</td>
+                            </tr>
                 }
             </tbody>
         </table>

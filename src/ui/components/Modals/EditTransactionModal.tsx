@@ -15,6 +15,7 @@ type TransactionModalParams = {
 export default function EditTransactionModal() {
     const date = useAppSelector(state => state.date);
     const transaction = useAppSelector(state => state.transaction);
+    const currentPage = useAppSelector(state => state.pagination);
 
     const windowHeaders: TransactionModalParams = {
         [TransactionEvent.ADD]: "Новая транзакция",
@@ -25,8 +26,28 @@ export default function EditTransactionModal() {
     const transactionService = new TransactionService(dispatch);
 
     const transactionEvents = {
-        [TransactionEvent.ADD]: (): void => { transactionService.addTransaction( transaction.transactionData, { year: date.selectedYear, month: date.selectedMonth, note: transaction.requiredNote }) },
-        [TransactionEvent.EDIT]: (): void => { transactionService.editTransaction(transaction.id, transaction.transactionData, { year: date.selectedYear, month: date.selectedMonth, note: transaction.requiredNote }) }
+
+        [TransactionEvent.ADD]: (): void => {transactionService.addTransaction(
+            transaction.transactionData,
+            {
+                year: date.selectedYear,
+                month: date.selectedMonth,
+                note: transaction.requiredNote,
+                page: currentPage
+            }
+        )},
+
+        [TransactionEvent.EDIT]: (): void => {transactionService.editTransaction(
+            transaction.id,
+            transaction.transactionData,
+            {
+                year: date.selectedYear,
+                month: date.selectedMonth,
+                note: transaction.requiredNote,
+                page: currentPage
+            }
+        )}
+
     };
 
     const buttonValues: TransactionModalParams = {

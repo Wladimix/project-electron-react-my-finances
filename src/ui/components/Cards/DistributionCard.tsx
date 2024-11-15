@@ -12,6 +12,7 @@ type DistributionCardProps = {
 export default function DistributionCard({ distributionType }: DistributionCardProps) {
     const date = useAppSelector(state => state.date);
     const requiredNote = useAppSelector(state => state.transaction.requiredNote);
+    const currentPage = useAppSelector(state => state.pagination);
 
     const [name, setName] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
@@ -30,7 +31,12 @@ export default function DistributionCard({ distributionType }: DistributionCardP
             distributionType.id,
             distributionTypeName,
             distributionTypeAmount,
-            { year: date.selectedYear, month: date.selectedMonth, note: requiredNote }
+            {
+                year: date.selectedYear,
+                month: date.selectedMonth,
+                note: requiredNote,
+                page: currentPage
+            }
         );
 
         setName("");
@@ -42,7 +48,12 @@ export default function DistributionCard({ distributionType }: DistributionCardP
             distributionType.id,
             distributionType.name,
             distributionType.amount,
-            { year: date.selectedYear, month: date.selectedMonth, note: requiredNote }
+            {
+                year: date.selectedYear,
+                month: date.selectedMonth,
+                note: requiredNote,
+                page: currentPage
+            }
         );
     };
 
