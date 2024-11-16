@@ -12,7 +12,7 @@ import { TablesNames } from "../constants";
 class TransactionService {
 
     async getAll(filter: TransactionFilter): Promise<AllTransactions>  {
-        const transactionsQuery = TransactionModel.getAll(filter.note, filter.page);
+        const transactionsQuery = TransactionModel.getAll(filter.note, filter.page as number);
 
         const result = await transactionsQuery.whereBetween(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, makeDateSearchOptions(filter.year, filter.month));
         console.info(`Получены данные из таблицы "${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}"`);
@@ -46,10 +46,11 @@ class TransactionService {
         }), {});
     };
 
-    async getCount(): Promise<number> {
-        const numberOfTransactions = await TransactionModel.getCount();
+    async getCount(filter: TransactionFilter): Promise<number> {
+        const numberOfTransactionsQuery = TransactionModel.getCount(filter.note);
+        const result = (await numberOfTransactionsQuery.whereBetween(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, makeDateSearchOptions(filter.year, filter.month)))[0].count;
         console.info(`Получено количество записей таблицы "${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}"`);
-        return numberOfTransactions;
+        return result;
     };
 
     async add(transaction: AddTransactionDTO): Promise<number> {

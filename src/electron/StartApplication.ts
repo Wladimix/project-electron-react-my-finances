@@ -6,12 +6,13 @@ import DistributionModel from "./DustributionFinances/DustributionModel";
 import fs from "fs";
 import NoteController from "./Note/NoteController";
 import NoteModel from "./Note/NoteModel";
+import seed from "./seed";
 import TransactionController from "./Transaction/TransactionController";
 import TransactionModel from "./Transaction/TransactionModel";
 
+import { DATABASE_PATH } from "./connectionDB";
 import { TablesNames, VALUE_MISSING } from "./constants";
 import { ipcMain } from "electron";
-import { DATABASE_PATH } from "./connectionDB";
 
 class StartService {
 
@@ -75,6 +76,10 @@ class StartService {
 
     ipcHandle<Channel extends keyof ElectronApi, Listener extends IController[Channel]>(channel: Channel, listener: Listener): void {
         ipcMain.handle(channel, listener);
+    };
+
+    async runSeed() {
+        await seed();
     };
 
 };

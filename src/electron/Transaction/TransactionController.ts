@@ -41,9 +41,9 @@ class TransactionController implements ITransactionController {
         };
     };
 
-    async getNumberOfTransactions(): Promise<ResponceData<number>> {
+    async getNumberOfTransactions(event, filter: TransactionFilter): Promise<ResponceData<number>> {
         try {
-            const numberOfTransactions = await TransactionService.getCount();
+            const numberOfTransactions = await TransactionService.getCount(filter);
 
             return {
                 data: numberOfTransactions,

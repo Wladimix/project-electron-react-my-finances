@@ -65,6 +65,7 @@ export default function Transactions() {
                         />
                     </div>
                 </div>
+                <div><a className="uk-button uk-button-primary" href="#statistics" data-uk-scroll>СТАТИСТИКА</a></div>
             </div>
 
             <TransactionsTable />

@@ -14,7 +14,11 @@ export default function Pagination() {
 
     const [pageCount, setPageCount] = useState<number>(currentPage + 1);
 
-    useEffect(() => { CalculationService.calculatePageCount(setPageCount) }, [allTransactions]);
+    useEffect(() => { CalculationService.calculatePageCount(setPageCount, {
+        year: date.selectedYear,
+        month: date.selectedMonth,
+        note: transaction.requiredNote
+    }) }, [allTransactions]);
 
     const dispatch = useAppDispatch();
 
@@ -26,7 +30,7 @@ export default function Pagination() {
             note: transaction.requiredNote,
             page: selected
         });
-    }
+    };
 
     return (
         <ReactPaginate

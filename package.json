@@ -9,10 +9,12 @@
         "build": "webpack --config ./webpack.config.js",
         "watch": "webpack --config ./webpack.config.js --watch",
         "start": "npm run build && electron ./build/main.js",
-        "start:dev": "npm-run-all --parallel watch start",
-        "dist:mac": "npm run build && electron-builder --mac --arm64",
-        "dist:win": "npm run build && electron-builder --win --x64",
-        "dist:linux": "npm run build && electron-builder --linux --x64"
+        "start-seed": "cross-env SEED=true npm run start",
+        "start:watch": "npm-run-all --parallel watch start",
+        "start:watch-seed": "cross-env SEED=true npm run start:watch",
+        "dist:mac": "cross-env MODE=production npm run build && electron-builder --mac --arm64",
+        "dist:win": "cross-env MODE=production npm run build && electron-builder --win --x64",
+        "dist:linux": "cross-env MODE=production npm run build && electron-builder --linux --x64"
     },
     "devDependencies": {
         "@types/knex": "^0.16.1",
@@ -33,6 +35,7 @@
     },
     "dependencies": {
         "@reduxjs/toolkit": "^2.3.0",
+        "cross-env": "^7.0.3",
         "date-fns": "^4.1.0",
         "knex": "^3.1.0",
         "react": "^18.3.1",

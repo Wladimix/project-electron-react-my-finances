@@ -4,7 +4,7 @@ import YearlyStatisticCard from "./Cards/YearlyStatisticCard";
 export default function Statistics() {
     return (
         <>
-            <h1 className="uk-heading-line uk-width-expand">
+            <h1 id="statistics" className="uk-heading-line uk-width-expand">
                 <span>
                     <button
                         className="uk-button uk-button-primary uk-margin-right"

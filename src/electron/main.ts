@@ -29,6 +29,10 @@ app.whenReady().then(async () => {
 
     await StartApplication.createTablesIfNotExist();
     StartApplication.createRouter();
+    if (process.env.SEED === "true") {
+        await StartApplication.runSeed();
+    }
+
     createWindow();
 });
 
