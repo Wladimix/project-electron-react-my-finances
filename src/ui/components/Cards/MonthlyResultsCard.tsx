@@ -4,12 +4,12 @@ import TransactionService from "../../services/Transaction/TransactionService";
 
 import { NOT_DEFINE } from "../../constants";
 import { selectMonth } from "../../storage/dateSlice";
+import { setPage } from "../../storage/paginationSlice";
 import { useAppDispatch, useAppSelector } from "../../storage/store";
 
 export default function MonthlyResultsCard() {
     const date = useAppSelector(state => state.date);
     const requiredNote = useAppSelector(state => state.transaction.requiredNote);
-    const currentPage = useAppSelector(state => state.pagination);
 
     const dispatch = useAppDispatch();
     const transactionService = new TransactionService(dispatch);
@@ -17,8 +17,9 @@ export default function MonthlyResultsCard() {
     const months = date.dates[date.selectedYear] ? [ ...date.dates[date.selectedYear] ].reverse() : [];
 
     const changeMonthEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        transactionService.loadTransactions({ year: date.selectedYear, month: e.target.value, note: requiredNote, page: currentPage });
+        transactionService.loadTransactions({ year: date.selectedYear, month: e.target.value, note: requiredNote, page: 0 });
         dispatch(selectMonth(e.target.value));
+        dispatch(setPage(0));
     };
 
     return (

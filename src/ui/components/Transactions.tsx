@@ -3,15 +3,15 @@ import TransactionService from "../services/Transaction/TransactionService";
 import TransactionsTable from "./Tables/TransactionsTable";
 
 import { setEventType, setRequiredNote, setTransactionData } from "../storage/transactionSlice";
+import { setNotes } from "../storage/dataSlice";
+import { setPage } from "../storage/paginationSlice";
 import { TransactionEvent } from "../constants";
 import { useAppDispatch, useAppSelector } from "../storage/store";
-import { setNotes } from "../storage/dataSlice";
 import { useState } from "react";
 
 export default function Transactions() {
     const transaction = useAppSelector(state => state.transaction);
     const date = useAppSelector(state => state.date);
-    const currentPage = useAppSelector(state => state.pagination);
 
     const [timerId, setTimerId] = useState<NodeJS.Timeout>();
 
@@ -25,6 +25,7 @@ export default function Transactions() {
 
     const changeNoteEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setRequiredNote(e.target.value.toLowerCase().replace(/ +/g, ' ')));
+        dispatch(setPage(0));
 
         clearTimeout(timerId);
         setTimerId(setTimeout(() => {
@@ -33,7 +34,7 @@ export default function Transactions() {
                 year: date.selectedYear,
                 month: date.selectedMonth,
                 note: e.target.value.toLowerCase().trim().replace(/ +/g, ' '),
-                page: currentPage
+                page: 0
             });
 
         }, 1000));

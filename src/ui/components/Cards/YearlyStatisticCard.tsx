@@ -8,14 +8,11 @@ export default function YearlyStatisticCard() {
 
     return (
         <div className="uk-card uk-card-default uk-card-body uk-background-muted">
-            {
-                date.selectedYear !== NOT_DEFINE
-                    ?   <button className="uk-button uk-button-default uk-card-badge uk-label">ДИАГРАММА ЗА {date.selectedYear}</button>
-                    :   <div className="uk-card-badge">ГОД НЕ ВЫБРАН</div>
-            }
+
             <h1 className="uk-heading-medium">
                 {date.selectedYear !== NOT_DEFINE ? date.selectedYear : <span data-uk-icon="icon: calendar; ratio: 3"></span>}
             </h1>
+
             {
                 date.selectedYear !== NOT_DEFINE
                     ?   <ExpenditureStatistics date={{ selectedYear: date.selectedYear, selectedMonth: NOT_DEFINE }} />

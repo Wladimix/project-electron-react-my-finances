@@ -1,6 +1,7 @@
 import CalculationService from "../../services/CalculationService";
 
 import { DELETED_PARAMS_REGULAR } from "../../constants";
+import { Doughnut } from "react-chartjs-2";
 import { useAppSelector } from "../../storage/store";
 import { useEffect, useState } from "react";
 
@@ -27,6 +28,28 @@ export default function ExpenditureStatistics({ date }: ExpenditureStatisticsPro
 
     return (
         <>
+            <Doughnut
+                data={{
+                    labels: amountOfExpenses.map(expenses => expenses.purchase),
+                    datasets: [{
+                        data: amountOfExpenses.map(expenses => Number(expenses.amount.replace(/[\s₽]+/g, "")))
+                    }]
+                }}
+                options={{
+                    responsive: true,
+                    plugins: {
+                        colors: {
+                            forceOverride: true
+                        },
+                        legend: {
+                            position: "bottom"
+                        }
+                    }
+                }}
+            />
+
+            <hr></hr>
+
             {
                 amountOfExpenses.length
                     ?   amountOfExpenses.map(expenses => (
