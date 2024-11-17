@@ -5,7 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
         <style>
+
             * { user-select: none; }
+
+            body {
+                overflow-y: scroll;
+            }
+
+            body::-webkit-scrollbar {
+                width: 10px;
+                background-color: #f9f9fd;
+            }
+
+            body::-webkit-scrollbar-thumb {
+                background-color: #32D296;
+            }
+
+            body::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+                background-color: #f9f9fd;
+            }
+
         </style>
     </head>
     <body>
