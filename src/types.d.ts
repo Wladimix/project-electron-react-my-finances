@@ -166,7 +166,7 @@ type ElectronApi = {
 
 
     getAllTransactions: (filter: TransactionFilter) => Promise<ResponceData<GetTransactionDTO[]>>
-    getAllTransactionDates: () => Promise<ResponceData<any>>
+    getAllTransactionDates: () => Promise<ResponceData<GetDatesDTO>>
     getNumberOfTransactions: (filter: TransactionFilter) => Promise<ResponceData<number>>
     addTransaction: (transaction: AddTransactionDTO) => Promise<ResponceData<number>>
     editTransaction: (transaction: EditTransactionDTO) => Promise<ResponceData<boolean>>

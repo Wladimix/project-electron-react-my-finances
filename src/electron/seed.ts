@@ -22,16 +22,20 @@ export default async function seed() {
     ]);
 
     await knex(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME).del();
-    await knex(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME).insert(makeTransactions());
+    await knex(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME).insert([
+        ...makeTransactions(2022),
+        ...makeTransactions(2023),
+        ...makeTransactions(2024),
+    ]);
 
 };
 
-function makeTransactions() {
+function makeTransactions(year: number) {
     let transactions: Object[] = [];
 
     for (let i = 0; i <= 11; i++) {
         transactions.push({
-            date: new Date(2024, i, Math.floor(Math.random() * (15 - 1 + 1) + 1)),
+            date: new Date(year, i, Math.floor(Math.random() * (15 - 1 + 1) + 1)),
             source_of_transaction_id: 1,
             transaction_address_id: 2,
             spending_category_id: 1,
@@ -42,7 +46,7 @@ function makeTransactions() {
 
         for (let j = 1; j <= 5; j++) {
             transactions.push({
-                date: new Date(2024, i, Math.floor(Math.random() * (28 - 1 + 1) + 1)),
+                date: new Date(year, i, Math.floor(Math.random() * (28 - 1 + 1) + 1)),
                 source_of_transaction_id: 2,
                 transaction_address_id: 1,
                 spending_category_id: Math.floor(Math.random() * (7 - 2 + 1) + 2),

@@ -1,6 +1,6 @@
 import CalculationService from "../../services/CalculationService";
 
-import { DELETED_PARAMS_REGULAR, NOT_DEFINE } from "../../constants";
+import { DELETED_PARAMS_REGULAR } from "../../constants";
 import { useAppSelector } from "../../storage/store";
 import { useEffect, useState } from "react";
 

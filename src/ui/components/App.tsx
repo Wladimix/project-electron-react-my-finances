@@ -8,8 +8,11 @@ import Transactions from "./Transactions";
 import TransactionService from '../services/Transaction/TransactionService';
 import Statistics from "./Statistics";
 
+import { Chart, CategoryScale } from "chart.js/auto";
 import { useAppDispatch, useAppSelector } from "../storage/store";
 import { useEffect } from "react";
+
+Chart.register(CategoryScale);
 
 export default function App() {
     const date = useAppSelector(state => state.date);

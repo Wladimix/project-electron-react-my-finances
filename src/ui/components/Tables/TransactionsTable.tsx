@@ -19,14 +19,14 @@ export default function TransactionsTable() {
             </thead>
             <tbody>
             {
-                    transactions.length
-                        ?   transactions.map(transaction => (
-                                <TransactionsTableRow key={transaction.id} transaction={transaction} />
-                            ))
-                        :   <tr>
-                                <td className="uk-text-large uk-text-primary" colSpan={6}>Финансовые операции отсутствуют</td>
-                            </tr>
-                }
+                transactions.length
+                    ?   transactions.map(transaction => (
+                            <TransactionsTableRow key={transaction.id} transaction={transaction} />
+                        ))
+                    :   <tr>
+                            <td className="uk-text-large uk-text-primary" colSpan={6}>Финансовые операции отсутствуют</td>
+                        </tr>
+            }
             </tbody>
         </table>
     );

@@ -1,3 +1,4 @@
+import { NOT_DEFINE } from "../constants";
 import { showNotification } from "../lib/utils";
 
 class CalculationService {
@@ -49,6 +50,22 @@ class CalculationService {
         };
     };
 
+    async getComparativeStatistics(setComparativeStatistics: React.Dispatch<React.SetStateAction<{ [key: keyof GetDatesDTO]: TotalStatisticsDTO }>>) {
+        const dates = await window.electron.getAllTransactionDates();
+        showNotification(dates, { onlyErrorChecking: true });
+
+        const years = Object.keys(dates.data as GetDatesDTO);
+        const comparativeStatistics: { [key: keyof GetDatesDTO]: TotalStatisticsDTO } = {};
+
+        for (let year of years) {
+            const totalAmount = await window.electron.getTotalAmount({ year, month: NOT_DEFINE });
+            showNotification(totalAmount, { onlyErrorChecking: true });
+
+            comparativeStatistics[year] = totalAmount.data as TotalStatisticsDTO;
+        };
+
+        setComparativeStatistics(comparativeStatistics);
+    };
 };
 
 export default new CalculationService();

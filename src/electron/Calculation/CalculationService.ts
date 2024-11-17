@@ -3,7 +3,7 @@ import ObjectEditing from "../lib/ObjectEditing";
 import TransactionModel from "../Transaction/TransactionModel";
 
 import { convertAmountToString, makeDateSearchOptions } from "../lib/utils";
-import { TablesNames, TransactionTypes } from "../constants";
+import { TablesNames, TransactionTypes, NOT_DEFINE } from '../constants';
 
 class CalculationService {
 
@@ -34,6 +34,10 @@ class CalculationService {
     };
 
     async getStatisticsOnExpenses(date: DateDTO): Promise<AmountOfExpenses> {
+        if (date.year === NOT_DEFINE) {
+            return [];
+        };
+
         const amountOfExpensesQuery = TransactionModel.getAmountOfExpensesByCategory();
         const { year, month } = date;
 
