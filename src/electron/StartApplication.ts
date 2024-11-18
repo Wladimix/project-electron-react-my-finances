@@ -6,11 +6,12 @@ import DistributionModel from "./DustributionFinances/DustributionModel";
 import fs from "fs";
 import NoteController from "./Note/NoteController";
 import NoteModel from "./Note/NoteModel";
+import path from 'path';
 import seed from "./seed";
 import TransactionController from "./Transaction/TransactionController";
 import TransactionModel from "./Transaction/TransactionModel";
 
-import { DATABASE_PATH } from "./connectionDB";
+import { DATABASE_NAME, DATABASE_PATH } from "./connectionDB";
 import { TablesNames, VALUE_MISSING } from "./constants";
 import { ipcMain } from "electron";
 
@@ -20,6 +21,10 @@ class StartService {
         try {
 
             if (!fs.existsSync(DATABASE_PATH)) {
+                fs.mkdirSync(DATABASE_PATH);
+            };
+
+            if (!fs.existsSync(path.join(DATABASE_PATH + DATABASE_NAME))) {
 
                 await DistributionModel.createTable();
                 console.info(`Таблица "${TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME}" создана`);
@@ -70,6 +75,7 @@ class StartService {
         this.ipcHandle("getCapital", CalculationController.getCapital);
         this.ipcHandle("getTotalAmount", CalculationController.getTotalAmount);
         this.ipcHandle("getStatisticsOnExpenses", CalculationController.getStatisticsOnExpenses);
+        this.ipcHandle("getInflationData", CalculationController.getInflationData);
 
     };
 

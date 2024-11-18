@@ -49,6 +49,31 @@ class CalculationService {
         ) as AmountOfExpenses;
     };
 
+    async calculateInflation(year: number): Promise<InflationDTO> {
+        const recordsForInflation = await TransactionModel.getRecordsForInflation(year);
+        console.log(recordsForInflation);
+
+        return {
+            year: 5,
+            data: {
+                "Продукт 1": {
+                    "январь": 3,
+                    "февраль": 0,
+                    "март": 4,
+                    "апрель": 0,
+                    "май": 0,
+                    "июнь": 0,
+                    "июль": 2,
+                    "август": 5,
+                    "сентябрь": 0,
+                    "октябрь": 0,
+                    "ноябрь": 3,
+                    "декабрь": 3
+                }
+            }
+        }
+    };
+
 };
 
 export default new CalculationService();

@@ -33,7 +33,8 @@ export default function TransactionsTableRow({ transaction }: TransactionsTableR
             transactionAddressId: transaction.transactionAddressId,
             spendingCategoryId: transaction.spendingCategoryId,
             note: transaction.note,
-            amount: transaction.amount
+            amount: transaction.amount,
+            toCalculateInflation: transaction.toCalculateInflation
         }));
     };
 

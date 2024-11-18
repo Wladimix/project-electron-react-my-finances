@@ -66,6 +66,24 @@ class CalculationService {
 
         setComparativeStatistics(comparativeStatistics);
     };
+
+    async getInflationData(setInflation: React.Dispatch<React.SetStateAction<InflationDTO>>, year: number) {
+        const inflation = await window.electron.getInflationData(year);
+        showNotification(inflation, { onlyErrorChecking: true });
+
+        if (inflation.data) {
+            setInflation(inflation.data);
+        } else {
+            setInflation({
+                year: 0,
+                data: {
+                    "продукт": {
+                        "месяц": 0
+                    }
+                }
+            })
+        };
+    };
 };
 
 export default new CalculationService();

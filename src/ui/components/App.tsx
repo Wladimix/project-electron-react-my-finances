@@ -2,6 +2,7 @@ import SpendingCategoryService from "../services/SpendingCategoryService";
 import DistributionAndCategoryModal from "./Modals/DistributionAndCategoryModal";
 import DistributionService from "../services/DistributionService";
 import EditTransactionModal from "./Modals/EditTransactionModal";
+import Inflation from "./Inflation";
 import MonthlyYearlyResults from "./MonthlyYearlyResults";
 import TotalCard from "./Cards/TotalCard";
 import Transactions from "./Transactions";
@@ -53,6 +54,7 @@ export default function App() {
                 }
 
                 <Statistics />
+                <Inflation />
 
             </div>
 

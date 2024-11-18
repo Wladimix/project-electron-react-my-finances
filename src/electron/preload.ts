@@ -23,7 +23,8 @@ const api: ElectronApi = {
 
     getCapital: () => ipcRenderer.invoke("getCapital"),
     getTotalAmount: (date: DateDTO) => ipcRenderer.invoke("getTotalAmount", date),
-    getStatisticsOnExpenses: (date: DateDTO) => ipcRenderer.invoke("getStatisticsOnExpenses", date)
+    getStatisticsOnExpenses: (date: DateDTO) => ipcRenderer.invoke("getStatisticsOnExpenses", date),
+    getInflationData: (year: number) => ipcRenderer.invoke("getInflationData", year)
 
 }
 

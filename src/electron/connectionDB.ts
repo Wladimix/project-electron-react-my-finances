@@ -2,12 +2,13 @@ import knex from "knex";
 import os from "os";
 import path from "path";
 
-export const DATABASE_PATH = path.join(os.homedir(), "my_finances_db.sqlite3")
+export const DATABASE_PATH = path.join(os.homedir(), "my_finances_data");
+export const DATABASE_NAME = "my_finances_db.sqlite3";
 
 const database = knex({
     client: "sqlite3",
     connection: {
-        filename: DATABASE_PATH
+        filename: path.join(DATABASE_PATH, DATABASE_NAME)
     },
     useNullAsDefault: true
 });

@@ -3,7 +3,7 @@ import ErrorHandling from "../lib/ErrorHandling";
 
 import { RequestStatuses } from "../constants";
 
-class CalculationController {
+class CalculationController implements ICalculationController {
 
     async getCapital(): Promise<ResponceData<string>> {
         try {
@@ -55,6 +55,24 @@ class CalculationController {
                 data: null,
                 status: RequestStatuses.ERROR,
                 message: await ErrorHandling.makeErrorMessage(error as Error, "Ошибка получения статистики по расходам")
+            };
+        };
+    };
+
+    async getInflationData(event, year: number): Promise<ResponceData<InflationDTO>> {
+        try {
+            const inflationData = await CalculationService.calculateInflation(year);
+
+            return {
+                data: inflationData,
+                status: RequestStatuses.SUCCESS,
+                message: "Получены данные по инфляции"
+            }
+        } catch (error) {
+            return {
+                data: null,
+                status: RequestStatuses.ERROR,
+                message: await ErrorHandling.makeErrorMessage(error as Error, "Ошибка получения данных по инфляции")
             };
         };
     };

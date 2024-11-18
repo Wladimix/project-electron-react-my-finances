@@ -58,7 +58,8 @@ type GetTransactionDTO = {
     spendingCategoryDeleted: boolean,
     note: string,
     amount: string,
-    transactionType: string
+    transactionType: string,
+    toCalculateInflation: boolean
 };
 type GetDatesDTO = {
     [key: string]: number[]
@@ -70,7 +71,8 @@ type AddTransactionDTO = {
     spendingCategoryId: number,
     note: string,
     amount: string,
-    transactionType: string
+    transactionType: string,
+    toCalculateInflation: boolean
 }
 type EditTransactionDTO = {
     id: number
@@ -80,7 +82,8 @@ type EditTransactionDTO = {
     spendingCategoryId: number,
     note: string,
     amount: string,
-    transactionType: string
+    transactionType: string,
+    toCalculateInflation: boolean
 }
 type DeleteTransactionDTO = EditTransactionDTO
 interface ITransactionController {
@@ -94,6 +97,7 @@ interface ITransactionController {
 
 
 
+
 type GetNoteDTO = {
     id: number
     name: string
@@ -101,6 +105,7 @@ type GetNoteDTO = {
 interface INoteController {
     getNotes: (event: Electron.IpcMainInvokeEvent, substring: string) => Promise<ResponceData<GetNoteDTO[]>>
 }
+
 
 
 
@@ -123,10 +128,19 @@ type AmountOfExpenses = {
     purchase: string
     amount: string
 }
+type InflationDTO = {
+    year: number,
+    data: {
+        [key: string]: {
+            [key: string]: number
+        }
+    }
+}
 interface ICalculationController {
     getCapital: () => Promise<ResponceData<string>>
     getTotalAmount: (event: Electron.IpcMainInvokeEvent, date: DateDTO) => Promise<ResponceData<TotalStatisticsDTO>>
-    getStatisticsOnExpenses: (event: Electron.IpcMainInvokeEvent, date) => Promise<ResponceData<AmountOfExpenses[]>>
+    getStatisticsOnExpenses: (event: Electron.IpcMainInvokeEvent, date: DateDTO) => Promise<ResponceData<AmountOfExpenses[]>>
+    getInflationData: (event: Electron.IpcMainInvokeEvent, year: number) => Promise<ResponceData<InflationDTO>>
 }
 
 
@@ -177,7 +191,8 @@ type ElectronApi = {
 
     getCapital: () => Promise<ResponceData<string>>
     getTotalAmount: (date: DateDTO) => Promise<ResponceData<TotalStatisticsDTO>>
-    getStatisticsOnExpenses: (date) => Promise<ResponceData<AmountOfExpenses[]>>
+    getStatisticsOnExpenses: (date: DateDTO) => Promise<ResponceData<AmountOfExpenses[]>>
+    getInflationData: (year: number) => Promise<ResponceData<InflationDTO>>
 
 }
 

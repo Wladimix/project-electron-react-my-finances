@@ -1,5 +1,6 @@
 import CalculationService from "../../services/CalculationService";
 
+import { ChartEvent, LegendElement, LegendItem } from "chart.js";
 import { DELETED_PARAMS_REGULAR } from "../../constants";
 import { Doughnut } from "react-chartjs-2";
 import { useAppSelector } from "../../storage/store";
@@ -26,23 +27,39 @@ export default function ExpenditureStatistics({ date }: ExpenditureStatisticsPro
         CalculationService.getStatisticsOnExpenses(setAmountOfExpenses, { year: date.selectedYear, month: date.selectedMonth })
     }, [transactions]);
 
+    const handleHover = (evt: ChartEvent, item: LegendItem, legend: LegendElement<"doughnut">): void => {
+        const backgroundColor = legend.chart.data.datasets[0].backgroundColor as string[];
+        backgroundColor.forEach((color, index, colors) => {
+            colors[index] = index === item.index || color.length === 9 ? color : color + "4D";
+        });
+        legend.chart.update();
+    };
+
+    const handleLeave = (evt: ChartEvent, item: LegendItem, legend: LegendElement<"doughnut">): void => {
+        const backgroundColor = legend.chart.data.datasets[0].backgroundColor as string[];
+        backgroundColor.forEach((color, index, colors) => {
+            colors[index] = color.length === 9 ? color.slice(0, -2) : color;
+        });
+        legend.chart.update();
+    };
+
     return (
         <>
             <Doughnut
                 data={{
                     labels: amountOfExpenses.map(expenses => expenses.purchase),
                     datasets: [{
-                        data: amountOfExpenses.map(expenses => Number(expenses.amount.replace(/[\s₽]+/g, "")))
+                        data: amountOfExpenses.map(expenses => Number(expenses.amount.replace(/[\s₽]+/g, ""))),
+                        backgroundColor: ["#CB4335", "#1F618D", "#F1C40F", "#27AE60", "#884EA0", "#D35400"]
                     }]
                 }}
                 options={{
                     responsive: true,
                     plugins: {
-                        colors: {
-                            forceOverride: true
-                        },
                         legend: {
-                            position: "bottom"
+                            position: "bottom",
+                            onHover: handleHover,
+                            onLeave: handleLeave
                         }
                     }
                 }}

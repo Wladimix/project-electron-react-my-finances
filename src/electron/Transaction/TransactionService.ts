@@ -25,6 +25,7 @@ class TransactionService {
             OE.changeProperty("sourceOfTransactionDeleted", value => Boolean(value));
             OE.changeProperty("spendingCategoryDeleted", value => Boolean(value));
             OE.changeProperty("amount", convertAmountToString);
+            OE.changeProperty("toCalculateInflation", value => Boolean(value));
 
             return OE.getResult();
 
@@ -61,6 +62,7 @@ class TransactionService {
         const noteId = (await NoteService.findOrAdd(transaction.note)).id;
         const amount = convertAmountToNumber(transaction.amount);
         const transactionType = transaction.transactionType;
+        const toCalculateInflation = transaction.toCalculateInflation;
 
         const sourceOfTransaction = await DistributionModel.getOne(sourceOfTransactionId);
         const transactionAddress = await DistributionModel.getOne(transactionAddressId);
@@ -75,7 +77,8 @@ class TransactionService {
             spendingCategoryId,
             noteId,
             amount,
-            transactionType
+            transactionType,
+            toCalculateInflation
         });
         console.info(`В таблицу "${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}" добавлена транзакция`);
 
@@ -92,6 +95,7 @@ class TransactionService {
         const spendingCategoryId = transaction.spendingCategoryId;
         const amount = convertAmountToNumber(transaction.amount);
         const transactionType = transaction.transactionType;
+        const toCalculateInflation = transaction.toCalculateInflation;
 
         const sourceOfTransaction = await DistributionModel.getOne(sourceOfTransactionId);
         const transactionAddress = await DistributionModel.getOne(transactionAddressId);
@@ -123,7 +127,8 @@ class TransactionService {
             spendingCategoryId,
             noteId: noteForEditing.id,
             amount,
-            transactionType
+            transactionType,
+            toCalculateInflation
         }));
         console.info(`Запись #${transaction.id} в таблице "${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}" отредактирована`);
 
@@ -173,6 +178,7 @@ type AllTransactions = {
     note: string,
     amount: string,
     transactionType: string
+    toCalculateInflation: boolean
 }[];
 
 type Dates = {

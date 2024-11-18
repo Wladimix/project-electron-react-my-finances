@@ -15,7 +15,8 @@ export default function AddressOrCategoryInput() {
     const changeAddressOrCategoryEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         dispatch(setTransactionData({
             ...transactionData,
-            ...transactionFormService.identifyAndGetAddressOrCategoryToSend(e.target.value)
+            ...transactionFormService.identifyAndGetAddressOrCategoryToSend(e.target.value),
+            toCalculateInflation: false
         }));
     };
 

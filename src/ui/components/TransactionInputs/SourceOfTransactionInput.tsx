@@ -8,7 +8,11 @@ export default function SourceOfTransactionInput() {
     const dispatch = useAppDispatch();
 
     const changeSourceOfTransactionEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        dispatch(setTransactionData({ ...transactionData, sourceOfTransactionId: Number(e.target.value) }));
+        dispatch(setTransactionData({
+            ...transactionData,
+            sourceOfTransactionId: Number(e.target.value),
+            toCalculateInflation: false
+        }));
     };
 
     return (

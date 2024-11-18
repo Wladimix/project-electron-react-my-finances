@@ -39,7 +39,7 @@ export default function Statistics() {
             </div>
 
             <div className="uk-card uk-card-default uk-card-body uk-margin">
-                <h2 className="uk-card-title">Общая статистика по годам</h2>
+                <h2 className="uk-card-title">Общая статистика по годам (₽)</h2>
                 <Bar data={{
                     labels: Object.keys(comparativeStatistics),
                     datasets: [
@@ -58,7 +58,7 @@ export default function Statistics() {
                             backgroundColor: "rgba(200, 50, 50, 0.5)"
                         }
                     ]
-                }} />
+                }}/>
             </div>
         </>
     );

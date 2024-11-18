@@ -1,6 +1,7 @@
 import AddressOrCategoryInput from "../TransactionInputs/AddressOrCategoryInput";
 import AmountInput from "../TransactionInputs/AmountInput";
 import DateInput from "../TransactionInputs/DateInput";
+import InflationCheckBox from "../TransactionInputs/InflationCheckBox";
 import NoteInput from "../TransactionInputs/NoteInput";
 import SourceOfTransactionInput from "../TransactionInputs/SourceOfTransactionInput";
 import TransactionService from "../../services/Transaction/TransactionService";
@@ -80,6 +81,7 @@ export default function EditTransactionModal() {
                     <SourceOfTransactionInput />
                     <AddressOrCategoryInput />
                     <NoteInput />
+                    <InflationCheckBox />
                     <AmountInput />
 
                     <div className={textClasses[transaction.transactionData.transactionType]}>

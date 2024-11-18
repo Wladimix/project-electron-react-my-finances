@@ -17,6 +17,7 @@ class TransactionModel {
                 table.integer("note_id").references("id").inTable(TablesNames.NOTES_TABLE).notNullable();
                 table.integer("amount");
                 table.string("transaction_type", 7).notNullable();
+                table.boolean("to_calculate_inflation").defaultTo(false).notNullable();
             });
     };
 
@@ -36,6 +37,7 @@ class TransactionModel {
                 `${TablesNames.NOTES_TABLE}.name as note`,
                 `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.amount`,
                 `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.transaction_type as transactionType`,
+                `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.to_calculate_inflation as toCalculateInflation`
             )
             .from(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME)
             .offset(page * 30).limit(30)
@@ -110,6 +112,18 @@ class TransactionModel {
             .where({ transaction_type: transactionType });
     };
 
+    async getRecordsForInflation(year: number): Promise<RecordsForInflation> {
+        return await knex
+            .select(
+                `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`,
+                `${TablesNames.NOTES_TABLE}.name`,
+                `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.amount`
+            )
+            .from(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME)
+            .join(TablesNames.NOTES_TABLE, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.note_id`, "=", `${TablesNames.NOTES_TABLE}.id`)
+            .where({ to_calculate_inflation: true });
+    };
+
     async add(transaction: AddedTransaction): Promise<number> {
         return await knex(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME)
             .insert({
@@ -119,7 +133,8 @@ class TransactionModel {
                 spending_category_id: transaction.spendingCategoryId,
                 note_id: transaction.noteId,
                 amount: transaction.amount,
-                transaction_type: transaction.transactionType
+                transaction_type: transaction.transactionType,
+                to_calculate_inflation: transaction.toCalculateInflation
             });
     };
 
@@ -133,7 +148,8 @@ class TransactionModel {
                 spending_category_id: transaction.spendingCategoryId,
                 note_id: transaction.noteId,
                 amount: transaction.amount,
-                transaction_type: transaction.transactionType
+                transaction_type: transaction.transactionType,
+                to_calculate_inflation: transaction.toCalculateInflation
             });
     };
 
@@ -165,7 +181,8 @@ type AddedTransaction = {
     spendingCategoryId: number
     noteId: number
     amount: number
-    transactionType: string
+    transactionType: string,
+    toCalculateInflation: boolean
 };
 
 type EditableTransaction = {
@@ -176,9 +193,16 @@ type EditableTransaction = {
     spendingCategoryId: number
     noteId: number
     amount: number
-    transactionType: string
+    transactionType: string,
+    toCalculateInflation: boolean
 };
 
 type Dates = {
     date: number
+}[];
+
+type RecordsForInflation = {
+    date: Date,
+    name: string,
+    amount: number
 }[];

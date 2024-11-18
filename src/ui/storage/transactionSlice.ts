@@ -15,7 +15,8 @@ const initialState: transactionState = {
         spendingCategoryId: 1,
         note: VALUE_MISSING,
         amount: "",
-        transactionType: "type"
+        transactionType: "type",
+        toCalculateInflation: false
     }
 };
 

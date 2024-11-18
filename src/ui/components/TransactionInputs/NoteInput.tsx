@@ -17,7 +17,11 @@ export default function NoteInput() {
 
     const changeNoteEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setTransactionData(
-            { ...transactionData, note: e.target.value.toLowerCase().replace(/ +/g, ' ') }
+            {
+                ...transactionData,
+                note: e.target.value.toLowerCase().replace(/ +/g, ' '),
+                toCalculateInflation: false
+            }
         ));
 
         clearTimeout(timerId);
