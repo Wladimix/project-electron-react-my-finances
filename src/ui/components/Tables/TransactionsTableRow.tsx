@@ -2,7 +2,7 @@ import TransactionRowService from '../../services/Transaction/TransactionRowServ
 import TransactionService from '../../services/Transaction/TransactionService';
 
 import { setEventType, setTransactionData, setTransactionId } from '../../storage/transactionSlice';
-import { TransactionEvent } from '../../constants';
+import { NOT_DEFINE, TransactionEvent } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../storage/store';
 import { setNotes } from '../../storage/dataSlice';
 
@@ -14,6 +14,7 @@ export default function TransactionsTableRow({ transaction }: TransactionsTableR
     const date = useAppSelector(state => state.date);
     const requiredNote = useAppSelector(state => state.transaction.requiredNote);
     const currentPage = useAppSelector(state => state.pagination);
+    const inflation = useAppSelector(state => state.inflation);
 
     const transactionRowService = new TransactionRowService(transaction);
     const transactionParams = transactionRowService.makeTransactionParamsToShow();
@@ -55,7 +56,13 @@ export default function TransactionsTableRow({ transaction }: TransactionsTableR
                 <td>{data.date}</td>
                 <td className={classes.sourceOfTransaction}>{data.sourceOfTransaction}</td>
                 <td className={classes.addressOrCategory}>{data.addressOrCategory}</td>
-                <td>{data.note}</td>
+                <td>
+                    {
+                        date.selectedYear !== NOT_DEFINE
+                            ?   <div data-uk-tooltip={`title: ${inflation[data.note] ? "Инфляция за год: " + inflation[data.note] + "%" : ""}; pos: top; delay: 200`}>{data.note}</div>
+                            :   <div>{data.note}</div>
+                    }
+                </td>
                 <td className={classes.amount}>{data.amount}</td>
                 <td className="uk-text-center">
                     <button

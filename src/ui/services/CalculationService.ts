@@ -74,14 +74,7 @@ class CalculationService {
         if (inflation.data) {
             setInflation(inflation.data);
         } else {
-            setInflation({
-                year: 0,
-                data: {
-                    "продукт": {
-                        "месяц": 0
-                    }
-                }
-            })
+            setInflation({ "товар": 0 })
         };
     };
 };

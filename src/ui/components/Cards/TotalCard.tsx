@@ -17,10 +17,6 @@ export default function TotalCard() {
                         <td><h1 className="uk-text-bold uk-text-primary">Всего в наличии</h1></td>
                         <td><h1 className="uk-text-primary uk-text-right">{capital}</h1></td>
                     </tr>
-                    <tr>
-                        <td><h2 className="uk-text-bold">Годовая инфляция</h2></td>
-                        <td><h2 className="uk-text-right">5%</h2></td>
-                    </tr>
                 </tbody>
             </table>
         </div>

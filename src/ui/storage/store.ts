@@ -1,5 +1,6 @@
 import dataReducer from "./dataSlice";
 import dateReducer from "./dateSlice";
+import inflationReducer from "./inflationSlice";
 import paginationReducer from './paginationSlice';
 import transactionReducer from "./transactionSlice";
 
@@ -11,7 +12,8 @@ export const store = configureStore({
         data: dataReducer,
         date: dateReducer,
         pagination: paginationReducer,
-        transaction: transactionReducer
+        transaction: transactionReducer,
+        inflation: inflationReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false,

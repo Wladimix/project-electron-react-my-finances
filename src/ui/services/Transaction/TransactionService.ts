@@ -1,4 +1,5 @@
 import DistributionService from "../DistributionService";
+import InflationService from "../InflationService";
 
 import { checkAmount, showNotification } from "../../lib/utils";
 import { dataState, setNotes } from "../../storage/dataSlice";
@@ -35,6 +36,7 @@ export default class TransactionService {
 
         await this.loadTransactions(filter);
         await new DistributionService(this.dispatch).loadDistributionTypes();
+        await new InflationService(this.dispatch).loadInflationData(filter.year);
 
         this.dispatch(setNotes([]));
     };
@@ -45,6 +47,7 @@ export default class TransactionService {
 
         await this.loadTransactions(filter);
         await new DistributionService(this.dispatch).loadDistributionTypes();
+        await new InflationService(this.dispatch).loadInflationData(filter.year);
 
         this.dispatch(setNotes([]));
     };
@@ -55,6 +58,7 @@ export default class TransactionService {
 
         await this.loadTransactions(filter);
         await new DistributionService(this.dispatch).loadDistributionTypes();
+        await new InflationService(this.dispatch).loadInflationData(filter.year);
 
         this.dispatch(setNotes([]));
     };

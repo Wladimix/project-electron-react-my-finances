@@ -1,4 +1,5 @@
 import GeneralStatistics from "../Statistics/GeneralStatistics";
+import InflationService from "../../services/InflationService";
 import TransactionService from "../../services/Transaction/TransactionService";
 
 import { NOT_DEFINE } from "../../constants";
@@ -17,6 +18,7 @@ export default function YearlyResultsCard() {
 
     const changeYearEvent = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         transactionService.loadTransactions({ year: e.target.value, month: NOT_DEFINE, note: requiredNote, page: 0 });
+        new InflationService(dispatch).loadInflationData(e.target.value);
         dispatch(selectYear(e.target.value));
         dispatch(selectMonth(NOT_DEFINE));
         dispatch(setPage(0));

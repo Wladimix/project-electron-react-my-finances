@@ -1,9 +1,9 @@
 import DistributionModel from "../DustributionFinances/DustributionModel";
 import ObjectEditing from "../lib/ObjectEditing";
-import TransactionModel from "../Transaction/TransactionModel";
+import TransactionModel, { RecordForInflation } from "../Transaction/TransactionModel";
 
-import { convertAmountToString, makeDateSearchOptions } from "../lib/utils";
-import { TablesNames, TransactionTypes, NOT_DEFINE } from '../constants';
+import { convertAmountToString, filterOutUniqueValues, makeDateSearchOptions } from "../lib/utils";
+import { TablesNames, TransactionTypes, NOT_DEFINE, VALUE_MISSING } from '../constants';
 
 class CalculationService {
 
@@ -50,28 +50,36 @@ class CalculationService {
     };
 
     async calculateInflation(year: number): Promise<InflationDTO> {
+        const recordsForPrevYear = await TransactionModel.getRecordsForInflation(year - 1);
         const recordsForInflation = await TransactionModel.getRecordsForInflation(year);
-        console.log(recordsForInflation);
 
-        return {
-            year: 5,
-            data: {
-                "Продукт 1": {
-                    "январь": 3,
-                    "февраль": 0,
-                    "март": 4,
-                    "апрель": 0,
-                    "май": 0,
-                    "июнь": 0,
-                    "июль": 2,
-                    "август": 5,
-                    "сентябрь": 0,
-                    "октябрь": 0,
-                    "ноябрь": 3,
-                    "декабрь": 3
-                }
-            }
+        const notes = filterOutUniqueValues<{note: string}>(recordsForInflation, "note");
+        return notes.reduce((acc, note) => {
+
+            const uniqueNotesRecordsForPrevYear = recordsForPrevYear.filter(record => record.note === note);
+            const uniqueNotesRecords = recordsForInflation.filter(record => record.note === note);
+
+            const inflationForProduct = this.calculateInflationForEntity(uniqueNotesRecordsForPrevYear, uniqueNotesRecords);
+
+            return inflationForProduct !== VALUE_MISSING ? { ...acc, [note]: inflationForProduct } : { ...acc };
+
+        }, {});
+    };
+
+    calculateInflationForEntity(recordsForPrevYear: RecordForInflation[], records: RecordForInflation[]): number | typeof VALUE_MISSING {
+        let firstRecord: RecordForInflation[];
+        let lastrecord: RecordForInflation[];
+
+        firstRecord = recordsForPrevYear.slice(-1);
+        firstRecord = firstRecord.length ? firstRecord : records.slice(0, 1);
+
+        lastrecord = records.slice(-1);
+
+        if (firstRecord.length && lastrecord.length && firstRecord[0].id !== lastrecord[0].id) {
+            return Number((((lastrecord[0].amount - firstRecord[0].amount) / firstRecord[0].amount) * 100).toFixed(2));
         }
+
+        return VALUE_MISSING;
     };
 
 };

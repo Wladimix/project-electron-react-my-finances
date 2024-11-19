@@ -129,12 +129,7 @@ type AmountOfExpenses = {
     amount: string
 }
 type InflationDTO = {
-    year: number,
-    data: {
-        [key: string]: {
-            [key: string]: number
-        }
-    }
+    [key: string]: number
 }
 interface ICalculationController {
     getCapital: () => Promise<ResponceData<string>>

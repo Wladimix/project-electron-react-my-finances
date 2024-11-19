@@ -1,8 +1,9 @@
 import knex from "../connectionDB";
 
 import { Knex } from "knex";
+import { makeDateSearchOptions } from "../lib/utils";
 import { Note } from "../Note/NoteModel";
-import { TablesNames, TransactionTypes } from "../constants";
+import { NOT_DEFINE, TablesNames, TransactionTypes } from "../constants";
 
 class TransactionModel {
 
@@ -112,16 +113,18 @@ class TransactionModel {
             .where({ transaction_type: transactionType });
     };
 
-    async getRecordsForInflation(year: number): Promise<RecordsForInflation> {
+    async getRecordsForInflation(year: number): Promise<RecordForInflation[]> {
         return await knex
             .select(
+                `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.id`,
                 `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`,
-                `${TablesNames.NOTES_TABLE}.name`,
+                `${TablesNames.NOTES_TABLE}.name as note`,
                 `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.amount`
             )
             .from(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME)
             .join(TablesNames.NOTES_TABLE, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.note_id`, "=", `${TablesNames.NOTES_TABLE}.id`)
-            .where({ to_calculate_inflation: true });
+            .where({ to_calculate_inflation: true })
+            .andWhereBetween(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, makeDateSearchOptions(String(year), NOT_DEFINE));
     };
 
     async add(transaction: AddedTransaction): Promise<number> {
@@ -201,8 +204,9 @@ type Dates = {
     date: number
 }[];
 
-type RecordsForInflation = {
+export type RecordForInflation = {
+    id: number
     date: Date,
-    name: string,
+    note: string,
     amount: number
-}[];
+};

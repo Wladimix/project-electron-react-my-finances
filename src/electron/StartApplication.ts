@@ -24,7 +24,7 @@ class StartService {
                 fs.mkdirSync(DATABASE_PATH);
             };
 
-            if (!fs.existsSync(path.join(DATABASE_PATH + DATABASE_NAME))) {
+            if (!fs.existsSync(path.join(DATABASE_PATH, DATABASE_NAME))) {
 
                 await DistributionModel.createTable();
                 console.info(`Таблица "${TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME}" создана`);

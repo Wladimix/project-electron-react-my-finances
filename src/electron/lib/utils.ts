@@ -54,3 +54,7 @@ export function makeDateSearchOptions(year: string, month: string): [Knex.DbColu
 function getLastMonthDay(month: string): number {
     return month && month !== NOT_DEFINE ? new Date(1970, Number(month) + 1, 0).getDate() : 31;
 };
+
+export function filterOutUniqueValues<T extends Object>(array: Array<T>, key: keyof T): Array<T[keyof T]> {
+    return Array.from(new Set(array.map(item => item[key])));
+};

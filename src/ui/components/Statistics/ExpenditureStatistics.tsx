@@ -43,30 +43,30 @@ export default function ExpenditureStatistics({ date }: ExpenditureStatisticsPro
         legend.chart.update();
     };
 
+    const chart = <Doughnut
+        data={{
+            labels: amountOfExpenses.map(expenses => expenses.purchase),
+            datasets: [{
+                data: amountOfExpenses.map(expenses => Number(expenses.amount.replace(/[\s₽]+/g, ""))),
+                backgroundColor: ["#CB4335", "#1F618D", "#F1C40F", "#27AE60", "#884EA0", "#D35400"]
+            }]
+        }}
+        options={{
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "bottom",
+                    onHover: handleHover,
+                    onLeave: handleLeave
+                }
+            }
+        }}
+    />;
+
     return (
         <>
-            <Doughnut
-                data={{
-                    labels: amountOfExpenses.map(expenses => expenses.purchase),
-                    datasets: [{
-                        data: amountOfExpenses.map(expenses => Number(expenses.amount.replace(/[\s₽]+/g, ""))),
-                        backgroundColor: ["#CB4335", "#1F618D", "#F1C40F", "#27AE60", "#884EA0", "#D35400"]
-                    }]
-                }}
-                options={{
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: "bottom",
-                            onHover: handleHover,
-                            onLeave: handleLeave
-                        }
-                    }
-                }}
-            />
-
+            {amountOfExpenses.length ? chart : ""}
             <hr></hr>
-
             {
                 amountOfExpenses.length
                     ?   amountOfExpenses.map(expenses => (

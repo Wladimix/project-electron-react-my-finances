@@ -1,13 +1,17 @@
 import CalculationService from "../services/CalculationService";
+import InflationService from "../services/InflationService";
 import MonthlyStatisticCard from "./Cards/MonthlyStatisticCard";
 import YearlyStatisticCard from "./Cards/YearlyStatisticCard";
 
 import { Bar } from "react-chartjs-2";
+import { NOT_DEFINE } from "../constants";
 import { useAppSelector } from "../storage/store";
 import { useEffect, useState } from "react";
 
 export default function Statistics() {
+    const selectedYear = useAppSelector(state => state.date.selectedYear);
     const transactions = useAppSelector(state => state.data.transactions);
+    const inflation = useAppSelector(state => state.inflation);
 
     const [comparativeStatistics, setComparativeStatistics] = useState<{ [key: keyof GetDatesDTO]: TotalStatisticsDTO }>({});
 
@@ -39,7 +43,15 @@ export default function Statistics() {
             </div>
 
             <div className="uk-card uk-card-default uk-card-body uk-margin">
+                {
+                    (selectedYear !== NOT_DEFINE && Object.keys(inflation).length !== 0) &&
+                    <div className="uk-card-badge uk-label">
+                        {`ИНФЛЯЦИЯ ЗА ${selectedYear} ГОД: ${new InflationService().calculateTotalInflation(inflation)}%`}
+                    </div>
+                }
+
                 <h2 className="uk-card-title">Общая статистика по годам (₽)</h2>
+
                 <Bar data={{
                     labels: Object.keys(comparativeStatistics),
                     datasets: [
