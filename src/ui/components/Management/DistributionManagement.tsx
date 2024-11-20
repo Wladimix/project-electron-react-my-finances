@@ -22,6 +22,12 @@ export default function DistributionManagement() {
         setAmount("");
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter" && distributionService.checkDistributionType(name, amount)) {
+            addDistributionTypeEvent();
+        }
+    };
+
     return (
         <>
             <h3 className="uk-heading-line uk-width-expand">
@@ -42,6 +48,7 @@ export default function DistributionManagement() {
                             <input
                                 className="uk-input uk-margin"
                                 onChange={changeNameEvent}
+                                onKeyDown={handleKeyDown}
                                 spellCheck="false"
                                 type="text"
                                 value={name}
@@ -49,6 +56,7 @@ export default function DistributionManagement() {
                             <input
                                 className="uk-input uk-form-large"
                                 onChange={changeAmountEvent}
+                                onKeyDown={handleKeyDown}
                                 spellCheck="false"
                                 type="text"
                                 value={amount}

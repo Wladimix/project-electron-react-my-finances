@@ -59,7 +59,7 @@ export default function TransactionsTableRow({ transaction }: TransactionsTableR
                 <td>
                     {
                         date.selectedYear !== NOT_DEFINE
-                            ?   <div data-uk-tooltip={`title: ${inflation[data.note] ? "Инфляция за год: " + inflation[data.note] + "%" : ""}; pos: top; delay: 200`}>{data.note}</div>
+                            ?   <div className={inflation[data.note] ? "uk-text-primary uk-text-bold" : ""} data-uk-tooltip={`title: ${inflation[data.note] ? "Инфляция за год: " + inflation[data.note] + "%" : ""}; pos: top; delay: 200`}>{data.note}</div>
                             :   <div>{data.note}</div>
                     }
                 </td>

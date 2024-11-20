@@ -1,8 +1,9 @@
 import knex from "knex";
-import os from "os";
 import path from "path";
 
-export const DATABASE_PATH = path.join(os.homedir(), "my_finances_data");
+import { app } from "electron";
+
+export const DATABASE_PATH = path.join(app.getPath("home"), "my_finances_data");
 export const DATABASE_NAME = "my_finances_db.sqlite3";
 
 const database = knex({

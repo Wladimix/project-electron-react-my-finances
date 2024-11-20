@@ -16,6 +16,7 @@ function createWindow() {
     });
 
     win.setTitle("Мои финансы");
+    win.setMenu(null);
 
     if (isDev) {
         win.loadFile("index.html")

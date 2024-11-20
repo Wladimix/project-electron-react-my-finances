@@ -19,6 +19,12 @@ export default function CategoryManagement() {
         setName("");
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter" && categoryService.checkSpendingCategory(name)) {
+            addSpendingCategoryEvent();
+        }
+    };
+
     return (
         <>
             <h3 className="uk-heading-line uk-width-expand">
@@ -39,6 +45,7 @@ export default function CategoryManagement() {
                             <input
                                 className="uk-input uk-form-large"
                                 onChange={changeName}
+                                onKeyDown={handleKeyDown}
                                 spellCheck="false"
                                 type="text"
                                 value={name}
