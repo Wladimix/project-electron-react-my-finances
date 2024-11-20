@@ -125,7 +125,9 @@ class TransactionModel {
             .from(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME)
             .join(TablesNames.NOTES_TABLE, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.note_id`, "=", `${TablesNames.NOTES_TABLE}.id`)
             .where({ to_calculate_inflation: true })
-            .andWhereBetween(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, makeDateSearchOptions(String(year), NOT_DEFINE));
+            .andWhereBetween(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, makeDateSearchOptions(String(year), NOT_DEFINE))
+            .orderBy(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, "asc")
+            .orderBy(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.id`, "asc");
     };
 
     async add(transaction: AddedTransaction): Promise<number> {
