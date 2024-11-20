@@ -52,7 +52,7 @@ export default function CategoryCard({ spendingCategory }: CategoryCardProps) {
     return (
         <div>
             <div className="uk-card uk-card-secondary uk-card-hover uk-light">
-                <div className="uk-card-body">
+                <div className="uk-card-body" data-uk-tooltip={`title: ${spendingCategory.name}; pos: top; delay: 200`}>
                     <input
                         className="uk-input uk-form-large"
                         onChange={changeNameEvent}

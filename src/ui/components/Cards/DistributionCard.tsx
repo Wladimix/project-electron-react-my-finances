@@ -60,7 +60,7 @@ export default function DistributionCard({ distributionType }: DistributionCardP
     return (
         <div>
             <div className="uk-card uk-card-default uk-card-hover">
-                <div className="uk-card-body">
+                <div className="uk-card-body" data-uk-tooltip={`title: ${distributionType.name}: ${distributionType.amount}; pos: top; delay: 200`}>
                     <input
                         className="uk-input uk-margin"
                         onChange={changeNameEvent}
