@@ -22,7 +22,7 @@ export default function CategoryManagement() {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && categoryService.checkSpendingCategory(name)) {
             addSpendingCategoryEvent();
-        }
+        };
     };
 
     return (

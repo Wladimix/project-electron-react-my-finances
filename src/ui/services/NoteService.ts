@@ -13,14 +13,10 @@ export default class NoteService {
 
     async loadNotes(substring: string): Promise<void> {
         if (this.dispatch) {
-            // this.dispatch(setNotesLoader(true));
-
             const result = await window.electron.getNotes(substring);
             showNotification(result, { onlyErrorChecking: true });
-
             this.dispatch(setNotes(result.data));
-            // this.dispatch(setNotesLoader(false));
-        }
+        };
     };
 
     processNote(note: string): string {

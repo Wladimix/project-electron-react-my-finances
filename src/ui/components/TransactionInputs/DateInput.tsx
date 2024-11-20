@@ -1,5 +1,4 @@
 import DatePicker from "react-datepicker";
-import TransactionFormService from "../../services/Transaction/TransactionFormService";
 
 import { ru } from "date-fns/locale/ru";
 import { setTransactionData } from "../../storage/transactionSlice";

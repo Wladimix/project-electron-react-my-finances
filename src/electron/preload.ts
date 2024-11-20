@@ -26,6 +26,6 @@ const api: ElectronApi = {
     getStatisticsOnExpenses: (date: DateDTO) => ipcRenderer.invoke("getStatisticsOnExpenses", date),
     getInflationData: (year: number) => ipcRenderer.invoke("getInflationData", year)
 
-}
+};
 
 contextBridge.exposeInMainWorld("electron", api);

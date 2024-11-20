@@ -1,8 +1,8 @@
 import DistributionService from "../../DustributionFinances/DistributionService";
 
+import { convertAmountToNumber } from "../../lib/utils";
 import { DistributionType } from '../../DustributionFinances/DustributionModel';
 import { TransactionTypes } from "../../constants";
-import { convertAmountToNumber } from "../../lib/utils";
 
 class AddingTransaction {
 

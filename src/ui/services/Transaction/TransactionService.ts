@@ -4,9 +4,9 @@ import InflationService from "../InflationService";
 import { checkAmount, showNotification } from "../../lib/utils";
 import { dataState, setNotes } from "../../storage/dataSlice";
 import { Dispatch, ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
+import { NOT_DEFINE } from "../../constants";
 import { setTransactionLoader } from "../../storage/transactionSlice";
 import { setTransactions } from "../../storage/dataSlice";
-import { NOT_DEFINE } from "../../constants";
 import { setDates } from "../../storage/dateSlice";
 
 export default class TransactionService {

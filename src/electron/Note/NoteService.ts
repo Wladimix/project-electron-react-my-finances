@@ -1,7 +1,7 @@
 import NoteModel, { Note } from "./NoteModel";
+import TransactionModel from "../Transaction/TransactionModel";
 
 import { TablesNames } from "../constants";
-import TransactionModel from "../Transaction/TransactionModel";
 
 class NoteService {
 

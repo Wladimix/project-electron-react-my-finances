@@ -32,7 +32,7 @@ app.whenReady().then(async () => {
     StartApplication.createRouter();
     if (process.env.SEED === "true") {
         await StartApplication.runSeed();
-    }
+    };
 
     createWindow();
 });

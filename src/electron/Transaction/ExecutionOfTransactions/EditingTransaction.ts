@@ -2,7 +2,7 @@ import DistributionService from "../../DustributionFinances/DistributionService"
 
 import { convertAmountToNumber } from "../../lib/utils";
 import { DistributionType } from "../../DustributionFinances/DustributionModel";
-import { Transaction } from "../TransactionModel"
+import { Transaction } from "../TransactionModel";
 import { TransactionTypes } from "../../constants";
 
 class EditingTransaction {

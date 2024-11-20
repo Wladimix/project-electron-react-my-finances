@@ -110,7 +110,7 @@ class TransactionController implements ITransactionController {
                 status: RequestStatuses.ERROR,
                 message: await ErrorHandling.makeErrorMessage(error as Error, "Ошибка удаления финансовой транзакции")
             };
-        }
+        };
 
     };
 

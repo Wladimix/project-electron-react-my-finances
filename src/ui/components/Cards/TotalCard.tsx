@@ -21,4 +21,4 @@ export default function TotalCard() {
             </table>
         </div>
     );
-}
+};

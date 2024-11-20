@@ -25,7 +25,7 @@ export default function DistributionManagement() {
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && distributionService.checkDistributionType(name, amount)) {
             addDistributionTypeEvent();
-        }
+        };
     };
 
     return (

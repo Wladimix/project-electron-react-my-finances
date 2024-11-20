@@ -1,7 +1,7 @@
 import DistributionModel from "./DustributionModel";
 import ObjectEditing from "../lib/ObjectEditing";
 
-import { convertAmountToNumber, convertAmountToString, /* processAmountInObjectsList, */ removeSpaces } from "../lib/utils";
+import { convertAmountToNumber, convertAmountToString, removeSpaces } from "../lib/utils";
 import { TablesNames } from "../constants";
 
 class DistributionService {

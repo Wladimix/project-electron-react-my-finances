@@ -1,7 +1,7 @@
 import { Dispatch, ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 import { InflationState, setInflation } from "../storage/inflationSlice";
-import { showNotification } from "../lib/utils";
 import { NOT_DEFINE } from "../constants";
+import { showNotification } from "../lib/utils";
 
 class InflationService {
 

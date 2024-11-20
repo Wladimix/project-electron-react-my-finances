@@ -1,8 +1,9 @@
+import TransactionService from './Transaction/TransactionService';
+
 import { checkAmount, showNotification } from '../lib/utils';
 import { dataState } from '../storage/dataSlice';
 import { Dispatch, ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 import { setDistributionTypes } from "../storage/dataSlice";
-import TransactionService from './Transaction/TransactionService';
 
 export default class DistributionService {
 
