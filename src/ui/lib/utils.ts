@@ -1,3 +1,4 @@
+import monthsDictionary from "./monthsDictionary";
 import UIkit from "uikit";
 
 export function showNotification({ status, message } : ResponceData<any>, { onlyErrorChecking }: { onlyErrorChecking: boolean } = { onlyErrorChecking: false }) {
@@ -23,10 +24,5 @@ export function checkAmount(amount: string): boolean {
 };
 
 export function makeDate(date: Date): string {
-    return date.getFullYear() + "." + addZero(date.getMonth(), { isMonth: true });
-};
-
-function addZero(value: number, { isMonth }: { isMonth: boolean } = { isMonth: false }): string {
-    value = isMonth ? ++value : value;
-    return value < 10 ? "0" + value : String(value);
+    return monthsDictionary[date.getMonth()] + " " + date.getFullYear();
 };

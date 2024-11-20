@@ -20,7 +20,6 @@ class InflationService {
     };
 
     calculateTotalInflation(inflationData: InflationDTO): number {
-        console.log(inflationData)
         let sum = 0;
         Object.values(inflationData).forEach(product => { sum += product });
         return +(sum / Object.keys(inflationData).length).toFixed(2);

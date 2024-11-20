@@ -12,7 +12,9 @@ export default function DateInput() {
     const dispatch = useAppDispatch();
 
     const changeDateEvent = (date: Date | null): void => {
-        dispatch(setTransactionData({ ...transactionData, date }));
+        if (date && date.getFullYear() <= new Date().getFullYear()) {
+            dispatch(setTransactionData({ ...transactionData, date }));
+        };
     };
 
     return (
