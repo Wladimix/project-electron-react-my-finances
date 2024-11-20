@@ -28,6 +28,7 @@ export default function DateInput() {
                     selected={transactionData.date}
                     showTimeSelect
                     timeFormat="HH:mm"
+                    timeCaption="Время"
                 />
             </div>
         </div>
