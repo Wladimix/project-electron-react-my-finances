@@ -49,7 +49,8 @@ class TransactionModel {
             .join(TablesNames.NOTES_TABLE, `${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.note_id`, "=", `${TablesNames.NOTES_TABLE}.id`)
 
             .whereLike(`${TablesNames.NOTES_TABLE}.name`, `%${note}%`)
-            .orderBy(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, "desc");
+            .orderBy(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.date`, "desc")
+            .orderBy(`${TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME}.id`, "desc");
     };
 
     getCount(note: string): Knex.QueryBuilder {

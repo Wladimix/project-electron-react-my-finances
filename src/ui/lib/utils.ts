@@ -23,13 +23,7 @@ export function checkAmount(amount: string): boolean {
 };
 
 export function makeDate(date: Date): string {
-    return (
-        date.getFullYear() + "."
-        + addZero(date.getMonth(), { isMonth: true }) + "."
-        + addZero(date.getDate()) + " "
-        + addZero(date.getHours()) + ":"
-        + addZero(date.getMinutes())
-    );
+    return date.getFullYear() + "." + addZero(date.getMonth(), { isMonth: true });
 };
 
 function addZero(value: number, { isMonth }: { isMonth: boolean } = { isMonth: false }): string {
