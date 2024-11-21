@@ -5,6 +5,9 @@ import { TablesNames, TransactionTypes } from "./constants";
 export default async function seed() {
 
     await knex(TablesNames.NOTES_TABLE).del();
+    await knex(TablesNames.NOTES_TABLE).insert([
+        { name: "-", id: 1 }
+    ]);
 
     await knex(TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME).del();
     await knex(TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME).insert([
