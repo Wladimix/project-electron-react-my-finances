@@ -4,6 +4,8 @@ import { TablesNames, TransactionTypes } from "./constants";
 
 export default async function seed() {
 
+    await knex(TablesNames.NOTES_TABLE).del();
+
     await knex(TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME).del();
     await knex(TablesNames.DISTRIBUTION_OF_FINANCES_TABLE_NAME).insert([
         { name: "тип не выбран",   amount: 0,     id: 1 },
@@ -25,12 +27,12 @@ export default async function seed() {
     await knex(TablesNames.FINANCIAL_TRANSACTIONS_TABLE_NAME).insert([
         ...makeTransactions(2022),
         ...makeTransactions(2023),
-        ...makeTransactions(2024),
+        ...makeTransactions(2024)
     ]);
 
 };
 
-function makeTransactions(year: number) {
+function makeTransactions(year: number): Object[] {
     let transactions: Object[] = [];
 
     for (let i = 0; i <= 11; i++) {
